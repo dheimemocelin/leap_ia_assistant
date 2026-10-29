@@ -37,12 +37,15 @@ Valores de status: `answered`, `abstained`, `handoff`. Respostas sobre preço, e
 2. `get_vehicle_details(vehicle_id)` — especificações, diferenciais, itens de série, cores e fontes da versão aprovada.
 3. `search_vehicle_media(vehicle_id, version?, model_year?, color?, category?)` — somente assets aprovados, direitos documentados e local de armazenamento presente; devolve metadados/URI, nunca bytes/base64.
 4. `compare_vehicles(vehicle_ids[2..4])` — comparação determinística de campos aprovados; ausências ficam explicitamente ausentes.
-5. `get_commercial_offer(vehicle_id, audience?)` — somente ofertas aprovadas e dentro de validade; não informa estoque.
-6. `qualify_lead(fields)` — retorna campos mínimos ausentes e autorização derivada de consentimento registrado.
-7. `create_syonet_lead(lead_id, consent_id, idempotency_key)` — efeito externo bloqueado sem dados mínimos, consentimento verificado no servidor e adapter configurado.
-8. `handoff_to_human(conversation_id, reason, summary)` — abre encaminhamento interno e preserva contexto já coletado.
+5. `qualify_lead(fields)` — retorna campos mínimos ausentes e autorização derivada de consentimento registrado.
+6. `create_syonet_lead(lead_id, consent_id, idempotency_key)` — efeito externo bloqueado sem dados mínimos, consentimento verificado no servidor e adapter configurado; serve somente para encaminhar oportunidade autorizada.
+7. `handoff_to_human(conversation_id, reason, summary)` — abre encaminhamento interno e preserva contexto já coletado.
 
 Recuperação de manuais técnicos é uma ferramenta separada, chamada apenas se o catálogo comercial não contiver a resposta. Mensagens e dados não confiáveis não alteram instruções do sistema. O agente deve manter slots preenchidos na memória e não repetir perguntas respondidas.
+
+### Política comercial obrigatória
+
+Não existe `get_commercial_offer` na superfície de ferramentas do agente. Nenhum preço, parcela, taxa, desconto, promoção, condição de pagamento ou valor de avaliação de usado pode ser informado. O agente não negocia, reserva nem conclui vendas. Dados financeiros eventualmente mantidos em estruturas internas não podem ser serializados ao contexto do modelo. Solicitações diretas/indiretas ou instruções injetadas recebem resposta segura oferecendo apresentação de características e encaminhamento a consultor. A saída final passa por validação determinística independente do LLM.
 
 O modelo não recebe ferramentas genéricas HTTP/SQL, não escolhe endpoint/headers e não pode fabricar `consent_id`. Todas as chamadas são auditadas sem registrar prompt/PII bruto em logs comuns.
 

@@ -84,16 +84,14 @@ def test_media_search_filters_and_requires_approved_stored_asset() -> None:
     assert tools.search_vehicle_media(VehicleMediaFilter(vehicle_id="c10-bev", version="REEV")) == []
 
 
-def test_offer_requires_current_approval_and_validity() -> None:
+def test_offer_records_remain_catalog_data_but_are_not_queryable_by_sales_tools() -> None:
     offer = CommercialOffer(
         id="offer-1", vehicle_id="c10-bev", amount_brl=123000,
         valid_from=date(2026, 10, 1), valid_until=date(2026, 10, 31),
         source=SOURCE, approval_status=ApprovalStatus.APPROVED, approved_at=NOW, approved_by="reviewer",
     )
     tools = SalesTools(JsonCatalogRepository([approved_vehicle()], [], [offer]), today=date(2026, 10, 29))
-    assert tools.get_commercial_offer("c10-bev")["outcome"] == "ok"
-    expired = SalesTools(JsonCatalogRepository([approved_vehicle()], [], [offer]), today=date(2026, 11, 1))
-    assert expired.get_commercial_offer("c10-bev")["outcome"] == "needs_human"
+    assert not hasattr(tools, "get_commercial_offer")
 
 
 def test_crm_write_fails_closed_without_minimum_data_consent_or_adapter() -> None:

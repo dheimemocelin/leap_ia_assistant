@@ -2,6 +2,8 @@ from enum import StrEnum
 
 from pydantic import BaseModel, Field
 
+from app.policy.commercial import CommercialPolicyEngine
+
 
 class Confidence(StrEnum):
     GROUNDED = "grounded"
@@ -15,6 +17,13 @@ class AssistantResponse(BaseModel):
     confidence: Confidence
     source_ids: list[str] = Field(default_factory=list, max_length=10)
     handoff_required: bool = False
+
+    @classmethod
+    def validated(cls, **values: object) -> "AssistantResponse":
+        candidate = cls(**values)
+        if not CommercialPolicyEngine().validate_output(candidate.text):
+            raise ValueError("Response violates commercial policy")
+        return candidate
 
     def model_post_init(self, __context: object, /) -> None:
         if self.confidence == Confidence.GROUNDED and not self.source_ids:

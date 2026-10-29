@@ -62,6 +62,14 @@ Seleção de imagem é filtro determinístico sobre modelo/versão/ano/cor/categ
 
 Consulta de veículos, comparação e mídia é determinística. Qualificação é baseada em campos explicitamente coletados. Syonet requer dados mínimos, consentimento válido, chave idempotente e adapter configurado; o modelo não decide autorização. Handoff é ferramenta separada.
 
+### ADR-008: política comercial financeira é externa ao LLM
+
+O assistente só faz pré-vendas informativas. Não informa preço, parcelas, taxas, descontos, promoções, condições de pagamento ou avaliação de usados e não negocia, reserva nem fecha venda. `CommercialPolicyEngine` classifica solicitações e valida respostas sem depender do modelo. Oferta pode permanecer no domínio/catalog interno, mas não há ferramenta financeira na superfície do agente e a projeção para contexto do modelo usa allowlist de campos não financeiros. Pedido proibido recebe resposta segura e opção de consultor.
+
+### ADR-009: readiness verifica Postgres e Redis
+
+`/health/ready` responde sucesso somente após `SELECT 1` no banco e `PING` no Redis; falha em dependência necessária retorna 503 sem revelar credenciais ou detalhes internos. `/health/live` permanece independente dessas dependências.
+
 ## Decisões pendentes para descoberta
 
 - Identificador estável do cliente por canal, política de retenção, base legal, controlador/operador e processo de direitos LGPD.

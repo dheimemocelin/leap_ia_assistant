@@ -5,7 +5,8 @@ from typing import Protocol
 from pydantic import BaseModel, Field
 
 from app.catalog.models import ApprovalStatus, MediaCategory
-from app.catalog.repository import CatalogRepository, approved_vehicles, current_approved_offers
+from app.catalog.repository import CatalogRepository, approved_vehicles
+from app.policy.commercial import model_safe_vehicle
 
 
 class ToolOutcome(StrEnum):
@@ -72,13 +73,13 @@ class SalesTools:
             results = [v for v in results if v.model.casefold() == filters.model.casefold()]
         if filters.powertrain:
             results = [v for v in results if v.powertrain.value.casefold() == filters.powertrain.casefold()]
-        return [v.model_dump(mode="json") for v in results]
+        return [model_safe_vehicle(v.model_dump(mode="json")) for v in results]
 
     def get_vehicle_details(self, vehicle_id: str) -> dict | None:
         vehicle = self.catalog.vehicle(vehicle_id)
         if vehicle is None or vehicle.approval_status != ApprovalStatus.APPROVED:
             return None
-        return vehicle.model_dump(mode="json")
+        return model_safe_vehicle(vehicle.model_dump(mode="json"))
 
     def search_vehicle_media(self, filters: VehicleMediaFilter) -> list[dict]:
         vehicle = self.catalog.vehicle(filters.vehicle_id)
@@ -108,16 +109,6 @@ class SalesTools:
         if any(vehicle is None for vehicle in vehicles):
             return {"outcome": ToolOutcome.NOT_FOUND, "vehicles": []}
         return {"outcome": ToolOutcome.OK, "vehicles": vehicles}
-
-    def get_commercial_offer(self, vehicle_id: str, audience: str | None = None) -> dict:
-        if self.get_vehicle_details(vehicle_id) is None:
-            return {"outcome": ToolOutcome.NOT_FOUND, "offer": None}
-        offers = [o for o in current_approved_offers(self.catalog, self.today) if o.vehicle_id == vehicle_id]
-        if audience:
-            offers = [o for o in offers if o.audience in (None, audience)]
-        if not offers:
-            return {"outcome": ToolOutcome.NEEDS_HUMAN, "offer": None}
-        return {"outcome": ToolOutcome.OK, "offer": offers[0].model_dump(mode="json")}
 
     @staticmethod
     def qualify_lead(lead: LeadData) -> LeadQualification:
