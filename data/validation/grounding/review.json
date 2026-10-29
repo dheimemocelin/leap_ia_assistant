@@ -1,0 +1,12 @@
+{
+  "scope": "internal validation only; not manufacturer approval",
+  "reviewer": "internal-source-verification",
+  "reviewed_at": "2026-10-29T15:23:10.665016+00:00",
+  "url": "https://www.leapmotor.com.br/tecnologias-eletrificadas.html",
+  "verified_fields": {
+    "c10-bev": "BEV identity and range_km=338 with PBEV qualifier",
+    "b10-bev": "BEV identity only; specifications intentionally absent"
+  },
+  "extraction_method": "Manual verification of official web text on this execution; narrow fact selection, not synthetic commercial data",
+  "production_photos": "unchanged pending_review"
+}

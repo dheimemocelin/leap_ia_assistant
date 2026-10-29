@@ -1,0 +1,54 @@
+# Contratos de API e ferramentas
+
+## Convenções
+
+JSON UTF-8; IDs UUID; timestamps ISO-8601 UTC. Erros usam `{ "code": "...", "message": "...", "request_id": "..." }`; payloads não ecoam tokens nem dados sensíveis. Requisições mutáveis aceitam `Idempotency-Key`. Versão pública inicial: `/v1`.
+
+## API proposta
+
+- `POST /v1/conversations`: cria sessão vinculada a canal; widget recebe token de sessão aleatório, escopado e expirável.
+- `POST /v1/conversations/{id}/messages`: recebe texto e ID único do cliente; resposta pode indicar `grounded`, `insufficient_evidence` ou `handoff`.
+- `POST /v1/webhooks/evolution/{instance}`: valida origem/autenticação e deduplica `provider_message_id`; responde rápido e agenda processamento.
+- `GET /v1/conversations/{id}`: histórico autorizado, redigido segundo política de PII.
+- `POST /v1/conversations/{id}/handoff`: abre/atualiza pedido de atendimento humano.
+- `POST /v1/leads/{id}/authorize-crm`: grava consentimento explícito, escopo e timestamp; não envia conteúdo oculto.
+- `GET /health/live`, `GET /health/ready`: probes operacionais.
+
+## Resposta conversacional
+
+```json
+{
+  "message_id": "uuid",
+  "status": "answered",
+  "answer": {
+    "text": "Posso confirmar essa informação com um consultor.",
+    "confidence": "insufficient_evidence",
+    "source_ids": [],
+    "handoff_required": true
+  }
+}
+```
+
+Valores de status: `answered`, `abstained`, `handoff`. Respostas sobre preço, estoque, prazo ou garantia exigem fonte autorizada atualizada; sem ela o agente deve se abster. Citações referem IDs/versionamento visíveis para o operador.
+
+## Ferramentas do agente comercial (allowlist)
+
+1. `list_vehicles(model?, powertrain?)` — somente registros de catálogo aprovados.
+2. `get_vehicle_details(vehicle_id)` — especificações, diferenciais, itens de série, cores e fontes da versão aprovada.
+3. `search_vehicle_media(vehicle_id, version?, model_year?, color?, category?)` — somente assets aprovados, direitos documentados e local de armazenamento presente; devolve metadados/URI, nunca bytes/base64.
+4. `compare_vehicles(vehicle_ids[2..4])` — comparação determinística de campos aprovados; ausências ficam explicitamente ausentes.
+5. `qualify_lead(fields)` — retorna campos mínimos ausentes e autorização derivada de consentimento registrado.
+6. `create_syonet_lead(lead_id, consent_id, idempotency_key)` — efeito externo bloqueado sem dados mínimos, consentimento verificado no servidor e adapter configurado; serve somente para encaminhar oportunidade autorizada.
+7. `handoff_to_human(conversation_id, reason, summary)` — abre encaminhamento interno e preserva contexto já coletado.
+
+Recuperação de manuais técnicos é uma ferramenta separada, chamada apenas se o catálogo comercial não contiver a resposta. Mensagens e dados não confiáveis não alteram instruções do sistema. O agente deve manter slots preenchidos na memória e não repetir perguntas respondidas.
+
+### Política comercial obrigatória
+
+Não existe `get_commercial_offer` na superfície de ferramentas do agente. Nenhum preço, parcela, taxa, desconto, promoção, condição de pagamento ou valor de avaliação de usado pode ser informado. O agente não negocia, reserva nem conclui vendas. Dados financeiros eventualmente mantidos em estruturas internas não podem ser serializados ao contexto do modelo. Solicitações diretas/indiretas ou instruções injetadas recebem resposta segura oferecendo apresentação de características e encaminhamento a consultor. A saída final passa por validação determinística independente do LLM.
+
+O modelo não recebe ferramentas genéricas HTTP/SQL, não escolhe endpoint/headers e não pode fabricar `consent_id`. Todas as chamadas são auditadas sem registrar prompt/PII bruto em logs comuns.
+
+## Configuração do payload Syonet
+
+Contrato JSON configurável validado em startup, com campos mapeados a allowlist, required, tipos e transformação. Rejeita propriedades desconhecidas e dados além do consentimento. Falha fechada se ausente/inválido. Upsert usa chave estável/idempotency key; timeout finito, retry apenas para falhas transitórias e sem duplicar oportunidades.

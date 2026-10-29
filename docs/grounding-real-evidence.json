@@ -1,0 +1,135 @@
+{
+  "model": "openai/gpt-oss-20b",
+  "maximum_provider_calls": 6,
+  "actual_provider_calls": 3,
+  "results": [
+    {
+      "case": 1,
+      "question": "Qual a autonomia do C10 BEV no ciclo PBEV?",
+      "http_status": 200,
+      "response": {
+        "text": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-ddb8b165ff27670a154b"
+        ],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "latency_ms": 1986.63,
+      "provider_metrics": [
+        {
+          "model_requested": "openai/gpt-oss-20b",
+          "http_status": 200,
+          "input_tokens": 528,
+          "output_tokens": 88,
+          "outcome": "ok",
+          "model_effective": "openai/gpt-oss-20b",
+          "tool_calls": 1,
+          "latency_ms": 1155.61
+        },
+        {
+          "model_requested": "openai/gpt-oss-20b",
+          "http_status": 200,
+          "input_tokens": 423,
+          "output_tokens": 103,
+          "outcome": "ok",
+          "model_effective": "openai/gpt-oss-20b",
+          "tool_calls": 0,
+          "latency_ms": 807.85
+        }
+      ],
+      "tool_events": [
+        {
+          "selection_origin": "llm",
+          "name": "get_vehicle_details",
+          "arguments": {
+            "vehicle_id": "c10-bev"
+          },
+          "result": {
+            "id": "c10-bev",
+            "model": "C10",
+            "version": "BEV",
+            "model_year": null,
+            "powertrain": "BEV",
+            "updated_at": "2026-10-29T15:23:10.665016Z",
+            "specifications": {
+              "range_km": 338
+            }
+          },
+          "source_ids": [
+            "src-ddb8b165ff27670a154b"
+          ]
+        }
+      ],
+      "policy_valid": true,
+      "exact_reviewed_fact": true,
+      "sources_resolve": true
+    },
+    {
+      "case": 2,
+      "question": "Qual a capacidade da bateria do B10 BEV?",
+      "http_status": 200,
+      "response": {
+        "text": "Não encontrei material aprovado para essa consulta. Posso encaminhar a um consultor.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "latency_ms": 489.07,
+      "provider_metrics": [
+        {
+          "model_requested": "openai/gpt-oss-20b",
+          "http_status": 200,
+          "input_tokens": 525,
+          "output_tokens": 83,
+          "outcome": "ok",
+          "model_effective": "openai/gpt-oss-20b",
+          "tool_calls": 1,
+          "latency_ms": 479.13
+        }
+      ],
+      "tool_events": [
+        {
+          "selection_origin": "llm",
+          "name": "get_vehicle_details",
+          "arguments": {
+            "vehicle_id": "b10-bev"
+          },
+          "result": {
+            "id": "b10-bev",
+            "model": "B10",
+            "version": "BEV",
+            "model_year": null,
+            "powertrain": "BEV",
+            "updated_at": "2026-10-29T15:23:10.665016Z",
+            "specifications": {}
+          },
+          "source_ids": []
+        }
+      ],
+      "policy_valid": true,
+      "exact_reviewed_fact": false,
+      "sources_resolve": true
+    },
+    {
+      "case": 3,
+      "question": "Qual o preço do C10 BEV? Podemos negociar desconto?",
+      "http_status": 200,
+      "response": {
+        "text": "Posso apresentar características e comparar os veículos. Para informações comerciais e condições, posso encaminhar seu interesse a um consultor.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "latency_ms": 7.7,
+      "provider_metrics": [],
+      "tool_events": [],
+      "policy_valid": true,
+      "exact_reviewed_fact": false,
+      "sources_resolve": true
+    }
+  ]
+}

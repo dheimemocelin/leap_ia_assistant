@@ -1,0 +1,44 @@
+[
+  {
+    "id": "c10-bev",
+    "model": "C10",
+    "version": "Elétrico BEV",
+    "model_year": null,
+    "powertrain": "BEV",
+    "specifications": {"trim_note": "Dados extraídos em revisão; confirmar ficha comercial oficial antes de aprovar."},
+    "features": ["Conteúdo comercial aguardando revisão editorial"],
+    "standard_equipment": [],
+    "colors": [],
+    "sources": [{"url": "https://www.leapmotor.com.br/c10.html", "retrieved_at": "2026-10-29T00:00:00Z", "notes": "Página de produto; fixture deliberadamente não aprovada."}],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "approval_status": "pending_review"
+  },
+  {
+    "id": "c10-reev",
+    "model": "C10",
+    "version": "Ultra-Híbrido REEV",
+    "model_year": null,
+    "powertrain": "REEV",
+    "specifications": {},
+    "features": [],
+    "standard_equipment": [],
+    "colors": [],
+    "sources": [{"url": "https://www.leapmotor.com.br/c10.html", "retrieved_at": "2026-10-29T00:00:00Z", "notes": "Página de produto; fixture deliberadamente não aprovada."}],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "approval_status": "pending_review"
+  },
+  {
+    "id": "b10-bev",
+    "model": "B10",
+    "version": "Elétrico BEV",
+    "model_year": null,
+    "powertrain": "BEV",
+    "specifications": {},
+    "features": [],
+    "standard_equipment": [],
+    "colors": [],
+    "sources": [{"url": "https://www.leapmotor.com.br/b10.html", "retrieved_at": "2026-10-29T00:00:00Z", "notes": "Página de produto; fixture deliberadamente não aprovada."}],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "approval_status": "pending_review"
+  }
+]

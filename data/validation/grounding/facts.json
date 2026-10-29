@@ -1,0 +1,14 @@
+[
+  {
+    "id": "c10-bev-range-pbev",
+    "vehicle_id": "c10-bev",
+    "specification": "range_km",
+    "value": 338,
+    "statement": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+    "source_id": "src-ddb8b165ff27670a154b",
+    "query_terms": [
+      "autonomia",
+      "alcance"
+    ]
+  }
+]

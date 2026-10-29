@@ -1,0 +1,16 @@
+[
+  {
+    "id": "c10-media-draft-1",
+    "vehicle_id": "c10-bev",
+    "version": "Elétrico BEV",
+    "model_year": null,
+    "color": null,
+    "category": "exterior",
+    "source_url": "https://www.leapmotor.com.br/c10.html",
+    "storage_uri": null,
+    "rights_basis": "Aguardando validação de permissão e armazenamento; não redistribuir.",
+    "provenance": "Fixture sintética para validar gate de aprovação.",
+    "retrieved_at": "2026-10-29T00:00:00Z",
+    "approval_status": "pending_review"
+  }
+]
