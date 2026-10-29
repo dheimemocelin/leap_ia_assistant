@@ -73,7 +73,7 @@ async def test_photos_sources_and_ids(agent, vehicle_id):
 
 async def test_details_and_compact_context(agent):
     result = await agent.turn("one", "Características do C10 BEV")
-    assert result.source_ids
+    assert result.source_ids == [] and result.handoff_required
     assert result.media_ids == []
     await agent.turn("one", "Quero fotos")
     assert agent.llm.calls[-1][0][1]["role"] == "user"
@@ -120,7 +120,7 @@ async def test_timeout(agent):
             await asyncio.sleep(1)
 
     agent.llm = Slow()
-    result = await agent.turn("one", "Características B10 BEV")
+    result = await agent.turn("one", "Fotos B10 BEV")
     assert result.handoff_required
 
 

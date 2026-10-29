@@ -8,6 +8,7 @@ from typing import TypedDict
 from langgraph.graph import END, START, StateGraph
 from pydantic import BaseModel, ConfigDict
 
+from app.agent.grounding import GroundingPolicy
 from app.agent.llm import LLMAdapter, ToolCall
 from app.catalog.media_library import MediaSearchQuery, VehicleMediaLibrary, norm
 from app.domain.response import AssistantResponse
@@ -63,6 +64,8 @@ class TurnState(TypedDict, total=False):
     input_tokens: int
     output_tokens: int
     calls: int
+    selection_origin: str
+    tool_events: list[dict]
     want_media: bool
 
 
@@ -79,10 +82,21 @@ def reply(text: str, *, sources=None, media=None, handoff=False):
 class SalesAgent:
     """Single-process local memory; no external actions or unbounded agent loop."""
 
-    def __init__(self, catalog, media: VehicleMediaLibrary, llm: LLMAdapter, *, timeout=15):
+    def __init__(
+        self,
+        catalog,
+        media: VehicleMediaLibrary,
+        llm: LLMAdapter,
+        *,
+        timeout=15,
+        grounding: GroundingPolicy | None = None,
+        prefer_tool_calling=False,
+    ):
         self.catalog, self.media, self.llm = catalog, media, llm
         self.sales = SalesTools(catalog)
         self.timeout = timeout
+        self.grounding = grounding or GroundingPolicy([], catalog)
+        self.prefer_tool_calling = prefer_tool_calling
         self.sessions: dict[tuple[str, str], dict] = {}
         self.locks: dict[tuple[str, str], asyncio.Lock] = {}
         builder = StateGraph(TurnState)
@@ -128,6 +142,7 @@ class SalesAgent:
                     "evidence": {},
                     "call": {},
                     "calls": 0,
+                    "tool_events": [],
                     "input_tokens": 0,
                     "output_tokens": 0,
                 }
@@ -140,6 +155,7 @@ class SalesAgent:
                     {"role": "assistant", "content": state["response"]["text"][:500]},
                 ]
             )[-4:]
+            self.sessions[key]["tool_events"] = state.get("tool_events", [])
             self.sessions[key]["usage"] = {
                 k: state[k] for k in ["calls", "input_tokens", "output_tokens"]
             }
@@ -228,12 +244,26 @@ class SalesAgent:
                 if angle in text and name == "search_vehicle_media":
                     args["angle"] = angle
                     break
-            return {**s, "phase": "selected", "call": {"name": name, "arguments": args}}
+            if not self.prefer_tool_calling:
+                return {
+                    **s,
+                    "selection_origin": "deterministic",
+                    "phase": "selected",
+                    "call": {"name": name, "arguments": args},
+                }
+            s["planning_hint"] = (
+                f"Use a ferramenta {name} com os argumentos exatos: {json.dumps(args)}"
+            )
         try:
             result = await self.model_call(
                 s,
                 [
-                    {"role": "system", "content": SYSTEM},
+                    {
+                        "role": "system",
+                        "content": SYSTEM
+                        + " Solicite uma ferramenta de consulta; não responda sem consultar. "
+                        + s.get("planning_hint", ""),
+                    },
                     *s["history"],
                     {"role": "user", "content": s["text"]},
                 ],
@@ -241,7 +271,12 @@ class SalesAgent:
             )
             if len(result.tool_calls) != 1:
                 raise ValueError("Expected one read tool")
-            return {**s, "phase": "selected", "call": result.tool_calls[0].model_dump()}
+            return {
+                **s,
+                "selection_origin": "llm",
+                "phase": "selected",
+                "call": result.tool_calls[0].model_dump(),
+            }
         except Exception:  # noqa: BLE001 - local failure must not leak provider payload
             return {
                 **s,
@@ -268,6 +303,10 @@ class SalesAgent:
                 details = self.sales.get_vehicle_details(args.vehicle_id)
                 if not details or vehicle is None:
                     raise ValueError("Unapproved vehicle")
+                if s.get("model") and norm(vehicle.model) != norm(s["model"]):
+                    raise ValueError("Tool selected a different model")
+                if s.get("powertrain") and vehicle.powertrain.value != s["powertrain"]:
+                    raise ValueError("Tool selected a different powertrain")
                 sources = [
                     "src-"
                     + hashlib.sha256(
@@ -277,6 +316,8 @@ class SalesAgent:
                 ][:10]
                 if call.name == "get_vehicle_details":
                     data = details
+                    facts = self.grounding.for_vehicle(args.vehicle_id, s["text"])
+                    sources = list(dict.fromkeys(f["source_id"] for f in facts))
                 else:
                     results = self.media.search(
                         MediaSearchQuery(
@@ -286,10 +327,20 @@ class SalesAgent:
                     data = [{"id": m.id, "category": m.category.value} for m in results]
             else:
                 raise ValueError("Tool not authorized")
+            event = {
+                "selection_origin": s.get("selection_origin", "deterministic"),
+                "name": call.name,
+                "arguments": {"vehicle_id": args.vehicle_id} if args.vehicle_id else {},
+                "result": data,
+                "source_ids": sources,
+            }
             return {
+                "tool_events": [event],
                 "phase": "retrieved",
                 "evidence": {
                     "data": data,
+                    "facts": facts if call.name == "get_vehicle_details" else [],
+                    "kind": call.name,
                     "source_ids": sources,
                     "media_ids": [m["id"] for m in data]
                     if call.name == "search_vehicle_media"
@@ -307,7 +358,9 @@ class SalesAgent:
 
     async def compose(self, s):
         evidence = s["evidence"]
-        if not evidence["data"]:
+        if not evidence["data"] or (
+            evidence.get("kind") == "get_vehicle_details" and not evidence.get("facts")
+        ):
             return {
                 "phase": "abstained",
                 "response": reply(
@@ -319,7 +372,16 @@ class SalesAgent:
             result = await self.model_call(
                 s,
                 [
-                    {"role": "system", "content": SYSTEM},
+                    {
+                        "role": "system",
+                        "content": SYSTEM
+                        + (
+                            ' Para esta consulta retorne SOMENTE JSON {"fact_ids":["id"]}, selecionando fatos pertinentes à pergunta entre facts. '
+                            "Se os fatos não responderem à pergunta, use fact_ids vazio. Não use conhecimento externo."
+                            if evidence.get("kind") == "get_vehicle_details"
+                            else ""
+                        ),
+                    },
                     *s["history"],
                     {"role": "user", "content": s["text"]},
                     {
@@ -332,9 +394,13 @@ class SalesAgent:
             )
             if result.tool_calls or not result.text.strip():
                 raise ValueError("Expected final text")
-            response = reply(
-                result.text, sources=evidence["source_ids"], media=evidence["media_ids"]
-            )
+            if evidence.get("kind") == "get_vehicle_details":
+                text, sources = self.grounding.render(result.text, evidence["facts"])
+                response = reply(text, sources=sources)
+            else:
+                response = reply(
+                    result.text, sources=evidence["source_ids"], media=evidence["media_ids"]
+                )
         except Exception:  # noqa: BLE001 - timeout/malformed provider result becomes handoff
             response = reply(
                 "Não consegui concluir a resposta. Posso encaminhar a um consultor.", handoff=True

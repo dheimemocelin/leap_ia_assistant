@@ -1,0 +1,40 @@
+[
+  {
+    "id": "c10-bev",
+    "model": "C10",
+    "version": "BEV",
+    "powertrain": "BEV",
+    "specifications": {
+      "range_km": 338
+    },
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/tecnologias-eletrificadas.html",
+        "retrieved_at": "2026-10-29T15:23:10.665016+00:00",
+        "notes": "Internal verification against official page; scope is validation only."
+      }
+    ],
+    "updated_at": "2026-10-29T15:23:10.665016+00:00",
+    "approval_status": "approved",
+    "approved_at": "2026-10-29T15:23:10.665016+00:00",
+    "approved_by": "internal-source-verification"
+  },
+  {
+    "id": "b10-bev",
+    "model": "B10",
+    "version": "BEV",
+    "powertrain": "BEV",
+    "specifications": {},
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/tecnologias-eletrificadas.html",
+        "retrieved_at": "2026-10-29T15:23:10.665016+00:00",
+        "notes": "Internal verification against official page; scope is validation only."
+      }
+    ],
+    "updated_at": "2026-10-29T15:23:10.665016+00:00",
+    "approval_status": "approved",
+    "approved_at": "2026-10-29T15:23:10.665016+00:00",
+    "approved_by": "internal-source-verification"
+  }
+]
