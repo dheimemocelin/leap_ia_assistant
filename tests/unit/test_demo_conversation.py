@@ -87,7 +87,7 @@ async def test_photo_caption_is_natural_and_names_selected_vehicle(demo):
 
 
 async def test_yes_to_photo_offer_keeps_the_vehicle(demo):
-    facts = await demo.turn("offer", "Quero conhecer o B10 BEV")
+    facts = await demo.turn("offer", "Qual a potência do B10 BEV?")
     assert "Quer ver algumas fotos" in facts.text
     photos = await demo.turn("offer", "sim")
     assert len(photos.media_ids) == 3

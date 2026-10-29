@@ -1,0 +1,169 @@
+{
+  "baseline": "5cac5039aca73e119be0da67cb5d5190d7a070bf",
+  "synthetic": true,
+  "real_llm_calls": 0,
+  "turns": [
+    {
+      "user": "Olá",
+      "assistant": {
+        "text": "Olá! Posso ajudar você a conhecer os veículos e mostrar fotos. Você quer ver o B10 ou o C10?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Tenho interesse no B10",
+      "assistant": {
+        "text": "Você prefere a motorização elétrica BEV ou híbrida REEV?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "BEV",
+      "assistant": {
+        "text": "Essa informação eu ainda preciso confirmar para não te passar algo errado. Posso te mostrar as fotos do modelo enquanto isso?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Uso mais na cidade",
+      "assistant": {
+        "text": "Essa informação eu ainda preciso confirmar para não te passar algo errado. Posso te mostrar as fotos do modelo enquanto isso?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Tenho dois filhos e preciso de espaço",
+      "assistant": {
+        "text": "Essa informação eu ainda preciso confirmar para não te passar algo errado. Posso te mostrar as fotos do modelo enquanto isso?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Tenho receio de um carro elétrico",
+      "assistant": {
+        "text": "Essa informação eu ainda preciso confirmar para não te passar algo errado. Posso te mostrar as fotos do modelo enquanto isso?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Quero conhecer o carro presencialmente",
+      "assistant": {
+        "text": "O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros.\n\nQuer ver algumas fotos dele?",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-d54c6ab4a6069b6990a4"
+        ],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Não quero contato",
+      "assistant": {
+        "text": "Essa informação eu ainda preciso confirmar para não te passar algo errado. Posso te mostrar as fotos do modelo enquanto isso?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Qual o preço?",
+      "assistant": {
+        "text": "Posso apresentar características e comparar os veículos. Para informações comerciais e condições, posso encaminhar seu interesse a um consultor.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    },
+    {
+      "user": "Agora quero ver o C10 BEV",
+      "assistant": {
+        "text": "Essa informação eu ainda preciso confirmar para não te passar algo errado. Posso te mostrar as fotos do modelo enquanto isso?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {}
+    }
+  ]
+}

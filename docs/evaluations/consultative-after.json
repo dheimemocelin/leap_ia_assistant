@@ -1,0 +1,521 @@
+{
+  "baseline": "5cac5039aca73e119be0da67cb5d5190d7a070bf",
+  "synthetic": true,
+  "real_llm_calls": 0,
+  "turns": [
+    {
+      "user": "Olá",
+      "assistant": {
+        "text": "Olá! Posso ajudar você a conhecer os veículos e mostrar fotos. Você quer ver o B10 ou o C10?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": null,
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "understand_interest",
+        "temperature": "frio",
+        "qualification_reasons": [],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Tenho interesse no B10",
+      "assistant": {
+        "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "understand_interest",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "BEV",
+      "assistant": {
+        "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você pretende usar o carro no dia a dia?",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-media-a7003f6ac5256d84fcd2",
+          "src-media-9700050189508cfaadbf",
+          "src-media-cd78dc3783a5a75757a9",
+          "src-d54c6ab4a6069b6990a4"
+        ],
+        "media_ids": [
+          "b10-bev-cockpit-02",
+          "b10-bev-front_3_4-03",
+          "b10-bev-front_seats_roof-04"
+        ],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": null,
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "usage",
+        "asked": [
+          "usage"
+        ],
+        "greeted": true,
+        "next_action": "understand_usage",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Uso mais na cidade",
+      "assistant": {
+        "text": "Para seu uso na cidade, vou considerar as prioridades que você trouxer. O que pesa mais na sua escolha: espaço, conforto ou autonomia?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "need",
+        "asked": [
+          "usage",
+          "need"
+        ],
+        "greeted": true,
+        "next_action": "understand_need",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Tenho dois filhos e preciso de espaço",
+      "assistant": {
+        "text": "Para pensar no espaço para sua família, podemos começar pelo porta-malas. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Você gostaria de conhecer o carro presencialmente?",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-d54c6ab4a6069b6990a4"
+        ],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "visit",
+        "asked": [
+          "usage",
+          "need",
+          "visit"
+        ],
+        "greeted": true,
+        "next_action": "understand_visit",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Tenho receio de um carro elétrico",
+      "assistant": {
+        "text": "Podemos esclarecer isso com calma, sem presumir o que funciona para você. Sua dúvida é mais sobre recarga ou autonomia?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "objection",
+        "asked": [
+          "usage",
+          "need",
+          "visit"
+        ],
+        "greeted": true,
+        "next_action": "clarify_objection",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Quero conhecer o carro presencialmente",
+      "assistant": {
+        "text": "Posso preparar a continuidade com um consultor. Você autoriza compartilhar seu nome, telefone e interesse neste veículo para esse contato?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "offered",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "consent",
+        "asked": [
+          "usage",
+          "need",
+          "visit"
+        ],
+        "greeted": true,
+        "next_action": "await_contact_consent",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Não quero contato",
+      "assistant": {
+        "text": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "declined",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "usage",
+          "need",
+          "visit"
+        ],
+        "greeted": true,
+        "next_action": "respect_no_contact",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Qual o preço?",
+      "assistant": {
+        "text": "Esse assunto precisa de um consultor. Como você preferiu não compartilhar seus dados, não vou solicitar contato.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "declined",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "usage",
+          "need",
+          "visit"
+        ],
+        "greeted": true,
+        "next_action": "respect_no_contact",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Agora quero ver o C10 BEV",
+      "assistant": {
+        "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-media-d82d93c7faaa38f8004b",
+          "src-media-fa2a4d50a9e503e76e9e",
+          "src-media-a686823ddd21ea2635af",
+          "src-ddb8b165ff27670a154b"
+        ],
+        "media_ids": [
+          "c10-bev-front_3_4-07",
+          "c10-bev-front_seats-06",
+          "c10-bev-panoramic_roof-08"
+        ],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "urbano",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "declined",
+        "consent_at": null,
+        "consent_scope": null,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "usage",
+          "need",
+          "visit"
+        ],
+        "greeted": true,
+        "next_action": "answer_customer",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    }
+  ]
+}

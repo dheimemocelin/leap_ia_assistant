@@ -193,3 +193,15 @@ async def test_pending_real_catalog_is_not_exposed(tmp_path):
     local = SalesAgent(catalog, media, llm)
     result = await local.turn("one", "Fotos B10 BEV")
     assert not result.media_ids and not llm.calls
+
+
+async def test_consultative_presentation_uses_only_synthetic_approved_media(agent):
+    ambiguous = await agent.turn("consultative", "B10")
+    assert not ambiguous.media_ids
+    selected = await agent.turn("consultative", "BEV")
+    assert selected.media_ids == ["b10-bev-front"]
+    repeated = await agent.turn("consultative", "mais fotos")
+    assert not repeated.media_ids
+    changed = await agent.turn("consultative", "B10 REEV")
+    assert changed.media_ids == ["b10-reev-front"]
+    assert not agent.llm.calls
