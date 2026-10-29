@@ -76,3 +76,19 @@ async def test_feminine_powertrain_answer_keeps_photo_intent(demo):
     await demo.turn("feminine", "Quero fotos do B10")
     photos = await demo.turn("feminine", "a elétrica")
     assert len(photos.media_ids) == 3
+
+
+async def test_photo_caption_is_natural_and_names_selected_vehicle(demo):
+    response = await demo.turn("caption", "Fotos do B10 REEV")
+    assert "B10 REEV" in response.text
+    assert "foto(s)" not in response.text
+    assert "ampliar" in response.text
+    assert demo.sessions[("local", "caption")]["usage"]["calls"] == 0
+
+
+async def test_yes_to_photo_offer_keeps_the_vehicle(demo):
+    facts = await demo.turn("offer", "Quero conhecer o B10 BEV")
+    assert "Quer ver algumas fotos" in facts.text
+    photos = await demo.turn("offer", "sim")
+    assert len(photos.media_ids) == 3
+    assert all("b10-bev" in m for m in photos.media_ids)

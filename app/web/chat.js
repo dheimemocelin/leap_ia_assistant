@@ -31,8 +31,13 @@ $('login-form').addEventListener('submit', async event => {
 $('message-form').addEventListener('submit', async event => {
   event.preventDefault(); const text=$('message').value.trim(); if (!text || busy) return;
   busy=true; $('send').disabled=true; $('reset').disabled=true; $('logout').disabled=true; $('chat-error').textContent=''; $('message').value='';
-  append(text,'user'); const thinking=append('Consultando informações…','assistant',true);
-  try { const result=await api('/v1/web/messages',{text}); thinking.remove(); const article=append(result.text,'assistant');
+  append(text,'user'); const started=performance.now(); const thinking=append('Preparando resposta…','assistant',true);
+  try { const result=await api('/v1/web/messages',{text});
+    // Presentation pacing only: do not slow tools or pretend a human is typing.
+    const minimum=Math.min(2200,Math.max(1100,(result.text?.length || 0)*10));
+    const remaining=minimum-(performance.now()-started);
+    if(remaining>0) await new Promise(resolve=>setTimeout(resolve,remaining));
+    thinking.remove(); const article=append(result.text,'assistant');
     if (result.source_ids?.length) { const ref=document.createElement('div'); ref.className='reference'; ref.textContent=result.media_ids?.length ? 'Fotos autorizadas para este teste' : 'Informação apoiada em fonte verificada'; article.append(ref); }
     if (result.media_ids?.length) {
       const media=await api('/web/media/resolve',{media_ids:result.media_ids});

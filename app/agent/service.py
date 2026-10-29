@@ -225,6 +225,18 @@ class SalesAgent:
                 text,
             )
         )
+        affirmative = text.strip("!.? ") in {
+            "sim",
+            "quero",
+            "pode",
+            "manda",
+            "pode mandar",
+            "claro",
+            "sim por favor",
+        }
+        previous_reply = s["history"][-1]["content"] if s.get("history") else ""
+        if affirmative and "fotos" in norm(previous_reply):
+            want_media = True
         if not want_media and powertrain_answer:
             want_media = s.get("want_media", False)
         s.update(model=model, powertrain=powertrain, want_media=want_media)
@@ -400,16 +412,23 @@ class SalesAgent:
             return {
                 "phase": "abstained",
                 "response": reply(
-                    "Ainda não tenho essa informação técnica confirmada. Posso mostrar fotos deste modelo ou consultar os dados já verificados.",
+                    "Essa informação eu ainda preciso confirmar para não te passar algo errado. Posso te mostrar as fotos do modelo enquanto isso?",
                     handoff=True,
                 ),
             }
         if evidence.get("kind") == "search_vehicle_media":
+            vehicle = self.catalog.vehicle(s["call"]["arguments"]["vehicle_id"])
+            label = f"{vehicle.model} {vehicle.powertrain.value}"
             count = len(evidence["media_ids"])
+            caption = (
+                f"Claro! Separei uma foto do {label}. Toque nela para ampliar."
+                if count == 1
+                else f"Claro! Aqui estão algumas fotos do {label}. Você pode tocar em uma delas para ampliar."
+            )
             return {
                 "phase": "composed",
                 "response": reply(
-                    f"Separei {count} foto(s) deste veículo. Você pode clicar para ampliar.",
+                    caption,
                     sources=evidence["source_ids"],
                     media=evidence["media_ids"],
                 ),
@@ -442,7 +461,7 @@ class SalesAgent:
                 raise ValueError("Expected final text")
             if evidence.get("kind") == "get_vehicle_details":
                 text, sources = self.grounding.render(result.text, evidence["facts"])
-                response = reply(text, sources=sources)
+                response = reply(text + "\n\nQuer ver algumas fotos dele?", sources=sources)
             else:
                 response = reply(
                     result.text, sources=evidence["source_ids"], media=evidence["media_ids"]

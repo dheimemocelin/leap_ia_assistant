@@ -44,7 +44,7 @@ def grounded():
 async def test_real_tool_dispatch_and_exact_grounded_response(grounded):
     result = await grounded.turn("one", "Qual a autonomia do C10 BEV?")
     fact = next(iter(grounded.grounding.facts.values()))
-    assert result.text == fact.statement
+    assert result.text == fact.statement + "\n\nQuer ver algumas fotos dele?"
     assert result.source_ids == [fact.source_id]
     events = grounded.sessions[("local", "one")]["tool_events"]
     assert events[0]["selection_origin"] == "llm"
