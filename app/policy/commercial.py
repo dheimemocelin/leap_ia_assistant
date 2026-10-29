@@ -38,7 +38,10 @@ class CommercialPolicyEngine:
         return PolicyDecision.ALLOW
 
     def validate_output(self, text: str) -> bool:
-        return not self.FINANCIAL_OUTPUT.search(text) and self.classify_request(text) == PolicyDecision.ALLOW
+        return (
+            not self.FINANCIAL_OUTPUT.search(text)
+            and self.classify_request(text) == PolicyDecision.ALLOW
+        )
 
     @staticmethod
     def safe_response(decision: PolicyDecision) -> str:
@@ -47,11 +50,58 @@ class CommercialPolicyEngine:
         return "Posso apresentar características e comparar os veículos. Para informações comerciais e condições, posso encaminhar seu interesse a um consultor."
 
 
+# Explicit structural allowlist: unrecognized dictionaries/lists are never forwarded.
+TECHNICAL_NUMBERS = {
+    "range_km",
+    "battery_kwh",
+    "power_kw",
+    "power_cv",
+    "torque_nm",
+    "trunk_liters",
+    "length_mm",
+    "width_mm",
+    "height_mm",
+}
+PUBLIC_SCALARS = {"id", "model", "version", "model_year", "powertrain", "updated_at"}
+
+
 def model_safe_vehicle(vehicle: dict) -> dict:
-    """Explicit allowlist projection: financial catalog fields never enter model context."""
-    return {
-        key: vehicle[key]
-        for key in ("id", "model", "version", "model_year", "powertrain", "specifications",
-                    "features", "standard_equipment", "colors", "sources", "updated_at")
-        if key in vehicle
-    }
+    """Copy only known technical leaves; internal objects remain untouched."""
+
+    def project(value, allowed):
+        if not isinstance(value, dict):
+            return {}
+        result = {}
+        for key, item in value.items():
+            if key not in allowed:
+                continue
+            if key in TECHNICAL_NUMBERS:
+                if type(item) in (int, float) and item >= 0:
+                    result[key] = item
+            elif key == "model_year":
+                if item is None or type(item) is int and 2000 <= item <= 2100:
+                    result[key] = item
+            elif isinstance(item, str) and CommercialPolicyEngine().validate_output(item):
+                result[key] = item
+        return result
+
+    def technical(value):
+        if isinstance(value, list):
+            return [
+                clean for item in value if isinstance(item, dict) and (clean := technical(item))
+            ]
+        if not isinstance(value, dict):
+            return {}
+        clean = project(value, TECHNICAL_NUMBERS)
+        for key in ("battery", "dimensions", "motor", "motors"):
+            if key in value and isinstance(value[key], (dict, list)):
+                child = technical(value[key])
+                if child:
+                    clean[key] = child
+        return clean
+
+    result = project(vehicle, PUBLIC_SCALARS)
+    result["specifications"] = technical(vehicle.get("specifications", {}))
+    # Free-form features, equipment, source notes and colors are intentionally excluded
+    # until they have typed, reviewed identifiers instead of arbitrary document text.
+    return result
