@@ -193,3 +193,29 @@ async def test_objection_replaces_previous_visit_question(agent):
     await agent.turn("journey", "sim")
     assert profile(agent).consent == "not_requested"
     assert profile(agent).visit_interest is None
+
+
+async def test_preferred_name_optional_private_and_asked_once(agent):
+    greeting = await agent.turn("journey", "Oi")
+    assert "prefere ser chamado" in greeting.text
+    answer = await agent.turn("journey", "Pessoa Sintetica")
+    assert "Pessoa Sintetica" in answer.text
+    assert profile(agent).display_name == "Pessoa Sintetica"
+    assert profile(agent).consent == "not_requested"
+    assert profile(agent).contact_name is None
+    await agent.turn("journey", "B10 BEV")
+    again = await agent.turn("journey", "Oi")
+    assert "prefere ser chamado" not in again.text
+    assert "Pessoa Sintetica" not in json.dumps(agent.sessions[("local", "journey")]["history"])
+    await agent.turn("journey", "Quero visitar")
+    consented = await agent.turn("journey", "sim")
+    assert "telefone" in consented.text
+    assert profile(agent).contact_name == "Pessoa Sintetica"
+
+
+async def test_name_can_be_skipped_without_blocking_vehicle_request(agent):
+    await agent.turn("journey", "Oi")
+    result = await agent.turn("journey", "B10 BEV")
+    assert result.media_ids
+    assert profile(agent).display_name is None
+    assert profile(agent).name_prompted

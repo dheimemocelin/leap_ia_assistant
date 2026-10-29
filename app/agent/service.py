@@ -188,7 +188,13 @@ class SalesAgent:
                         if state.get("redact_input")
                         else redact_history(text[:500]),
                     },
-                    {"role": "assistant", "content": state["response"]["text"][:500]},
+                    {
+                        "role": "assistant",
+                        "content": state["response"]["text"][:500].replace(
+                            state.get("lead_profile", {}).get("display_name") or "[nome ausente]",
+                            "[nome omitido]",
+                        ),
+                    },
                 ]
             )[-4:]
             self.sessions[key]["tool_events"] = state.get("tool_events", [])
@@ -302,13 +308,19 @@ class SalesAgent:
             profile = LeadProfile.model_validate(s["lead_profile"])
             repeated = profile.greeted
             profile.greeted = True
+            ask_name = not profile.name_prompted and not profile.display_name
+            if ask_name:
+                profile.name_prompted = True
+                profile.pending_question = "display_name"
             return {
                 "lead_profile": profile.model_dump(),
                 "phase": "greeting",
                 "response": reply(
                     "Olá de novo! Podemos continuar de onde paramos."
                     if repeated
-                    else "Olá! Posso ajudar você a conhecer os veículos e mostrar fotos. Você quer ver o B10 ou o C10?"
+                    else "Olá! Posso te apresentar o B10 e o C10, com informações e fotos. Como você prefere ser chamado?"
+                    if ask_name
+                    else "Olá! Podemos explorar o B10 e o C10. Qual deles você quer conhecer?"
                 ),
             }
         return {"phase": "guarded"}

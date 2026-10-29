@@ -28,6 +28,8 @@ class LeadProfile(BaseModel):
     consent: Literal["not_requested", "offered", "granted", "declined"] = "not_requested"
     consent_at: str | None = None
     consent_scope: str | None = None
+    display_name: str | None = None
+    name_prompted: bool = False
     contact_name: str | None = None
     contact_phone: str | None = None
     pending_question: str | None = None
@@ -91,6 +93,8 @@ def offer_contact(profile: LeadProfile):
 
 
 def collect_contact(profile: LeadProfile):
+    if profile.consent == "granted" and not profile.contact_name and profile.display_name:
+        profile.contact_name = profile.display_name
     if not profile.contact_name:
         profile.pending_question = "name"
         profile.next_action = "collect_name"
@@ -152,6 +156,42 @@ def next_question(profile: LeadProfile):
 def observe(profile: LeadProfile, text: str):
     """Return a response override, plus whether input must be omitted from model history."""
     t = norm(text).strip("!.? ")
+    # Preferred name is local personalization, never permission to share a lead.
+    named = re.fullmatch(
+        r"(?:meu nome [ée]|me chamo|pode me chamar de|sou o|sou a) (.+?)[.! ]*",
+        text.strip(),
+        re.IGNORECASE,
+    )
+    awaiting_name = profile.pending_question == "display_name"
+    if awaiting_name and t in {"nao", "prefiro nao", "nao quero informar", "nao quero dizer"}:
+        profile.pending_question = None
+        return response("Tudo bem, seguimos sem nome. Qual modelo você quer conhecer?"), True
+    candidate = named.group(1) if named else text.strip() if awaiting_name else ""
+    if (
+        candidate
+        and (
+            named
+            or not re.search(
+                r"\b(quero|uso|cidade|fotos|autonomia|recarga|familia|interesse|potencia|painel|preco|obrigado)\b",
+                t,
+            )
+        )
+        and len(candidate) <= 60
+        and len(candidate.split()) <= 3
+        and re.fullmatch(r"[^\W\d_]+(?:[ '\-][^\W\d_]+)*", candidate, re.UNICODE)
+        and t
+        not in YES | NO | {"oi", "ola", "bev", "reev", "eletrico", "eletrica", "hibrido", "hibrida"}
+    ):
+        # Validate before rendering a user supplied name; never treat it as instructions.
+        from app.policy.commercial import CommercialPolicyEngine
+
+        if CommercialPolicyEngine().validate_output(candidate):
+            profile.display_name = candidate
+            profile.name_prompted = True
+            profile.pending_question = None
+            return response(f"Prazer, {candidate}. Qual modelo você quer conhecer?"), True
+    if awaiting_name:
+        profile.pending_question = None
     explicit_contact = bool(
         re.search(r"quero (?:falar|conversar) com (?:um |o )?(?:consultor|vendedor)", t)
     ) and not t.startswith("nao")
