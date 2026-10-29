@@ -161,6 +161,6 @@ async def test_groq_error_becomes_handoff_without_provider_payload(tmp_path):
         model="synthetic-model",
         transport=httpx.MockTransport(lambda request: httpx.Response(429, text="synthetic-key")),
     )
-    result = await local.turn("one", "Fotos B10 REEV")
+    result = await local.turn("one", "Me ajude a escolher")
     assert result.handoff_required and "synthetic-key" not in result.text
     assert len(local.llm.metrics) == 1

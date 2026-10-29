@@ -53,6 +53,14 @@ class GroundingPolicy:
         vehicle = self.catalog.vehicle(vehicle_id)
         if vehicle is None or vehicle.approval_status != "approved":
             return []
+        question = norm(question)
+        topics = {
+            "range_km": ["autonomia", "alcance"],
+            "battery_kwh": ["bateria", "capacidade da bateria"],
+            "power_cv": ["potencia", "cavalos", "desempenho"],
+            "trunk_liters": ["porta malas", "porta-malas", "bagageiro"],
+        }
+        requested = {field for field, terms in topics.items() if any(t in question for t in terms)}
         active_sources = {source_id(s) for s in vehicle.sources}
         return [
             f.model_dump()
@@ -60,7 +68,11 @@ class GroundingPolicy:
             if f.vehicle_id == vehicle_id
             and vehicle.specifications.get(f.specification) == f.value
             and f.source_id in active_sources
-            and any(term in norm(question) for term in f.query_terms)
+            and (
+                f.specification in requested
+                if requested
+                else any(term in question for term in f.query_terms)
+            )
         ]
 
     def render(self, candidate: str, offered: list[dict]):

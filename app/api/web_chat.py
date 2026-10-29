@@ -8,7 +8,7 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request, Response
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, SecretStr
+from pydantic import BaseModel, Field, SecretStr
 
 from app.api.chat import ChatInput, build_agent
 from app.config import settings
@@ -17,6 +17,7 @@ from app.domain.response import AssistantResponse
 router = APIRouter()
 ROOT = Path(__file__).resolve().parents[1] / "web"
 COOKIE = "leap_web_session"
+MEDIA_ROOT = (Path(__file__).resolve().parents[2] / "assets/media").resolve()
 
 
 class Login(BaseModel):
@@ -151,7 +152,89 @@ async def message(body: ChatInput, request: Request, response: Response):
     session["turns"] += 1
     key = "web_agent_reviewed" if session["reviewed"] else "web_agent_pending"
     if not hasattr(request.app.state, key):
-        setattr(request.app.state, key, build_agent(reviewed_catalog=session["reviewed"]))
+        setattr(
+            request.app.state,
+            key,
+            build_agent(reviewed_catalog=session["reviewed"], test_media=session["reviewed"]),
+        )
     agent = getattr(request.app.state, key)
     response.headers["Cache-Control"] = "no-store"
-    return await agent.turn(session["conversation_id"], body.text, owner="browser")
+    result = await agent.turn(session["conversation_id"], body.text, owner="browser")
+    grants = session.setdefault("media_tokens", {})
+    for media_id in result.media_ids:
+        if media_id not in grants.values():
+            grants[secrets.token_urlsafe(24)] = media_id
+    return result
+
+
+class MediaIds(BaseModel):
+    media_ids: list[str] = Field(max_length=3)
+
+
+def media_agent(request, session):
+    key = "web_agent_reviewed" if session["reviewed"] else "web_agent_pending"
+    agent = getattr(request.app.state, key, None)
+    if agent is None:
+        raise HTTPException(404, "Imagem indisponível.")
+    return agent
+
+
+@router.post("/web/media/resolve", include_in_schema=False)
+async def resolve_media(body: MediaIds, request: Request, response: Response):
+    same_origin(request)
+    session = store(request).get(request)
+    response.headers["Cache-Control"] = "no-store"
+    tokens = {value: token for token, value in session.get("media_tokens", {}).items()}
+    if any(media_id not in tokens for media_id in body.media_ids):
+        raise HTTPException(403, "Imagem não autorizada nesta conversa.")
+    return {
+        "images": [
+            {"id": media_id, "url": "/web/media/" + tokens[media_id]} for media_id in body.media_ids
+        ]
+    }
+
+
+@router.get("/web/media/{token}", include_in_schema=False)
+async def image(token: str, request: Request):
+    session = store(request).get(request)
+    media_id = session.get("media_tokens", {}).get(token)
+    if not media_id:
+        raise HTTPException(404, "Imagem indisponível.")
+    agent = media_agent(request, session)
+    record = next((m for m in agent.catalog.media() if m.id == media_id), None)
+    if record is None:
+        raise HTTPException(404, "Imagem indisponível.")
+    from app.catalog.media_library import MediaSearchQuery
+
+    eligible = agent.media.search(MediaSearchQuery(vehicle_id=record.vehicle_id, limit=100))
+    if record.id not in {m.id for m in eligible}:
+        raise HTTPException(404, "Imagem indisponível.")
+    root = MEDIA_ROOT
+    path = Path(record.asset_path or "")
+    resolved = (
+        path.resolve()
+        if path.is_absolute()
+        else (Path(__file__).resolve().parents[2] / path).resolve()
+    )
+    if not resolved.is_relative_to(root) or not resolved.is_file():
+        raise HTTPException(404, "Imagem indisponível.")
+    if resolved.stat().st_size > 10 * 1024 * 1024:
+        raise HTTPException(413, "Imagem muito grande.")
+    data = resolved.read_bytes()
+    if not record.sha256 or hashlib.sha256(data).hexdigest() != record.sha256:
+        raise HTTPException(404, "Imagem indisponível.")
+    if (
+        record.mime_type != "image/jpeg"
+        or not data.startswith(bytes.fromhex("ffd8ff"))
+        or not data.endswith(bytes.fromhex("ffd9"))
+    ):
+        raise HTTPException(415, "Formato de imagem inválido.")
+    return Response(
+        content=data,
+        media_type="image/jpeg",
+        headers={
+            "Cache-Control": "private, no-store",
+            "X-Content-Type-Options": "nosniff",
+            "Content-Disposition": 'inline; filename="vehicle.jpeg"',
+        },
+    )

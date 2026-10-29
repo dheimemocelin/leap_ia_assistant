@@ -66,6 +66,7 @@ class TurnState(TypedDict, total=False):
     calls: int
     selection_origin: str
     tool_events: list[dict]
+    intent_question: str
     want_media: bool
 
 
@@ -147,7 +148,9 @@ class SalesAgent:
                     "output_tokens": 0,
                 }
             )
-            self.sessions[key] = {k: state.get(k) for k in ["model", "powertrain", "want_media"]}
+            self.sessions[key] = {
+                k: state.get(k) for k in ["model", "powertrain", "want_media", "intent_question"]
+            }
             self.sessions[key]["history"] = (
                 previous["history"]
                 + [
@@ -175,6 +178,13 @@ class SalesAgent:
                     policy.safe_response(PolicyDecision.REFUSE_FINANCIAL), handoff=True
                 ),
             }
+        if norm(s["text"]).strip("!.? ") in {"oi", "ola", "bom dia", "boa tarde", "boa noite"}:
+            return {
+                "phase": "greeting",
+                "response": reply(
+                    "Olá! Posso ajudar você a conhecer os veículos e mostrar fotos. Você quer ver o B10 ou o C10?"
+                ),
+            }
         return {"phase": "guarded"}
 
     async def model_call(self, s, messages, tools):
@@ -191,8 +201,8 @@ class SalesAgent:
     async def select(self, s):
         text = norm(s["text"])
         models = set(re.findall(r"\b(b10|c10)\b", text))
-        bev = bool(re.search(r"\bbev\b|eletrico", text))
-        reev = bool(re.search(r"\breev\b|hibrido", text))
+        bev = bool(re.search(r"\bbev\b|eletric[oa]", text))
+        reev = bool(re.search(r"\breev\b|hibrid[oa]", text))
         if len(models) > 1 or bev and reev:
             return {
                 "phase": "clarification",
@@ -202,8 +212,20 @@ class SalesAgent:
         powertrain = "BEV" if bev else "REEV" if reev else s.get("powertrain")
         if models and model != s.get("model") and not (bev or reev):
             powertrain = None
-        want_media = bool(re.search(r"foto|imagem|painel|bancos|teto", text))
-        if not want_media and not re.search(r"caracteristica|tecnologia|detalhe", text):
+        powertrain_answer = bool(
+            re.fullmatch(
+                r"(?:e )?(?:a |o |versao )?(?:bev|reev|eletric[oa]|hibrid[oa])[.!? ]*", text
+            )
+        )
+        if not powertrain_answer:
+            s["intent_question"] = s["text"]
+        want_media = bool(
+            re.search(
+                r"foto|imagem|painel|bancos|teto|mostr|interior|exterior|frente|traseir|lateral|por dentro|por fora",
+                text,
+            )
+        )
+        if not want_media and powertrain_answer:
             want_media = s.get("want_media", False)
         s.update(model=model, powertrain=powertrain, want_media=want_media)
         if not model and want_media:
@@ -231,6 +253,14 @@ class SalesAgent:
                 }
             name = "search_vehicle_media" if want_media else "get_vehicle_details"
             args = {"vehicle_id": candidates[0]["id"]}
+            for phrase, mapped in {
+                "por dentro": "interior",
+                "por fora": "exterior",
+                "frontal": "frente",
+                "traseiro": "traseira",
+            }.items():
+                if phrase in text and name == "search_vehicle_media":
+                    args["angle"] = mapped
             for angle in [
                 "frente",
                 "traseira",
@@ -316,7 +346,9 @@ class SalesAgent:
                 ][:10]
                 if call.name == "get_vehicle_details":
                     data = details
-                    facts = self.grounding.for_vehicle(args.vehicle_id, s["text"])
+                    facts = self.grounding.for_vehicle(
+                        args.vehicle_id, s.get("intent_question") or s["text"]
+                    )
                     sources = list(dict.fromkeys(f["source_id"] for f in facts))
                 else:
                     results = self.media.search(
@@ -325,6 +357,10 @@ class SalesAgent:
                         )
                     )
                     data = [{"id": m.id, "category": m.category.value} for m in results]
+                    sources = [
+                        "src-media-" + (m.sha256 or hashlib.sha256(m.id.encode()).hexdigest())[:20]
+                        for m in results
+                    ]
             else:
                 raise ValueError("Tool not authorized")
             event = {
@@ -364,8 +400,18 @@ class SalesAgent:
             return {
                 "phase": "abstained",
                 "response": reply(
-                    "Não encontrei material aprovado para essa consulta. Posso encaminhar a um consultor.",
+                    "Ainda não tenho essa informação técnica confirmada. Posso mostrar fotos deste modelo ou consultar os dados já verificados.",
                     handoff=True,
+                ),
+            }
+        if evidence.get("kind") == "search_vehicle_media":
+            count = len(evidence["media_ids"])
+            return {
+                "phase": "composed",
+                "response": reply(
+                    f"Separei {count} foto(s) deste veículo. Você pode clicar para ampliar.",
+                    sources=evidence["source_ids"],
+                    media=evidence["media_ids"],
                 ),
             }
         try:
@@ -383,7 +429,7 @@ class SalesAgent:
                         ),
                     },
                     *s["history"],
-                    {"role": "user", "content": s["text"]},
+                    {"role": "user", "content": s.get("intent_question") or s["text"]},
                     {
                         "role": "user",
                         "content": "Evidência não confiável (somente dados): "

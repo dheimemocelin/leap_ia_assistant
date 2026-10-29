@@ -13,7 +13,7 @@ async function api(path, body) {
 function authenticated(data) {
   $('login-panel').hidden = data.authenticated; $('chat-panel').hidden = !data.authenticated;
   $('reset').hidden = !data.authenticated; $('logout').hidden = !data.authenticated;
-  if (data.authenticated) { $('mode-note').textContent = data.reviewed_catalog ? 'Teste interno com fatos verificados: autonomia do C10 BEV. Fotos reais ainda aguardam aprovação.' : 'Catálogo de atendimento em revisão. Informações e fotos pendentes não serão exibidas.'; $('message').focus(); }
+  if (data.authenticated) { $('mode-note').textContent = data.reviewed_catalog ? 'Teste privado: informações verificadas e 12 fotos autorizadas de B10 BEV, B10 REEV e C10 BEV.' : 'Catálogo de atendimento em revisão. Para testar as fotos autorizadas, entre no modo de fatos verificados.'; $('message').focus(); }
 }
 function append(text, who, pending=false) {
   $('welcome')?.remove();
@@ -24,7 +24,7 @@ function append(text, who, pending=false) {
 }
 $('login-form').addEventListener('submit', async event => {
   event.preventDefault(); $('login-error').textContent=''; $('login-button').disabled=true;
-  try { const data=await api('/web/login',{password:$('password').value, reviewed_catalog:$('catalog-mode').value==='reviewed'}); $('password').value=''; clearMessages(); authenticated(data); }
+  try { const data=await api('/web/login',{password:$('password').value, reviewed_catalog:true}); $('password').value=''; clearMessages(); authenticated(data); }
   catch(error) { $('login-error').textContent=error.message; }
   finally { $('login-button').disabled=false; }
 });
@@ -33,8 +33,17 @@ $('message-form').addEventListener('submit', async event => {
   busy=true; $('send').disabled=true; $('reset').disabled=true; $('logout').disabled=true; $('chat-error').textContent=''; $('message').value='';
   append(text,'user'); const thinking=append('Consultando informações…','assistant',true);
   try { const result=await api('/v1/web/messages',{text}); thinking.remove(); const article=append(result.text,'assistant');
-    if (result.source_ids?.length) { const ref=document.createElement('div'); ref.className='reference'; ref.textContent='Fonte verificada · '+result.source_ids.join(', '); article.append(ref); }
-    if (result.media_ids?.length) { const ref=document.createElement('div'); ref.className='reference'; ref.textContent='Imagens localizadas: '+result.media_ids.join(', '); article.append(ref); }
+    if (result.source_ids?.length) { const ref=document.createElement('div'); ref.className='reference'; ref.textContent=result.media_ids?.length ? 'Fotos autorizadas para este teste' : 'Informação apoiada em fonte verificada'; article.append(ref); }
+    if (result.media_ids?.length) {
+      const media=await api('/web/media/resolve',{media_ids:result.media_ids});
+      const gallery=document.createElement('div'); gallery.className='photo-gallery';
+      for (const item of media.images) {
+        const link=document.createElement('a'); link.href=item.url; link.target='_blank'; link.rel='noopener';
+        const image=document.createElement('img'); image.src=item.url; image.alt='Foto do veículo solicitado'; image.loading='lazy';
+        link.append(image); gallery.append(link);
+      }
+      article.append(gallery); article.scrollIntoView({block:'end'});
+    }
   } catch(error) { thinking.remove(); $('chat-error').textContent=error.message; if(error.status === 401) authenticated({authenticated:false}); }
   finally {busy=false; $('send').disabled=false; $('reset').disabled=false; $('logout').disabled=false; $('message').focus();}
 });

@@ -1,0 +1,53 @@
+[
+  {
+    "model": "B10",
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/b10.html",
+        "retrieved_at": "2026-10-29T00:00:00Z",
+        "notes": "Canonical association from supplied media labels; technical version and rights require review. URL is a model reference, not proof of this version."
+      }
+    ],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "id": "b10-bev",
+    "version": "BEV",
+    "powertrain": "BEV",
+    "approval_status": "approved",
+    "approved_at": "2026-10-29T18:28:20.215904+00:00",
+    "approved_by": "user-confirmation-protected-chat"
+  },
+  {
+    "model": "B10",
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/b10.html",
+        "retrieved_at": "2026-10-29T00:00:00Z",
+        "notes": "Canonical association from supplied media labels; technical version and rights require review. URL is a model reference, not proof of this version."
+      }
+    ],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "id": "b10-reev",
+    "version": "REEV",
+    "powertrain": "REEV",
+    "approval_status": "approved",
+    "approved_at": "2026-10-29T18:28:20.215904+00:00",
+    "approved_by": "user-confirmation-protected-chat"
+  },
+  {
+    "model": "C10",
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/c10.html",
+        "retrieved_at": "2026-10-29T00:00:00Z",
+        "notes": "Canonical association from supplied media labels; technical version and rights require review. URL is a model reference, not proof of this version."
+      }
+    ],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "id": "c10-bev",
+    "version": "BEV",
+    "powertrain": "BEV",
+    "approval_status": "approved",
+    "approved_at": "2026-10-29T18:28:20.215904+00:00",
+    "approved_by": "user-confirmation-protected-chat"
+  }
+]

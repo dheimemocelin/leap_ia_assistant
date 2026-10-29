@@ -12,6 +12,7 @@ from app.agent.llm import DisabledLLM, OllamaAdapter
 from app.agent.service import SalesAgent
 from app.catalog.loader import load_catalog
 from app.catalog.media_library import VehicleMediaLibrary
+from app.catalog.repository import JsonCatalogRepository
 from app.config import settings
 from app.domain.response import AssistantResponse
 
@@ -22,10 +23,17 @@ class ChatInput(BaseModel):
     text: str = Field(min_length=1, max_length=4000)
 
 
-def build_agent(*, reviewed_catalog=False):
+def build_agent(*, reviewed_catalog=False, test_media=False):
     root = Path(__file__).resolve().parents[2]
     catalog_root = root / ("data/validation/grounding" if reviewed_catalog else "data/catalog")
     catalog = load_catalog(catalog_root)
+    if reviewed_catalog:
+        original = load_catalog(
+            root / ("data/validation/media-chat" if test_media else "data/catalog")
+        )
+        vehicles = {v.id: v for v in original.vehicles()}
+        vehicles.update({v.id: v for v in catalog.vehicles()})
+        catalog = JsonCatalogRepository(list(vehicles.values()), original.media(), [])
     media = VehicleMediaLibrary.load(catalog, asset_root=root / "assets/media")
     if settings.llm_provider == "ollama":
         llm = OllamaAdapter(

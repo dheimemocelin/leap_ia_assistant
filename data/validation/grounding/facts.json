@@ -8,7 +8,54 @@
     "source_id": "src-ddb8b165ff27670a154b",
     "query_terms": [
       "autonomia",
-      "alcance"
+      "alcance",
+      "caracteristica",
+      "detalhe",
+      "conhecer",
+      "me fale",
+      "me fala",
+      "sobre",
+      "apresent"
     ]
+  },
+  {
+    "id": "b10-bev-power",
+    "vehicle_id": "b10-bev",
+    "specification": "power_cv",
+    "value": 218,
+    "statement": "O B10 BEV tem motor elétrico de 218 cv.",
+    "query_terms": [
+      "potencia",
+      "motor",
+      "cavalos",
+      "caracteristica",
+      "detalhe",
+      "conhecer",
+      "me fale",
+      "me fala",
+      "sobre",
+      "apresent"
+    ],
+    "source_id": "src-d54c6ab4a6069b6990a4"
+  },
+  {
+    "id": "b10-bev-trunk",
+    "vehicle_id": "b10-bev",
+    "specification": "trunk_liters",
+    "value": 405,
+    "statement": "O porta-malas traseiro do B10 BEV tem capacidade de 405 litros.",
+    "query_terms": [
+      "porta-malas",
+      "porta malas",
+      "bagageiro",
+      "caracteristica",
+      "detalhe",
+      "conhecer",
+      "me fale",
+      "me fala",
+      "sobre",
+      "apresent"
+    ],
+    "source_id": "src-d54c6ab4a6069b6990a4"
   }
 ]

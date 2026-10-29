@@ -65,7 +65,7 @@ async def test_photos_sources_and_ids(agent, vehicle_id):
     response = await agent.turn(vehicle_id, "Fotos do " + vehicle_id.replace("-", " "))
     assert response.media_ids == [vehicle_id + "-front"]
     assert response.source_ids
-    assert agent.sessions[("local", vehicle_id)]["usage"]["calls"] == 1
+    assert agent.sessions[("local", vehicle_id)]["usage"]["calls"] == 0
     model_input = json.dumps(agent.llm.calls)
     assert "asset_path" not in model_input and "storage_uri" not in model_input
     assert "base64" not in model_input and "get_commercial_offer" not in model_input
@@ -75,8 +75,9 @@ async def test_details_and_compact_context(agent):
     result = await agent.turn("one", "Características do C10 BEV")
     assert result.source_ids == [] and result.handoff_required
     assert result.media_ids == []
-    await agent.turn("one", "Quero fotos")
-    assert agent.llm.calls[-1][0][1]["role"] == "user"
+    photos = await agent.turn("one", "Quero fotos")
+    assert photos.media_ids == ["c10-bev-front"]
+    assert len(agent.sessions[("local", "one")]["history"]) == 4
 
 
 async def test_ambiguity_and_followup(agent):
@@ -120,8 +121,9 @@ async def test_timeout(agent):
             await asyncio.sleep(1)
 
     agent.llm = Slow()
-    result = await agent.turn("one", "Fotos B10 BEV")
+    result = await agent.turn("one", "Me ajude a escolher")
     assert result.handoff_required
+    assert agent.sessions[("local", "one")]["usage"]["calls"] == 1
 
 
 async def test_model_tool_call_allowlist(agent):
@@ -167,11 +169,12 @@ def test_http_policy_and_session_access(agent, monkeypatch):
         del app.state.sales_agent
 
 
-async def test_financial_model_output_gets_safe_fallback(agent):
+async def test_model_cannot_invent_financial_or_image_links_in_photo_reply(agent):
     agent.llm = FakeLLM(ModelReply(text="Preço R$ 180.000"))
     result = await agent.turn("one", "Fotos B10 BEV")
-    assert result.handoff_required and result.media_ids == [] and result.source_ids == []
-    assert "180" not in result.text
+    assert result.media_ids == ["b10-bev-front"]
+    assert not agent.llm.calls
+    assert "180" not in result.text and "http" not in result.text
 
 
 async def test_ambiguous_photos_never_guess_model(agent):

@@ -8,5 +8,19 @@
     "b10-bev": "BEV identity only; specifications intentionally absent"
   },
   "extraction_method": "Manual verification of official web text on this execution; narrow fact selection, not synthetic commercial data",
-  "production_photos": "unchanged pending_review"
+  "production_photos": "unchanged pending_review",
+  "additional_review": {
+    "reviewed_at": "2026-10-29T18:33:48.318394+00:00",
+    "url": "https://www.leapmotor.com.br/b10.html",
+    "method": "Official website search-index content verified after direct page fetch timed out",
+    "facts": [
+      "B10 BEV power 218 cv",
+      "B10 BEV rear trunk 405 L"
+    ],
+    "not_imported": [
+      "prices",
+      "stock",
+      "battery capacity"
+    ]
+  }
 }

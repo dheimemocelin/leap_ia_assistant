@@ -24,15 +24,24 @@
     "model": "B10",
     "version": "BEV",
     "powertrain": "BEV",
-    "specifications": {},
+    "specifications": {
+      "power_cv": 218,
+      "trunk_liters": 405
+    },
     "sources": [
       {
         "url": "https://www.leapmotor.com.br/tecnologias-eletrificadas.html",
         "retrieved_at": "2026-10-29T15:23:10.665016+00:00",
         "notes": "Internal verification against official page; scope is validation only."
+      },
+      {
+        "url": "https://www.leapmotor.com.br/b10.html",
+        "retrieved_at": "2026-10-29T18:33:48.318394Z",
+        "source_type": "official_website",
+        "notes": "Verified official indexed page: B10 Eletrico BEV; 218 cv and rear trunk 405 L. No prices imported."
       }
     ],
-    "updated_at": "2026-10-29T15:23:10.665016+00:00",
+    "updated_at": "2026-10-29T18:33:48.318394+00:00",
     "approval_status": "approved",
     "approved_at": "2026-10-29T15:23:10.665016+00:00",
     "approved_by": "internal-source-verification"
