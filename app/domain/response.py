@@ -19,6 +19,7 @@ class AssistantResponse(BaseModel):
     text: str = Field(min_length=1, max_length=4000)
     confidence: Confidence
     source_ids: list[str] = Field(default_factory=list, max_length=10)
+    media_ids: list[str] = Field(default_factory=list, max_length=3)
     handoff_required: bool = False
 
     @classmethod
@@ -33,7 +34,7 @@ class AssistantResponse(BaseModel):
             and not CommercialPolicyEngine().validate_output(values["text"])
             or any(
                 not isinstance(item, str) or not re.fullmatch(r"[A-Za-z0-9_.:-]{1,200}", item)
-                for item in (values.get("source_ids") or [])
+                for item in [*(values.get("source_ids") or []), *(values.get("media_ids") or [])]
             )
         ):
             return {
