@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    web_chat_password: SecretStr = Field(default=SecretStr(""), repr=False)
     app_env: str = "local"
     app_api_key: str = ""
     database_url: str = "postgresql+psycopg://leap:leap@localhost:5432/leap"

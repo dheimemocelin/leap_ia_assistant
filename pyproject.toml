@@ -30,3 +30,6 @@ asyncio_mode = "auto"
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+
+[tool.setuptools.package-data]
+app = ["web/*.html", "web/*.css", "web/*.js"]

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEAP · Vamos conversar</title>
+  <link rel="stylesheet" href="/web/chat.css"><script src="/web/chat.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="LEAP início"><span class="brand-mark">↗</span> LEAP<span class="brand-dot">.</span></a>
+    <div class="sidebar-main"><span class="eyebrow">UM NOVO JEITO DE IR</span><h1>Seu próximo<br>passo começa<br>com uma conversa.</h1><p>Explore a mobilidade elétrica.<br>Encontre o que faz sentido para você.</p><div class="line-art" aria-hidden="true"><span>BEV</span><div class="orbit"></div><span>REEV</span></div></div>
+    <footer><span class="status-dot"></span> Ambiente de teste privado</footer>
+  </aside>
+  <main>
+    <header class="topbar"><div><span class="status-dot"></span><strong>Assistente LEAP</strong><span class="tag">PRÉ-VENDAS</span></div><div class="actions"><button id="reset" type="button" hidden>Nova conversa</button><button id="logout" type="button" hidden>Sair</button></div></header>
+    <section id="login-panel" class="login-panel" aria-labelledby="login-title">
+      <span class="eyebrow">BEM-VINDO AO LEAP</span><h2 id="login-title">Vamos conversar?</h2><p>Entre com a senha de acesso para testar o assistente.</p>
+      <form id="login-form"><label for="password">Senha de acesso</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="200" placeholder="Digite sua senha">
+      <label for="catalog-mode">O que você quer testar?</label><select id="catalog-mode"><option value="reviewed">Conversa com fatos verificados</option><option value="pending">Catálogo de atendimento em revisão</option></select>
+      <button class="primary" id="login-button" type="submit">Entrar no chat <span aria-hidden="true">↗</span></button><p id="login-error" role="alert"></p></form>
+      <p class="small">Teste com perguntas gerais. Evite informar dados pessoais.</p>
+    </section>
+    <section id="chat-panel" class="chat-panel" hidden aria-label="Conversa com assistente">
+      <div id="mode-note" class="mode-note"></div>
+      <div id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions">
+        <div class="welcome" id="welcome"><span class="assistant-symbol" aria-hidden="true">↗</span><h2>O que te move?</h2><p>Posso ajudar você a conhecer os veículos Leapmotor.</p><div class="suggestions"><button type="button" data-prompt="Qual a autonomia do C10 BEV?">Autonomia do C10 BEV <span>↗</span></button><button type="button" data-prompt="Quero conhecer o B10">Conhecer o B10 <span>↗</span></button><button type="button" data-prompt="Você pode me mostrar fotos do B10 REEV?">Ver fotos do B10 REEV <span>↗</span></button></div></div>
+      </div>
+      <div class="composer-wrap"><p id="chat-error" role="alert"></p><form id="message-form" class="composer"><label class="sr-only" for="message">Sua mensagem</label><textarea id="message" rows="1" maxlength="4000" required placeholder="Escreva sua pergunta…"></textarea><button id="send" type="submit" aria-label="Enviar mensagem">↑</button></form><p class="disclaimer">O assistente pode pedir mais informações ou encaminhar você a um consultor.</p></div>
+    </section>
+  </main>
+</body>
+</html>

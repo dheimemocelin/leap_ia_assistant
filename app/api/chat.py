@@ -1,4 +1,5 @@
 import hashlib
+import json
 import secrets
 from pathlib import Path
 
@@ -6,6 +7,7 @@ from fastapi import APIRouter, Header, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from app.agent.groq import GroqAdapter
+from app.agent.grounding import GroundingPolicy, ReviewedFact
 from app.agent.llm import DisabledLLM, OllamaAdapter
 from app.agent.service import SalesAgent
 from app.catalog.loader import load_catalog
@@ -20,9 +22,10 @@ class ChatInput(BaseModel):
     text: str = Field(min_length=1, max_length=4000)
 
 
-def build_agent():
+def build_agent(*, reviewed_catalog=False):
     root = Path(__file__).resolve().parents[2]
-    catalog = load_catalog(root / "data/catalog")
+    catalog_root = root / ("data/validation/grounding" if reviewed_catalog else "data/catalog")
+    catalog = load_catalog(catalog_root)
     media = VehicleMediaLibrary.load(catalog, asset_root=root / "assets/media")
     if settings.llm_provider == "ollama":
         llm = OllamaAdapter(
@@ -40,7 +43,16 @@ def build_agent():
         llm = DisabledLLM()
     else:
         raise ValueError("Unknown LLM provider")
-    return SalesAgent(catalog, media, llm, timeout=settings.llm_timeout_seconds)
+    grounding = None
+    if reviewed_catalog:
+        facts = [
+            ReviewedFact.model_validate(f)
+            for f in json.loads((catalog_root / "facts.json").read_text())
+        ]
+        grounding = GroundingPolicy(facts, catalog)
+    return SalesAgent(
+        catalog, media, llm, timeout=settings.llm_timeout_seconds, grounding=grounding
+    )
 
 
 @router.post("/v1/conversations/{conversation_id}/messages", response_model=AssistantResponse)
