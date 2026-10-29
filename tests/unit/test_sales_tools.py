@@ -44,6 +44,7 @@ def approved_media(media_id: str, *, color: str, category: MediaCategory) -> Veh
         source_url="https://www.leapmotor.com.br/c10.html",
         storage_uri=f"s3://approved-media/{media_id}.jpg",
         rights_basis="Written permission ref MEDIA-001",
+        usage_rights_status="approved",
         provenance="Official product page image",
         retrieved_at=NOW,
         approval_status=ApprovalStatus.APPROVED,

@@ -1,0 +1,47 @@
+[
+  {
+    "model": "B10",
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/b10.html",
+        "retrieved_at": "2026-10-29T00:00:00Z",
+        "notes": "Canonical association from supplied media labels; technical version and rights require review. URL is a model reference, not proof of this version."
+      }
+    ],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "id": "b10-bev",
+    "version": "BEV",
+    "powertrain": "BEV",
+    "approval_status": "pending_review"
+  },
+  {
+    "model": "B10",
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/b10.html",
+        "retrieved_at": "2026-10-29T00:00:00Z",
+        "notes": "Canonical association from supplied media labels; technical version and rights require review. URL is a model reference, not proof of this version."
+      }
+    ],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "id": "b10-reev",
+    "version": "REEV",
+    "powertrain": "REEV",
+    "approval_status": "pending_review"
+  },
+  {
+    "model": "C10",
+    "sources": [
+      {
+        "url": "https://www.leapmotor.com.br/c10.html",
+        "retrieved_at": "2026-10-29T00:00:00Z",
+        "notes": "Canonical association from supplied media labels; technical version and rights require review. URL is a model reference, not proof of this version."
+      }
+    ],
+    "updated_at": "2026-10-29T00:00:00Z",
+    "id": "c10-bev",
+    "version": "BEV",
+    "powertrain": "BEV",
+    "approval_status": "pending_review"
+  }
+]

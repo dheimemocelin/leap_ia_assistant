@@ -63,8 +63,18 @@ class VehicleMedia(BaseModel):
     model_year: int | None = Field(default=None, ge=2000, le=2100)
     color: str | None = None
     category: MediaCategory
-    source_url: HttpUrl
+    source_url: HttpUrl | None = None
     storage_uri: str | None = None
+    asset_path: str | None = None
+    sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    mime_type: str | None = None
+    width: int | None = Field(default=None, gt=0)
+    height: int | None = Field(default=None, gt=0)
+    subcategory: str | None = None
+    source_type: str | None = None
+    usage_rights_status: str = "pending_confirmation"
+    model_confirmation: str | None = None
+    tags: list[str] = Field(default_factory=list)
     rights_basis: str
     provenance: str
     retrieved_at: datetime
@@ -74,8 +84,11 @@ class VehicleMedia(BaseModel):
 
     @model_validator(mode="after")
     def approval_requires_auditor(self) -> "VehicleMedia":
-        if self.approval_status == ApprovalStatus.APPROVED and not (self.approved_at and self.approved_by):
-            raise ValueError("Approved media requires approver and timestamp")
+        if self.approval_status == ApprovalStatus.APPROVED:
+            if not (self.approved_at and self.approved_by and self.storage_uri):
+                raise ValueError("Approved media requires approver, timestamp, and stored asset")
+            if self.usage_rights_status != "approved":
+                raise ValueError("Approved media requires usage rights approval")
         return self
 
 
