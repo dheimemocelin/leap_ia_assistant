@@ -5,6 +5,7 @@ from pathlib import Path
 from fastapi import APIRouter, Header, HTTPException, Request
 from pydantic import BaseModel, Field
 
+from app.agent.groq import GroqAdapter
 from app.agent.llm import DisabledLLM, OllamaAdapter
 from app.agent.service import SalesAgent
 from app.catalog.loader import load_catalog
@@ -26,6 +27,12 @@ def build_agent():
     if settings.llm_provider == "ollama":
         llm = OllamaAdapter(
             base_url=settings.llm_base_url,
+            model=settings.llm_model,
+            timeout=settings.llm_timeout_seconds,
+        )
+    elif settings.llm_provider == "groq":
+        llm = GroqAdapter(
+            api_key=settings.groq_api_key,
             model=settings.llm_model,
             timeout=settings.llm_timeout_seconds,
         )

@@ -1,0 +1,78 @@
+{
+  "model": "openai/gpt-oss-20b",
+  "interactions": [
+    {
+      "interaction": 1,
+      "fixture": "synthetic in-memory only",
+      "http_status": 200,
+      "latency_ms": 1059.94,
+      "provider_calls": 1,
+      "provider_metrics": [
+        {
+          "model_requested": "openai/gpt-oss-20b",
+          "http_status": 200,
+          "input_tokens": 231,
+          "output_tokens": 249,
+          "outcome": "ok",
+          "model_effective": "openai/gpt-oss-20b",
+          "tool_calls": 0,
+          "latency_ms": 1031.32
+        }
+      ],
+      "media_ids": [
+        "b10-reev-front"
+      ],
+      "source_count": 1,
+      "handoff_required": false,
+      "confidence": "grounded",
+      "policy_output_valid": true,
+      "tool": "search_vehicle_media",
+      "output_text_sha256": "637f80cbf93837454d5f2f78095eeac17617bab99d5d3aa4f4ea1f017776dc5f"
+    },
+    {
+      "interaction": 2,
+      "fixture": "synthetic in-memory only",
+      "http_status": 200,
+      "latency_ms": 605.58,
+      "provider_calls": 1,
+      "provider_metrics": [
+        {
+          "model_requested": "openai/gpt-oss-20b",
+          "http_status": 200,
+          "input_tokens": 269,
+          "output_tokens": 171,
+          "outcome": "ok",
+          "model_effective": "openai/gpt-oss-20b",
+          "tool_calls": 0,
+          "latency_ms": 592.83
+        }
+      ],
+      "media_ids": [],
+      "source_count": 1,
+      "handoff_required": false,
+      "confidence": "grounded",
+      "policy_output_valid": true,
+      "tool": "get_vehicle_details",
+      "output_text_sha256": "d308e34cd6e38c4ee8da144aa4e482f95f0e56ca80a6190e6cd0f7746998de18"
+    },
+    {
+      "interaction": 3,
+      "fixture": "synthetic in-memory only",
+      "http_status": 200,
+      "latency_ms": 5.99,
+      "provider_calls": 0,
+      "provider_metrics": [],
+      "media_ids": [],
+      "source_count": 0,
+      "handoff_required": true,
+      "confidence": "insufficient_evidence",
+      "policy_output_valid": true,
+      "tool": "blocked_before_tools",
+      "output_text_sha256": "bd9e4746e1748946b4d54f1a0a7cafc812d380e99c5546d12d9e6dfe91d1ed3f"
+    }
+  ],
+  "total_provider_calls": 2,
+  "input_tokens": 500,
+  "output_tokens": 420,
+  "catalog": "synthetic fixtures only; real photos remain pending_review"
+}
