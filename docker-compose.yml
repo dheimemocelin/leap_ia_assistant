@@ -1,0 +1,39 @@
+services:
+  api:
+    build: .
+    env_file: .env
+    ports: ["8000:8000"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/live')"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: leap
+      POSTGRES_USER: leap
+      POSTGRES_PASSWORD: leap
+    ports: ["5432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data", "./migrations/001_initial.sql:/docker-entrypoint-initdb.d/001_initial.sql:ro"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U leap -d leap"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["6379:6379"]
+    volumes: ["redis_data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  postgres_data:
+  redis_data:
