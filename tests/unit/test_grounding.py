@@ -60,7 +60,7 @@ async def test_real_tool_dispatch_and_exact_grounded_response(grounded):
 
 async def test_insufficient_evidence_never_asks_model_to_invent(grounded):
     result = await grounded.turn("one", "Qual a capacidade da bateria do C10 BEV?")
-    assert result.handoff_required and not result.source_ids
+    assert not result.handoff_required and not result.source_ids
     assert grounded.llm.calls == 1
 
 
@@ -72,7 +72,7 @@ async def test_unknown_fact_and_extra_claim_are_rejected(grounded):
     grounded.prefer_tool_calling = False
     grounded.llm = Bad()
     result = await grounded.turn("one", "Qual a autonomia do C10 BEV?")
-    assert result.handoff_required and "999" not in result.text and not result.source_ids
+    assert not result.handoff_required and "999" not in result.text and not result.source_ids
 
 
 async def test_nested_financial_data_cannot_become_fact_or_tool_context(grounded):
@@ -109,7 +109,7 @@ async def test_changed_or_revoked_fact_abstains(grounded, change):
     else:
         vehicle.sources = []
     response = await grounded.turn("changed", "Qual a autonomia do C10 BEV?")
-    assert response.handoff_required and not response.source_ids
+    assert not response.handoff_required and not response.source_ids
     assert grounded.llm.calls == (0 if change == "approval" else 1)
 
 
@@ -124,7 +124,7 @@ async def test_model_cannot_switch_requested_canonical_vehicle(grounded):
 
     grounded.llm = Wrong()
     result = await grounded.turn("wrong", "Qual a autonomia do C10 BEV?")
-    assert result.handoff_required and not result.source_ids
+    assert not result.handoff_required and not result.source_ids
 
 
 def test_unoffered_and_financial_facts_rejected(grounded):

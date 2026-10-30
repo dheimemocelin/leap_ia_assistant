@@ -1,3 +1,5 @@
+> Histórico da etapa anterior. A regra de handoff foi substituída pela solicitação explícita do cliente; veja [SDR v2](sdr-v2-evaluation.md).
+
 # Lia — correção SDR P1 e acolhimento
 
 Data: 2026-10-30. Baseline: `bd94068`. Branch: `fix/sdr-context-continuity`.

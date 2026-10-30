@@ -1,0 +1,1182 @@
+{
+  "baseline": "8b833c2d27e14a4d588a88313a152f75c29635ca",
+  "synthetic": true,
+  "implementation": "working-tree",
+  "real_llm_calls": 0,
+  "scenario": "sdr-v2",
+  "turns": [
+    {
+      "user": "oi",
+      "assistant": {
+        "text": "Olá! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Posso te apresentar o B10 e o C10, com informações e fotos. Como você prefere ser chamado?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": null,
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": null,
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "display_name",
+        "asked": [],
+        "greeted": true,
+        "next_action": "WELCOME",
+        "temperature": "frio",
+        "qualification_reasons": [],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Me chamo Pessoa Sintetica",
+      "assistant": {
+        "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": null,
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "DISCOVER",
+        "temperature": "frio",
+        "qualification_reasons": [],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "o B10",
+      "assistant": {
+        "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "DISCOVER",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "BEV",
+      "assistant": {
+        "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-media-a7003f6ac5256d84fcd2",
+          "src-media-9700050189508cfaadbf",
+          "src-media-cd78dc3783a5a75757a9",
+          "src-d54c6ab4a6069b6990a4"
+        ],
+        "media_ids": [
+          "b10-bev-cockpit-02",
+          "b10-bev-front_3_4-03",
+          "b10-bev-front_seats_roof-04"
+        ],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "SHOWCASE",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Pensei em utilizar para Uber.",
+      "assistant": {
+        "text": "Entendi: o carro faria parte do seu trabalho com aplicativo. Podemos avaliar o que você precisa nessa rotina. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "daily_distance",
+        "asked": [
+          "daily_distance"
+        ],
+        "greeted": true,
+        "next_action": "ENGAGE",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Uns 200 km",
+      "assistant": {
+        "text": "Anotei essa distância como parte da sua rotina. Podemos considerar a autonomia verificada e suas possibilidades de recarga, sem presumir o resultado no seu uso.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos"
+        ],
+        "first_electric": false,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "daily_distance"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Uso com a família também",
+      "assistant": {
+        "text": "Vamos considerar também sua rotina com a família ao explorar o carro. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. O que costuma exigir mais espaço: passageiros, bagagem ou os dois?",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-d54c6ab4a6069b6990a4"
+        ],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": false,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "family_priority",
+        "asked": [
+          "daily_distance",
+          "family_priority"
+        ],
+        "greeted": true,
+        "next_action": "EDUCATE",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Nunca tive um elétrico",
+      "assistant": {
+        "text": "Vamos explorar isso a partir do seu dia a dia, sem pular suas dúvidas. Você quer começar pela recarga ou pela autonomia?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "first_electric_priority",
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Tenho dúvidas sobre recarga",
+      "assistant": {
+        "text": "Esse ponto merece atenção antes de você decidir. Você teria onde carregar em casa ou no trabalho?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "charging_context",
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Em casa",
+      "assistant": {
+        "text": "Anotei essa possibilidade de recarga. Isso ajuda a entender sua rotina; a compatibilidade e os detalhes técnicos do veículo ainda precisam ser verificados nas fontes aprovadas.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Qual o preço?",
+      "assistant": {
+        "text": "Meu papel aqui é ajudar a conhecer os veículos, suas características verificadas e fotos. Podemos continuar explorando o modelo que te interessa.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Quero conhecer presencialmente",
+      "assistant": {
+        "text": "Conhecer o carro de perto faz parte da sua avaliação. Enquanto isso, podemos explorar as fotos e os detalhes verificados que você quer observar pessoalmente.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Não quero falar com vendedor",
+      "assistant": {
+        "text": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "declined",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "RESPECT_DECLINE",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Agora quero C10 BEV",
+      "assistant": {
+        "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-media-d82d93c7faaa38f8004b",
+          "src-media-fa2a4d50a9e503e76e9e",
+          "src-media-a686823ddd21ea2635af",
+          "src-ddb8b165ff27670a154b"
+        ],
+        "media_ids": [
+          "c10-bev-front_3_4-07",
+          "c10-bev-front_seats-06",
+          "c10-bev-panoramic_roof-08"
+        ],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "declined",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "SHOWCASE",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Qual a autonomia?",
+      "assistant": {
+        "text": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-ddb8b165ff27670a154b"
+        ],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "declined",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "EDUCATE",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Quero falar com um consultor",
+      "assistant": {
+        "text": "Posso preparar a continuidade com um consultor. Você autoriza compartilhar seu nome, telefone e interesse neste veículo para esse contato?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "handoff",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested",
+          "human_contact_requested"
+        ],
+        "consent": "offered",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "consent",
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "HANDOFF",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "sim",
+      "assistant": {
+        "text": "Qual telefone, com DDD, você prefere usar para o contato?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "handoff",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested",
+          "human_contact_requested"
+        ],
+        "consent": "granted",
+        "consent_at": "2026-10-30T13:33:43.465900+00:00",
+        "consent_scope": "C10:BEV",
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": "Pessoa Sintetica",
+        "contact_phone": null,
+        "pending_question": "phone",
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "HANDOFF",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "11000000000",
+      "assistant": {
+        "text": "Obrigado. Deixei o resumo e o contato preparados nesta conversa. Ainda não foram enviados a um consultor.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": 200,
+        "trip_distance_km": null,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "handoff",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested",
+          "human_contact_requested"
+        ],
+        "consent": "granted",
+        "consent_at": "2026-10-30T13:33:43.465900+00:00",
+        "consent_scope": "C10:BEV",
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": "Pessoa Sintetica",
+        "contact_phone": "11000000000",
+        "pending_question": null,
+        "asked": [
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "HANDOFF",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": {
+          "status": "prepared_not_sent",
+          "model": "C10",
+          "powertrain": "BEV",
+          "vehicle_id": "c10-bev",
+          "usage": "aplicativos",
+          "needs": [
+            "espaco"
+          ],
+          "objections": [
+            "recarga",
+            "mobilidade_eletrica"
+          ],
+          "visit_interest": true,
+          "purchase_timeline": null,
+          "temperature": "quente",
+          "qualification_reasons": [
+            "modelo identificado",
+            "uso informado",
+            "prioridade informada",
+            "interesse explícito em visita"
+          ],
+          "contact": {
+            "name": "Pessoa Sintetica",
+            "phone": "11000000000"
+          },
+          "consent": {
+            "status": "granted",
+            "at": "2026-10-30T13:33:43.465900+00:00",
+            "purpose": "contact_by_human_consultant",
+            "scope": "C10:BEV"
+          }
+        }
+      }
+    }
+  ]
+}

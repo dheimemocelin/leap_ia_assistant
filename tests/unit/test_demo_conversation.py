@@ -44,7 +44,7 @@ async def test_actual_authorized_demo_photos_are_available(demo, vehicle):
 
 async def test_specific_missing_battery_not_replaced_with_unrelated_summary(demo):
     reply = await demo.turn("missing", "Qual a capacidade da bateria do B10 BEV?")
-    assert reply.handoff_required and not reply.source_ids
+    assert not reply.handoff_required and not reply.source_ids
     assert "405" not in reply.text and "218" not in reply.text
 
 

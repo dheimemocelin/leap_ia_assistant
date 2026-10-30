@@ -51,11 +51,15 @@ async def test_customer_journey_visual_context_decline_and_price(agent):
     objection = await agent.turn("journey", "Tenho receio de carro elétrico")
     assert "recarga ou autonomia" in objection.text
     visit = await agent.turn("journey", "Quero conhecer o carro presencialmente")
-    assert "autoriza" in visit.text and profile(agent).temperature == "quente"
+    assert (
+        "autoriza" not in visit.text
+        and not visit.handoff_required
+        and profile(agent).temperature == "quente"
+    )
     refused = await agent.turn("journey", "Não quero contato")
     assert profile(agent).consent == "declined"
     price = await agent.turn("journey", "Qual o preço?")
-    assert "autoriza" not in price.text and price.handoff_required
+    assert "autoriza" not in price.text and not price.handoff_required
     assert not profile(agent).handoff_summary
     switched = await agent.turn("journey", "Agora quero ver o C10 BEV")
     assert switched.media_ids and all("c10-bev" in x for x in switched.media_ids)
@@ -79,6 +83,7 @@ async def test_customer_journey_visual_context_decline_and_price(agent):
 async def test_consent_contact_summary_and_private_history(agent):
     await agent.turn("journey", "B10 BEV")
     await agent.turn("journey", "Quero visitar")
+    await agent.turn("journey", "Quero falar com um consultor")
     await agent.turn("journey", "sim")
     assert profile(agent).consent == "granted"
     await agent.turn("journey", "Pessoa Sintetica")
@@ -113,7 +118,7 @@ async def test_known_brand_and_insufficient_catalog(agent):
     family = await agent.turn("journey", "Preciso de espaço para minha família")
     assert not family.source_ids and "evidência aprovada" in family.text
     missing = await agent.turn("journey", "Qual a capacidade da bateria?")
-    assert missing.handoff_required and not missing.source_ids
+    assert not missing.handoff_required and not missing.source_ids
 
 
 async def test_no_repeated_default_photos_and_fresh_model(agent):
@@ -150,6 +155,7 @@ async def test_repeated_use_does_not_repeat_question(agent):
 async def test_selection_interrupts_contact_collection_and_invalidates_consent(agent):
     await agent.turn("journey", "B10 BEV")
     await agent.turn("journey", "Quero visitar")
+    await agent.turn("journey", "Quero falar com um consultor")
     await agent.turn("journey", "sim")
     changed = await agent.turn("journey", "REEV")
     assert changed.media_ids and all("b10-reev" in m for m in changed.media_ids)
@@ -179,8 +185,8 @@ async def test_c10_without_powertrain_uses_only_approved_canonical_variant(agent
 
 async def test_no_new_contact_data_without_explicit_consent(agent):
     response = await agent.turn("journey", "Meu telefone é 11000000000")
-    assert "autoriza" in response.text
-    assert profile(agent).consent == "offered"
+    assert "autoriza" not in response.text
+    assert profile(agent).consent == "not_requested"
     assert profile(agent).contact_phone is None
     assert "11000000000" not in json.dumps(agent.sessions[("local", "journey")]["history"])
 
@@ -210,6 +216,7 @@ async def test_preferred_name_optional_private_and_asked_once(agent):
     assert "prefere ser chamado" not in again.text
     assert "Pessoa Sintetica" not in json.dumps(agent.sessions[("local", "journey")]["history"])
     await agent.turn("journey", "Quero visitar")
+    await agent.turn("journey", "Quero falar com um consultor")
     consented = await agent.turn("journey", "sim")
     assert "telefone" in consented.text
     assert profile(agent).contact_name == "Pessoa Sintetica"

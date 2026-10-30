@@ -46,7 +46,7 @@ async def test_exact_uber_incident_continues_discovery(agent):
     assert "aplicativo" in reply.text and "quilômetros" in reply.text
     assert "confirmar" not in reply.text and not reply.source_ids and not reply.media_ids
     assert state(agent)["usage"] == "aplicativos"
-    assert state(agent)["next_action"] == "explore"
+    assert state(agent)["next_action"] == "ENGAGE"
     assert state(agent)["temperature"] == "morno"
     recorded = await agent.turn("sdr", "Uns 200 km")
     assert state(agent)["daily_distance_km"] == 200
@@ -71,7 +71,7 @@ async def test_family_first_electric_charging_visit_and_decline(agent):
     changed = await agent.turn("sdr", "Agora quero C10 BEV")
     assert changed.media_ids and all("c10-bev" in x for x in changed.media_ids)
     visit = await agent.turn("sdr", "Quero conhecer presencialmente")
-    assert "autoriza" in visit.text
+    assert "autoriza" not in visit.text and not visit.handoff_required
     refused = await agent.turn("sdr", "Não quero falar com vendedor")
     assert not refused.media_ids and state(agent)["consent"] == "declined"
     await agent.turn("sdr", "Qual o preço?")
@@ -145,11 +145,11 @@ async def test_missing_charging_fact_still_allows_consultative_question(agent):
 async def test_buying_intent_prepares_only_authorized_handoff(agent):
     await agent.turn("sdr", "C10 BEV")
     result = await agent.turn("sdr", "Pretendo comprar em 2 meses")
-    assert "autoriza" in result.text
+    assert "autoriza" not in result.text and not result.handoff_required
     assert state(agent)["buying_intent"]
     assert state(agent)["purchase_timeline"] == "em 2 meses"
     assert state(agent)["temperature"] == "quente"
-    assert state(agent)["commercial_stage"] == "handoff"
+    assert state(agent)["commercial_stage"] == "interest"
     assert not state(agent)["handoff_summary"]
 
 
@@ -159,3 +159,134 @@ async def test_declining_name_after_specific_request_keeps_vehicle_context(agent
     assert "Qual modelo" not in response.text
     assert state(agent)["vehicle_id"] == "c10-bev"
     assert state(agent)["display_name"] is None
+
+
+async def test_screenshot_trip_and_economy_context_does_not_dead_end(agent):
+    for text in ["oi", "Pessoa Sintetica", "o b10", "reev"]:
+        await agent.turn("sdr", text)
+    result = await agent.turn("sdr", "bom é pra viagem e economia")
+    assert not result.handoff_required
+    assert "viag" in result.text.lower() and "distância" in result.text
+    assert "consultor" not in result.text
+    assert state(agent)["usage"] == "viagens"
+    assert "economia" in state(agent)["needs"]
+    followup = await agent.turn("sdr", "uns 500 km")
+    assert not followup.handoff_required
+    assert state(agent)["trip_distance_km"] == 500
+    assert "consultor" not in followup.text
+
+
+@pytest.mark.parametrize(
+    "message",
+    [
+        "Quero visitar",
+        "Pretendo comprar em 2 meses",
+        "Qual o preço?",
+        "Qual a bateria?",
+        "bom é pra viagem e economia",
+    ],
+)
+async def test_no_automatic_consultant_for_interest_or_missing_facts(agent, message):
+    await agent.turn("sdr", "B10 REEV")
+    response = await agent.turn("sdr", message)
+    assert not response.handoff_required
+    assert "consultor" not in response.text.lower() and "vendedor" not in response.text.lower()
+    assert "precisa de confirmação por um consultor" not in response.text
+    assert state(agent)["consent"] == "not_requested"
+    assert not state(agent)["handoff_summary"]
+
+
+async def test_only_explicit_human_request_starts_handoff_and_topic_can_change(agent):
+    await agent.turn("sdr", "B10 BEV")
+    await agent.turn("sdr", "Quero visitar")
+    request = await agent.turn("sdr", "Pode me passar para um vendedor?")
+    assert request.handoff_required and "autoriza" in request.text
+    assert state(agent)["next_action"] == "HANDOFF"
+    await agent.turn("sdr", "Qual a potência?")
+    assert state(agent)["pending_question"] != "consent"
+    assert state(agent)["consent"] == "not_requested"
+    await agent.turn("sdr", "sim")
+    assert state(agent)["consent"] != "granted"
+
+
+async def test_trip_distance_and_charging_reply_complete_the_discovery(agent):
+    await agent.turn("sdr", "B10 REEV")
+    await agent.turn("sdr", "pra viagem e economia")
+    await agent.turn("sdr", "Uns 500 km")
+    answer = await agent.turn("sdr", "Em casa")
+    assert state(agent)["charging_access"] == "home"
+    assert not answer.handoff_required and "?" not in answer.text
+    assert "consultor" not in answer.text
+
+
+async def test_full_sdr_v2_journey_actions_grounding_and_authorized_summary(agent):
+    turns = [
+        "oi",
+        "Me chamo Pessoa Sintetica",
+        "B10",
+        "BEV",
+        "Vou usar para Uber",
+        "Uns 200 km",
+        "Vou usar com minha família",
+        "Nunca tive um elétrico",
+        "Tenho dúvidas sobre recarga",
+        "Em casa",
+        "Qual o preço?",
+        "Quero conhecer presencialmente",
+        "Não quero falar com vendedor",
+        "Agora quero C10 BEV",
+        "Qual a autonomia?",
+        "Quero falar com um consultor",
+        "sim",
+        "11000000000",
+    ]
+    actions, all_media = [], set()
+    for index, text in enumerate(turns):
+        result = await agent.turn("sdr", text)
+        actions.append(state(agent)["next_action"])
+        assert result.text.count("?") <= 1
+        assert "Essa informação ainda precisa de confirmação por um consultor" not in result.text
+        assert not all_media.intersection(result.media_ids)
+        all_media.update(result.media_ids)
+        if index < 15:
+            assert not result.handoff_required
+            assert "consultor" not in result.text.lower() and "vendedor" not in result.text.lower()
+        if text == "BEV":
+            assert result.media_ids and all("b10-bev" in m for m in result.media_ids)
+            assert "?" not in result.text  # objective presentation is sufficient here
+        if text == "Qual a autonomia?":
+            assert "338" in result.text and result.source_ids
+    assert set(actions) == {
+        "WELCOME",
+        "DISCOVER",
+        "SHOWCASE",
+        "EDUCATE",
+        "ENGAGE",
+        "QUALIFY",
+        "HANDOFF",
+        "RESPECT_DECLINE",
+    }
+    summary = state(agent)["handoff_summary"]
+    assert summary["status"] == "prepared_not_sent"
+    assert summary["consent"]["status"] == "granted"
+    assert summary["contact"]["phone"] == "11000000000"
+    assert summary["vehicle_id"] == "c10-bev"
+    assert state(agent)["daily_distance_km"] == 200
+    assert "Pessoa Sintetica" not in json.dumps(agent.llm.calls)
+
+
+async def test_model_cannot_initiate_handoff_or_keep_unused_sources(agent):
+    from app.agent.llm import ToolCall
+
+    class ReferralModel:
+        async def complete(self, messages, tools):
+            if tools:
+                return ModelReply(tool_calls=[ToolCall(name="list_vehicles")])
+            return ModelReply(text="Sugiro falar com um consultor.")
+
+    agent.llm = ReferralModel()
+    response = await agent.turn("sdr", "Quais modelos existem?")
+    assert not response.handoff_required
+    assert "consultor" not in response.text
+    assert not response.source_ids
+    assert not state(agent)["handoff_summary"]

@@ -146,10 +146,13 @@ async def test_groq_adapter_through_existing_graph_and_policy(tmp_path):
         transport=httpx.MockTransport(handler),
     )
     result = await local.turn("one", "Quais veículos existem?")
-    assert len(requests) == 2
-    assert local.sessions[("local", "one")]["usage"]["input_tokens"] == 60
-    assert result.handoff_required and "180" not in result.text
+    assert len(requests) == 1
+    assert local.sessions[("local", "one")]["usage"]["input_tokens"] == 30
+    assert not result.handoff_required and "180" not in result.text
     assert len(requests[0]["tools"]) == 3
+    blocked = await local.turn("one", "Qual o preço?")
+    assert not blocked.handoff_required and "180" not in blocked.text
+    assert len(requests) == 1
 
 
 async def test_groq_error_becomes_handoff_without_provider_payload(tmp_path):
@@ -162,5 +165,5 @@ async def test_groq_error_becomes_handoff_without_provider_payload(tmp_path):
         transport=httpx.MockTransport(lambda request: httpx.Response(429, text="synthetic-key")),
     )
     result = await local.turn("one", "Me ajude a escolher")
-    assert result.handoff_required and "synthetic-key" not in result.text
+    assert not result.handoff_required and "synthetic-key" not in result.text
     assert len(local.llm.metrics) == 1

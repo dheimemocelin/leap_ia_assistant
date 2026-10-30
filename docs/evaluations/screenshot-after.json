@@ -1,0 +1,396 @@
+{
+  "baseline": "8b833c2d27e14a4d588a88313a152f75c29635ca",
+  "synthetic": true,
+  "implementation": "working-tree",
+  "real_llm_calls": 0,
+  "scenario": "screenshot",
+  "turns": [
+    {
+      "user": "oi",
+      "assistant": {
+        "text": "Olá! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Posso te apresentar o B10 e o C10, com informações e fotos. Como você prefere ser chamado?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": null,
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": null,
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "display_name",
+        "asked": [],
+        "greeted": true,
+        "next_action": "WELCOME",
+        "temperature": "frio",
+        "qualification_reasons": [],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Pessoa Sintetica",
+      "assistant": {
+        "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": null,
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "DISCOVER",
+        "temperature": "frio",
+        "qualification_reasons": [],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "o b10",
+      "assistant": {
+        "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "DISCOVER",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "reev",
+      "assistant": {
+        "text": "Separei estas imagens do B10 REEV para você começar a conhecê-lo. Toque em uma imagem para ampliar.",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-media-a9ff19ce76ea9b7bfecf",
+          "src-media-692def5f68253a3ff6e6",
+          "src-media-7606a304c26a9daf5167"
+        ],
+        "media_ids": [
+          "b10-reev-cockpit-12",
+          "b10-reev-front_3_4-11",
+          "b10-reev-front_seats_roof-10"
+        ],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "REEV",
+        "vehicle_id": "b10-reev",
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "SHOWCASE",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "bom é pra viagem e economia",
+      "assistant": {
+        "text": "Entendi, as viagens também fazem parte da escolha. Você costuma fazer qual distância nessas viagens?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "REEV",
+        "vehicle_id": "b10-reev",
+        "usage": "viagens",
+        "use_contexts": [
+          "viagens"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "economia"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "travel_pattern",
+        "asked": [
+          "travel_pattern"
+        ],
+        "greeted": true,
+        "next_action": "ENGAGE",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "uns 500 km",
+      "assistant": {
+        "text": "Vou considerar essa distância nas viagens. Para explorar sua prioridade de economia sem presumir resultados, podemos começar pelas possibilidades de recarga. Você teria onde carregar em casa ou no trabalho?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "REEV",
+        "vehicle_id": "b10-reev",
+        "usage": "viagens",
+        "use_contexts": [
+          "viagens"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": 500,
+        "charging_access": null,
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "economia"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "charging_context",
+        "asked": [
+          "travel_pattern",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "em casa",
+      "assistant": {
+        "text": "Anotei essa possibilidade de recarga. Isso ajuda a entender sua rotina; a compatibilidade e os detalhes técnicos do veículo ainda precisam ser verificados nas fontes aprovadas.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "REEV",
+        "vehicle_id": "b10-reev",
+        "usage": "viagens",
+        "use_contexts": [
+          "viagens"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": 500,
+        "charging_access": "home",
+        "contact_reason": "information",
+        "commercial_stage": "interest",
+        "needs": [
+          "economia"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "travel_pattern",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    }
+  ]
+}

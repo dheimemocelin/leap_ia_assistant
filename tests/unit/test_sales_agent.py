@@ -73,7 +73,7 @@ async def test_photos_sources_and_ids(agent, vehicle_id):
 
 async def test_details_and_compact_context(agent):
     result = await agent.turn("one", "Características do C10 BEV")
-    assert result.source_ids == [] and result.handoff_required
+    assert result.source_ids == [] and not result.handoff_required
     assert result.media_ids == []
     photos = await agent.turn("one", "Quero fotos")
     assert photos.media_ids == ["c10-bev-front"]
@@ -93,7 +93,7 @@ async def test_ambiguity_and_followup(agent):
 )
 async def test_financial_and_sales_actions_blocked_without_model(agent, text):
     result = await agent.turn("one", text)
-    assert result.handoff_required
+    assert not result.handoff_required
     assert not agent.llm.calls and not result.media_ids
 
 
@@ -112,7 +112,7 @@ async def test_tool_failure(agent, monkeypatch):
 
     monkeypatch.setattr(agent.media, "search", fail)
     result = await agent.turn("one", "Fotos B10 BEV")
-    assert result.handoff_required and "private" not in result.text
+    assert not result.handoff_required and "private" not in result.text
 
 
 async def test_timeout(agent):
@@ -122,14 +122,14 @@ async def test_timeout(agent):
 
     agent.llm = Slow()
     result = await agent.turn("one", "Me ajude a escolher")
-    assert result.handoff_required
+    assert not result.handoff_required
     assert agent.sessions[("local", "one")]["usage"]["calls"] == 1
 
 
 async def test_model_tool_call_allowlist(agent):
     agent.llm = FakeLLM(ModelReply(tool_calls=[ToolCall(name="create_syonet_lead")]))
     result = await agent.turn("one", "Ajude-me a escolher")
-    assert result.handoff_required
+    assert not result.handoff_required
     assert len(agent.llm.calls) == 1
 
 
@@ -145,7 +145,7 @@ async def test_model_tool_call_list_and_call_budget(agent):
 
     agent.llm = Planner()
     await agent.turn("one", "Quais veículos existem?")
-    assert len(agent.llm.calls) == 2
+    assert len(agent.llm.calls) == 1  # Approved identities do not need a second generation call.
     assert len(agent.llm.calls[0][1]) == 3
 
 

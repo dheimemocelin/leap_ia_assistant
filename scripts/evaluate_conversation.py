@@ -50,6 +50,37 @@ CONSULTATIVE_DIALOGUE = [
 ]
 
 
+SCREENSHOT_DIALOGUE = [
+    "oi",
+    "Pessoa Sintetica",
+    "o b10",
+    "reev",
+    "bom é pra viagem e economia",
+    "uns 500 km",
+    "em casa",
+]
+SDR_V2_DIALOGUE = [
+    "oi",
+    "Me chamo Pessoa Sintetica",
+    "o B10",
+    "BEV",
+    "Pensei em utilizar para Uber.",
+    "Uns 200 km",
+    "Uso com a família também",
+    "Nunca tive um elétrico",
+    "Tenho dúvidas sobre recarga",
+    "Em casa",
+    "Qual o preço?",
+    "Quero conhecer presencialmente",
+    "Não quero falar com vendedor",
+    "Agora quero C10 BEV",
+    "Qual a autonomia?",
+    "Quero falar com um consultor",
+    "sim",
+    "11000000000",
+]
+
+
 async def replay(dialogue):
     agent = build_agent(reviewed_catalog=True, test_media=True)
     agent.llm = OfflineModel()
@@ -71,15 +102,28 @@ async def replay(dialogue):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--scenario", choices=["consultative", "sdr"], default="consultative")
+    parser.add_argument(
+        "--scenario",
+        choices=["consultative", "sdr", "screenshot", "sdr-v2"],
+        default="consultative",
+    )
+    parser.add_argument("--implementation-label", default="working-tree")
     args = parser.parse_args()
     payload = {
         "baseline": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
         "synthetic": True,
+        "implementation": args.implementation_label,
         "real_llm_calls": 0,
         "scenario": args.scenario,
         "turns": asyncio.run(
-            replay(SDR_DIALOGUE if args.scenario == "sdr" else CONSULTATIVE_DIALOGUE)
+            replay(
+                {
+                    "sdr": SDR_DIALOGUE,
+                    "consultative": CONSULTATIVE_DIALOGUE,
+                    "screenshot": SCREENSHOT_DIALOGUE,
+                    "sdr-v2": SDR_V2_DIALOGUE,
+                }[args.scenario]
+            )
         ),
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
