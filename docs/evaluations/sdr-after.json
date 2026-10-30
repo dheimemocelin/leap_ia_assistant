@@ -1,0 +1,568 @@
+{
+  "baseline": "bd94068dc477c13d8f5bd5e502e0ecaaa345cfbd",
+  "synthetic": true,
+  "real_llm_calls": 0,
+  "scenario": "sdr",
+  "turns": [
+    {
+      "user": "Qual a autonomia do C10 BEV?",
+      "assistant": {
+        "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Como você prefere ser chamado?",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-ddb8b165ff27670a154b"
+        ],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "display_name",
+        "asked": [],
+        "greeted": true,
+        "next_action": "explain",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Manda fotos.",
+      "assistant": {
+        "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. Toque em uma imagem para ampliar. Como você pretende usar o carro no dia a dia?",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-media-d82d93c7faaa38f8004b",
+          "src-media-fa2a4d50a9e503e76e9e",
+          "src-media-a686823ddd21ea2635af"
+        ],
+        "media_ids": [
+          "c10-bev-front_3_4-07",
+          "c10-bev-front_seats-06",
+          "c10-bev-panoramic_roof-08"
+        ],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "usage",
+        "asked": [
+          "usage"
+        ],
+        "greeted": true,
+        "next_action": "explore",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Pensei em utilizar para Uber.",
+      "assistant": {
+        "text": "Entendi: o carro faria parte do seu trabalho com aplicativo. Podemos avaliar o que você precisa nessa rotina. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "daily_distance",
+        "asked": [
+          "usage",
+          "daily_distance"
+        ],
+        "greeted": true,
+        "next_action": "explore",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Uso com minha família também",
+      "assistant": {
+        "text": "Vamos considerar também sua rotina com a família ao explorar o carro. Ainda não tenho evidência aprovada para afirmar como este modelo atende a essa prioridade. O que costuma exigir mais espaço: passageiros, bagagem ou os dois?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "family_priority",
+        "asked": [
+          "usage",
+          "daily_distance",
+          "family_priority"
+        ],
+        "greeted": true,
+        "next_action": "explore",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Nunca tive um elétrico",
+      "assistant": {
+        "text": "Vamos explorar isso a partir do seu dia a dia, sem pular suas dúvidas. Você quer começar pela recarga ou pela autonomia?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "first_electric_priority",
+        "asked": [
+          "usage",
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority"
+        ],
+        "greeted": true,
+        "next_action": "clarify",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Tenho dúvidas sobre recarga",
+      "assistant": {
+        "text": "Esse ponto merece atenção antes de você decidir. Você teria onde carregar em casa ou no trabalho?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 1,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "C10",
+        "powertrain": "BEV",
+        "vehicle_id": "c10-bev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "charging_context",
+        "asked": [
+          "usage",
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "clarify",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Agora quero ver B10 REEV",
+      "assistant": {
+        "text": "Separei estas imagens do B10 REEV para você começar a conhecê-lo. Toque em uma imagem para ampliar.",
+        "confidence": "grounded",
+        "source_ids": [
+          "src-media-a9ff19ce76ea9b7bfecf",
+          "src-media-692def5f68253a3ff6e6",
+          "src-media-7606a304c26a9daf5167"
+        ],
+        "media_ids": [
+          "b10-reev-cockpit-12",
+          "b10-reev-front_3_4-11",
+          "b10-reev-front_seats_roof-10"
+        ],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "REEV",
+        "vehicle_id": "b10-reev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "usage",
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "present",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Quero conhecer presencialmente",
+      "assistant": {
+        "text": "Posso preparar a continuidade com um consultor. Você autoriza compartilhar seu nome, telefone e interesse neste veículo para esse contato?",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": true
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "REEV",
+        "vehicle_id": "b10-reev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "handoff",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "offered",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "consent",
+        "asked": [
+          "usage",
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "await_contact_consent",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "user": "Não quero falar com vendedor",
+      "assistant": {
+        "text": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+        "confidence": "insufficient_evidence",
+        "source_ids": [],
+        "media_ids": [],
+        "handoff_required": false
+      },
+      "usage": {
+        "calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "profile": {
+        "interest_model": "B10",
+        "powertrain": "REEV",
+        "vehicle_id": "b10-reev",
+        "usage": "aplicativos",
+        "use_contexts": [
+          "aplicativos",
+          "familia"
+        ],
+        "first_electric": true,
+        "daily_distance_km": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [
+          "espaco"
+        ],
+        "objections": [
+          "recarga",
+          "mobilidade_eletrica"
+        ],
+        "knows_brand": false,
+        "visit_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "visit_requested"
+        ],
+        "consent": "declined",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "usage",
+          "daily_distance",
+          "family_priority",
+          "first_electric_priority",
+          "charging_context"
+        ],
+        "greeted": true,
+        "next_action": "respect_no_contact",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "prioridade informada",
+          "interesse explícito em visita"
+        ],
+        "handoff_summary": null
+      }
+    }
+  ]
+}

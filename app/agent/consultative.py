@@ -18,6 +18,11 @@ class LeadProfile(BaseModel):
     powertrain: str | None = None
     vehicle_id: str | None = None
     usage: str | None = None
+    use_contexts: list[str] = Field(default_factory=list)
+    first_electric: bool = False
+    daily_distance_km: int | None = None
+    contact_reason: str | None = None
+    commercial_stage: str = "discovery"
     needs: list[str] = Field(default_factory=list)
     objections: list[str] = Field(default_factory=list)
     knows_brand: bool = False
@@ -73,6 +78,13 @@ def classify(profile: LeadProfile):
         else "frio"
     )
     profile.qualification_reasons = reasons
+    profile.commercial_stage = (
+        "handoff"
+        if profile.consent in {"offered", "granted"}
+        else "interest"
+        if profile.temperature != "frio"
+        else "discovery"
+    )
 
 
 def offer_contact(profile: LeadProfile):
@@ -83,6 +95,7 @@ def offer_contact(profile: LeadProfile):
         )
     if profile.consent == "granted":
         return collect_contact(profile)
+    profile.commercial_stage = "handoff"
     profile.consent = "offered"
     profile.pending_question = "consent"
     profile.next_action = "await_contact_consent"
@@ -133,23 +146,14 @@ def collect_contact(profile: LeadProfile):
 
 
 def next_question(profile: LeadProfile):
-    choices = []
-    if profile.usage is None:
-        choices.append(("usage", "Como você pretende usar o carro no dia a dia?"))
-    if not profile.needs:
-        choices.append(("need", "O que pesa mais na sua escolha: espaço, conforto ou autonomia?"))
-    if profile.visit_interest is None and (profile.usage or profile.needs):
-        choices.append(("visit", "Você gostaria de conhecer o carro presencialmente?"))
-    if profile.purchase_timeline is None and profile.buying_intent:
-        choices.append(("timeline", "Você tem algum prazo em mente para a compra?"))
-    for key, text in choices:
-        if key not in profile.asked:
-            profile.asked.append(key)
-            profile.pending_question = key
-            profile.next_action = "understand_" + key
-            return text
+    """One useful invitation at presentation, never a sequential qualification form."""
+    if profile.usage is None and "usage" not in profile.asked:
+        profile.asked.append("usage")
+        profile.pending_question = "usage"
+        profile.next_action = "explore"
+        return "Como você pretende usar o carro no dia a dia?"
     profile.pending_question = None
-    profile.next_action = "answer_customer"
+    profile.next_action = "present"
     return ""
 
 
@@ -158,21 +162,33 @@ def observe(profile: LeadProfile, text: str):
     t = norm(text).strip("!.? ")
     # Preferred name is local personalization, never permission to share a lead.
     named = re.fullmatch(
-        r"(?:meu nome [ée]|me chamo|pode me chamar de|sou o|sou a) (.+?)[.! ]*",
+        r"(?:(?:oi|olá)[,! ]+)?(?:meu nome [ée]|me chamo|pode me chamar de|sou o|sou a) (.+?)[.! ]*",
         text.strip(),
         re.IGNORECASE,
     )
+    trailing_request = ""
+    if named and "," in named.group(1):
+        candidate_name, trailing_request = named.group(1).split(",", 1)
+    else:
+        candidate_name = named.group(1) if named else ""
     awaiting_name = profile.pending_question == "display_name"
     if awaiting_name and t in {"nao", "prefiro nao", "nao quero informar", "nao quero dizer"}:
         profile.pending_question = None
-        return response("Tudo bem, seguimos sem nome. Qual modelo você quer conhecer?"), True
-    candidate = named.group(1) if named else text.strip() if awaiting_name else ""
+        return response(
+            "Tudo bem, seguimos sem nome. "
+            + (
+                "Podemos continuar conhecendo o carro por aqui."
+                if profile.interest_model
+                else "Qual modelo você quer conhecer?"
+            )
+        ), True
+    candidate = candidate_name if named else text.strip() if awaiting_name else ""
     if (
         candidate
         and (
             named
             or not re.search(
-                r"\b(quero|uso|cidade|fotos|autonomia|recarga|familia|interesse|potencia|painel|preco|obrigado)\b",
+                r"\b(quero|uso|vou|tenho|trabalhar|uber|aplicativo|filhos|cidade|fotos|autonomia|recarga|familia|interesse|potencia|painel|preco|obrigado)\b",
                 t,
             )
         )
@@ -189,7 +205,15 @@ def observe(profile: LeadProfile, text: str):
             profile.display_name = candidate
             profile.name_prompted = True
             profile.pending_question = None
-            return response(f"Prazer, {candidate}. Qual modelo você quer conhecer?"), True
+            if not trailing_request:
+                return response(
+                    f"Prazer, {candidate}. "
+                    + (
+                        "Podemos continuar explorando o carro por aqui."
+                        if profile.interest_model
+                        else "Qual modelo você quer conhecer?"
+                    )
+                ), True
     if awaiting_name:
         profile.pending_question = None
     explicit_contact = bool(
@@ -243,10 +267,28 @@ def observe(profile: LeadProfile, text: str):
                     "Não consegui identificar o telefone. Pode informar DDD e número?", handoff=True
                 ), True
         return collect_contact(profile), True
-    if re.search(r"\bcidade\b|\burbano\b|dia a dia|\btrabalho\b", t):
-        profile.usage = "urbano"
+    if re.search(r"uber|99|aplicativo", t) and not re.search(r"nao.*(?:uber|aplicativo)", t):
+        profile.usage = "aplicativos"
+        if "aplicativos" not in profile.use_contexts:
+            profile.use_contexts.append("aplicativos")
+    if re.search(r"nunca (?:tive|usei|dirigi).*eletric|primeir[oa].*eletric", t):
+        profile.first_electric = True
+    if "recarga" in t and "recarga" not in profile.objections:
+        profile.objections.append("recarga")
+    distance = re.search(r"\b(\d{1,4})\s*(?:km|quilometros)\b", t)
+    if distance and profile.pending_question == "daily_distance":
+        profile.daily_distance_km = int(distance.group(1))
+        profile.pending_question = None
+    if re.search(r"familia|filhos", t) and "familia" not in profile.use_contexts:
+        profile.use_contexts.append("familia")
+    if re.search(r"\bcidade\b|\burbano\b|dia a dia|\btrabalho\b", t) and not re.search(
+        r"uber|99|aplicativo", t
+    ):
+        profile.usage = "trabalho" if "trabalho" in t and "cidade" not in t else "urbano"
     elif re.search(r"estrada|viajar|viagens", t):
         profile.usage = "viagens"
+    if profile.usage and profile.usage not in profile.use_contexts:
+        profile.use_contexts.append(profile.usage)
     for pattern, need in [
         (r"espaco|familia|filhos", "espaco"),
         (r"conforto", "conforto"),
@@ -267,6 +309,13 @@ def observe(profile: LeadProfile, text: str):
     match = re.search(r"(?:em|daqui a|nos proximos) (\d{1,2}) (dias|meses|mes)", t)
     if match:
         profile.purchase_timeline = match.group(0)
+    if (
+        profile.buying_intent
+        and re.search(r"quero comprar|pretendo comprar|vou comprar", t)
+        and not t.startswith("nao")
+    ):
+        classify(profile)
+        return offer_contact(profile), False
     if re.search(
         r"conhecer.*(?:presencial|pessoalmente)|ver.*pessoalmente|quero visitar|test[ -]?drive", t
     ) and not t.startswith("nao"):
@@ -290,9 +339,82 @@ def observe(profile: LeadProfile, text: str):
     if re.search(r"\d[\d ()+.-]{8,}\d|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", text):
         return offer_contact(profile), True
     classify(profile)
-    return None, False
+    return None, bool(trailing_request)
 
 
 def redact_history(text: str):
     text = re.sub(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", "[contato omitido]", text)
     return re.sub(r"\+?\d[\d ()+.-]{8,}\d", "[contato omitido]", text)
+
+
+class NextBestAction(BaseModel):
+    """Server-owned intent and allowed wording; the model cannot introduce claims."""
+
+    action: Literal["explain", "present", "explore", "clarify", "handoff"]
+    variants: list[str]
+    question: str = ""
+
+
+def choose_next_action(profile: LeadProfile, before: dict) -> NextBestAction | None:
+    question = ""
+    if profile.first_electric and not before.get("first_electric"):
+        key = "first_electric_priority"
+        variants = [
+            "Podemos começar pelo que muda na sua rotina, sem pressupor experiência com elétricos.",
+            "Vamos explorar isso a partir do seu dia a dia, sem pular suas dúvidas.",
+        ]
+        question = "Você quer começar pela recarga ou pela autonomia?"
+        action = "clarify"
+    elif profile.objections != before["objections"]:
+        key = "charging_context" if "recarga" in profile.objections else "electric_concern"
+        variants = [
+            "Vamos olhar essa dúvida com calma e considerar sua rotina.",
+            "Esse ponto merece atenção antes de você decidir.",
+        ]
+        question = (
+            "Você teria onde carregar em casa ou no trabalho?"
+            if key == "charging_context"
+            else "Sua dúvida é mais sobre recarga ou autonomia?"
+        )
+        action = "clarify"
+    elif profile.usage != before["usage"] or profile.needs != before["needs"]:
+        if profile.usage == "aplicativos" and profile.needs == before["needs"]:
+            key = "daily_distance"
+            variants = [
+                "Para trabalhar com aplicativo, vale entender sua rotina de uso antes de avaliar o carro.",
+                "Entendi: o carro faria parte do seu trabalho com aplicativo. Podemos avaliar o que você precisa nessa rotina.",
+            ]
+            question = (
+                "Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?"
+            )
+        elif "espaco" in profile.needs:
+            key = "family_priority"
+            variants = [
+                "Para usar com a família, podemos olhar o espaço e o que vocês costumam levar.",
+                "Vamos considerar também sua rotina com a família ao explorar o carro.",
+            ]
+            question = "O que costuma exigir mais espaço: passageiros, bagagem ou os dois?"
+        elif profile.usage == "viagens":
+            key = "travel_pattern"
+            variants = [
+                "Vamos considerar seus trajetos de viagem ao conhecer o carro.",
+                "Entendi, as viagens também fazem parte da escolha.",
+            ]
+            question = "Você costuma fazer qual distância nessas viagens?"
+        else:
+            key = "use_priority"
+            variants = [
+                "Para seu uso na cidade, vou considerar as prioridades que você trouxer.",
+                "Vamos partir da sua rotina para escolher o que vale explorar no carro.",
+            ]
+            question = "O que mais importa para você nesse uso?"
+        action = "explore"
+    else:
+        return None
+    if key in profile.asked:
+        question = ""
+    else:
+        profile.asked.append(key)
+    profile.pending_question = key if question else None
+    profile.next_action = action
+    return NextBestAction(action=action, variants=variants, question=question)

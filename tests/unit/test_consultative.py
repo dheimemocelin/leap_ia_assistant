@@ -17,6 +17,8 @@ class ReviewedOnly:
     async def complete(self, messages, tools):
         self.messages.append(messages)
         assert not tools
+        if "variants" in messages[-1]["content"]:
+            return ModelReply(text='{"variant":1}')
         evidence = json.loads(messages[-1]["content"].split(": ", 1)[1])
         return ModelReply(text=json.dumps({"fact_ids": [f["id"] for f in evidence["facts"]]}))
 
@@ -187,9 +189,9 @@ async def test_objection_replaces_previous_visit_question(agent):
     await agent.turn("journey", "B10 BEV")
     await agent.turn("journey", "Uso na cidade")
     await agent.turn("journey", "Preciso de espaço para família")
-    assert profile(agent).pending_question == "visit"
+    assert profile(agent).pending_question == "family_priority"
     await agent.turn("journey", "Tenho receio de carro elétrico")
-    assert profile(agent).pending_question == "objection"
+    assert profile(agent).pending_question == "electric_concern"
     await agent.turn("journey", "sim")
     assert profile(agent).consent == "not_requested"
     assert profile(agent).visit_interest is None
