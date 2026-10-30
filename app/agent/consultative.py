@@ -7,6 +7,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from app.agent.social import social_intent
 from app.catalog.media_library import norm
 from app.domain.response import AssistantResponse
 
@@ -198,6 +199,7 @@ def observe(profile: LeadProfile, text: str):
     candidate = candidate_name if named else text.strip() if awaiting_name else ""
     if (
         candidate
+        and (named or social_intent(text) is None)
         and (
             named
             or not re.search(
@@ -260,7 +262,11 @@ def observe(profile: LeadProfile, text: str):
             f"{profile.interest_model or 'unspecified'}:{profile.powertrain or 'unspecified'}"
         )
         return collect_contact(profile), True
-    if profile.consent == "granted" and profile.pending_question in {"name", "phone"}:
+    if (
+        profile.consent == "granted"
+        and profile.pending_question in {"name", "phone"}
+        and social_intent(text) is None
+    ):
         if profile.pending_question == "name":
             if (
                 len(text.strip()) >= 2
@@ -309,10 +315,12 @@ def observe(profile: LeadProfile, text: str):
         profile.pending_question = None
     if re.search(r"familia|filhos", t) and "familia" not in profile.use_contexts:
         profile.use_contexts.append("familia")
-    if re.search(r"\bcidade\b|\burbano\b|dia a dia|\btrabalho\b", t) and not re.search(
+    if re.search(r"\bcidade\b|\burbano\b|dia a dia|\btrabalh(?:o|ar)\b", t) and not re.search(
         r"uber|99|aplicativo", t
     ):
-        profile.usage = "trabalho" if "trabalho" in t and "cidade" not in t else "urbano"
+        profile.usage = (
+            "trabalho" if re.search(r"\btrabalh(?:o|ar)\b", t) and "cidade" not in t else "urbano"
+        )
     elif re.search(r"\bestrada\b|\bviajar\b|\bviage(?:m|ns)\b", t):
         profile.usage = "viagens"
     if profile.usage and profile.usage not in profile.use_contexts:
@@ -435,6 +443,13 @@ def choose_next_action(profile: LeadProfile, before: dict) -> NextBestAction | N
                 "Vamos considerar também sua rotina com a família ao explorar o carro.",
             ]
             question = "O que costuma exigir mais espaço: passageiros, bagagem ou os dois?"
+        elif profile.usage == "trabalho":
+            key = "professional_routine"
+            variants = [
+                "Vamos considerar sua rotina de trabalho ao explorar o carro.",
+                "Entendi que o carro fará parte do seu trabalho. Podemos partir dessa rotina.",
+            ]
+            question = "Como você pretende usar o carro no trabalho?"
         elif profile.usage == "viagens":
             key = "travel_pattern"
             variants = [

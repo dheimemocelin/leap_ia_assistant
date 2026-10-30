@@ -18,6 +18,13 @@ from app.agent.consultative import (
 )
 from app.agent.grounding import GroundingPolicy
 from app.agent.llm import LLMAdapter, ToolCall
+from app.agent.social import (
+    SOCIAL_WORDS,
+    SocialDraft,
+    fallback_social,
+    render_social,
+    social_intent,
+)
 from app.catalog.media_library import MediaSearchQuery, VehicleMediaLibrary, norm
 from app.domain.response import AssistantResponse
 from app.policy.commercial import CommercialPolicyEngine, PolicyDecision
@@ -266,6 +273,51 @@ class SalesAgent:
         ) != PolicyDecision.ALLOW or bool(
             re.search(r"pix|pagamento|reserv|negoci|fech|desconto|promoc|preco", text)
         )
+        reaction = social_intent(s["text"])
+        if reaction and not override and not financial:
+            if reaction == "positive" and "positive_reaction" not in profile.signals:
+                profile.signals.append("positive_reaction")
+            if reaction == "doubt" and "unspecified_doubt" not in profile.objections:
+                profile.objections.append("unspecified_doubt")
+            if reaction == "more" and "explore_requested" not in profile.signals:
+                profile.signals.append("explore_requested")
+            if reaction == "negative" and "visual_preference" not in profile.objections:
+                profile.objections.append("visual_preference")
+            context = {
+                "vehicle": {"model": profile.interest_model, "powertrain": profile.powertrain},
+                "reaction": reaction,
+                "allowed_social_vocabulary": sorted(SOCIAL_WORDS),
+                "usage": profile.usage,
+                "needs": profile.needs,
+                "asked": profile.asked,
+                "photos_already_shown": bool(s.get("shown_media_ids")),
+                "reviewed_facts_already_presented": [
+                    f
+                    for f in self.grounding.for_vehicle(profile.vehicle_id, "conhecer")
+                    if f["id"] in (s.get("presented_fact_ids") or [])
+                ]
+                if profile.vehicle_id
+                else [],
+            }
+            try:
+                result = await self.model_call(
+                    s,
+                    [
+                        {
+                            "role": "system",
+                            "content": 'Você é Lia, assistente virtual de pré-vendas. É uma reação social, não uma pergunta técnica. Escreva uma resposta curta e natural no contexto, sem se reapresentar, citar nome, repetir fotos ou fatos, criar atributos ou prometer benefícios. Sem entusiasmo artificial. Não encaminhe a atendimento humano. Pergunta é opcional, no máximo uma e sem repetir asked. Retorne SOMENTE JSON {"acknowledgement":"texto", "question":null} ou question {"key":"usage|priority|doubt|objection","text":"pergunta?"}. Componha com as palavras de allowed_social_vocabulary, usando acentos naturais. A aplicação valida o vocabulário e mantém afirmações técnicas no caminho de fatos revisados.',
+                        },
+                        {"role": "user", "content": json.dumps(context, ensure_ascii=False)},
+                    ],
+                    [],
+                )
+                if result.tool_calls:
+                    raise ValueError("No tools in social turn")
+                draft = SocialDraft.model_validate_json(result.text)
+                text_reply = render_social(draft, profile, reaction)
+            except Exception:  # noqa: BLE001 - social continuity on malformed/unsafe output
+                text_reply = fallback_social(reaction)
+            override = reply(text_reply)
         plan = (
             choose_next_action(profile, before)
             if not override and not technical_question and not models and not financial

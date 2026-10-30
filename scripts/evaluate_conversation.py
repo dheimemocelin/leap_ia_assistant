@@ -14,6 +14,28 @@ class OfflineModel:
     async def complete(self, messages, tools):
         if tools:
             return ModelReply(tool_calls=[ToolCall(name="list_vehicles")])
+        if messages[-1]["content"].startswith("{"):
+            context = json.loads(messages[-1]["content"])
+            if "reaction" in context:
+                label = " ".join(x for x in context["vehicle"].values() if x)
+                kind = context["reaction"]
+                ack = {
+                    "positive": f"O visual do {label} chamou sua atenção.",
+                    "negative": f"Entendi sua impressão sobre o {label}.",
+                    "doubt": f"Podemos esclarecer suas dúvidas sobre o {label}.",
+                    "more": f"Podemos continuar pelo que mais te interessa no {label}.",
+                }[kind]
+                key, question = {
+                    "positive": ("usage", "Como você pretende usar o carro no dia a dia?"),
+                    "negative": ("objection", "O que não te agradou no visual?"),
+                    "doubt": ("doubt", "Qual ponto você quer esclarecer primeiro?"),
+                    "more": ("priority", "O que você quer conhecer melhor nesse modelo?"),
+                }[kind]
+                return ModelReply(
+                    text=json.dumps(
+                        {"acknowledgement": ack, "question": {"key": key, "text": question}}
+                    )
+                )
         if "variants" in messages[-1]["content"]:
             return ModelReply(text='{"variant":1}')
         evidence = json.loads(messages[-1]["content"].split(": ", 1)[1])
@@ -81,6 +103,21 @@ SDR_V2_DIALOGUE = [
 ]
 
 
+SOCIAL_DIALOGUE = [
+    "Me chamo Pessoa Sintetica",
+    "Fotos do B10 BEV",
+    "Que legal",
+    "Gostei",
+    "Muito bonito",
+    "Interessante",
+    "Não gostei",
+    "Tenho dúvidas",
+    "Quero saber mais",
+    "Uso para trabalhar",
+    "Pensei em usar para Uber",
+]
+
+
 async def replay(dialogue):
     agent = build_agent(reviewed_catalog=True, test_media=True)
     agent.llm = OfflineModel()
@@ -93,6 +130,7 @@ async def replay(dialogue):
                 "user": text,
                 "assistant": response.model_dump(mode="json"),
                 "usage": state["usage"],
+                "tool_names": [e["name"] for e in state.get("tool_events", [])],
                 "profile": state.get("lead_profile", {}),
             }
         )
@@ -104,7 +142,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
         "--scenario",
-        choices=["consultative", "sdr", "screenshot", "sdr-v2"],
+        choices=["consultative", "sdr", "screenshot", "sdr-v2", "social"],
         default="consultative",
     )
     parser.add_argument("--implementation-label", default="working-tree")
@@ -122,6 +160,7 @@ if __name__ == "__main__":
                     "consultative": CONSULTATIVE_DIALOGUE,
                     "screenshot": SCREENSHOT_DIALOGUE,
                     "sdr-v2": SDR_V2_DIALOGUE,
+                    "social": SOCIAL_DIALOGUE,
                 }[args.scenario]
             )
         ),
