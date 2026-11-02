@@ -112,3 +112,7 @@ git diff --check
 | Prioridades e configuração | [Backlog](docs/backlog.md) e [dependências](docs/dependencies.md) |
 
 Alguns documentos descrevem etapas anteriores; o runbook Evolution e o plano da próxima iteração registram o checkpoint operacional atual. Credenciais, banco local, conversas e QR Codes ficam fora do Git.
+
+## Código, imagens e segurança
+
+O código é distribuído sob [licença MIT](LICENSE). Fotografias e marcas têm [condições próprias](assets/MEDIA-NOTICE.md), sem licença geral de reutilização. Consulte a [política de segurança](SECURITY.md) e a [revisão de preparação para publicação](docs/publication-review.md).

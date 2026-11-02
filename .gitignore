@@ -16,3 +16,15 @@ htmlcov/
 *.sqlite3
 *.sqlite3-wal
 *.sqlite3-shm
+*.db
+*.db-wal
+*.db-shm
+*.sql
+*.dump
+*.log
+backups/
+evolution_instances/
+auth_info_baileys/
+evolution-qr*.png
+*.pem
+*.key
