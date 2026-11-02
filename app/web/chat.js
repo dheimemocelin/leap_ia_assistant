@@ -12,7 +12,7 @@ async function api(path, body) {
 }
 function authenticated(data) {
   $('login-panel').hidden = data.authenticated; $('chat-panel').hidden = !data.authenticated;
-  $('reset').hidden = !data.authenticated; $('logout').hidden = !data.authenticated;
+  $('reset').hidden = !data.authenticated; $('logout').hidden = !data.authenticated; $('forget').hidden = !data.authenticated;
   if (data.authenticated) { $('mode-note').textContent = data.reviewed_catalog ? 'Teste privado: informações verificadas e 12 fotos autorizadas de B10 BEV, B10 REEV e C10 BEV.' : 'Catálogo de atendimento em revisão. Para testar as fotos autorizadas, entre no modo de fatos verificados.'; $('message').focus(); }
 }
 function append(text, who, pending=false) {
@@ -30,7 +30,7 @@ $('login-form').addEventListener('submit', async event => {
 });
 $('message-form').addEventListener('submit', async event => {
   event.preventDefault(); const text=$('message').value.trim(); if (!text || busy) return;
-  busy=true; $('send').disabled=true; $('reset').disabled=true; $('logout').disabled=true; $('chat-error').textContent=''; $('message').value='';
+  busy=true; $('send').disabled=true; $('reset').disabled=true; $('logout').disabled=true; $('forget').disabled=true; $('chat-error').textContent=''; $('message').value='';
   append(text,'user'); const started=performance.now(); const thinking=append('Preparando resposta…','assistant',true);
   try { const result=await api('/v1/web/messages',{text});
     // Presentation pacing only: do not slow tools or pretend a human is typing.
@@ -50,10 +50,12 @@ $('message-form').addEventListener('submit', async event => {
       article.append(gallery); article.scrollIntoView({block:'end'});
     }
   } catch(error) { thinking.remove(); $('chat-error').textContent=error.message; if(error.status === 401) authenticated({authenticated:false}); }
-  finally {busy=false; $('send').disabled=false; $('reset').disabled=false; $('logout').disabled=false; $('message').focus();}
+  finally {busy=false; $('send').disabled=false; $('reset').disabled=false; $('logout').disabled=false; $('forget').disabled=false; $('message').focus();}
 });
 $('message').addEventListener('keydown', event => {if(event.key==='Enter' && !event.shiftKey && !event.isComposing) {event.preventDefault(); $('message-form').requestSubmit();}});
 $('reset').addEventListener('click',async()=>{try {await api('/web/reset',{}); clearMessages(); $('message').focus();}catch(error){$('chat-error').textContent=error.message;}});
 $('logout').addEventListener('click',async()=>{try {await api('/web/logout',{}); clearMessages(); authenticated({authenticated:false});}catch(error){$('chat-error').textContent=error.message;}});
 bindSuggestions();
 api('/web/session').then(authenticated).catch(()=>authenticated({authenticated:false}));
+
+$('forget').addEventListener('click',async()=>{if(busy)return;try {await api('/web/forget',{});clearMessages();authenticated({authenticated:false});}catch(error){$('chat-error').textContent=error.message;}});

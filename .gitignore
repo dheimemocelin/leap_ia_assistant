@@ -11,3 +11,8 @@ node_modules/
 dist/
 coverage.xml
 htmlcov/
+
+.local/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm

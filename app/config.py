@@ -5,6 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     web_chat_password: SecretStr = Field(default=SecretStr(""), repr=False)
     app_env: str = "local"
+    pilot_db_path: str = ""
     app_api_key: str = ""
     database_url: str = "postgresql+psycopg://leap:leap@localhost:5432/leap"
     redis_url: str = "redis://localhost:6379/0"

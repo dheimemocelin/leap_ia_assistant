@@ -1,7 +1,10 @@
 """Password-gated temporary web chat. Browser never receives backend/provider keys."""
 
+import asyncio
 import hashlib
+import re
 import secrets
+import sqlite3
 import time
 from collections import deque
 from pathlib import Path
@@ -13,11 +16,21 @@ from pydantic import BaseModel, Field, SecretStr
 from app.api.chat import ChatInput, build_agent
 from app.config import settings
 from app.domain.response import AssistantResponse
+from app.pilot_store import PilotStore
 
 router = APIRouter()
 ROOT = Path(__file__).resolve().parents[1] / "web"
 COOKIE = "leap_web_session"
+PERSON_COOKIE = "leap_browser_identity"
 MEDIA_ROOT = (Path(__file__).resolve().parents[2] / "assets/media").resolve()
+
+
+def pilot_store(request):
+    if not settings.pilot_db_path:
+        return None
+    if not hasattr(request.app.state, "pilot_store"):
+        request.app.state.pilot_store = PilotStore(settings.pilot_db_path)
+    return request.app.state.pilot_store
 
 
 class Login(BaseModel):
@@ -103,6 +116,35 @@ async def login(body: Login, request: Request, response: Response):
     if len(body.password.get_secret_value()) > 200:
         raise HTTPException(401, "Senha incorreta.")
     token = store(request).login(body.password.get_secret_value(), body.reviewed_catalog)
+    try:
+        repository = pilot_store(request)
+        if repository:
+            identity = request.cookies.get(PERSON_COOKIE, "")
+            person = hashlib.sha256(identity.encode()).hexdigest()
+            if not re.fullmatch(r"[A-Za-z0-9_-]{43}", identity) or not await asyncio.to_thread(
+                repository.known_person, person
+            ):
+                identity = secrets.token_urlsafe(32)
+                person = hashlib.sha256(identity.encode()).hexdigest()
+            thread = await asyncio.to_thread(
+                repository.open_thread, person, "reviewed" if body.reviewed_catalog else "pending"
+            )
+            active = store(request).sessions[hashlib.sha256(token.encode()).hexdigest()]
+            active.update(thread, person_id=person)
+            response.set_cookie(
+                PERSON_COOKIE,
+                identity,
+                httponly=True,
+                secure=request.url.scheme == "https",
+                samesite="strict",
+                max_age=30 * 86400,
+                path="/",
+            )
+    except (sqlite3.Error, OSError):
+        store(request).sessions.pop(hashlib.sha256(token.encode()).hexdigest(), None)
+        raise HTTPException(
+            503, "Memória local indisponível. Tente novamente mais tarde."
+        ) from None
     response.set_cookie(
         COOKIE,
         token,
@@ -139,7 +181,13 @@ async def logout(request: Request, response: Response):
 async def reset(request: Request):
     same_origin(request)
     session = store(request).get(request)
-    session["conversation_id"] = secrets.token_hex(16)
+    repository = pilot_store(request)
+    if repository and session.get("owner"):
+        session["conversation_id"] = await asyncio.to_thread(
+            repository.reset_thread, session["owner"]
+        )
+    else:
+        session["conversation_id"] = secrets.token_hex(16)
     return {"reset": True}
 
 
@@ -159,12 +207,54 @@ async def message(body: ChatInput, request: Request, response: Response):
         )
     agent = getattr(request.app.state, key)
     response.headers["Cache-Control"] = "no-store"
-    result = await agent.turn(session["conversation_id"], body.text, owner="browser")
+    if settings.pilot_db_path:
+        agent.memory_store = pilot_store(request)
+    try:
+        result = await agent.turn(
+            session["conversation_id"], body.text, owner=session.get("owner", "browser")
+        )
+    except (sqlite3.Error, OSError, ValueError):
+        raise HTTPException(503, "Não consegui salvar esta conversa. Tente novamente.") from None
     grants = session.setdefault("media_tokens", {})
     for media_id in result.media_ids:
         if media_id not in grants.values():
             grants[secrets.token_urlsafe(24)] = media_id
     return result
+
+
+@router.post("/web/forget", include_in_schema=False)
+async def forget(request: Request, response: Response):
+    same_origin(request)
+    active = store(request).get(request)
+    repository = pilot_store(request)
+    person = active.get("person_id")
+    if repository and person:
+        persisted_owners = await asyncio.to_thread(repository.forget, person)
+        owners = set(persisted_owners) | {
+            s.get("owner") for s in store(request).sessions.values() if s.get("person_id") == person
+        }
+        for agent_key in ["web_agent_reviewed", "web_agent_pending"]:
+            agent = getattr(request.app.state, agent_key, None)
+            if agent:
+                for key in list(agent.sessions):
+                    if key[0] in owners:
+                        agent.sessions.pop(key, None)
+                        agent.locks.pop(key, None)
+        store(request).sessions = {
+            key: s for key, s in store(request).sessions.items() if s.get("person_id") != person
+        }
+    else:
+        for agent_key in ["web_agent_reviewed", "web_agent_pending"]:
+            agent = getattr(request.app.state, agent_key, None)
+            if agent and hasattr(agent, "sessions"):
+                key = (active.get("owner", "browser"), active["conversation_id"])
+                agent.sessions.pop(key, None)
+                agent.locks.pop(key, None)
+        token = request.cookies.get(COOKIE, "")
+        store(request).sessions.pop(hashlib.sha256(token.encode()).hexdigest(), None)
+    response.delete_cookie(PERSON_COOKIE, path="/")
+    response.delete_cookie(COOKIE, path="/")
+    return {"forgotten": True}
 
 
 class MediaIds(BaseModel):

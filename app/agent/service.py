@@ -114,12 +114,14 @@ class SalesAgent:
         timeout=15,
         grounding: GroundingPolicy | None = None,
         prefer_tool_calling=False,
+        memory_store=None,
     ):
         self.catalog, self.media, self.llm = catalog, media, llm
         self.sales = SalesTools(catalog)
         self.timeout = timeout
         self.grounding = grounding or GroundingPolicy([], catalog)
         self.prefer_tool_calling = prefer_tool_calling
+        self.memory_store = memory_store
         self.sessions: dict[tuple[str, str], dict] = {}
         self.locks: dict[tuple[str, str], asyncio.Lock] = {}
         builder = StateGraph(TurnState)
@@ -158,6 +160,10 @@ class SalesAgent:
             self.locks[key] = asyncio.Lock()
         async with self.locks[key]:
             previous = self.sessions[key]
+            if self.memory_store:
+                previous = await asyncio.to_thread(
+                    self.memory_store.load_state, owner, conversation_id
+                )
             state = await self.graph.ainvoke(
                 {
                     **previous,
@@ -208,6 +214,14 @@ class SalesAgent:
             self.sessions[key]["usage"] = {
                 k: state[k] for k in ["calls", "input_tokens", "output_tokens"]
             }
+            if self.memory_store:
+                try:
+                    await asyncio.to_thread(
+                        self.memory_store.save_state, owner, conversation_id, self.sessions[key]
+                    )
+                except Exception:
+                    self.sessions[key] = previous
+                    raise
             logging.getLogger(__name__).info(
                 "agent_turn_completed", extra=self.sessions[key]["usage"]
             )

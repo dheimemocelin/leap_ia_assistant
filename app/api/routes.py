@@ -1,3 +1,5 @@
+import asyncio
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from redis.asyncio import Redis
@@ -5,6 +7,7 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 
 from app.config import settings
+from app.pilot_store import PilotStore
 
 router = APIRouter()
 
@@ -20,6 +23,12 @@ async def live() -> HealthResponse:
 
 @router.get("/health/ready", response_model=HealthResponse, tags=["health"])
 async def ready() -> HealthResponse:
+    if settings.pilot_db_path:
+        try:
+            await asyncio.to_thread(PilotStore, settings.pilot_db_path)
+        except Exception as exc:
+            raise HTTPException(503, "required pilot database unavailable") from exc
+        return HealthResponse(status="ok")
     engine = create_async_engine(settings.database_url, pool_pre_ping=True)
     redis = Redis.from_url(settings.redis_url, socket_connect_timeout=1, socket_timeout=1)
     try:
