@@ -42,6 +42,8 @@ class LeadProfile(BaseModel):
     objections: list[str] = Field(default_factory=list)
     knows_brand: bool = False
     visit_interest: bool | None = None
+    visit_preference: str | None = None
+    trade_in_interest: bool | None = None
     purchase_timeline: str | None = None
     buying_intent: bool = False
     signals: list[str] = Field(default_factory=list)
@@ -81,6 +83,10 @@ def classify(profile: LeadProfile):
         reasons.append("prioridade informada")
     if profile.visit_interest:
         reasons.append("interesse explícito em visita")
+    if profile.visit_preference:
+        reasons.append("preferência de visita informada")
+    if profile.trade_in_interest is not None:
+        reasons.append("intenção de troca informada")
     if profile.buying_intent:
         reasons.append("intenção explícita de compra")
     if profile.purchase_timeline:
@@ -142,6 +148,8 @@ def collect_contact(profile: LeadProfile):
         "needs": profile.needs,
         "objections": profile.objections,
         "visit_interest": profile.visit_interest,
+        "visit_preference": profile.visit_preference,
+        "trade_in_interest": profile.trade_in_interest,
         "purchase_timeline": profile.purchase_timeline,
         "temperature": profile.temperature,
         "qualification_reasons": profile.qualification_reasons,
@@ -211,7 +219,9 @@ def observe(profile: LeadProfile, text: str, *, channel_phone: str | None = None
         and len(candidate.split()) <= 3
         and re.fullmatch(r"[^\W\d_]+(?:[ '\-][^\W\d_]+)*", candidate, re.UNICODE)
         and t
-        not in YES | NO | {"oi", "ola", "opa", "bev", "reev", "eletrico", "eletrica", "hibrido", "hibrida"}
+        not in YES
+        | NO
+        | {"oi", "ola", "opa", "bev", "reev", "eletrico", "eletrica", "hibrido", "hibrida"}
     ):
         # Validate before rendering a user supplied name; never treat it as instructions.
         from app.policy.commercial import CommercialPolicyEngine
@@ -348,19 +358,22 @@ def observe(profile: LeadProfile, text: str, *, channel_phone: str | None = None
     match = re.search(r"(?:em|daqui a|nos proximos) (\d{1,2}) (dias|meses|mes)", t)
     if match:
         profile.purchase_timeline = match.group(0)
+    if re.search(r"\b(?:na|para|pra) troca\b|trocar (?:o )?meu (?:carro|veiculo)", t):
+        profile.trade_in_interest = not bool(re.search(r"nao.*(?:tenho|troca|trocar)", t))
+    if profile.pending_question == "trade_in":
+        if t in YES or re.search(r"\btenho\b", t) and not re.search(r"\bnao\b", t):
+            profile.trade_in_interest = True
+            profile.pending_question = None
+        elif t in NO or re.search(r"\bnao tenho\b|sem (?:carro|veiculo)", t):
+            profile.trade_in_interest = False
+            profile.pending_question = None
+    if re.search(r"nao (?:quero|pretendo|posso).*?(?:visitar|loja|presencial)", t):
+        profile.visit_interest = False
+        profile.pending_question = None
     if explicit_contact:
         if "human_contact_requested" not in profile.signals:
             profile.signals.append("human_contact_requested")
         return offer_contact(profile), False
-    if (
-        profile.buying_intent
-        and re.search(r"quero comprar|pretendo comprar|vou comprar", t)
-        and not t.startswith("nao")
-    ):
-        classify(profile)
-        return response(
-            "Entendi seu interesse. Podemos continuar explorando o carro e o que importa para sua escolha."
-        ), False
     if re.search(
         r"conhecer.*(?:presencial|pessoalmente)|ver.*pessoalmente|quero visitar|test[ -]?drive", t
     ) and not t.startswith("nao"):
@@ -368,19 +381,25 @@ def observe(profile: LeadProfile, text: str, *, channel_phone: str | None = None
         if "visit_requested" not in profile.signals:
             profile.signals.append("visit_requested")
         classify(profile)
-        return response(
-            "Conhecer o carro de perto faz parte da sua avaliação. Enquanto isso, podemos explorar as fotos e os detalhes verificados que você quer observar pessoalmente."
-        ), False
     if profile.pending_question == "visit" and t in YES:
         profile.visit_interest = True
+        profile.pending_question = None
         classify(profile)
-        return response(
-            "Entendi seu interesse. Podemos continuar explorando o carro e o que importa para sua escolha."
-        ), False
     if profile.pending_question == "visit" and t in NO:
         profile.visit_interest = False
         profile.pending_question = None
-        return response("Sem problema. Podemos continuar conhecendo o carro por aqui."), False
+    if profile.visit_interest is not False and profile.pending_question in {
+        "visit",
+        "visit_preference",
+    }:
+        day = re.search(r"\b(hoje|amanha|segunda|terca|quarta|quinta|sexta|sabado|domingo)\b", t)
+        period = re.search(r"\b(manha|tarde|noite)\b", t)
+        if day or period:
+            profile.visit_interest = True
+            profile.visit_preference = " / ".join(
+                value.group(1) for value in (day, period) if value
+            )
+            profile.pending_question = None
     if explicit_contact:
         if "human_contact_requested" not in profile.signals:
             profile.signals.append("human_contact_requested")
@@ -396,6 +415,61 @@ def observe(profile: LeadProfile, text: str, *, channel_phone: str | None = None
 def redact_history(text: str):
     text = re.sub(r"[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", "[contato omitido]", text)
     return re.sub(r"\+?\d[\d ()+.-]{8,}\d", "[contato omitido]", text)
+
+
+def purchase_plan(profile: LeadProfile, text: str, *, interpreted=False, before=None):
+    """Discuss the customer's decision, without inventing a sales process.
+
+    This plan grants no contact, negotiation or transaction permissions. Inquiry
+    alone is not a buying commitment; explicit intent is observed separately.
+    """
+    t = norm(text)
+    if re.search(r"nao.*\bcompr", t):
+        return None
+    changed = before and any(
+        getattr(profile, key) != before.get(key)
+        for key in ("visit_interest", "visit_preference", "trade_in_interest")
+    )
+    if not interpreted and not changed and not re.search(r"\b(?:compra|comprar|aquisicao)\b", t):
+        return None
+    if "purchase_inquiry" not in profile.signals:
+        profile.signals.append("purchase_inquiry")
+    profile.next_action = SDRAction.QUALIFY
+    key, question = None, None
+    if not changed and profile.pending_question in {
+        "visit",
+        "visit_preference",
+        "trade_in",
+        "purchase_priority",
+        "purchase_timeline",
+    }:
+        pass  # A repeated inquiry must not stack questions while an answer is pending.
+    elif changed and profile.visit_interest is False:
+        pass  # Respect the refusal without immediately replacing it with another question.
+    elif profile.visit_interest is True and not profile.visit_preference:
+        key = "visit_preference"
+        question = "Que dia e período seriam melhores para você conhecer o carro na loja?"
+    elif profile.visit_interest is True and profile.trade_in_interest is None:
+        key = "trade_in"
+        question = "Você pensa em incluir seu carro atual na troca?"
+    elif profile.visit_interest is None and profile.vehicle_id and "visit" not in profile.asked:
+        key = "visit"
+        question = "Você gostaria de conhecer o carro de perto na loja?"
+    elif profile.buying_intent and not profile.purchase_timeline:
+        key = "purchase_timeline"
+        question = "Você já tem algum prazo em mente para essa compra?"
+    elif "purchase_priority" not in profile.asked:
+        key = "purchase_priority"
+        question = "O que você ainda quer esclarecer antes de decidir?"
+    if key in profile.asked:
+        key, question = None, None
+    return {
+        "intent": "purchase",
+        "action": SDRAction.QUALIFY,
+        "question_keys": [key] if key else [],
+        "suggested_question": {"key": key, "text": question} if key else None,
+        "facts": [],
+    }
 
 
 class NextBestAction(BaseModel):

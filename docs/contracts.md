@@ -57,3 +57,7 @@ Contrato JSON configurável validado em startup, com campos mapeados a allowlist
 ## Lia v3 — contrato interno em avaliação
 
 `ConversationPlan` separa intenção, perguntas opcionais e fatos revisados de `ConversationDraft` (`text`, `fact_ids`, `question`). Fontes e mídias permanecem server-owned. `InterpretedIntent` é uma dica semântica com categoria `other`, sem autoridade de consentimento ou ações. Texto e transcrição usam o mesmo `SalesAgent.turn`; voz é opt-in e responde somente texto. [Contratos, limites e ativação](lia-v3.md).
+
+### Oportunidade e visita local
+
+O plano `purchase` trata decisão de compra/visita sem conceder ações externas. `LeadProfile` e a oportunidade `local_only` acrescentam `trade_in_interest: bool | null` e `visit_preference: str | null`. A preferência é informação declarada, nunca reserva ou agendamento confirmado. Nome e veículo canônico continuam vinculados à identidade persistida do contato. Convite para conhecer o carro não implica consentimento para contato humano; handoff mantém pedido explícito e autorização. [Comportamento e evidências](lia-store-visit.md).

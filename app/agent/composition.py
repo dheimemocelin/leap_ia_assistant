@@ -37,6 +37,11 @@ class ConversationQuestion(BaseModel):
         "preferred_name",
         "model_interest",
         "brand_interest",
+        "purchase_priority",
+        "purchase_timeline",
+        "visit",
+        "visit_preference",
+        "trade_in",
     ]
     text: str = Field(min_length=1, max_length=180)
 
@@ -70,6 +75,7 @@ class ConversationPlan(BaseModel):
         "welcome",
         "brand",
         "other",
+        "purchase",
     ]
     action: str | None = None
     question_keys: list[str] = Field(default_factory=list, max_length=3)
@@ -109,6 +115,12 @@ def validate_prose(text: str, profile: dict, *, question=False):
         raise CompositionRejected("unverified_spelled_value")
     if re.search(r"consultor|vendedor|humano|\blia\b|assistente virtual|me chamo|sou uma?", t):
         raise CompositionRejected("identity_or_handoff")
+    if re.search(
+        r"\b(?:agendei|agendamos|agendad[oa]|confirmad[oa]|aceitamos|avaliamos)\b|"
+        r"\b(?:visita|horario|agendamento)\s+(?:esta|foi|ficou)\s+confirmad",
+        t,
+    ):
+        raise CompositionRejected("unauthorized_store_commitment")
     if text.count("?") != (1 if question else 0):
         raise CompositionRejected("question_shape")
     if (

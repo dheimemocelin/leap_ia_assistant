@@ -1,0 +1,409 @@
+{
+  "evaluation_type": "deterministic simulated LLM; no real model calls or WhatsApp sends",
+  "baseline": "dfa162b",
+  "after": {
+    "turns": [
+      {
+        "user": "Oi",
+        "assistant": {
+          "text": "Opa! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Seja bem-vindo. Como você prefere ser chamado?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "welcome",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "WELCOME"
+      },
+      {
+        "user": "Me chamo Pessoa Sintetica",
+        "assistant": {
+          "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "Então quero saber do b10",
+        "assistant": {
+          "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-d54c6ab4a6069b6990a4"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "next_action": "SHOWCASE"
+      },
+      {
+        "user": "Muito lega",
+        "assistant": {
+          "text": "Pelo que você contou, o visual chamou sua atenção. Podemos olhar a escolha a partir da sua rotina. Como você imagina usar o carro no dia a dia?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "positive",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "Como é a questão da compra",
+        "assistant": {
+          "text": "Vamos partir do que falta para você decidir sobre o B10 BEV. Você gostaria de conhecer o carro de perto na loja?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "purchase",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "QUALIFY"
+      },
+      {
+        "user": "Sim",
+        "assistant": {
+          "text": "Vamos partir do que falta para você decidir sobre o B10 BEV. Que dia e período seriam melhores para você conhecer o carro na loja?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "purchase",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "QUALIFY"
+      },
+      {
+        "user": "Sábado de manhã",
+        "assistant": {
+          "text": "Vamos partir do que falta para você decidir sobre o B10 BEV. Você pensa em incluir seu carro atual na troca?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "purchase",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "QUALIFY"
+      },
+      {
+        "user": "Tenho um carro na troca",
+        "assistant": {
+          "text": "Vamos partir do que falta para você decidir sobre o B10 BEV. O que você ainda quer esclarecer antes de decidir?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "purchase",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "QUALIFY"
+      }
+    ],
+    "profile": {
+      "interest_model": "B10",
+      "powertrain": "BEV",
+      "vehicle_id": "b10-bev",
+      "usage": null,
+      "use_contexts": [],
+      "first_electric": false,
+      "daily_distance_km": null,
+      "trip_distance_km": null,
+      "charging_access": null,
+      "contact_reason": "information",
+      "commercial_stage": "interest",
+      "needs": [],
+      "objections": [],
+      "knows_brand": false,
+      "visit_interest": true,
+      "visit_preference": "sabado / manha",
+      "trade_in_interest": true,
+      "purchase_timeline": null,
+      "buying_intent": false,
+      "signals": [
+        "positive_reaction",
+        "purchase_inquiry"
+      ],
+      "consent": "not_requested",
+      "consent_at": null,
+      "consent_scope": null,
+      "display_name": "Pessoa Sintetica",
+      "name_prompted": true,
+      "contact_name": null,
+      "contact_phone": null,
+      "pending_question": "purchase_priority",
+      "asked": [
+        "display_name",
+        "usage",
+        "visit",
+        "visit_preference",
+        "trade_in",
+        "purchase_priority"
+      ],
+      "greeted": true,
+      "next_action": "QUALIFY",
+      "temperature": "quente",
+      "qualification_reasons": [
+        "modelo identificado",
+        "interesse explícito em visita"
+      ],
+      "handoff_summary": null
+    }
+  },
+  "same_harness": true,
+  "before": {
+    "turns": [
+      {
+        "user": "Oi",
+        "assistant": {
+          "text": "Opa! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Seja bem-vindo. Como você prefere ser chamado?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "welcome",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "WELCOME"
+      },
+      {
+        "user": "Me chamo Pessoa Sintetica",
+        "assistant": {
+          "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "Então quero saber do b10",
+        "assistant": {
+          "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-d54c6ab4a6069b6990a4"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "next_action": "SHOWCASE"
+      },
+      {
+        "user": "Muito lega",
+        "assistant": {
+          "text": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "other",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "Como é a questão da compra",
+        "assistant": {
+          "text": "Estou acompanhando. Pode me contar o que você quer abordar agora.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "fallback",
+          "fallback_reason": "repeated_response",
+          "intent": "other"
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "Sim",
+        "assistant": {
+          "text": "Tudo bem. Podemos seguir no seu ritmo e pelo que faz sentido para você.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "fallback",
+          "fallback_reason": "repeated_response",
+          "intent": "other"
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "Sábado de manhã",
+        "assistant": {
+          "text": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "other",
+          "evidence_selection_recovered": false
+        },
+        "next_action": "DISCOVER"
+      },
+      {
+        "user": "Tenho um carro na troca",
+        "assistant": {
+          "text": "Estou acompanhando. Pode me contar o que você quer abordar agora.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "fallback",
+          "fallback_reason": "repeated_response",
+          "intent": "other"
+        },
+        "next_action": "DISCOVER"
+      }
+    ],
+    "profile": {
+      "interest_model": "B10",
+      "powertrain": "BEV",
+      "vehicle_id": "b10-bev",
+      "usage": null,
+      "use_contexts": [],
+      "first_electric": false,
+      "daily_distance_km": null,
+      "trip_distance_km": null,
+      "charging_access": null,
+      "contact_reason": "information",
+      "commercial_stage": "discovery",
+      "needs": [],
+      "objections": [],
+      "knows_brand": false,
+      "visit_interest": null,
+      "purchase_timeline": null,
+      "buying_intent": false,
+      "signals": [],
+      "consent": "not_requested",
+      "consent_at": null,
+      "consent_scope": null,
+      "display_name": "Pessoa Sintetica",
+      "name_prompted": true,
+      "contact_name": null,
+      "contact_phone": null,
+      "pending_question": null,
+      "asked": [
+        "display_name"
+      ],
+      "greeted": true,
+      "next_action": "DISCOVER",
+      "temperature": "frio",
+      "qualification_reasons": [
+        "modelo identificado"
+      ],
+      "handoff_summary": null
+    }
+  }
+}

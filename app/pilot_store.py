@@ -105,6 +105,8 @@ class PilotStore:
             "daily_distance_km",
             "trip_distance_km",
             "visit_interest",
+            "visit_preference",
+            "trade_in_interest",
             "purchase_timeline",
             "buying_intent",
             "signals",

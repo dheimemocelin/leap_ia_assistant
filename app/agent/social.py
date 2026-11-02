@@ -11,7 +11,7 @@ Reaction = Literal["positive", "negative", "doubt", "more", "short"]
 def social_intent(text: str) -> Reaction | None:
     text = norm(text).strip("!.? ")
     if re.fullmatch(
-        r"(?:(?:ah|nossa|uau)[, ]+)?(?:achei |eu achei )?(?:que legal|muito legal|legal|gostei|muito bonito|bonito|interessante|bacana|amei|adorei|curti|lindo|show|top)(?: mesmo| demais| bastante| muito)?",
+        r"(?:(?:ah|nossa|uau)[, ]+)?(?:achei |eu achei )?(?:que legal|muito legal?|legal|gostei|muito bonito|bonito|interessante|bacana|amei|adorei|curti|lindo|show|top)(?: mesmo| demais| bastante| muito)?",
         text,
     ):
         return "positive"
