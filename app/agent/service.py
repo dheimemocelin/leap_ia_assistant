@@ -513,6 +513,9 @@ class SalesAgent:
             not override
             and not models
             and not pts
+            and text.strip("!.? ") not in {
+                "oi", "ola", "opa", "bom dia", "boa tarde", "boa noite"
+            }
             and profile.vehicle_id
             and not financial
             and not technical_question
@@ -988,6 +991,7 @@ class SalesAgent:
             "consecutive_questions": s.get("consecutive_questions", 0),
             "suggested_question": plan.get("suggested_question"),
             "allowed_question_keys": plan.get("question_keys", []),
+            "require_facts": plan.get("require_facts", False),
         }
         if plan["intent"] in {"positive", "negative", "doubt", "more", "short"}:
             context["reaction"] = plan["intent"]
@@ -1004,6 +1008,7 @@ class SalesAgent:
                         + " Escreva a formulação conversacional, não escolha templates. Retorne SOMENTE JSON "
                         '{"text":"texto livre", "fact_ids":[], "question":null}. '
                         'Question é opcional: {"key":"chave permitida","text":"pergunta?"}. '
+                        "Nunca coloque perguntas em text; use question somente com uma chave permitida. "
                         "text reconhece a experiência/necessidade do cliente; não afirma atributos, benefícios, "
                         "comparações, números ou capacidades do carro. Para fatos use somente fact_ids fornecidos; "
                         "a aplicação os renderiza com fontes. Não copie fatos em text. Não repita fatos já apresentados "
@@ -1027,6 +1032,12 @@ class SalesAgent:
                 else []
             )
             facts = [f for f in facts if f in current]
+            # Evidence retrieval is server-owned. An omitted selection must not
+            # turn a successfully grounded query into a provider failure.
+            # Explicit invalid IDs still fail validation; revoked facts stay out.
+            evidence_recovered = bool(plan.get("require_facts") and not draft.fact_ids and facts)
+            if evidence_recovered:
+                draft = draft.model_copy(update={"fact_ids": [f["id"] for f in facts[:2]]})
             text, sources, question = render_draft(
                 draft,
                 profile.model_dump(),
@@ -1053,6 +1064,7 @@ class SalesAgent:
                 "origin": "llm" if draft.text or question else "evidence_selection",
                 "fallback_reason": None,
                 "intent": plan["intent"],
+                "evidence_selection_recovered": evidence_recovered,
             }
         except CompositionRejected as exc:
             reason = str(exc)
