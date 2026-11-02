@@ -7,7 +7,7 @@ from fastapi import APIRouter, Header, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from app.agent.groq import GroqAdapter
-from app.agent.grounding import GroundingPolicy, ReviewedFact
+from app.agent.grounding import GroundingPolicy, ReviewedBrandFact, ReviewedFact, ReviewedTextFact
 from app.agent.llm import DisabledLLM, OllamaAdapter
 from app.agent.service import SalesAgent
 from app.catalog.loader import load_catalog
@@ -57,7 +57,18 @@ def build_agent(*, reviewed_catalog=False, test_media=False):
             ReviewedFact.model_validate(f)
             for f in json.loads((catalog_root / "facts.json").read_text())
         ]
-        grounding = GroundingPolicy(facts, catalog)
+        knowledge_path = catalog_root / "knowledge.json"
+        if knowledge_path.is_file():
+            facts += [
+                ReviewedTextFact.model_validate(f) for f in json.loads(knowledge_path.read_text())
+            ]
+        brand_path = catalog_root / "brand.json"
+        brand = (
+            ReviewedBrandFact.model_validate_json(brand_path.read_text())
+            if brand_path.is_file()
+            else None
+        )
+        grounding = GroundingPolicy(facts, catalog, brand=brand)
     return SalesAgent(
         catalog,
         media,

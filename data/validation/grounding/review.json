@@ -22,5 +22,35 @@
       "stock",
       "battery capacity"
     ]
+  },
+  "knowledge_expansion": {
+    "reviewed_at": "2026-11-02T22:21:21.875590+00:00",
+    "reviewer": "internal-source-verification (Codex)",
+    "scope": "Internal pilot source verification, not human or manufacturer approval",
+    "source_pages": [
+      {
+        "url": "https://www.leapmotor.com.br/b10.html",
+        "retrieved_at": "2026-11-02T22:18:35.431046+00:00",
+        "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+        "approval_status": "pending_review"
+      },
+      {
+        "url": "https://www.leapmotor.com.br/c10.html",
+        "retrieved_at": "2026-11-02T22:18:35.468051+00:00",
+        "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+        "approval_status": "pending_review"
+      }
+    ],
+    "numeric_facts_added": 18,
+    "technical_statements_added": 21,
+    "excluded": [
+      "prices and promotions",
+      "local stock and availability",
+      "warranties requiring year-model verification",
+      "C10 power and torque conflicting between model page and press release",
+      "regional test figures and road-range extrapolations"
+    ],
+    "raw_candidates": "local pending review; never automatically loaded",
+    "range_review": "B10 REEV: 68 km electric PBEV/Inmetro and up to 900 km combined WLTP, separately qualified from official technical footnote; not road-only measurements."
   }
 }

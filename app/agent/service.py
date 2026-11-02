@@ -106,6 +106,8 @@ class TurnState(TypedDict, total=False):
     redact_input: bool
     proactive: bool
     presented_fact_ids: list[str]
+    offered_vehicle_ids: list[str]
+    reference_vehicle_id: str | None
 
 
 def reply(text: str, *, sources=None, media=None, handoff=False):
@@ -116,6 +118,37 @@ def reply(text: str, *, sources=None, media=None, handoff=False):
         media_ids=media or [],
         handoff_required=handoff,
     ).model_dump(mode="json")
+
+
+def vehicle_label(vehicle):
+    return vehicle.model + (" elétrico" if vehicle.powertrain.value == "BEV" else " ultra-híbrido")
+
+
+def customer_text(text):
+    """Presentation aliases only; canonical IDs and evidence stay unchanged."""
+    text = re.sub(r"\b(B10|C10) BEV\b", r"\1 elétrico", text)
+    text = re.sub(r"\b(B10|C10) REEV\b", r"\1 ultra-híbrido", text)
+    return text.replace("fotos aprovadas", "fotos").replace("imagens aprovadas", "imagens")
+
+
+def ordinal_choice(text):
+    match = re.fullmatch(
+        r"(?:(?:a|o|quero a|quero o|prefiro a|prefiro o|pode ser a|pode ser o) )?"
+        r"(primeir[oa]|segund[oa]|terceir[oa])(?: opcao| modelo| carro)?[.!? ]*",
+        norm(text),
+    )
+    return (
+        {
+            "primeiro": 0,
+            "primeira": 0,
+            "segundo": 1,
+            "segunda": 1,
+            "terceiro": 2,
+            "terceira": 2,
+        }.get(match[1])
+        if match
+        else None
+    )
 
 
 class SalesAgent:
@@ -220,6 +253,7 @@ class SalesAgent:
                     "call": {},
                     "calls": 0,
                     "tool_events": [],
+                    "reference_vehicle_id": None,
                     "input_tokens": 0,
                     "output_tokens": 0,
                 }
@@ -236,6 +270,7 @@ class SalesAgent:
                     "introduced_vehicle_ids",
                     "presented_fact_ids",
                     "composition",
+                    "offered_vehicle_ids",
                 ]
             }
             self.sessions[key]["history"] = (
@@ -315,6 +350,28 @@ class SalesAgent:
         profile = LeadProfile.model_validate(s.get("lead_profile") or {})
         # A new explicit selection interrupts contact collection; consent is scoped.
         text = norm(s["text"])
+        if (
+            re.search(r"o que (?:e|significa)|nao (?:sei|entendi|entendo)|qual.*diferenca", text)
+            and (
+                re.search(r"\bbe+v\b|\breev\b|sigla|eletric|hibrid", text)
+                or s.get("history")
+                and "ultra-hibrid" in norm(s["history"][-1]["content"])
+            )
+            and self.grounding.for_brand()
+            and self.grounding.brand.powertrain_explanations
+        ):
+            notes = self.grounding.brand.powertrain_explanations
+            return {
+                "lead_profile": profile.model_dump(),
+                "response": reply(
+                    " ".join(notes.values()), sources=[self.grounding.for_brand()[0]["source_id"]]
+                ),
+                "composition": {
+                    "origin": "evidence_selection",
+                    "fallback_reason": None,
+                    "intent": "powertrain_explanation",
+                },
+            }
         if re.search(r"(?:qual|sabe|lembra).*meu nome|como (?:eu )?me chamo", text):
             name = profile.display_name
             return {
@@ -331,7 +388,40 @@ class SalesAgent:
                 },
             }
         models = set(re.findall(r"\b(b10|c10)\b", text))
-        pts = set(re.findall(r"\b(bev|reev)\b", text))
+        pts = set(re.findall(r"\b(bev|reev)\b", text.replace("beev", "bev")))
+        ordinal = ordinal_choice(s["text"])
+        if ordinal is not None:
+            offered = s.get("offered_vehicle_ids") or []
+            if "offered_vehicle_ids" not in s:
+                # One-time compatibility with menus sent before ordered IDs were
+                # persisted. Only the exact former server template is accepted.
+                for message in reversed(s.get("history", [])):
+                    legacy = (
+                        re.fullmatch(
+                            r"Podemos explorar ((?:B10|C10) (?:BEV|REEV)(?:, (?:B10|C10) (?:BEV|REEV))*)\. Qual você quer conhecer primeiro\?",
+                            message["content"],
+                        )
+                        if message["role"] == "assistant"
+                        else None
+                    )
+                    if legacy:
+                        offered = [
+                            label.lower().replace(" ", "-") for label in legacy[1].split(", ")
+                        ]
+                        break
+            choice = self.catalog.vehicle(offered[ordinal]) if ordinal < len(offered) else None
+            if choice is None or choice.approval_status != "approved":
+                return {
+                    "response": reply(
+                        "Você pode me dizer qual carro quer conhecer? Posso te mostrar o B10 e o C10."
+                    ),
+                    "lead_profile": profile.model_dump(),
+                }
+            models, pts = {choice.model.lower()}, {choice.powertrain.value.lower()}
+            s["reference_vehicle_id"] = choice.id
+            s["offered_vehicle_ids"] = []
+        elif models or pts:
+            s["offered_vehicle_ids"] = []
         if re.fullmatch(r"(?:a |o )?eletric[oa][.!? ]*", text):
             pts = {"bev"}
         if re.fullmatch(r"(?:a |o )?hibrid[oa][.!? ]*", text):
@@ -377,9 +467,15 @@ class SalesAgent:
             if profile.consent == "offered":
                 profile.consent = "not_requested"
         before = profile.model_dump()
+        if s.get("reference_vehicle_id") and profile.pending_question == "display_name":
+            profile.pending_question = None
         override, redact = observe(profile, s["text"], channel_phone=s.get("trusted_contact_phone"))
         technical_question = bool(
-            re.search(r"qual|quanto|como funciona|capacidade|autonomia.*\?", text)
+            re.search(
+                r"qual|quanto|como funciona|capacidade|autonomia.*\?|"
+                r"(?:tem|possui|conta com|como sao).*(?:banco|teto|airbag|carplay|android|multimidia|carreg|recarga|motor)",
+                text,
+            )
         )
         financial = CommercialPolicyEngine().classify_request(
             s["text"]
@@ -398,7 +494,11 @@ class SalesAgent:
         if buying:
             s["composition_plan"] = buying
             override = reply(
-                "Podemos partir do que você precisa para decidir sobre o carro."
+                (
+                    "Para entender as possibilidades de troca, é importante trazer seu carro à loja para uma avaliação presencial."
+                    if profile.trade_in_interest and before.get("trade_in_interest") is not True
+                    else "Podemos partir do que você precisa para decidir sobre o carro."
+                )
                 + (
                     " " + buying["suggested_question"]["text"]
                     if buying["suggested_question"]
@@ -410,13 +510,17 @@ class SalesAgent:
             and not financial
             and re.search(r"nunca ouvi|nao conheco.*(?:marca|leapmotor)|que marca", text)
         ):
+            brand = self.grounding.for_brand()
             s["composition_plan"] = {
                 "intent": "brand",
                 "question_keys": ["model_interest"],
-                "facts": [],
+                "facts": brand,
+                "require_facts": bool(brand),
             }
             override = reply(
-                "Posso te apresentar o B10 e o C10 e mostrar as fotos aprovadas. A base ainda não tem um resumo institucional revisado da marca."
+                (brand[0]["statement"] + " " if brand else "")
+                + "Posso te apresentar o B10 e o C10 e mostrar como são por dentro e por fora. Qual deles você quer conhecer primeiro?",
+                sources=[f["source_id"] for f in brand],
             )
         if reaction and not override and not financial:
             if reaction == "positive" and "positive_reaction" not in profile.signals:
@@ -535,6 +639,7 @@ class SalesAgent:
             )
         if (
             not override
+            and not s.get("reference_vehicle_id")
             and not models
             and not pts
             and text.strip("!.? ") not in {"oi", "ola", "opa", "bom dia", "boa tarde", "boa noite"}
@@ -623,6 +728,8 @@ class SalesAgent:
             "llm_latency_ms": s.get("llm_latency_ms", 0),
             "token_usage_known": s.get("token_usage_known", False),
             "presented_fact_ids": s.get("presented_fact_ids") or [],
+            "reference_vehicle_id": s.get("reference_vehicle_id"),
+            "offered_vehicle_ids": s.get("offered_vehicle_ids") or [],
         }
 
     async def guard(self, s):
@@ -635,7 +742,7 @@ class SalesAgent:
                 "phase": "blocked",
                 "response": s.get("response")
                 or reply(
-                    "Meu papel aqui é ajudar a conhecer os veículos, suas características verificadas e fotos. Podemos continuar explorando o modelo que te interessa."
+                    "Esses detalhes são tratados na loja. Por aqui, posso te ajudar a conhecer o carro e organizar o que você quer ver de perto."
                 ),
                 "lead_profile": s["lead_profile"],
             }
@@ -706,9 +813,17 @@ class SalesAgent:
 
     async def select(self, s):
         text = norm(s["text"])
+        reference = (
+            self.catalog.vehicle(s.get("reference_vehicle_id"))
+            if s.get("reference_vehicle_id")
+            else None
+        )
         models = set(re.findall(r"\b(b10|c10)\b", text))
-        bev = bool(re.search(r"\bbev\b|eletric[oa]", text))
+        bev = bool(re.search(r"\bbe+v\b|eletric[oa]", text))
         reev = bool(re.search(r"\breev\b|hibrid[oa]", text))
+        if reference:
+            models = {reference.model.lower()}
+            bev, reev = reference.powertrain.value == "BEV", reference.powertrain.value == "REEV"
         if len(models) > 1 or bev and reev:
             return {
                 "phase": "clarification",
@@ -716,11 +831,24 @@ class SalesAgent:
             }
         model = next(iter(models), s.get("model"))
         powertrain = "BEV" if bev else "REEV" if reev else s.get("powertrain")
+        if not model and text.strip("!.? ") in {
+            "pode ser",
+            "pode mostrar",
+            "quero conhecer",
+            "quais modelos",
+            "quais opcoes",
+        }:
+            return {
+                **s,
+                "phase": "selected",
+                "selection_origin": "deterministic",
+                "call": {"name": "list_vehicles", "arguments": {}},
+            }
         if models and model != s.get("model") and not (bev or reev):
             powertrain = None
-        powertrain_answer = bool(
+        powertrain_answer = bool(reference) or bool(
             re.fullmatch(
-                r"(?:e )?(?:a |o |versao )?(?:bev|reev|eletric[oa]|hibrid[oa])[.!? ]*", text
+                r"(?:e )?(?:a |o |versao )?(?:be+v|reev|eletric[oa]|hibrid[oa])[.!? ]*", text
             )
         )
         if not powertrain_answer:
@@ -732,6 +860,12 @@ class SalesAgent:
                 text,
             )
         )
+        feature_question = bool(
+            re.search(r"\b(?:tem|possui|conta com|como e|como sao|qual|quantos)\b", text)
+            and not re.search(r"foto|imagem|manda|mostr|ver o|ver a", text)
+        )
+        if feature_question:
+            want_media = False
         affirmative = text.strip("!.? ") in {
             "sim",
             "quero",
@@ -760,11 +894,15 @@ class SalesAgent:
                 powertrain = next(iter(available))
                 s["powertrain"] = powertrain
         if model and not powertrain:
+            options = sorted(
+                self.sales.list_vehicles(VehicleFilter(model=model)), key=lambda v: v["id"]
+            )
             return {
                 **s,
+                "offered_vehicle_ids": [v["id"] for v in options],
                 "phase": "clarification",
                 "response": reply(
-                    "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?"
+                    f"No {model.upper()}, posso te mostrar a opção elétrica ou a ultra-híbrida. Qual você prefere conhecer primeiro?"
                 ),
             }
         if model and powertrain:
@@ -774,7 +912,7 @@ class SalesAgent:
                     **s,
                     "phase": "clarification",
                     "response": reply(
-                        "Ainda não consegui identificar uma versão aprovada para essa seleção. Qual modelo e motorização você quer explorar?",
+                        "Qual opção você quer conhecer: o elétrico ou o ultra-híbrido?",
                         handoff=False,
                     ),
                 }
@@ -797,7 +935,7 @@ class SalesAgent:
             introduction = vehicle_id not in (s.get("introduced_vehicle_ids") or [])
             technical = bool(
                 re.search(
-                    r"autonomia|potencia|bateria|porta.malas|caracteristica|especific|equipamento",
+                    r"autonomia|potencia|bateria|porta.malas|caracteristica|especific|equipamento|recarga|carreg|quanto.*faz|torque|dimens|tem |possui|como sao|como e",
                     norm(s.get("intent_question") or s["text"]) if powertrain_answer else text,
                 )
             )
@@ -968,7 +1106,7 @@ class SalesAgent:
             return {
                 "phase": "error",
                 "response": reply(
-                    "A consulta não funcionou agora. Seu contexto está preservado; podemos tentar esse ponto novamente.",
+                    "Não consegui buscar essa informação agora. Pode me dizer de outro jeito?",
                     handoff=False,
                 ),
             }
@@ -989,6 +1127,8 @@ class SalesAgent:
             if profile.vehicle_id
             else []
         )
+        if plan["intent"] == "brand":
+            facts = [f for f in plan.get("facts", []) if f in self.grounding.for_brand()]
         context = {
             "task": "compose_conversation",
             "intent": plan["intent"],
@@ -1024,6 +1164,12 @@ class SalesAgent:
             "suggested_question": plan.get("suggested_question"),
             "allowed_question_keys": plan.get("question_keys", []),
             "require_facts": plan.get("require_facts", False),
+            "trade_in_guidance": (
+                "Para entender as possibilidades de troca, é importante trazer o carro à loja "
+                "para uma avaliação presencial. Não prometa valorização, aceitação ou qualquer valor."
+                if profile.trade_in_interest
+                else None
+            ),
         }
         if plan["intent"] in {"positive", "negative", "doubt", "more", "short"}:
             context["reaction"] = plan["intent"]
@@ -1071,6 +1217,8 @@ class SalesAgent:
                 if profile.vehicle_id
                 else []
             )
+            if plan["intent"] == "brand":
+                current = self.grounding.for_brand()
             facts = [f for f in facts if f in current]
             # Evidence retrieval is server-owned. An omitted selection must not
             # turn a successfully grounded query into a provider failure.
@@ -1132,7 +1280,29 @@ class SalesAgent:
                     "Certo. Podemos continuar pelo que você quiser explorar.",
                 ]
                 response = reply(next(text for text in alternatives if text not in previous))
-            telemetry = {"origin": "fallback", "fallback_reason": reason, "intent": plan["intent"]}
+            recovered = []
+            if plan.get("require_facts") and reason in {
+                "question_shape",
+                "provider_timeout",
+                "provider_failure",
+                "call_budget_exhausted",
+                "missing_required_evidence",
+                "untrusted_identifier_or_value",
+            }:
+                # A failed wording attempt must not hide an independently
+                # verified answer. Never salvage model text, IDs or questions.
+                live = self.grounding.for_vehicle(profile.vehicle_id, s["text"])
+                recovered = [f for f in facts if f in live]
+                if recovered:
+                    response = reply(
+                        " ".join(f["statement"] for f in recovered),
+                        sources=list(dict.fromkeys(f["source_id"] for f in recovered)),
+                    )
+            telemetry = {
+                "origin": "evidence_fallback" if recovered else "fallback",
+                "fallback_reason": reason,
+                "intent": plan["intent"],
+            }
             profile_facts = list(
                 dict.fromkeys(
                     [
@@ -1201,8 +1371,7 @@ class SalesAgent:
             return {
                 "lead_profile": profile.model_dump(),
                 "response": reply(
-                    "Ainda não tenho detalhes de recarga aprovados para este modelo. Podemos explorar suas possibilidades de recarga sem presumir esses detalhes."
-                    + question
+                    "Não tenho esse detalhe de recarga aqui. Para entender sua rotina:" + question
                 ),
             }
         if not evidence["data"] or (
@@ -1213,9 +1382,7 @@ class SalesAgent:
                 "question_keys": [],
                 "facts": [],
             }
-            s["response"] = reply(
-                "Esse ponto ainda não está documentado na base aprovada. Podemos continuar pelo que você precisa na sua rotina."
-            )
+            s["response"] = reply("Não tenho esse dado específico para te passar com segurança.")
             return await self.compose_conversation(s)
         if evidence.get("kind") == "search_vehicle_media":
             vehicle = self.catalog.vehicle(s["call"]["arguments"]["vehicle_id"])
@@ -1265,11 +1432,16 @@ class SalesAgent:
                 ),
             }
         if evidence.get("kind") == "list_vehicles":
-            labels = sorted({f"{v['model']} {v['powertrain']}" for v in evidence["data"]})
+            options = sorted(evidence["data"], key=lambda v: v["id"])
+            vehicles = [self.catalog.vehicle(v["id"]) for v in options]
+            labels = [vehicle_label(v) for v in vehicles]
             return {
+                "offered_vehicle_ids": [v.id for v in vehicles],
                 "phase": "composed",
                 "response": reply(
-                    "Podemos explorar " + ", ".join(labels) + ". Qual você quer conhecer primeiro?"
+                    "Posso te mostrar:\n"
+                    + "\n".join(f"{i}. {label}" for i, label in enumerate(labels, 1))
+                    + "\nQual deles você quer conhecer primeiro?"
                 ),
             }
         # Approved technical claims remain separate from conversational formulation.
@@ -1280,9 +1452,21 @@ class SalesAgent:
             "require_facts": True,
         }
         s["response"] = reply(
-            "Não consegui concluir essa consulta agora. Podemos tentar novamente sem perder o contexto da conversa."
+            "Não consegui buscar essa informação agora. Pode me dizer de outro jeito?"
         )
-        return await self.compose_conversation(s)
+        result = await self.compose_conversation(s)
+        if (
+            any(f.get("specification") == "range_km" for f in evidence.get("facts", []))
+            and re.search(r"estrada|rodovia", norm(s["text"]))
+            and result["response"].get("source_ids")
+        ):
+            result["response"] = reply(
+                result["response"]["text"]
+                + " Essa referência é do ciclo de homologação, não uma medição específica de estrada.",
+                sources=result["response"]["source_ids"],
+                media=result["response"].get("media_ids", []),
+            )
+        return result
 
     async def output(self, s):
         profile = LeadProfile.model_validate(s.get("lead_profile") or {})
@@ -1348,6 +1532,9 @@ class SalesAgent:
                     profile.pending_question = "display_name"
             response = AssistantResponse.model_validate({**response.model_dump(), "text": text})
             profile.greeted = True
+        response = AssistantResponse.model_validate(
+            {**response.model_dump(), "text": customer_text(response.text)}
+        )
         return {
             "lead_profile": profile.model_dump(),
             "phase": "completed",

@@ -44,7 +44,7 @@ async def test_customer_journey_visual_context_decline_and_price(agent):
     greeting = await agent.turn("journey", "Olá")
     assert greeting.text.count("?") <= 1
     ambiguous = await agent.turn("journey", "Tenho interesse no B10")
-    assert "BEV" in ambiguous.text and "REEV" in ambiguous.text
+    assert "elétrica" in ambiguous.text and "ultra-híbrida" in ambiguous.text
     assert not ambiguous.media_ids
     selected = await agent.turn("journey", "BEV")
     assert len(selected.media_ids) == 3
@@ -125,6 +125,7 @@ async def test_known_brand_and_insufficient_catalog(agent):
     family = await agent.turn("journey", "Preciso de espaço para minha família")
     assert not family.source_ids and "família" in family.text
     assert "evidência aprovada" not in family.text  # A need is not an unsupported technical claim.
+    agent.catalog.vehicle("b10-reev").specifications.pop("battery_kwh")
     missing = await agent.turn("journey", "Qual a capacidade da bateria?")
     assert not missing.handoff_required and not missing.source_ids
 
@@ -149,7 +150,7 @@ async def test_pending_media_are_not_approved_by_conversation(agent):
     agent.media = VehicleMediaLibrary.load(catalog, asset_root=Path("assets/media"))
     result = await agent.turn("journey", "B10 BEV")
     assert not result.media_ids
-    assert "fotos aprovadas" in result.text
+    assert "fotos" in result.text and "aprovadas" not in result.text
 
 
 async def test_repeated_use_does_not_repeat_question(agent):

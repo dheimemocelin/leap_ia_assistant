@@ -81,7 +81,7 @@ async def test_non_technical_turn_after_photos_does_not_query_technical_facts(ag
     assert session["lead_profile"]["vehicle_id"] == "b10-bev"
     assert session["lead_profile"]["display_name"] == "Pessoa Sintetica"
     if text in {"Que legal", "Gostei", "Muito bonito", "Interessante"}:
-        assert "O visual do B10 BEV chamou sua atenção." in result.text
+        assert "O visual do B10 elétrico chamou sua atenção." in result.text
         assert session["usage"] == {"calls": 1, "input_tokens": 40, "output_tokens": 20}
 
 
@@ -99,7 +99,7 @@ async def test_model_writes_different_natural_responses_without_fixed_variant_id
     await agent.turn("social", "Fotos do B10 BEV")
     agent.llm = SocialWriter(draft={"acknowledgement": ack, "question": None})
     response = await agent.turn("social", "Gostei")
-    assert response.text == ack
+    assert response.text == ack.replace("B10 BEV", "B10 elétrico")
     assert "?" not in response.text
 
 

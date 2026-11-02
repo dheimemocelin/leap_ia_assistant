@@ -82,7 +82,7 @@ async def test_details_and_compact_context(agent):
 
 async def test_ambiguity_and_followup(agent):
     result = await agent.turn("one", "Fotos B10")
-    assert "BEV" in result.text and not agent.llm.calls
+    assert "elétrica" in result.text and not agent.llm.calls
     result = await agent.turn("one", "REEV")
     assert result.source_ids
     assert agent.sessions[("local", "one")]["powertrain"] == "REEV"

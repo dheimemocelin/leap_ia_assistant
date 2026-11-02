@@ -1,0 +1,438 @@
+[
+  {
+    "id": "b10-bev-bev-technology",
+    "vehicle_id": "b10-bev",
+    "specification": "drivetrain",
+    "statement": "O B10 BEV usa propulsão totalmente elétrica, alimentada por bateria.",
+    "query_terms": [
+      "tecnologia",
+      "motorizacao",
+      "como funciona",
+      "o que e bev"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "A Leapmotor desenvolve seus próprios sistemas inteligentes, integrando motor, bateria e software em perfeita harmonia. O motor BEV (Veículo Elétrico a Bateria) entrega uma experiência que une potência silenciosa, alto torque sem vibrações, performance eficiente com sistema 100% elétrico e menor desgate mecânico.",
+    "evidence_sha256": "514a0d1f0bf0bc7c8cd2c7db5941a7d325971e6a154756f0a8e4bc51f887d3be",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Motorização Elétrica / Como funciona a tecnologia da Leapmotor?",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-reev-technology",
+    "vehicle_id": "b10-reev",
+    "specification": "drivetrain",
+    "statement": "No B10 REEV, as rodas são movimentadas pelo motor elétrico; o motor a combustão funciona como gerador para recarregar a bateria.",
+    "query_terms": [
+      "tecnologia",
+      "motorizacao",
+      "gerador",
+      "como funciona",
+      "o que e reev"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "No B10 Ultra-híbrido, a experiência de condução é sempre elétrica, com 218 cv e 240 Nm de torque . O motor a combustão funciona como gerador, recarregando a bateria em movimento. Assim você tem a liberdade da autonomia estendida, e o conforto de uma motorização silenciosa.",
+    "evidence_sha256": "c9d1a74edb876f6a634e1a18e065dcfe272e547e43199d7522367e1b2ce4f082",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Motorização Ultra-híbrida / Como funciona o B10 Ultra-híbrido",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "c10-bev-bev-technology",
+    "vehicle_id": "c10-bev",
+    "specification": "drivetrain",
+    "statement": "O C10 BEV usa propulsão totalmente elétrica, alimentada por bateria.",
+    "query_terms": [
+      "tecnologia",
+      "motorizacao",
+      "como funciona",
+      "o que e bev"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a",
+    "evidence_text": "Zero emissões, máxima eficiência. A versão BEV do C10 traz um sistema 100% elétrico com motor de 218 cv e 320 Nm de torque, que proporciona acelerações ágeis, condução sem ruídos e 338 km de autonomia (PBEV).",
+    "evidence_sha256": "ea3f6460206151e89f0482a692034501f4710187102bef99d576840463971c2f",
+    "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+    "source_section": "Motorização Elétrica / Tecnologia BEV",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-bev-dc-charging",
+    "vehicle_id": "b10-bev",
+    "specification": "charging",
+    "statement": "O site oficial informa recarga rápida DC de 30% a 80% em 16 minutos para o B10 BEV. O tempo pode variar conforme as condições de carregamento.",
+    "query_terms": [
+      "recarga",
+      "carregar",
+      "carregamento",
+      "rapida",
+      "dc"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "No B10 Elétrico (BEV), você tem a bateria de até 56,2 kWh, já no B10 Ultra-híbrido (REEV), ela é de 18,8 kWh. O tempo de carregamento pode variar, dependendo do modo escolhido. Com Wallbox (AC), a bateria carrega de 0% a 100% em 3h30min (Ultra-híbrido) e 6h48min (Elétrico). Enquanto em postos de recarga rápida (DC), a recarga vai de 30% a 80% em 16min (Elétrico) e 18min (Ultra-híbrido). Você também pode usar o carregador portátil incluso no B10 Elétrico, para máxima flexibilidade nas suas recargas.​",
+    "evidence_sha256": "894088592f02438ff65c6b3503afb9d931cd6c85a94513e035feaadf2054e43a",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Bateria e Carregamento / Escolha como recarregar",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-bev-ac-charging",
+    "vehicle_id": "b10-bev",
+    "specification": "charging",
+    "statement": "Com Wallbox AC, o site oficial informa recarga de 0% a 100% em 6h48min para o B10 BEV. O tempo pode variar conforme o modo de carregamento.",
+    "query_terms": [
+      "wallbox",
+      "ac",
+      "casa",
+      "tomada"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "No B10 Elétrico (BEV), você tem a bateria de até 56,2 kWh, já no B10 Ultra-híbrido (REEV), ela é de 18,8 kWh. O tempo de carregamento pode variar, dependendo do modo escolhido. Com Wallbox (AC), a bateria carrega de 0% a 100% em 3h30min (Ultra-híbrido) e 6h48min (Elétrico). Enquanto em postos de recarga rápida (DC), a recarga vai de 30% a 80% em 16min (Elétrico) e 18min (Ultra-híbrido). Você também pode usar o carregador portátil incluso no B10 Elétrico, para máxima flexibilidade nas suas recargas.​",
+    "evidence_sha256": "894088592f02438ff65c6b3503afb9d931cd6c85a94513e035feaadf2054e43a",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Bateria e Carregamento / Escolha como recarregar",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-dc-charging",
+    "vehicle_id": "b10-reev",
+    "specification": "charging",
+    "statement": "O site oficial informa recarga rápida DC de 30% a 80% em 18 minutos para o B10 REEV. O tempo pode variar conforme as condições de carregamento.",
+    "query_terms": [
+      "recarga",
+      "carregar",
+      "carregamento",
+      "rapida",
+      "dc"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "No B10 Elétrico (BEV), você tem a bateria de até 56,2 kWh, já no B10 Ultra-híbrido (REEV), ela é de 18,8 kWh. O tempo de carregamento pode variar, dependendo do modo escolhido. Com Wallbox (AC), a bateria carrega de 0% a 100% em 3h30min (Ultra-híbrido) e 6h48min (Elétrico). Enquanto em postos de recarga rápida (DC), a recarga vai de 30% a 80% em 16min (Elétrico) e 18min (Ultra-híbrido). Você também pode usar o carregador portátil incluso no B10 Elétrico, para máxima flexibilidade nas suas recargas.​",
+    "evidence_sha256": "894088592f02438ff65c6b3503afb9d931cd6c85a94513e035feaadf2054e43a",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Bateria e Carregamento / Escolha como recarregar",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-ac-charging",
+    "vehicle_id": "b10-reev",
+    "specification": "charging",
+    "statement": "Com Wallbox AC, o site oficial informa recarga de 0% a 100% em 3h30min para o B10 REEV. O tempo pode variar conforme o modo de carregamento.",
+    "query_terms": [
+      "wallbox",
+      "ac",
+      "casa",
+      "tomada"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "No B10 Elétrico (BEV), você tem a bateria de até 56,2 kWh, já no B10 Ultra-híbrido (REEV), ela é de 18,8 kWh. O tempo de carregamento pode variar, dependendo do modo escolhido. Com Wallbox (AC), a bateria carrega de 0% a 100% em 3h30min (Ultra-híbrido) e 6h48min (Elétrico). Enquanto em postos de recarga rápida (DC), a recarga vai de 30% a 80% em 16min (Elétrico) e 18min (Ultra-híbrido). Você também pode usar o carregador portátil incluso no B10 Elétrico, para máxima flexibilidade nas suas recargas.​",
+    "evidence_sha256": "894088592f02438ff65c6b3503afb9d931cd6c85a94513e035feaadf2054e43a",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Bateria e Carregamento / Escolha como recarregar",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "c10-bev-dc-charging",
+    "vehicle_id": "c10-bev",
+    "specification": "charging",
+    "statement": "Para o C10 BEV, o site oficial informa recarga rápida DC de 30% a 80% em cerca de 30 minutos.",
+    "query_terms": [
+      "recarga",
+      "carregar",
+      "carregamento",
+      "rapida",
+      "dc"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a",
+    "evidence_text": "No C10 Elétrico (BEV), você recarrega como quiser: com Wallbox (AC), de 5% a 100% em cerca de 7h48min; em postos rápidos (DC), de 30% a 80% em 30 min; com o carregador portátil incluso, para máxima flexibilidade nas suas recargas.",
+    "evidence_sha256": "d02981c31cbff7bf42bd5655ac0cdcef261bdc47fd91d1cb4b641c4e6c1b6e17",
+    "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+    "source_section": "Bateria e Carregamento / Recarga C10 Elétrico (BEV)",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "c10-bev-ac-charging",
+    "vehicle_id": "c10-bev",
+    "specification": "charging",
+    "statement": "Para o C10 BEV, o site oficial informa recarga com Wallbox AC de 5% a 100% em cerca de 7h48min.",
+    "query_terms": [
+      "wallbox",
+      "ac",
+      "casa",
+      "tomada"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a",
+    "evidence_text": "No C10 Elétrico (BEV), você recarrega como quiser: com Wallbox (AC), de 5% a 100% em cerca de 7h48min; em postos rápidos (DC), de 30% a 80% em 30 min; com o carregador portátil incluso, para máxima flexibilidade nas suas recargas.",
+    "evidence_sha256": "d02981c31cbff7bf42bd5655ac0cdcef261bdc47fd91d1cb4b641c4e6c1b6e17",
+    "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+    "source_section": "Bateria e Carregamento / Recarga C10 Elétrico (BEV)",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-bev-multimedia",
+    "vehicle_id": "b10-bev",
+    "specification": "connectivity",
+    "statement": "O B10 BEV tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto.",
+    "query_terms": [
+      "multimidia",
+      "carplay",
+      "android",
+      "conectividade",
+      "tela"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "O controle está nas suas mãos. No tablet embarcado com 14,6” do B10, você tem a integração total do seu veículo em uma só tela , com espelhamento sem fio via Apple CarPlay ou Android Auto. Acesse, monitore e ajuste: aplicativos, mapas, abertura e fechamento de vidros.",
+    "evidence_sha256": "2e178b88526071fdfc85289c588bb2939e7b3113ff852beb77325845a0e23479",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Leap+ Connect / Central Multimídia",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-bev-roof",
+    "vehicle_id": "b10-bev",
+    "specification": "comfort",
+    "statement": "O B10 BEV tem teto panorâmico Sky View de 1,8 m² com cortina elétrica.",
+    "query_terms": [
+      "teto",
+      "panoramico"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "Que tal dirigir com sensação panorâmica e iluminação natural? É só abrir o teto panorâmico Sky View de 1,8 m² e apreciar um belo dia ensolarado e, quando preferir, fechá-lo com a cortina elétrica para um ambiente mais intimista.",
+    "evidence_sha256": "ac62469027f10715b85965678da1a09e3b01aa97e615e947feb8a251e9446eb2",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Design e Conforto / Teto Panorâmico Sky View",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-bev-airbags",
+    "vehicle_id": "b10-bev",
+    "specification": "safety",
+    "statement": "O B10 BEV tem sete airbags: frontais, laterais, de cortina e central.",
+    "query_terms": [
+      "airbag",
+      "seguranca"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "Proteção por todas os lados. São 7 Airbags (2 frontais, 2 laterais, 2 cortinas e 1 central) localizados em pontos estratégicos do carro para segurança completa em todos os assentos.",
+    "evidence_sha256": "477b3884abf2017ca2c76b35c66d78ab42398d0e76380d1fe4384d6e733a922b",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Segurança / 7 airbags",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-multimedia",
+    "vehicle_id": "b10-reev",
+    "specification": "connectivity",
+    "statement": "O B10 REEV tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto.",
+    "query_terms": [
+      "multimidia",
+      "carplay",
+      "android",
+      "conectividade",
+      "tela"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "O controle está nas suas mãos. No tablet embarcado com 14,6” do B10, você tem a integração total do seu veículo em uma só tela , com espelhamento sem fio via Apple CarPlay ou Android Auto. Acesse, monitore e ajuste: aplicativos, mapas, abertura e fechamento de vidros.",
+    "evidence_sha256": "2e178b88526071fdfc85289c588bb2939e7b3113ff852beb77325845a0e23479",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Leap+ Connect / Central Multimídia",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-roof",
+    "vehicle_id": "b10-reev",
+    "specification": "comfort",
+    "statement": "O B10 REEV tem teto panorâmico Sky View de 1,8 m² com cortina elétrica.",
+    "query_terms": [
+      "teto",
+      "panoramico"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "Que tal dirigir com sensação panorâmica e iluminação natural? É só abrir o teto panorâmico Sky View de 1,8 m² e apreciar um belo dia ensolarado e, quando preferir, fechá-lo com a cortina elétrica para um ambiente mais intimista.",
+    "evidence_sha256": "ac62469027f10715b85965678da1a09e3b01aa97e615e947feb8a251e9446eb2",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Design e Conforto / Teto Panorâmico Sky View",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-airbags",
+    "vehicle_id": "b10-reev",
+    "specification": "safety",
+    "statement": "O B10 REEV tem sete airbags: frontais, laterais, de cortina e central.",
+    "query_terms": [
+      "airbag",
+      "seguranca"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "Proteção por todas os lados. São 7 Airbags (2 frontais, 2 laterais, 2 cortinas e 1 central) localizados em pontos estratégicos do carro para segurança completa em todos os assentos.",
+    "evidence_sha256": "477b3884abf2017ca2c76b35c66d78ab42398d0e76380d1fe4384d6e733a922b",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Segurança / 7 airbags",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-seats",
+    "vehicle_id": "b10-reev",
+    "specification": "comfort",
+    "statement": "Os bancos dianteiros do B10 REEV têm ajuste elétrico e resfriamento, itens que o site identifica como exclusivos dessa motorização no B10.",
+    "query_terms": [
+      "bancos",
+      "ventilacao",
+      "resfriamento",
+      "ajuste"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "Conforto que você sente assim que entra. Exclusivo da versão Ultra-híbrida, os bancos dianteiros contam com ajuste elétrico e resfriamento, para que cada trajeto seja tão agradável quanto a chegada.",
+    "evidence_sha256": "fe854b690df0f3cf0b14b1bfab55e214669b75eabc7332e8d83c48bc0dbbb298",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Design e Conforto / Bancos com resfriamento e ajuste elétrico",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "c10-bev-multimedia",
+    "vehicle_id": "c10-bev",
+    "specification": "connectivity",
+    "statement": "A central multimídia Leap One do C10 BEV tem tela de 14,6 polegadas e reúne navegação e ajustes do veículo.",
+    "query_terms": [
+      "multimidia",
+      "conectividade",
+      "tela",
+      "navegacao"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a",
+    "evidence_text": "O controle do C10 está nas suas mãos. A Central Multimídia Leap One de 14,6\" integra tudo em uma só tela: aplicativos embarcados, programação de rotinas automatizadas, navegação com mapa online integrado, ajustes de iluminação e dos assistentes de condução, entre diversas outras funções.",
+    "evidence_sha256": "0babc939bd46ab197bb054055108e0ad09d10402d168613cc1821061652b6939",
+    "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+    "source_section": "Leap+ Connect / Central Multimídia Leap One",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "c10-bev-roof",
+    "vehicle_id": "c10-bev",
+    "specification": "comfort",
+    "statement": "O C10 BEV tem teto panorâmico Sky View de 2,1 m² com cortina elétrica.",
+    "query_terms": [
+      "teto",
+      "panoramico"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a",
+    "evidence_text": "Que tal dirigir com a sensação de amplitude e iluminação natural? É só abrir a cortina elétrica do Teto Panorâmico Sky View de 2,1 m² e apreciar o mundo dentro e fora do seu C10.",
+    "evidence_sha256": "ac22c5ebbda9ed9f08927b899aced0286f55a89ff95597cd29ca6240d61ede6e",
+    "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+    "source_section": "Design / Teto Panorâmico Sky View",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "c10-bev-airbags",
+    "vehicle_id": "c10-bev",
+    "specification": "safety",
+    "statement": "O C10 BEV tem sete airbags: frontais, laterais, de cortina e central.",
+    "query_terms": [
+      "airbag",
+      "seguranca"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a",
+    "evidence_text": "Proteção por todos os lados. São 7 airbags localizados em pontos estratégicos do carro: 2 frontais, 2 laterais, 2 cortinas e 1 central, garantindo proteção completa em todos os assentos.",
+    "evidence_sha256": "b96751ba9561b52ab64cfaa49df0d696f5858022d87bfac0cb5854d06fc01896",
+    "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+    "source_section": "Segurança / 7 Airbags",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "c10-bev-seats",
+    "vehicle_id": "c10-bev",
+    "specification": "comfort",
+    "statement": "Os bancos dianteiros do C10 BEV têm aquecimento e ventilação.",
+    "query_terms": [
+      "bancos",
+      "aquecimento",
+      "ventilacao"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a",
+    "evidence_text": "Além dos ajustes elétricos, os bancos dianteiros contam também com aquecimento e ventilação, garantindo uma viagem aconchegante independente da temperatura.",
+    "evidence_sha256": "e068271be8b6c88bf4fd0c58dcd8b32a876a235d7b1c4208bd6f75985f0bd5f7",
+    "page_sha256": "f649ce663e2cef0fe94878492b7097990bae62f859eff16997a58fe37d13bf78",
+    "source_section": "Conforto / Aquecimento e ventilação",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:21:21.875590+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  },
+  {
+    "id": "b10-reev-range-combined-wltp",
+    "vehicle_id": "b10-reev",
+    "specification": "range_context",
+    "statement": "Para o B10 REEV, o site informa até 900 km de autonomia combinada no ciclo WLTP. Autonomia combinada e autonomia somente elétrica são referências diferentes.",
+    "query_terms": [
+      "autonomia",
+      "alcance",
+      "quanto",
+      "combinada",
+      "total",
+      "wltp"
+    ],
+    "source_id": "src-df3598f09d51f9445970",
+    "evidence_text": "Autonomia elétrica de 68 km conforme ciclo PBEV-INMETRO. Autonomia combinada de 900 km segundo ciclo WLTP. Os valores podem variar de acordo com condições de uso, temperatura, estilo de condução, carga transportada e outros fatores externos.",
+    "evidence_sha256": "20b4b4320aa0259b3239c899cfc01d75c6388cdd873d88dc929433bd1adfc534",
+    "page_sha256": "e05d052237ae966685352410318a9cae9a4d48a3572a35044def926def42a4c1",
+    "source_section": "Rodapé técnico / Autonomia elétrica e combinada",
+    "approval_status": "approved",
+    "approved_at": "2026-11-02T22:28:32.311077+00:00",
+    "approved_by": "internal-source-verification (Codex)",
+    "market": "BR"
+  }
+]

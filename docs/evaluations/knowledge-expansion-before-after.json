@@ -1,0 +1,608 @@
+{
+  "evaluation": "same deterministic protocol model and inputs; not real Groq or human quality evaluation",
+  "baseline": "822a484",
+  "after": {
+    "knowledge": [
+      {
+        "user": "Me chamo Pessoa Sintetica",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "B10 BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico tem motor elétrico de 218 cv. O porta-malas traseiro do B10 elétrico tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "search_vehicle_media"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Que legal quanto ele faz na estrada?",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. A autonomia homologada do B10 elétrico é de 288 km pelo Inmetro. Essa referência é do ciclo de homologação, não uma medição específica de estrada.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "technical",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [
+          "get_vehicle_details"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Qual a capacidade da bateria?",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. O B10 elétrico tem bateria de 56,2 kWh.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "technical",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [
+          "get_vehicle_details"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Como funciona a recarga rápida?",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. O site oficial informa recarga rápida DC de 30% a 80% em 16 minutos para o B10 elétrico. O tempo pode variar conforme as condições de carregamento.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "technical",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [
+          "get_vehicle_details"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Ele tem Apple CarPlay?",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. O B10 elétrico tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "technical",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [
+          "get_vehicle_details"
+        ],
+        "vehicle_id": "b10-bev"
+      }
+    ],
+    "new_customer": [
+      {
+        "user": "Boa noite",
+        "assistant": {
+          "text": "Opa! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Seja bem-vindo. Como você prefere ser chamado?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "welcome",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Ana Sintetica",
+        "assistant": {
+          "text": "Prazer, Ana Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Qual você tem? Ainda não conheço sobre a marca",
+        "assistant": {
+          "text": "A Leapmotor é uma marca focada em veículos eletrificados e atua com o grupo Stellantis. Posso te apresentar o B10 e o C10 e mostrar como são por dentro e por fora. Qual deles você quer conhecer primeiro?",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-d6b817d0bb2d649652e5"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "fallback",
+          "fallback_reason": "internal_jargon",
+          "intent": "brand"
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Ok",
+        "assistant": {
+          "text": "Certo, seguimos a partir do que você já me contou.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "short",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Pode ser",
+        "assistant": {
+          "text": "Posso te mostrar:\n1. B10 elétrico\n2. B10 ultra-híbrido\n3. C10 elétrico\nQual deles você quer conhecer primeiro?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "list_vehicles"
+        ],
+        "vehicle_id": null
+      },
+      {
+        "user": "A primeira opção",
+        "assistant": {
+          "text": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico tem motor elétrico de 218 cv. O porta-malas traseiro do B10 elétrico tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "search_vehicle_media"
+        ],
+        "vehicle_id": "b10-bev"
+      }
+    ],
+    "terms": [
+      {
+        "user": "Quero conhecer o B10",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. No B10, posso te mostrar a opção elétrica ou a ultra-híbrida. Qual você prefere conhecer primeiro?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Não entendi essas siglas BEV e REEV",
+        "assistant": {
+          "text": "O elétrico usa só bateria para mover o carro e não tem motor a combustão. O ultra-híbrido também oferece condução elétrica, com um motor a combustão para estender a autonomia.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-d6b817d0bb2d649652e5"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "evidence_selection",
+          "fallback_reason": null,
+          "intent": "powertrain_explanation"
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "A segunda opção",
+        "assistant": {
+          "text": "Separei estas imagens do B10 ultra-híbrido para você começar a conhecê-lo. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a9ff19ce76ea9b7bfecf",
+            "src-media-692def5f68253a3ff6e6",
+            "src-media-7606a304c26a9daf5167"
+          ],
+          "media_ids": [
+            "b10-reev-cockpit-12",
+            "b10-reev-front_3_4-11",
+            "b10-reev-front_seats_roof-10"
+          ],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "search_vehicle_media"
+        ],
+        "vehicle_id": "b10-reev"
+      }
+    ]
+  },
+  "network_calls_during_evaluation": 0,
+  "source_fingerprints": {
+    "app/agent/service.py": "d2c5a7048501b5abc98b188fbba091d307074e124629b0080886f37c4eec42a2",
+    "app/agent/grounding.py": "91d5b497f3fd561cd663a2e2598fe74cbf7f833e1dfd4ca51cb9a3906e2b07d3",
+    "data/validation/grounding/facts.json": "45c49ef612e8c4188d6890aab611cbe21aa47bdbf7ee0fa5aa177eccb575dee1",
+    "data/validation/grounding/knowledge.json": "6a33816f8c644e2c3c20da8cd43764ac5ff0ca3eaa89ddb1322bacb8db0df225",
+    "data/validation/grounding/brand.json": "f025d6b43a749c900016ec1c8adef187a96df5e7065ee0347984bcb0cfe12838"
+  },
+  "before": {
+    "knowledge": [
+      {
+        "user": "Me chamo Pessoa Sintetica",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "B10 BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-d54c6ab4a6069b6990a4"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "search_vehicle_media"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Que legal quanto ele faz na estrada?",
+        "assistant": {
+          "text": "Esse ponto ainda está em aberto na base aprovada. Podemos continuar pelo que você precisa na sua rotina.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "missing_evidence",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [
+          "get_vehicle_details"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Qual a capacidade da bateria?",
+        "assistant": {
+          "text": "Esse ponto ainda não está documentado na base aprovada. Podemos continuar pelo que você precisa na sua rotina.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "fallback",
+          "fallback_reason": "repeated_response",
+          "intent": "missing_evidence"
+        },
+        "tool_names": [
+          "get_vehicle_details"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Como funciona a recarga rápida?",
+        "assistant": {
+          "text": "Ainda não tenho detalhes de recarga aprovados para este modelo. Podemos explorar suas possibilidades de recarga sem presumir esses detalhes. Você teria onde carregar em casa ou no trabalho?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "get_vehicle_details"
+        ],
+        "vehicle_id": "b10-bev"
+      },
+      {
+        "user": "Ele tem Apple CarPlay?",
+        "assistant": {
+          "text": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "other",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [],
+        "vehicle_id": "b10-bev"
+      }
+    ],
+    "new_customer": [
+      {
+        "user": "Boa noite",
+        "assistant": {
+          "text": "Opa! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Seja bem-vindo. Como você prefere ser chamado?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "welcome",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Ana Sintetica",
+        "assistant": {
+          "text": "Prazer, Ana Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Qual você tem? Ainda não conheço sobre a marca",
+        "assistant": {
+          "text": "Posso te apresentar o B10 e o C10 a partir dos modelos e fotos da nossa base.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "brand",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Ok",
+        "assistant": {
+          "text": "Certo, seguimos a partir do que você já me contou.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "short",
+          "evidence_selection_recovered": false
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Pode ser",
+        "assistant": {
+          "text": "Podemos explorar B10 BEV, B10 REEV, C10 BEV. Qual você quer conhecer primeiro?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "list_vehicles"
+        ],
+        "vehicle_id": null
+      },
+      {
+        "user": "A primeira opção",
+        "assistant": {
+          "text": "Podemos explorar B10 BEV, B10 REEV, C10 BEV. Qual você quer conhecer primeiro?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [
+          "list_vehicles"
+        ],
+        "vehicle_id": null
+      }
+    ],
+    "terms": [
+      {
+        "user": "Quero conhecer o B10",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "Não entendi essas siglas BEV e REEV",
+        "assistant": {
+          "text": "Qual modelo e motorização você quer conhecer primeiro?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      },
+      {
+        "user": "A segunda opção",
+        "assistant": {
+          "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "tool_names": [],
+        "vehicle_id": null
+      }
+    ]
+  }
+}

@@ -47,14 +47,20 @@ async def test_real_tool_dispatch_and_exact_grounded_response(grounded):
     assert (
         result.text
         == "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. "
-        + fact.statement
+        + fact.statement.replace("C10 BEV", "C10 elétrico")
         + " Como você prefere ser chamado?"
     )
     assert result.source_ids == [fact.source_id]
     events = grounded.sessions[("local", "one")]["tool_events"]
     assert events[0]["selection_origin"] == "llm"
     assert events[0]["name"] == "get_vehicle_details"
-    assert events[0]["result"]["specifications"] == {"range_km": 338}
+    assert events[0]["result"]["specifications"] == {
+        "range_km": 338,
+        "trunk_liters": 465,
+        "length_mm": 4730,
+        "width_mm": 1900,
+        "height_mm": 1680,
+    }
     assert grounded.llm.calls == 2
 
 

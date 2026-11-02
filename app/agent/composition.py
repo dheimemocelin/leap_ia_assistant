@@ -116,6 +116,11 @@ def validate_prose(text: str, profile: dict, *, question=False):
     if re.search(r"consultor|vendedor|humano|\blia\b|assistente virtual|me chamo|sou uma?", t):
         raise CompositionRejected("identity_or_handoff")
     if re.search(
+        r"base (?:aprovada|revisada)|nossa base|catalogo interno|resumo institucional.*revisad|contexto.*preservad",
+        t,
+    ):
+        raise CompositionRejected("internal_jargon")
+    if re.search(
         r"\b(?:agendei|agendamos|agendad[oa]|confirmad[oa]|aceitamos|avaliamos)\b|"
         r"\b(?:visita|horario|agendamento)\s+(?:esta|foi|ficou)\s+confirmad",
         t,

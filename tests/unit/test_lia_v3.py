@@ -30,13 +30,14 @@ async def test_direct_model_interest_delivers_content_or_necessary_powertrain_cl
 ):
     result = await agent.turn("v3", "Queria conhecer o " + model)
     if model == "B10":
-        assert "BEV" in result.text and "REEV" in result.text
+        assert "elétrica" in result.text and "ultra-híbrida" in result.text
         assert "prefere ser chamado" not in result.text
     else:
         assert result.media_ids and "338" in result.text
 
 
 async def test_brand_without_approved_institutional_facts_does_not_invent_origin(agent):
+    agent.grounding.brand = None
     response = await agent.turn("v3", "Nunca ouvi falar da Leapmotor")
     assert "B10" in response.text and "C10" in response.text
     assert "detalhe técnico" not in response.text and "China" not in response.text
@@ -66,7 +67,7 @@ async def test_memory_question_before_and_after_name_is_not_a_catalog_query(agen
 
 async def test_short_powertrain_answer_preserves_the_original_technical_question(agent):
     first = await agent.turn("v3", "Qual a potência do B10?")
-    assert "BEV" in first.text and "REEV" in first.text
+    assert "elétrica" in first.text and "ultra-híbrida" in first.text
     answer = await agent.turn("v3", "BEV")
     assert "218" in answer.text and answer.source_ids and not answer.media_ids
 

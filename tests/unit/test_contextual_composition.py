@@ -242,6 +242,7 @@ async def test_complete_conversation_scenarios(agent, scenario):
     assert len(SCENARIOS) >= 20
     seen_media = set()
     approved_sources = {f.source_id for f in agent.grounding.facts.values()}
+    approved_sources.update(f["source_id"] for f in agent.grounding.for_brand())
     approved_sources.update("src-media-" + m.sha256[:20] for m in agent.media.records if m.sha256)
     for item in scenario["messages"]:
         kind = item.get("type", "text") if isinstance(item, dict) else "text"
@@ -253,12 +254,27 @@ async def test_complete_conversation_scenarios(agent, scenario):
         assert state["usage"]["calls"] <= 2
         assert set(response.source_ids) <= approved_sources
         # Explicit angle requests may intentionally revisit a previously shown image.
-        explicit_angle = any(word in message.lower() for word in ["interior", "exterior", "painel", "bancos", "teto", "frente", "traseira", "lateral"])
+        explicit_angle = any(
+            word in message.lower()
+            for word in [
+                "interior",
+                "exterior",
+                "painel",
+                "bancos",
+                "teto",
+                "frente",
+                "traseira",
+                "lateral",
+            ]
+        )
         if not explicit_angle:
             assert not seen_media.intersection(response.media_ids)
         else:
             records = {m.id: m for m in agent.media.records}
-            assert all(records[i].vehicle_id == state["lead_profile"]["vehicle_id"] for i in response.media_ids)
+            assert all(
+                records[i].vehicle_id == state["lead_profile"]["vehicle_id"]
+                for i in response.media_ids
+            )
         seen_media.update(response.media_ids)
         assert state["composition"]["origin"] in {
             "llm",

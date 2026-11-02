@@ -141,9 +141,14 @@ async def test_name_and_specific_question_in_first_message(agent):
 
 
 async def test_missing_charging_fact_still_allows_consultative_question(agent):
+    # Explicitly remove charging evidence: the expanded official catalog now
+    # covers this topic in ordinary use.
+    agent.grounding.facts = {
+        key: fact for key, fact in agent.grounding.facts.items() if fact.specification != "charging"
+    }
     await agent.turn("sdr", "C10 BEV")
     response = await agent.turn("sdr", "Como funciona a recarga?")
-    assert not response.source_ids and "detalhes de recarga aprovados" in response.text
+    assert not response.source_ids and "detalhe de recarga" in response.text
     assert "casa ou no trabalho" in response.text
     assert response.text.count("?") == 1
     repeated = await agent.turn("sdr", "Como funciona a recarga?")

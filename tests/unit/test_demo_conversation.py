@@ -12,7 +12,9 @@ class EvidenceOnlyLLM:
         if messages[-1]["content"].startswith("{"):
             context = json.loads(messages[-1]["content"])
             if context.get("task") == "compose_conversation":
-                return ModelReply(text=json.dumps({"fact_ids": [f["id"] for f in context["facts"]]}))
+                return ModelReply(
+                    text=json.dumps({"fact_ids": [f["id"] for f in context["facts"]]})
+                )
         evidence = json.loads(messages[-1]["content"].split(": ", 1)[1])
         if evidence.get("kind") == "get_vehicle_details":
             assert any(
@@ -31,7 +33,7 @@ def demo():
 
 async def test_asking_powertrain_keeps_original_characteristics_request(demo):
     first = await demo.turn("one", "Quero conhecer o B10")
-    assert "BEV" in first.text
+    assert "elétrica" in first.text
     answer = await demo.turn("one", "bev")
     assert "218" in answer.text and "405" in answer.text
     photos = await demo.turn("one", "Me mostra por dentro")
@@ -47,6 +49,9 @@ async def test_actual_authorized_demo_photos_are_available(demo, vehicle):
 
 
 async def test_specific_missing_battery_not_replaced_with_unrelated_summary(demo):
+    # The official battery value is now loaded; explicitly revoke it to exercise
+    # the original missing-evidence regression with a controlled catalog.
+    demo.catalog.vehicle("b10-bev").specifications.pop("battery_kwh")
     reply = await demo.turn("missing", "Qual a capacidade da bateria do B10 BEV?")
     assert not reply.handoff_required and not reply.source_ids
     assert "405" not in reply.text and "218" not in reply.text
@@ -85,7 +90,7 @@ async def test_feminine_powertrain_answer_keeps_photo_intent(demo):
 
 async def test_photo_caption_is_natural_and_names_selected_vehicle(demo):
     response = await demo.turn("caption", "Fotos do B10 REEV")
-    assert "B10 REEV" in response.text
+    assert "B10 ultra-híbrido" in response.text
     assert "foto(s)" not in response.text
     assert "ampliar" in response.text
     assert demo.sessions[("local", "caption")]["usage"]["calls"] == 0
@@ -97,10 +102,17 @@ async def test_yes_to_photo_offer_keeps_the_vehicle(demo):
             if messages[-1]["content"].startswith("{"):
                 context = json.loads(messages[-1]["content"])
                 if context.get("intent") == "technical":
-                    return ModelReply(text=json.dumps({
-                        "fact_ids": [f["id"] for f in context["facts"]],
-                        "question": {"key": "photos", "text": "Quer ver algumas fotos dele?"},
-                    }))
+                    return ModelReply(
+                        text=json.dumps(
+                            {
+                                "fact_ids": [f["id"] for f in context["facts"]],
+                                "question": {
+                                    "key": "photos",
+                                    "text": "Quer ver algumas fotos dele?",
+                                },
+                            }
+                        )
+                    )
             return await super().complete(messages, tools)
 
     demo.llm = PhotoInvitation()

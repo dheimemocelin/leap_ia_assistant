@@ -61,3 +61,7 @@ Contrato JSON configurável validado em startup, com campos mapeados a allowlist
 ### Oportunidade e visita local
 
 O plano `purchase` trata decisão de compra/visita sem conceder ações externas. `LeadProfile` e a oportunidade `local_only` acrescentam `trade_in_interest: bool | null` e `visit_preference: str | null`. A preferência é informação declarada, nunca reserva ou agendamento confirmado. Nome e veículo canônico continuam vinculados à identidade persistida do contato. Convite para conhecer o carro não implica consentimento para contato humano; handoff mantém pedido explícito e autorização. [Comportamento e evidências](lia-store-visit.md).
+
+### Conhecimento técnico e referências de opção
+
+`ReviewedTextFact` e a introdução institucional possuem revisão explícita, fonte e digest. Somente a projeção pública de fatos aprovados chega à composição; o modelo não aprova documentos. `offered_vehicle_ids` guarda IDs ordenados no estado da mesma conversa; referências ordinais não podem selecionar itens fora dessa oferta. A linguagem de apresentação pode usar elétrico/ultra-híbrido, preservando as chaves BEV/REEV internamente. [Fontes, evidências e limites](knowledge-expansion.md).

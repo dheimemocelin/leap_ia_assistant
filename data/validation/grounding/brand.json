@@ -1,0 +1,19 @@
+{
+  "id": "leapmotor-brand-introduction-br",
+  "statement": "A Leapmotor é uma marca focada em veículos eletrificados e atua com o grupo Stellantis.",
+  "source": {
+    "url": "https://www.leapmotor.com.br/sobre-a-leapmotor.html",
+    "retrieved_at": "2026-11-02T22:38:46.931937+00:00",
+    "source_type": "official_website",
+    "notes": "Two institutional statements checked directly in the Brazilian institutional page; no origin, warranty or local availability inferred. Definitions checked in the ELÉTRICO (BEV) and Ultra-híbrido (REEV) institutional sections."
+  },
+  "evidence_text": "Somos uma marca que já nasceu elétrica | Leapmotor faz parte do grupo Stellantis",
+  "evidence_sha256": "c4777ee5b972e26c4cff6d7c6e599760293eee41f50c73d3c3d32c5ac0361b3d",
+  "approval_status": "approved",
+  "approved_at": "2026-11-02T22:38:46.931937+00:00",
+  "approved_by": "internal-source-verification (Codex)",
+  "powertrain_explanations": {
+    "BEV": "O elétrico usa só bateria para mover o carro e não tem motor a combustão.",
+    "REEV": "O ultra-híbrido também oferece condução elétrica, com um motor a combustão para estender a autonomia."
+  }
+}

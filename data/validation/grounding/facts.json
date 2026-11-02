@@ -5,7 +5,7 @@
     "specification": "range_km",
     "value": 338,
     "statement": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
-    "source_id": "src-ddb8b165ff27670a154b",
+    "source_id": "src-4fd5626a95fbbb06171a",
     "query_terms": [
       "autonomia",
       "alcance",
@@ -36,7 +36,7 @@
       "sobre",
       "apresent"
     ],
-    "source_id": "src-d54c6ab4a6069b6990a4"
+    "source_id": "src-df3598f09d51f9445970"
   },
   {
     "id": "b10-bev-trunk",
@@ -56,6 +56,230 @@
       "sobre",
       "apresent"
     ],
-    "source_id": "src-d54c6ab4a6069b6990a4"
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-bev-range_km",
+    "vehicle_id": "b10-bev",
+    "specification": "range_km",
+    "value": 288,
+    "statement": "A autonomia homologada do B10 BEV é de 288 km pelo Inmetro.",
+    "query_terms": [
+      "autonomia",
+      "alcance"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-bev-battery_kwh",
+    "vehicle_id": "b10-bev",
+    "specification": "battery_kwh",
+    "value": 56.2,
+    "statement": "O B10 BEV tem bateria de 56,2 kWh.",
+    "query_terms": [
+      "bateria"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-bev-torque_nm",
+    "vehicle_id": "b10-bev",
+    "specification": "torque_nm",
+    "value": 240,
+    "statement": "O motor elétrico do B10 BEV entrega 240 Nm de torque.",
+    "query_terms": [
+      "torque"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-bev-length_mm",
+    "vehicle_id": "b10-bev",
+    "specification": "length_mm",
+    "value": 4510,
+    "statement": "O comprimento do B10 BEV é de 4,51 m.",
+    "query_terms": [
+      "comprimento",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-bev-width_mm",
+    "vehicle_id": "b10-bev",
+    "specification": "width_mm",
+    "value": 1880,
+    "statement": "A largura do B10 BEV é de 1,88 m.",
+    "query_terms": [
+      "largura",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-bev-height_mm",
+    "vehicle_id": "b10-bev",
+    "specification": "height_mm",
+    "value": 1670,
+    "statement": "A altura do B10 BEV é de 1,67 m.",
+    "query_terms": [
+      "altura",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-reev-power_cv",
+    "vehicle_id": "b10-reev",
+    "specification": "power_cv",
+    "value": 218,
+    "statement": "O B10 REEV tem motor elétrico de tração de 218 cv.",
+    "query_terms": [
+      "potencia",
+      "cavalos",
+      "motor"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-reev-battery_kwh",
+    "vehicle_id": "b10-reev",
+    "specification": "battery_kwh",
+    "value": 18.8,
+    "statement": "O B10 REEV tem bateria de 18,8 kWh.",
+    "query_terms": [
+      "bateria"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-reev-torque_nm",
+    "vehicle_id": "b10-reev",
+    "specification": "torque_nm",
+    "value": 240,
+    "statement": "O motor elétrico de tração do B10 REEV entrega 240 Nm de torque.",
+    "query_terms": [
+      "torque"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-reev-trunk_liters",
+    "vehicle_id": "b10-reev",
+    "specification": "trunk_liters",
+    "value": 350,
+    "statement": "O porta-malas do B10 REEV tem capacidade de 350 litros.",
+    "query_terms": [
+      "porta-malas",
+      "porta malas",
+      "bagageiro"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-reev-length_mm",
+    "vehicle_id": "b10-reev",
+    "specification": "length_mm",
+    "value": 4530,
+    "statement": "O comprimento do B10 REEV é de 4,53 m.",
+    "query_terms": [
+      "comprimento",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-reev-width_mm",
+    "vehicle_id": "b10-reev",
+    "specification": "width_mm",
+    "value": 1880,
+    "statement": "A largura do B10 REEV é de 1,88 m.",
+    "query_terms": [
+      "largura",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "b10-reev-height_mm",
+    "vehicle_id": "b10-reev",
+    "specification": "height_mm",
+    "value": 1650,
+    "statement": "A altura do B10 REEV é de 1,65 m.",
+    "query_terms": [
+      "altura",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
+  },
+  {
+    "id": "c10-bev-trunk_liters",
+    "vehicle_id": "c10-bev",
+    "specification": "trunk_liters",
+    "value": 465,
+    "statement": "O porta-malas traseiro do C10 BEV tem capacidade de 465 litros.",
+    "query_terms": [
+      "porta-malas",
+      "porta malas",
+      "bagageiro"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a"
+  },
+  {
+    "id": "c10-bev-length_mm",
+    "vehicle_id": "c10-bev",
+    "specification": "length_mm",
+    "value": 4730,
+    "statement": "O comprimento do C10 BEV é de 4,73 m.",
+    "query_terms": [
+      "comprimento",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a"
+  },
+  {
+    "id": "c10-bev-width_mm",
+    "vehicle_id": "c10-bev",
+    "specification": "width_mm",
+    "value": 1900,
+    "statement": "A largura do C10 BEV é de 1,90 m.",
+    "query_terms": [
+      "largura",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a"
+  },
+  {
+    "id": "c10-bev-height_mm",
+    "vehicle_id": "c10-bev",
+    "specification": "height_mm",
+    "value": 1680,
+    "statement": "A altura do C10 BEV é de 1,68 m.",
+    "query_terms": [
+      "altura",
+      "dimensoes",
+      "tamanho"
+    ],
+    "source_id": "src-4fd5626a95fbbb06171a"
+  },
+  {
+    "id": "b10-reev-range-electric-pbev",
+    "vehicle_id": "b10-reev",
+    "specification": "range_km",
+    "value": 68,
+    "statement": "O B10 REEV tem autonomia somente elétrica de 68 km no ciclo PBEV/Inmetro.",
+    "query_terms": [
+      "autonomia",
+      "alcance"
+    ],
+    "source_id": "src-df3598f09d51f9445970"
   }
 ]
