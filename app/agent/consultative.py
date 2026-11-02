@@ -171,7 +171,7 @@ def next_question(profile: LeadProfile):
     return ""
 
 
-def observe(profile: LeadProfile, text: str):
+def observe(profile: LeadProfile, text: str, *, channel_phone: str | None = None):
     """Return a response override, plus whether input must be omitted from model history."""
     t = norm(text).strip("!.? ")
     # Preferred name is local personalization, never permission to share a lead.
@@ -257,6 +257,8 @@ def observe(profile: LeadProfile, text: str):
         profile.consent = "not_requested"
     if profile.pending_question == "consent" and t in YES:
         profile.consent = "granted"
+        if channel_phone and re.fullmatch(r"[0-9]{8,15}", channel_phone):
+            profile.contact_phone = channel_phone
         profile.consent_at = datetime.now(UTC).isoformat()
         profile.consent_scope = (
             f"{profile.interest_model or 'unspecified'}:{profile.powertrain or 'unspecified'}"

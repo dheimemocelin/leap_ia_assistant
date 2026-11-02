@@ -1,0 +1,24 @@
+[Unit]
+Description=LEAP pilot WhatsApp agent
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/.t3/projects/leap-ia-assistant
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 -m uvicorn app.main:app --host 172.17.0.1 --port 8000 --no-access-log
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+NoNewPrivileges=true
+InaccessiblePaths=/home/ubuntu/apps/evolution /home/ubuntu/.t3/userdata /home/ubuntu/.codex
+PrivateTmp=true
+ProtectHome=read-only
+ProtectSystem=strict
+ReadWritePaths=/home/ubuntu/.t3/projects/leap-ia-assistant/.local
+MemoryMax=768M
+
+[Install]
+WantedBy=multi-user.target

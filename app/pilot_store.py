@@ -140,7 +140,7 @@ class PilotStore:
                 "UPDATE pilot_people SET display_name=?,updated_at=? WHERE id=?",
                 (profile.get("display_name"), now, row["person_id"]),
             )
-            if profile.get("vehicle_id"):
+            if profile.get("vehicle_id") or "human_contact_requested" in profile.get("signals", []):
                 db.execute(
                     "INSERT INTO pilot_opportunities(owner,conversation_id,payload,updated_at) VALUES (?,?,?,?) ON CONFLICT(owner,conversation_id) DO UPDATE SET payload=excluded.payload,updated_at=excluded.updated_at",
                     (owner, conversation_id, json.dumps(payload, ensure_ascii=False), now),

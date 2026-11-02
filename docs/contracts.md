@@ -8,7 +8,7 @@ JSON UTF-8; IDs UUID; timestamps ISO-8601 UTC. Erros usam `{ "code": "...", "mes
 
 - `POST /v1/conversations`: cria sessão vinculada a canal; widget recebe token de sessão aleatório, escopado e expirável.
 - `POST /v1/conversations/{id}/messages`: recebe texto e ID único do cliente; resposta pode indicar `grounded`, `insufficient_evidence` ou `handoff`.
-- `POST /v1/webhooks/evolution/{instance}`: valida origem/autenticação e deduplica `provider_message_id`; responde rápido e agenda processamento.
+- `POST /hooks/evolution/{instance}`: webhook máquina-a-máquina autenticado por `X-Webhook-Secret`; persiste inbox e deduplica IDs, retornando apenas `queued`, `duplicate` ou `ignored`.
 - `GET /v1/conversations/{id}`: histórico autorizado, redigido segundo política de PII.
 - `POST /v1/conversations/{id}/handoff`: abre/atualiza pedido de atendimento humano.
 - `POST /v1/leads/{id}/authorize-crm`: grava consentimento explícito, escopo e timestamp; não envia conteúdo oculto.
@@ -21,7 +21,7 @@ JSON UTF-8; IDs UUID; timestamps ISO-8601 UTC. Erros usam `{ "code": "...", "mes
   "message_id": "uuid",
   "status": "answered",
   "answer": {
-    "text": "Posso confirmar essa informação com um consultor.",
+    "text": "Podemos explorar as informações verificadas do veículo.",
     "confidence": "insufficient_evidence",
     "source_ids": [],
     "handoff_required": true

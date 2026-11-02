@@ -84,6 +84,7 @@ class TurnState(TypedDict, total=False):
     tool_events: list[dict]
     intent_question: str
     want_media: bool
+    trusted_contact_phone: str | None
     lead_profile: dict
     shown_media_ids: list[str]
     introduced_vehicle_ids: list[str]
@@ -143,7 +144,12 @@ class SalesAgent:
         self.graph = builder.compile()
 
     async def turn(
-        self, conversation_id: str, text: str, *, owner: str = "local"
+        self,
+        conversation_id: str,
+        text: str,
+        *,
+        owner: str = "local",
+        trusted_contact_phone: str | None = None,
     ) -> AssistantResponse:
         if (
             not text.strip()
@@ -168,6 +174,7 @@ class SalesAgent:
                 {
                     **previous,
                     "text": text,
+                    "trusted_contact_phone": trusted_contact_phone,
                     "response": {},
                     "redact_input": False,
                     "proactive": False,
@@ -278,7 +285,7 @@ class SalesAgent:
             if profile.consent == "offered":
                 profile.consent = "not_requested"
         before = profile.model_dump()
-        override, redact = observe(profile, s["text"])
+        override, redact = observe(profile, s["text"], channel_phone=s.get("trusted_contact_phone"))
         technical_question = bool(
             re.search(r"qual|quanto|como funciona|capacidade|autonomia.*\?", text)
         )
