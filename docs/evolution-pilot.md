@@ -29,7 +29,7 @@ Cliente não faz login nem informa senha. Autenticação de Evolution/webhook fi
 
 Deduplica ID da mensagem e controla partes separadas para texto/fotos. Retry automático limitado a conexão não estabelecida e HTTP 429. Timeout de leitura/escrita ou erro ambíguo não é reenviado: fica em `review`, evitando duplicar mensagem possivelmente entregue. Reinício marca processamento/entrega interrompidos para revisão; mensagens ainda em fila ou respostas prontas permanecem duráveis. Não se promete exactly-once externo.
 
-Estados: `queued`, `processing`, `ready`, `delivering`, `sent`, `dry_run`, `review`, `cancelled`. `sent` significa aceite da API com ID, não leitura no telefone. Limites: 40 mensagens por participante/dia, um worker/processo e até três fotos por resposta. Áudio, visão, grupos e LID sem alias telefônico não estão implementados. Participantes ficam em configuração privada; não é um bot público irrestrito.
+Estados: `queued`, `processing`, `ready`, `delivering`, `sent`, `dry_run`, `review`, `cancelled`. `sent` significa aceite da API com ID, não leitura no telefone. Limites: 40 mensagens por participante/dia, um worker/processo e até três fotos por resposta. Áudio, visão, grupos e LID sem alias telefônico não estão implementados. Por padrão, participantes ficam em allowlist privada. Com autorização explícita do operador, `EVOLUTION_ALLOWED_NUMBERS=*` aceita qualquer remetente privado; autenticação do webhook, limite diário, dedup e bloqueio de grupos/fromMe permanecem ativos. Esse é o modo atualmente autorizado para o piloto.
 
 ## Operação
 
@@ -57,14 +57,30 @@ Readiness verifica o banco do backend; não comprova pareamento ou qualidade Gro
 - Container → backend: HTTP 200 pela rede interna, sem túnel público.
 - Teste cruzado de credencial negado (401), sem WhatsApp conectado.
 - Catálogo de modelos Groq consultado por GET: HTTP 200 e modelo configurado disponível, sem inferência/tokens.
-- QR real gerado pelo servidor instalado; pareamento ainda depende do usuário.
+- QR real gerado e pareamento concluído pelo usuário; atendimento no WhatsApp confirmado em 2026-11-02.
 - **192 testes automatizados passaram**: parser, auth, tamanho, allowlist, dedup, isolamento, memória após reinício, texto revalidado, multipart, entrega parcial incerta, dry-run, recuperação, exclusão, contato pós-consentimento, retries limitados e gates anteriores.
 - Ruff, compilação Python, JavaScript syntax check e diff check aprovados; um aviso upstream LangChainPendingDeprecationWarning permanece.
 
-Nenhum teste automatizado chama Groq/WhatsApp real. O primeiro atendimento real depende de pareamento e mensagem do participante autorizado. Não se declara entrega no telefone ou qualidade Groq aprovadas antes disso. A lista recebida em campo privado foi instalada sem expor números.
+Nenhum teste automatizado chama Groq/WhatsApp real. O usuário confirmou recebimento no atendimento real em 2026-11-02. Isso valida a integração observada, sem comprovar qualidade geral, estabilidade prolongada ou entrega de todas as mensagens. Dados pessoais e credenciais não são versionados.
 
 ## Contratos consultados
 
 [Release oficial](https://github.com/evolution-foundation/evolution-api/releases/tag/2.3.7), [router de envio](https://github.com/evolution-foundation/evolution-api/blob/main/src/api/routes/sendMessage.router.ts), [DTOs](https://github.com/evolution-foundation/evolution-api/blob/main/src/api/dto/sendMessage.dto.ts), [webhook e cabeçalhos](https://github.com/evolution-foundation/evolution-api/blob/main/src/api/integrations/event/webhook/webhook.controller.ts).
 
 A schema da imagem instalada foi inspecionada: multipart exige `number` e `mediatype`, permite arquivo `file`. Compatibilidade foi testada localmente; recebimento no telefone e estabilidade da sessão exigem piloto pareado. Versão fixa, sem atualização silenciosa para `latest`.
+
+
+## Checkpoint operacional — 2026-11-02
+
+- Usuário confirmou que o atendimento funcionou no WhatsApp. Snapshot agregado do banco: 9 eventos `sent`, 9 partes de texto e 3 partes de imagem aceitas pelo provedor; 1 evento anterior em `review` com texto `uncertain`. Sem exposição de números, nomes ou conteúdo.
+- Falha inicial: allowlist continha o número receptor, não o remetente. Após autorização do usuário, modo `*` libera conversas privadas recebidas de qualquer número. Não autoriza disparos proativos.
+- Outra falha comprovada: logs Baileys `conflict: replaced`, conexão oscilando e envio sem confirmação. Reinício somente do container Evolution restaurou `open`; não houve novo conflito na janela verificada após o reinício. Causa raiz das sessões concorrentes ainda não comprovada. Evitar chamar connect/gerar QR enquanto já conectado.
+- Mensagem incerta não foi reenviada automaticamente. Preservar esse comportamento para evitar duplicação.
+- Atendimento real não teve medição detalhada de tokens/custo/latência neste checkpoint. Não extrapolar qualidade comercial a partir de sucesso de transporte.
+- Infraestrutura compartilhada permanece fora do Git LEAP; caminhos e comandos estão neste runbook. `.env`, SQLite e QR não entram no commit.
+
+## Próxima etapa
+
+Consultar [plano de evolução do atendimento](next-iteration-plan.md). Não há segundo grafo, RAG novo ou troca de modelo neste checkpoint.
+
+Validação deste checkpoint: **193 testes Pytest passaram**, Ruff, compilação Python e `git diff --check` aprovados. Um aviso upstream LangChain permanece. Teste adicional cobre modo aberto com autenticação obrigatória e bloqueio de grupos/fromMe.

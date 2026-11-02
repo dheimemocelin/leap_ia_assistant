@@ -60,7 +60,7 @@ async def inbound(instance: str, request: Request, x_webhook_secret: str = Heade
         raise HTTPException(400, "Invalid event")
     message = parse_message(payload, instance)
     allowed = {n.strip() for n in settings.evolution_allowed_numbers.split(",") if n.strip()}
-    if message is None or message.recipient not in allowed:
+    if message is None or ("*" not in allowed and message.recipient not in allowed):
         return {"status": "ignored"}
     key = settings.evolution_identity_key.get_secret_value()
     person = private_id(key, "person:" + instance + ":" + message.recipient)

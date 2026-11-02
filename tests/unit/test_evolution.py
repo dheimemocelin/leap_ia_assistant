@@ -98,6 +98,18 @@ def test_allowlist_size_and_invalid_payload(inbox):
     assert client.post(path, content=b"invalid", headers=headers()).status_code == 400
 
 
+def test_public_pilot_accepts_unknown_sender_but_preserves_auth_and_loop_guards(inbox, monkeypatch):
+    store, client = inbox
+    monkeypatch.setattr(settings, "evolution_allowed_numbers", "*")
+    path = "/hooks/evolution/test-instance"
+    body = event(remoteJid="5511000000001@s.whatsapp.net")
+    assert client.post(path, json=body).status_code == 401
+    assert client.post(path, json=body, headers=headers()).json() == {"status": "queued"}
+    for key in ({"fromMe": True}, {"remoteJid": "123@g.us"}):
+        assert client.post(path, json=event(**key), headers=headers()).json() == {"status": "ignored"}
+    assert store.counts() == {"queued": 1}
+
+
 async def test_text_adapter_revalidates_policy_and_auth():
     requests = []
 

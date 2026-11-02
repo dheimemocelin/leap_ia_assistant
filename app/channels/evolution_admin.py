@@ -35,8 +35,17 @@ def main():
                         "instance": settings.evolution_instance,
                         "connection": connection,
                         "send_enabled": settings.evolution_send_enabled,
-                        "authorized_testers": len(
-                            [n for n in settings.evolution_allowed_numbers.split(",") if n]
+                        "access_mode": (
+                            "any_private_sender"
+                            if "*" in settings.evolution_allowed_numbers.split(",")
+                            else "allowlist"
+                        ),
+                        "authorized_testers": (
+                            None
+                            if "*" in settings.evolution_allowed_numbers.split(",")
+                            else len(
+                                [n for n in settings.evolution_allowed_numbers.split(",") if n]
+                            )
                         ),
                         "queue": EvolutionStore(settings.pilot_db_path).counts(),
                     }
