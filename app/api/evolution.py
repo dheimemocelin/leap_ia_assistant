@@ -62,12 +62,21 @@ async def inbound(instance: str, request: Request, x_webhook_secret: str = Heade
     allowed = {n.strip() for n in settings.evolution_allowed_numbers.split(",") if n.strip()}
     if message is None or ("*" not in allowed and message.recipient not in allowed):
         return {"status": "ignored"}
+    if message.input_type == "audio" and not settings.evolution_audio_enabled:
+        return {"status": "ignored"}
     key = settings.evolution_identity_key.get_secret_value()
     person = private_id(key, "person:" + instance + ":" + message.recipient)
     event = private_id(key, "message:" + instance + ":" + message.message_id)
     try:
         accepted = await asyncio.to_thread(
-            repository(request).enqueue, event, person, instance, message.recipient, message.text
+            repository(request).enqueue,
+            event,
+            person,
+            instance,
+            message.recipient,
+            message.text,
+            message.input_type,
+            message.audio,
         )
     except ValueError:
         raise HTTPException(429, "Pilot message limit reached") from None

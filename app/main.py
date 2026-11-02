@@ -10,6 +10,7 @@ from app.api.evolution import configuration_ready
 from app.api.evolution import router as evolution_router
 from app.api.routes import router
 from app.api.web_chat import router as web_router
+from app.channels.audio import GroqSpeechToText
 from app.channels.evolution import EvolutionAdapter
 from app.channels.evolution_worker import EvolutionWorker
 from app.config import settings
@@ -32,8 +33,24 @@ async def lifespan(app):
             settings.evolution_instance,
         )
         worker = EvolutionWorker(
-            storage, agent, adapter, send_enabled=settings.evolution_send_enabled
+            storage,
+            agent,
+            adapter,
+            send_enabled=settings.evolution_send_enabled,
+            stt=GroqSpeechToText(
+                settings.stt_api_key.get_secret_value(),
+                settings.stt_model,
+                timeout=settings.stt_timeout_seconds,
+            )
+            if settings.evolution_audio_enabled and settings.stt_provider == "groq"
+            else None,
+            audio_max_bytes=settings.audio_max_bytes,
+            audio_max_seconds=settings.audio_max_seconds,
+            stt_timeout=settings.stt_timeout_seconds,
+            stt_hourly_usd=settings.stt_usd_per_audio_hour,
         )
+        if settings.evolution_audio_enabled and worker.stt is None:
+            raise RuntimeError("Audio enabled without a configured STT provider")
         app.state.evolution_worker = worker
         task = asyncio.create_task(worker.run())
     try:

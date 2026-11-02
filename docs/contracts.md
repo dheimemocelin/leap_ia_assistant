@@ -52,3 +52,8 @@ O modelo não recebe ferramentas genéricas HTTP/SQL, não escolhe endpoint/head
 ## Configuração do payload Syonet
 
 Contrato JSON configurável validado em startup, com campos mapeados a allowlist, required, tipos e transformação. Rejeita propriedades desconhecidas e dados além do consentimento. Falha fechada se ausente/inválido. Upsert usa chave estável/idempotency key; timeout finito, retry apenas para falhas transitórias e sem duplicar oportunidades.
+
+
+## Lia v3 — contrato interno em avaliação
+
+`ConversationPlan` separa intenção, perguntas opcionais e fatos revisados de `ConversationDraft` (`text`, `fact_ids`, `question`). Fontes e mídias permanecem server-owned. `InterpretedIntent` é uma dica semântica com categoria `other`, sem autoridade de consentimento ou ações. Texto e transcrição usam o mesmo `SalesAgent.turn`; voz é opt-in e responde somente texto. [Contratos, limites e ativação](lia-v3.md).

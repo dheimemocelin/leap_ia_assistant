@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "real_provider_calls": 0,
+  "audio_fixture": "generated silent WAV; fake STT text, not ASR quality",
+  "input_normalization": "same queue, identity, agent and outbox",
+  "stt_calls": 1,
+  "delivery": "mock adapter, not real WhatsApp",
+  "assistant_texts": [
+    "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Vamos continuar a partir do seu interesse e das suas prioridades. O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+    "Você pediu para eu te chamar de Pessoa Sintetica."
+  ],
+  "states": {
+    "sent": 2
+  }
+}

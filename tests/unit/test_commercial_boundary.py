@@ -63,7 +63,8 @@ def test_http_boundary_normal_tools_errors_and_future_streaming():
     for path in ["financial", "tool", "error", "exception", "stream"]:
         response = client.get("/v1/" + path)
         assert "180" not in response.text
-        assert response.json()["handoff_required"]
+        assert not response.json()["handoff_required"]
+        assert "consultor" not in response.json()["text"]
 
 
 def test_unvalidated_copy_is_checked_on_serialization():

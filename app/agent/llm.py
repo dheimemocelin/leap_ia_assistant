@@ -6,6 +6,10 @@ import httpx
 from pydantic import BaseModel, ConfigDict, Field
 
 
+class LLMProviderError(RuntimeError):
+    """Sanitized provider failure, distinct from application schema validation."""
+
+
 class ToolCall(BaseModel):
     model_config = ConfigDict(extra="forbid")
     name: str

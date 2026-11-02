@@ -61,7 +61,7 @@ async def test_real_tool_dispatch_and_exact_grounded_response(grounded):
 async def test_insufficient_evidence_never_asks_model_to_invent(grounded):
     result = await grounded.turn("one", "Qual a capacidade da bateria do C10 BEV?")
     assert not result.handoff_required and not result.source_ids
-    assert grounded.llm.calls == 1
+    assert grounded.llm.calls == 2  # Selection plus evidence-free contextual wording.
 
 
 async def test_unknown_fact_and_extra_claim_are_rejected(grounded):
@@ -110,7 +110,7 @@ async def test_changed_or_revoked_fact_abstains(grounded, change):
         vehicle.sources = []
     response = await grounded.turn("changed", "Qual a autonomia do C10 BEV?")
     assert not response.handoff_required and not response.source_ids
-    assert grounded.llm.calls == (0 if change == "approval" else 1)
+    assert grounded.llm.calls == (0 if change == "approval" else 2)
 
 
 async def test_model_cannot_switch_requested_canonical_vehicle(grounded):

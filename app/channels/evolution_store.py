@@ -20,8 +20,17 @@ class EvolutionStore(PilotStore):
                     content TEXT NOT NULL, state TEXT NOT NULL DEFAULT 'pending', provider_id TEXT,
                     PRIMARY KEY(event_id,part));
             """)
+            columns = {row[1] for row in db.execute("PRAGMA table_info(pilot_wa_inbox)")}
+            for name, definition in {
+                "input_type": "TEXT NOT NULL DEFAULT 'text'",
+                "audio_ref": "TEXT NOT NULL DEFAULT ''",
+                "metrics": "TEXT NOT NULL DEFAULT '{}'",
+            }.items():
+                if name not in columns:
+                    db.execute(f"ALTER TABLE pilot_wa_inbox ADD COLUMN {name} {definition}")
+        self.purge_content()
 
-    def enqueue(self, event_id, person, instance, recipient, text):
+    def enqueue(self, event_id, person, instance, recipient, text, input_type="text", audio=None):
         if text.casefold().strip("!.? ") in {"apagar meus dados", "esquecer meus dados"}:
             text = text.casefold().strip("!.? ")
         with self.connect() as db:
@@ -38,8 +47,17 @@ class EvolutionStore(PilotStore):
             }:
                 raise ValueError("Pilot daily turn limit")
             db.execute(
-                "INSERT INTO pilot_wa_inbox(event_id,person,instance,recipient,text,created_at) VALUES (?,?,?,?,?,?)",
-                (event_id, person, instance, recipient, text, int(time.time())),
+                "INSERT INTO pilot_wa_inbox(event_id,person,instance,recipient,text,created_at,input_type,audio_ref) VALUES (?,?,?,?,?,?,?,?)",
+                (
+                    event_id,
+                    person,
+                    instance,
+                    recipient,
+                    text,
+                    int(time.time()),
+                    input_type,
+                    json.dumps(audio) if audio else "",
+                ),
             )
             return True
 
@@ -68,7 +86,7 @@ class EvolutionStore(PilotStore):
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
             db.execute(
-                "UPDATE pilot_wa_inbox SET state='ready',response=? WHERE event_id=?",
+                "UPDATE pilot_wa_inbox SET state='ready',audio_ref='',response=? WHERE event_id=?",
                 (json.dumps(response), event_id),
             )
             parts = [("text", response["text"])] + [("image", x) for x in response["media_ids"]]
@@ -102,7 +120,7 @@ class EvolutionStore(PilotStore):
     def finish(self, event_id, state):
         with self.connect() as db:
             db.execute(
-                "UPDATE pilot_wa_inbox SET state=?,text='',recipient='' WHERE event_id=?",
+                "UPDATE pilot_wa_inbox SET state=?,text='',recipient='',audio_ref='' WHERE event_id=?",
                 (state, event_id),
             )
             if state == "review":
@@ -118,10 +136,43 @@ class EvolutionStore(PilotStore):
                 (person, current_event),
             )
             db.execute(
-                "UPDATE pilot_wa_inbox SET text='',recipient='',response=NULL,state=CASE WHEN state IN ('queued','ready','processing','delivering') THEN 'cancelled' ELSE state END WHERE person=? AND event_id<>?",
+                "UPDATE pilot_wa_inbox SET text='',recipient='',audio_ref='',response=NULL,state=CASE WHEN state IN ('queued','ready','processing','delivering') THEN 'cancelled' ELSE state END WHERE person=? AND event_id<>?",
                 (person, current_event),
             )
             db.execute("UPDATE pilot_wa_inbox SET person='' WHERE person=?", (person,))
+
+    def record_metrics(self, event_id, values):
+        allowed = {
+            "input_type",
+            "audio_latency_ms",
+            "stt_latency_ms",
+            "stt_duration_seconds",
+            "stt_estimated_usd",
+            "audio_failure",
+            "llm_calls",
+            "intent",
+            "action",
+            "composition_origin",
+            "fallback_reason",
+        }
+        with self.connect() as db:
+            db.execute(
+                "UPDATE pilot_wa_inbox SET metrics=? WHERE event_id=?",
+                (json.dumps({k: v for k, v in values.items() if k in allowed}), event_id),
+            )
+
+    def purge_content(self):
+        cutoff = int(time.time()) - 30 * 86400
+        with self.connect() as db:
+            db.execute("DELETE FROM pilot_people WHERE updated_at<?", (cutoff,))
+            db.execute(
+                "UPDATE pilot_wa_outbox SET content='',provider_id=NULL WHERE event_id IN (SELECT event_id FROM pilot_wa_inbox WHERE created_at<?)",
+                (cutoff,),
+            )
+            db.execute(
+                "UPDATE pilot_wa_inbox SET person='',text='',recipient='',audio_ref='',response=NULL,metrics='{}',state=CASE WHEN state IN ('queued','ready','processing','delivering') THEN 'cancelled' ELSE state END WHERE created_at<?",
+                (cutoff,),
+            )
 
     def counts(self):
         with self.connect() as db:

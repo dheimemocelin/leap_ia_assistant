@@ -1,0 +1,2715 @@
+{
+  "commit": "1db98ff",
+  "implementation": "baseline-archive",
+  "audio_evaluation": "synthetic transcripts only; no STT or WhatsApp requests",
+  "source_sha256": {
+    "app/agent/service.py": "1e981604f78fa866e2220a4a0d6f86fc8e342102eeb2779312f48ca2352dc0db",
+    "app/agent/social.py": "5ad142ff95ba1c95a3acab7bfe5e978d2212199efcce340f7c18bdf3715165ca"
+  },
+  "dataset_sha256": "343272bd91ffa5106492bfd7086f4db8c7da614729e55962af7a39058d107f88",
+  "synthetic": true,
+  "real_llm_calls": 0,
+  "dialogues": [
+    {
+      "id": "welcome",
+      "turns": [
+        {
+          "user": "Oi",
+          "input_type": "text",
+          "assistant": {
+            "text": "Olá! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Posso te apresentar o B10 e o C10, com informações e fotos. Como você prefere ser chamado?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Me chamo Pessoa Sintetica",
+          "input_type": "text",
+          "assistant": {
+            "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "B10",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Gostei bastante",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "positive",
+      "turns": [
+        {
+          "user": "Fotos do B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Que legal",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Gostei",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "paraphrase",
+      "turns": [
+        {
+          "user": "Fotos do B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Achei muito bonito",
+          "input_type": "text",
+          "assistant": {
+            "text": "Prazer, Achei muito bonito. Podemos continuar explorando o carro por aqui.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Interessante mesmo",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "negative",
+      "turns": [
+        {
+          "user": "Fotos do B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Não gostei",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Quero saber mais",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "family",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Vou usar com a família",
+          "input_type": "text",
+          "assistant": {
+            "text": "Vamos considerar também sua rotina com a família ao explorar o carro. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. O que costuma exigir mais espaço: passageiros, bagagem ou os dois?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Tenho dois filhos e preciso de espaço",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "travel",
+      "turns": [
+        {
+          "user": "B10 REEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 REEV para você começar a conhecê-lo. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a9ff19ce76ea9b7bfecf",
+              "src-media-692def5f68253a3ff6e6",
+              "src-media-7606a304c26a9daf5167"
+            ],
+            "media_ids": [
+              "b10-reev-cockpit-12",
+              "b10-reev-front_3_4-11",
+              "b10-reev-front_seats_roof-10"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-reev"
+        },
+        {
+          "user": "É para viagens e economia",
+          "input_type": "text",
+          "assistant": {
+            "text": "Entendi, as viagens também fazem parte da escolha. Você costuma fazer qual distância nessas viagens?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-reev"
+        },
+        {
+          "user": "Uns 500 km",
+          "input_type": "text",
+          "assistant": {
+            "text": "Vou considerar essa distância nas viagens. Para explorar sua prioridade de economia sem presumir resultados, podemos começar pelas possibilidades de recarga. Você teria onde carregar em casa ou no trabalho?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-reev"
+        },
+        {
+          "user": "Em casa",
+          "input_type": "text",
+          "assistant": {
+            "text": "Anotei essa possibilidade de recarga. Isso ajuda a entender sua rotina; a compatibilidade e os detalhes técnicos do veículo ainda precisam ser verificados nas fontes aprovadas.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-reev"
+        }
+      ]
+    },
+    {
+      "id": "uber",
+      "turns": [
+        {
+          "user": "Qual a autonomia do C10 BEV?",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Manda fotos",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Pensei em usar para Uber",
+          "input_type": "text",
+          "assistant": {
+            "text": "Entendi: o carro faria parte do seu trabalho com aplicativo. Podemos avaliar o que você precisa nessa rotina. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Uns 200 km",
+          "input_type": "text",
+          "assistant": {
+            "text": "Anotei essa distância como parte da sua rotina. Podemos considerar a autonomia verificada e suas possibilidades de recarga, sem presumir o resultado no seu uso.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Uso para trabalhar",
+          "input_type": "text",
+          "assistant": {
+            "text": "Entendi que o carro fará parte do seu trabalho. Podemos partir dessa rotina. Como você pretende usar o carro no trabalho?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Uso na cidade",
+          "input_type": "text",
+          "assistant": {
+            "text": "Vamos partir da sua rotina para escolher o que vale explorar no carro. O que mais importa para você nesse uso?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "first_electric",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Nunca tive um elétrico",
+          "input_type": "text",
+          "assistant": {
+            "text": "Vamos explorar isso a partir do seu dia a dia, sem pular suas dúvidas. Você quer começar pela recarga ou pela autonomia?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Tenho dúvidas sobre recarga",
+          "input_type": "text",
+          "assistant": {
+            "text": "Esse ponto merece atenção antes de você decidir. Você teria onde carregar em casa ou no trabalho?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Em casa",
+          "input_type": "text",
+          "assistant": {
+            "text": "Anotei essa possibilidade de recarga. Isso ajuda a entender sua rotina; a compatibilidade e os detalhes técnicos do veículo ainda precisam ser verificados nas fontes aprovadas.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "charging",
+      "turns": [
+        {
+          "user": "C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Tenho receio de recarga",
+          "input_type": "text",
+          "assistant": {
+            "text": "Esse ponto merece atenção antes de você decidir. Você teria onde carregar em casa ou no trabalho?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Em casa",
+          "input_type": "text",
+          "assistant": {
+            "text": "Anotei essa possibilidade de recarga. Isso ajuda a entender sua rotina; a compatibilidade e os detalhes técnicos do veículo ainda precisam ser verificados nas fontes aprovadas.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Entendi",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "technical",
+      "turns": [
+        {
+          "user": "C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Qual a autonomia?",
+          "input_type": "text",
+          "assistant": {
+            "text": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Obrigado",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "missing_fact",
+      "turns": [
+        {
+          "user": "B10 REEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 REEV para você começar a conhecê-lo. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a9ff19ce76ea9b7bfecf",
+              "src-media-692def5f68253a3ff6e6",
+              "src-media-7606a304c26a9daf5167"
+            ],
+            "media_ids": [
+              "b10-reev-cockpit-12",
+              "b10-reev-front_3_4-11",
+              "b10-reev-front_seats_roof-10"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-reev"
+        },
+        {
+          "user": "Qual a autonomia?",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-reev"
+        },
+        {
+          "user": "Quero saber mais",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-reev"
+        }
+      ]
+    },
+    {
+      "id": "photos",
+      "turns": [
+        {
+          "user": "B10",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Manda fotos",
+          "input_type": "text",
+          "assistant": {
+            "text": "Claro! Separei uma foto do B10 BEV. Toque nela para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-b4c3519e7afa27662c9d"
+            ],
+            "media_ids": [
+              "b10-bev-rear_3_4-01"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Gostei",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "switch",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Agora C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Qual a autonomia?",
+          "input_type": "text",
+          "assistant": {
+            "text": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "price",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Qual o preço?",
+          "input_type": "text",
+          "assistant": {
+            "text": "Meu papel aqui é ajudar a conhecer os veículos, suas características verificadas e fotos. Podemos continuar explorando o modelo que te interessa.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Gostei",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "negotiate",
+      "turns": [
+        {
+          "user": "C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Quero negociar desconto",
+          "input_type": "text",
+          "assistant": {
+            "text": "Meu papel aqui é ajudar a conhecer os veículos, suas características verificadas e fotos. Podemos continuar explorando o modelo que te interessa.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Quero ver fotos",
+          "input_type": "text",
+          "assistant": {
+            "text": "Claro! Separei uma foto do C10 BEV. Toque nela para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-e78c9e74d659679eef6d"
+            ],
+            "media_ids": [
+              "c10-bev-rear_3_4-05"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "decline",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Não quero falar com vendedor",
+          "input_type": "text",
+          "assistant": {
+            "text": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Quero saber mais",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "handoff",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Quero falar com vendedor",
+          "input_type": "text",
+          "assistant": {
+            "text": "Posso preparar a continuidade com um consultor. Você autoriza compartilhar seu nome, telefone e interesse neste veículo para esse contato?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": true
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Sim",
+          "input_type": "text",
+          "assistant": {
+            "text": "Como você gostaria que eu registrasse seu nome?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": true
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Pessoa Sintetica",
+          "input_type": "text",
+          "assistant": {
+            "text": "Qual telefone, com DDD, você prefere usar para o contato?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": true
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "11000000000",
+          "input_type": "text",
+          "assistant": {
+            "text": "Obrigado. Deixei o resumo e o contato preparados nesta conversa. Ainda não foram enviados a um consultor.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": true
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "no_consent",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Quero falar com vendedor",
+          "input_type": "text",
+          "assistant": {
+            "text": "Posso preparar a continuidade com um consultor. Você autoriza compartilhar seu nome, telefone e interesse neste veículo para esse contato?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": true
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Não autorizo",
+          "input_type": "text",
+          "assistant": {
+            "text": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Quero fotos",
+          "input_type": "text",
+          "assistant": {
+            "text": "Claro! Separei uma foto do B10 BEV. Toque nela para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-b4c3519e7afa27662c9d"
+            ],
+            "media_ids": [
+              "b10-bev-rear_3_4-01"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "short",
+      "turns": [
+        {
+          "user": "Fotos do B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Entendi",
+          "input_type": "text",
+          "assistant": {
+            "text": "Prazer, Entendi. Podemos continuar explorando o carro por aqui.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Ok",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Obrigado",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "topic_change",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Uso na cidade",
+          "input_type": "text",
+          "assistant": {
+            "text": "Vamos partir da sua rotina para escolher o que vale explorar no carro. O que mais importa para você nesse uso?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Agora quero C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Manda fotos",
+          "input_type": "text",
+          "assistant": {
+            "text": "Claro! Separei uma foto do C10 BEV. Toque nela para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-e78c9e74d659679eef6d"
+            ],
+            "media_ids": [
+              "c10-bev-rear_3_4-05"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "name_decline",
+      "turns": [
+        {
+          "user": "Oi",
+          "input_type": "text",
+          "assistant": {
+            "text": "Olá! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Posso te apresentar o B10 e o C10, com informações e fotos. Como você prefere ser chamado?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Prefiro não",
+          "input_type": "text",
+          "assistant": {
+            "text": "Tudo bem, seguimos sem nome. Qual modelo você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Qual a autonomia?",
+          "input_type": "text",
+          "assistant": {
+            "text": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "v3-opa",
+      "turns": [
+        {
+          "user": "Opa",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Podemos explorar B10 BEV, B10 REEV, C10 BEV. Qual você quer conhecer primeiro?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "list_vehicles"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Me chamo Pessoa Sintetica",
+          "input_type": "text",
+          "assistant": {
+            "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Queria conhecer o B10",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o BEV, elétrico, ou o REEV, híbrido. Qual motorização você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Amei",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "v3-brand",
+      "turns": [
+        {
+          "user": "Nunca ouvi falar da Leapmotor",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Podemos explorar B10 BEV, B10 REEV, C10 BEV. Qual você quer conhecer primeiro?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "list_vehicles"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Quero conhecer C10",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Quero ver o interior do C10",
+          "input_type": "text",
+          "assistant": {
+            "text": "Claro! Aqui estão algumas fotos do C10 BEV. Você pode tocar em uma delas para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "v3-memory",
+      "turns": [
+        {
+          "user": "Você sabe meu nome?",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Podemos explorar B10 BEV, B10 REEV, C10 BEV. Qual você quer conhecer primeiro?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "list_vehicles"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Me chamo Pessoa Sintetica",
+          "input_type": "text",
+          "assistant": {
+            "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Qual meu nome?",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar B10 BEV, B10 REEV, C10 BEV. Qual você quer conhecer primeiro?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "list_vehicles"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "v3-other",
+      "turns": [
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Mudando de assunto, deixa eu te contar uma coisa",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "No meu corre diário",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Obrigado",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        }
+      ]
+    },
+    {
+      "id": "v3-audio-text",
+      "turns": [
+        {
+          "user": "Me chamo Pessoa Sintetica, qual a autonomia do C10 BEV?",
+          "input_type": "audio",
+          "assistant": {
+            "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. O C10 BEV tem autonomia de até 338 km no ciclo PBEV.\n\nQuer ver algumas fotos dele?",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Qual meu nome?",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Pensei em usar para Uber",
+          "input_type": "audio",
+          "assistant": {
+            "text": "Entendi: o carro faria parte do seu trabalho com aplicativo. Podemos avaliar o que você precisa nessa rotina. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Uns 200 km",
+          "input_type": "text",
+          "assistant": {
+            "text": "Anotei essa distância como parte da sua rotina. Podemos considerar a autonomia verificada e suas possibilidades de recarga, sem presumir o resultado no seu uso.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    },
+    {
+      "id": "v3-long",
+      "turns": [
+        {
+          "user": "Oi",
+          "input_type": "text",
+          "assistant": {
+            "text": "Olá! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Posso te apresentar o B10 e o C10, com informações e fotos. Como você prefere ser chamado?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "Me chamo Pessoa Sintetica",
+          "input_type": "text",
+          "assistant": {
+            "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": null
+        },
+        {
+          "user": "B10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do B10 BEV para você começar a conhecê-lo. O B10 BEV tem motor elétrico de 218 cv. O porta-malas traseiro do B10 BEV tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9",
+              "src-d54c6ab4a6069b6990a4"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Uso na cidade",
+          "input_type": "text",
+          "assistant": {
+            "text": "Vamos partir da sua rotina para escolher o que vale explorar no carro. O que mais importa para você nesse uso?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Gostei",
+          "input_type": "text",
+          "assistant": {
+            "text": "Podemos explorar o que chamou sua atenção.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Entendi",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Tenho receio de um elétrico",
+          "input_type": "text",
+          "assistant": {
+            "text": "Esse ponto merece atenção antes de você decidir. Sua dúvida é mais sobre recarga ou autonomia?",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Em casa",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "b10-bev"
+        },
+        {
+          "user": "Agora C10 BEV",
+          "input_type": "text",
+          "assistant": {
+            "text": "Separei estas imagens do C10 BEV para você começar a conhecê-lo. O C10 BEV tem autonomia de até 338 km no ciclo PBEV. Toque em uma imagem para ampliar.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af",
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "handoff_required": false
+          },
+          "tools": [
+            "search_vehicle_media"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Qual a autonomia?",
+          "input_type": "text",
+          "assistant": {
+            "text": "O C10 BEV tem autonomia de até 338 km no ciclo PBEV.",
+            "confidence": "grounded",
+            "source_ids": [
+              "src-ddb8b165ff27670a154b"
+            ],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 1,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Obrigado",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        },
+        {
+          "user": "Qual meu nome?",
+          "input_type": "text",
+          "assistant": {
+            "text": "Ainda não tenho esse detalhe técnico confirmado para este modelo. Podemos continuar explorando o que você precisa no carro.",
+            "confidence": "insufficient_evidence",
+            "source_ids": [],
+            "media_ids": [],
+            "handoff_required": false
+          },
+          "tools": [
+            "get_vehicle_details"
+          ],
+          "composition": {},
+          "usage": {
+            "calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "vehicle_id": "c10-bev"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "dialogues": 28,
+    "turns": 111,
+    "instrumentation_available": false,
+    "llm_drafted_turns": null,
+    "llm_drafted_ratio": null,
+    "fallback_reasons": null,
+    "exact_repeated_responses": 8,
+    "turns_with_multiple_questions": 0,
+    "policy_violations": 0,
+    "social_turns_with_technical_queries": 9
+  },
+  "not_measured": [
+    "real_model_naturalness",
+    "human_ratings",
+    "real_latency",
+    "real_cost"
+  ],
+  "metric_definition": "fixed social reference set; independent of runtime classifier"
+}

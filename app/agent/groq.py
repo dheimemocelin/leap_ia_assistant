@@ -8,10 +8,10 @@ from collections import deque
 import httpx
 from pydantic import SecretStr
 
-from app.agent.llm import ModelReply, ToolCall
+from app.agent.llm import LLMProviderError, ModelReply, ToolCall
 
 
-class ProviderError(RuntimeError):
+class ProviderError(LLMProviderError):
     pass
 
 

@@ -6,16 +6,16 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
 
 from app.domain.response import AssistantResponse, Confidence
-from app.policy.commercial import CommercialPolicyEngine, PolicyDecision
 
 
 def fallback_response(status_code=200):
     return JSONResponse(
         {
-            "text": CommercialPolicyEngine.safe_response(PolicyDecision.REFUSE_FINANCIAL),
+            "text": "Não consegui concluir essa resposta agora. Você pode tentar novamente por aqui.",
             "confidence": Confidence.INSUFFICIENT,
             "source_ids": [],
-            "handoff_required": True,
+            "media_ids": [],
+            "handoff_required": False,
         },
         status_code=status_code,
     )
@@ -37,7 +37,11 @@ class CommercialOutputBoundary(BaseHTTPMiddleware):
                 body.extend(chunk)
                 if len(body) > 65536:
                     return fallback_response()
-            candidate = AssistantResponse.model_validate(json.loads(body))
+            original = json.loads(body)
+            candidate = AssistantResponse.model_validate(original)
+            if candidate.text != original.get("text"):
+                # A policy replacement is not customer consent to human contact.
+                return fallback_response(response.status_code)
             return JSONResponse(candidate.model_dump(mode="json"), status_code=response.status_code)
         except Exception:  # noqa: BLE001 - last HTTP boundary must sanitize all application errors
             # Never expose exception text or unvalidated tool results.

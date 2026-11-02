@@ -9,6 +9,10 @@ from app.api.chat import build_agent
 class EvidenceOnlyLLM:
     async def complete(self, messages, tools):
         assert not tools
+        if messages[-1]["content"].startswith("{"):
+            context = json.loads(messages[-1]["content"])
+            if context.get("task") == "compose_conversation":
+                return ModelReply(text=json.dumps({"fact_ids": [f["id"] for f in context["facts"]]}))
         evidence = json.loads(messages[-1]["content"].split(": ", 1)[1])
         if evidence.get("kind") == "get_vehicle_details":
             assert any(
@@ -60,10 +64,11 @@ async def test_photos_are_rendered_without_model_generated_urls(demo):
     assert demo.sessions[("local", "photo-no-model")]["usage"]["calls"] == 0
 
 
-async def test_greeting_is_natural_without_model(demo):
+async def test_greeting_remains_natural_when_wording_model_fails(demo):
     response = await demo.turn("greeting", "Oi!")
     assert "B10" in response.text and "C10" in response.text
-    assert demo.sessions[("local", "greeting")]["usage"]["calls"] == 0
+    assert demo.sessions[("local", "greeting")]["usage"]["calls"] == 1
+    assert demo.sessions[("local", "greeting")]["composition"]["origin"] == "fallback"
 
 
 async def test_technical_question_after_photos_does_not_repeat_photos(demo):
@@ -87,6 +92,18 @@ async def test_photo_caption_is_natural_and_names_selected_vehicle(demo):
 
 
 async def test_yes_to_photo_offer_keeps_the_vehicle(demo):
+    class PhotoInvitation(EvidenceOnlyLLM):
+        async def complete(self, messages, tools):
+            if messages[-1]["content"].startswith("{"):
+                context = json.loads(messages[-1]["content"])
+                if context.get("intent") == "technical":
+                    return ModelReply(text=json.dumps({
+                        "fact_ids": [f["id"] for f in context["facts"]],
+                        "question": {"key": "photos", "text": "Quer ver algumas fotos dele?"},
+                    }))
+            return await super().complete(messages, tools)
+
+    demo.llm = PhotoInvitation()
     await demo.turn("offer", "Oi")
     facts = await demo.turn("offer", "Qual a potência do B10 BEV?")
     assert "Quer ver algumas fotos" in facts.text

@@ -17,6 +17,14 @@ class SDRModel:
         self.calls.append(messages)
         if self.timeout:
             raise TimeoutError("synthetic timeout")
+        if messages[-1]["content"].startswith("{"):
+            context = json.loads(messages[-1]["content"])
+            if context.get("task") == "compose_conversation":
+                from scripts.evaluate_lia_quality import QualityModel
+
+                if self.invalid:
+                    return ModelReply(text="É aprovado para Uber e garante economia de R$ 500.")
+                return await QualityModel().complete(messages, tools)
         if "variants" in messages[-1]["content"]:
             if self.invalid:
                 return ModelReply(text="É aprovado para Uber e garante economia de R$ 500.")
@@ -61,7 +69,7 @@ async def test_family_first_electric_charging_visit_and_decline(agent):
     photos = await agent.turn("sdr", "BEV")
     assert photos.media_ids
     family = await agent.turn("sdr", "Vou usar com minha família")
-    assert "família" in family.text and "405" in family.text
+    assert "família" in family.text and "405" not in family.text
     first = await agent.turn("sdr", "Nunca tive um elétrico")
     assert "recarga ou" in first.text
     assert state(agent)["first_electric"]

@@ -59,7 +59,13 @@ def build_agent(*, reviewed_catalog=False, test_media=False):
         ]
         grounding = GroundingPolicy(facts, catalog)
     return SalesAgent(
-        catalog, media, llm, timeout=settings.llm_timeout_seconds, grounding=grounding
+        catalog,
+        media,
+        llm,
+        timeout=settings.llm_timeout_seconds,
+        grounding=grounding,
+        input_token_rate=settings.llm_input_usd_per_million,
+        output_token_rate=settings.llm_output_usd_per_million,
     )
 
 

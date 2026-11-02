@@ -12,6 +12,14 @@ class Settings(BaseSettings):
     evolution_webhook_secret: SecretStr = Field(default=SecretStr(""), repr=False)
     evolution_identity_key: SecretStr = Field(default=SecretStr(""), repr=False)
     evolution_allowed_numbers: str = ""
+    evolution_audio_enabled: bool = False
+    audio_max_bytes: int = Field(default=2_000_000, gt=0, le=5_000_000)
+    audio_max_seconds: int = Field(default=120, gt=0, le=300)
+    stt_provider: str = "disabled"
+    stt_model: str = "whisper-large-v3-turbo"
+    stt_api_key: SecretStr = Field(default=SecretStr(""), repr=False)
+    stt_timeout_seconds: float = Field(default=30, gt=0, le=60)
+    stt_usd_per_audio_hour: float | None = Field(default=None, gt=0)
     app_env: str = "local"
     pilot_db_path: str = ""
     app_api_key: str = ""
@@ -23,6 +31,8 @@ class Settings(BaseSettings):
     llm_model: str = ""
     llm_base_url: str = "http://127.0.0.1:11434"
     llm_timeout_seconds: float = 15
+    llm_input_usd_per_million: float | None = Field(default=None, ge=0)
+    llm_output_usd_per_million: float | None = Field(default=None, ge=0)
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
 

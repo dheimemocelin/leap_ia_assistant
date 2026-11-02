@@ -1,0 +1,259 @@
+[
+  {
+    "id": "welcome",
+    "messages": [
+      "Oi",
+      "Me chamo Pessoa Sintetica",
+      "B10",
+      "BEV",
+      "Gostei bastante"
+    ]
+  },
+  {
+    "id": "positive",
+    "messages": [
+      "Fotos do B10 BEV",
+      "Que legal",
+      "Gostei"
+    ]
+  },
+  {
+    "id": "paraphrase",
+    "messages": [
+      "Fotos do B10 BEV",
+      "Achei muito bonito",
+      "Interessante mesmo"
+    ]
+  },
+  {
+    "id": "negative",
+    "messages": [
+      "Fotos do B10 BEV",
+      "Não gostei",
+      "Quero saber mais"
+    ]
+  },
+  {
+    "id": "family",
+    "messages": [
+      "B10 BEV",
+      "Vou usar com a família",
+      "Tenho dois filhos e preciso de espaço"
+    ]
+  },
+  {
+    "id": "travel",
+    "messages": [
+      "B10 REEV",
+      "É para viagens e economia",
+      "Uns 500 km",
+      "Em casa"
+    ]
+  },
+  {
+    "id": "uber",
+    "messages": [
+      "Qual a autonomia do C10 BEV?",
+      "Manda fotos",
+      "Pensei em usar para Uber",
+      "Uns 200 km"
+    ]
+  },
+  {
+    "id": "work",
+    "messages": [
+      "B10 BEV",
+      "Uso para trabalhar",
+      "Uso na cidade"
+    ]
+  },
+  {
+    "id": "first_electric",
+    "messages": [
+      "B10 BEV",
+      "Nunca tive um elétrico",
+      "Tenho dúvidas sobre recarga",
+      "Em casa"
+    ]
+  },
+  {
+    "id": "charging",
+    "messages": [
+      "C10 BEV",
+      "Tenho receio de recarga",
+      "Em casa",
+      "Entendi"
+    ]
+  },
+  {
+    "id": "technical",
+    "messages": [
+      "C10 BEV",
+      "Qual a autonomia?",
+      "Obrigado"
+    ]
+  },
+  {
+    "id": "missing_fact",
+    "messages": [
+      "B10 REEV",
+      "Qual a autonomia?",
+      "Quero saber mais"
+    ]
+  },
+  {
+    "id": "photos",
+    "messages": [
+      "B10",
+      "BEV",
+      "Manda fotos",
+      "Gostei"
+    ]
+  },
+  {
+    "id": "switch",
+    "messages": [
+      "B10 BEV",
+      "Agora C10 BEV",
+      "Qual a autonomia?"
+    ]
+  },
+  {
+    "id": "price",
+    "messages": [
+      "B10 BEV",
+      "Qual o preço?",
+      "Gostei"
+    ]
+  },
+  {
+    "id": "negotiate",
+    "messages": [
+      "C10 BEV",
+      "Quero negociar desconto",
+      "Quero ver fotos"
+    ]
+  },
+  {
+    "id": "decline",
+    "messages": [
+      "B10 BEV",
+      "Não quero falar com vendedor",
+      "Quero saber mais"
+    ]
+  },
+  {
+    "id": "handoff",
+    "messages": [
+      "B10 BEV",
+      "Quero falar com vendedor",
+      "Sim",
+      "Pessoa Sintetica",
+      "11000000000"
+    ]
+  },
+  {
+    "id": "no_consent",
+    "messages": [
+      "B10 BEV",
+      "Quero falar com vendedor",
+      "Não autorizo",
+      "Quero fotos"
+    ]
+  },
+  {
+    "id": "short",
+    "messages": [
+      "Fotos do B10 BEV",
+      "Entendi",
+      "Ok",
+      "Obrigado"
+    ]
+  },
+  {
+    "id": "topic_change",
+    "messages": [
+      "B10 BEV",
+      "Uso na cidade",
+      "Agora quero C10 BEV",
+      "Manda fotos"
+    ]
+  },
+  {
+    "id": "name_decline",
+    "messages": [
+      "Oi",
+      "Prefiro não",
+      "C10 BEV",
+      "Qual a autonomia?"
+    ]
+  },
+  {
+    "id": "v3-opa",
+    "messages": [
+      "Opa",
+      "Me chamo Pessoa Sintetica",
+      "Queria conhecer o B10",
+      "BEV",
+      "Amei"
+    ]
+  },
+  {
+    "id": "v3-brand",
+    "messages": [
+      "Nunca ouvi falar da Leapmotor",
+      "Quero conhecer C10",
+      "Quero ver o interior do C10"
+    ]
+  },
+  {
+    "id": "v3-memory",
+    "messages": [
+      "Você sabe meu nome?",
+      "Me chamo Pessoa Sintetica",
+      "Qual meu nome?",
+      "C10 BEV"
+    ]
+  },
+  {
+    "id": "v3-other",
+    "messages": [
+      "B10 BEV",
+      "Mudando de assunto, deixa eu te contar uma coisa",
+      "No meu corre diário",
+      "Obrigado"
+    ]
+  },
+  {
+    "id": "v3-audio-text",
+    "messages": [
+      {
+        "type": "audio",
+        "transcript": "Me chamo Pessoa Sintetica, qual a autonomia do C10 BEV?"
+      },
+      "Qual meu nome?",
+      {
+        "type": "audio",
+        "transcript": "Pensei em usar para Uber"
+      },
+      "Uns 200 km"
+    ]
+  },
+  {
+    "id": "v3-long",
+    "messages": [
+      "Oi",
+      "Me chamo Pessoa Sintetica",
+      "B10 BEV",
+      "Uso na cidade",
+      "Gostei",
+      "Entendi",
+      "Tenho receio de um elétrico",
+      "Em casa",
+      "Agora C10 BEV",
+      "Qual a autonomia?",
+      "Obrigado",
+      "Qual meu nome?"
+    ]
+  }
+]

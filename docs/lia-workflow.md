@@ -1,5 +1,7 @@
 # Workflow da Lia — atendimento e operação
 
+Mapa do baseline `1db98ff`. Para a implementação em avaliação, consulte [Lia v3](lia-v3.md).
+
 Mapa do código em 2026-11-02. **Atual** descreve comportamento implementado;
 **proposto** é desenho para revisão, sem implementação neste checkpoint.
 O fluxograma pode ser visualizado no GitHub e no [desenho interativo](diagrams/lia-workflow.html).

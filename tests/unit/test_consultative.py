@@ -17,6 +17,12 @@ class ReviewedOnly:
     async def complete(self, messages, tools):
         self.messages.append(messages)
         assert not tools
+        if messages[-1]["content"].startswith("{"):
+            context = json.loads(messages[-1]["content"])
+            if context.get("task") == "compose_conversation":
+                from scripts.evaluate_lia_quality import QualityModel
+
+                return await QualityModel().complete(messages, tools)
         if "variants" in messages[-1]["content"]:
             return ModelReply(text='{"variant":1}')
         evidence = json.loads(messages[-1]["content"].split(": ", 1)[1])
@@ -46,7 +52,8 @@ async def test_customer_journey_visual_context_decline_and_price(agent):
     urban = await agent.turn("journey", "Uso na cidade")
     assert "dia a dia?" not in urban.text
     family = await agent.turn("journey", "Tenho dois filhos e preciso de espaço")
-    assert "405" in family.text and family.source_ids
+    assert "família" in family.text and "405" not in family.text
+    assert not family.source_ids  # Already introduced facts need not be repeated.
     assert "espaco" in profile(agent).needs and profile(agent).usage == "urbano"
     objection = await agent.turn("journey", "Tenho receio de carro elétrico")
     assert "recarga ou autonomia" in objection.text
@@ -116,7 +123,8 @@ async def test_known_brand_and_insufficient_catalog(agent):
     assert "direto" in known.text and profile(agent).knows_brand
     await agent.turn("journey", "B10 REEV")
     family = await agent.turn("journey", "Preciso de espaço para minha família")
-    assert not family.source_ids and "evidência aprovada" in family.text
+    assert not family.source_ids and "família" in family.text
+    assert "evidência aprovada" not in family.text  # A need is not an unsupported technical claim.
     missing = await agent.turn("journey", "Qual a capacidade da bateria?")
     assert not missing.handoff_required and not missing.source_ids
 

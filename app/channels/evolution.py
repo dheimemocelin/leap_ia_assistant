@@ -1,6 +1,7 @@
 """Evolution v2 contract: inbound-only destinations, no model-controlled actions."""
 
 import asyncio
+import base64
 import hashlib
 import hmac
 import re
@@ -9,6 +10,7 @@ from urllib.parse import quote, urlsplit
 
 import httpx
 
+from app.channels.audio import AudioError
 from app.domain.response import AssistantResponse
 
 
@@ -17,6 +19,8 @@ class IncomingMessage:
     message_id: str
     recipient: str
     text: str
+    input_type: str = "text"
+    audio: dict | None = None
 
 
 def parse_message(payload: dict, instance: str) -> IncomingMessage | None:
@@ -45,6 +49,35 @@ def parse_message(payload: dict, instance: str) -> IncomingMessage | None:
         extended = message.get("extendedTextMessage", {})
         text = extended.get("text") if isinstance(extended, dict) else None
     identifier = key.get("id")
+    audio = message.get("audioMessage")
+    if (
+        text is None
+        and isinstance(audio, dict)
+        and isinstance(identifier, str)
+        and 1 <= len(identifier) <= 200
+    ):
+        # Persist only the server message reference and bounded metadata. Never
+        # store/fetch the URL, mediaKey, directPath or base64 supplied in a webhook.
+        length = audio.get("fileLength", 0)
+        seconds = audio.get("seconds", 0)
+        if isinstance(length, dict):
+            length = length.get("low", -1) if length.get("high", 0) == 0 else -1
+        try:
+            length, seconds = int(length), int(seconds)
+        except (ValueError, TypeError):
+            length, seconds = -1, -1
+        return IncomingMessage(
+            identifier,
+            jid.split("@")[0],
+            "",
+            "audio",
+            {
+                "message_id": identifier,
+                "mime": str(audio.get("mimetype", ""))[:100],
+                "bytes": length,
+                "seconds": seconds,
+            },
+        )
     if (
         not isinstance(identifier, str)
         or not 1 <= len(identifier) <= 200
@@ -135,3 +168,50 @@ class EvolutionAdapter:
             data={"number": recipient, "mediatype": "image", "mimetype": "image/jpeg"},
             files={"file": ("vehicle.jpeg", content, "image/jpeg")},
         )
+
+    async def download_audio(self, reference, *, max_bytes):
+        identifier = reference.get("message_id")
+        if not isinstance(identifier, str) or not 1 <= len(identifier) <= 200:
+            raise AudioError("invalid_audio_reference")
+        try:
+            async with (
+                httpx.AsyncClient(
+                    timeout=self.timeout,
+                    trust_env=False,
+                    follow_redirects=False,
+                    transport=self.transport,
+                ) as client,
+                client.stream(
+                    "POST",
+                    f"{self.url}/chat/getBase64FromMediaMessage/{quote(self.instance, safe='')}",
+                    headers={"apikey": self.key},
+                    json={"message": {"key": {"id": identifier}}, "convertToMp4": False},
+                ) as response,
+            ):
+                if response.status_code != 200:
+                    raise AudioError("media_unavailable")
+                body = bytearray()
+                async for chunk in response.aiter_bytes():
+                    body.extend(chunk)
+                    if len(body) > (max_bytes * 4 // 3) + 65536:
+                        raise AudioError("audio_download_size")
+            import json
+
+            value = json.loads(body)
+            encoded, mime = value.get("base64"), value.get("mimetype")
+            if not isinstance(encoded, str) or not isinstance(mime, str):
+                raise AudioError("invalid_media_response")
+            if len(encoded) > 4 * ((max_bytes + 2) // 3):
+                raise AudioError("audio_download_size")
+            content = base64.b64decode(encoded, validate=True)
+            if not content or len(content) > max_bytes:
+                raise AudioError("audio_download_size")
+            return content, mime
+        except AudioError:
+            raise
+        except httpx.TimeoutException:
+            raise AudioError("media_timeout") from None
+        except httpx.HTTPError:
+            raise AudioError("media_connection_error") from None
+        except (ValueError, TypeError, AttributeError):
+            raise AudioError("invalid_media_response") from None

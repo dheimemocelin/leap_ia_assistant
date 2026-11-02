@@ -211,7 +211,7 @@ def observe(profile: LeadProfile, text: str, *, channel_phone: str | None = None
         and len(candidate.split()) <= 3
         and re.fullmatch(r"[^\W\d_]+(?:[ '\-][^\W\d_]+)*", candidate, re.UNICODE)
         and t
-        not in YES | NO | {"oi", "ola", "bev", "reev", "eletrico", "eletrica", "hibrido", "hibrida"}
+        not in YES | NO | {"oi", "ola", "opa", "bev", "reev", "eletrico", "eletrica", "hibrido", "hibrida"}
     ):
         # Validate before rendering a user supplied name; never treat it as instructions.
         from app.policy.commercial import CommercialPolicyEngine
