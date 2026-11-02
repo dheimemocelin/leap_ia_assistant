@@ -105,6 +105,7 @@ git diff --check
 | Quero entender… | Onde consultar |
 | --- | --- |
 | Como operar e diagnosticar o WhatsApp | [Runbook Evolution](docs/evolution-pilot.md) |
+| Todos os passos e decisões do atendimento | [Workflow desenhado da Lia](docs/lia-workflow.md) |
 | Memória, oportunidades e exclusão local | [Piloto e persistência](docs/pilot-runbook.md) |
 | Próximas melhorias de atendimento | [Plano da próxima iteração](docs/next-iteration-plan.md) |
 | Estrutura e decisões técnicas | [Arquitetura](docs/architecture.md) e [modelo de dados](docs/data-model.md) |
