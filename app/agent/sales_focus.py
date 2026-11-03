@@ -41,7 +41,11 @@ def support_reply(text, history):
 
 def add_visit_question(plan, profile):
     if (
-        plan.get("intent") == "positive"
+        (
+            plan.get("intent") == "positive"
+            or plan.get("intent") == "usage"
+            and not plan.get("suggested_question")
+        )
         and profile.vehicle_id
         and profile.usage
         and profile.visit_interest is None

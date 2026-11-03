@@ -97,7 +97,9 @@ class DeliveryError(Exception):
 
 
 class EvolutionAdapter:
-    def __init__(self, base_url, api_key, instance, *, transport=None, timeout=15):
+    def __init__(
+        self, base_url, api_key, instance, *, transport=None, timeout=15, typing_delay_ms=0
+    ):
         parts = urlsplit(base_url)
         if (
             parts.username
@@ -117,7 +119,10 @@ class EvolutionAdapter:
         if not re.fullmatch(r"[A-Za-z0-9_-]{1,80}", instance) or not api_key:
             raise ValueError("Invalid Evolution configuration")
         self.url, self.key, self.instance = base_url.rstrip("/"), api_key, instance
+        if type(typing_delay_ms) is not int or not 0 <= typing_delay_ms <= 2000:
+            raise ValueError("Typing delay must be 0..2000 milliseconds")
         self.transport, self.timeout = transport, timeout
+        self.typing_delay_ms = typing_delay_ms
 
     async def _post(self, action, **payload):
         for attempt in range(3):
@@ -156,9 +161,10 @@ class EvolutionAdapter:
         if not re.fullmatch(r"[0-9]{8,15}", recipient):
             raise ValueError("Invalid recipient")
         safe = AssistantResponse.model_validate(response.model_dump(mode="json"))
-        return await self._post(
-            "sendText", json={"number": recipient, "text": safe.text, "linkPreview": False}
-        )
+        payload = {"number": recipient, "text": safe.text, "linkPreview": False}
+        if self.typing_delay_ms:
+            payload["delay"] = self.typing_delay_ms
+        return await self._post("sendText", json=payload)
 
     async def send_image(self, recipient, content: bytes):
         if not re.fullmatch(r"[0-9]{8,15}", recipient):

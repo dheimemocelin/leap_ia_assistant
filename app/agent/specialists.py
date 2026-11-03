@@ -220,8 +220,14 @@ class ReceptionSpecialist:
             )
         if state["routing"].get("origin") == "fallback":
             # A failed classifier is not a license to guess or spend another timeout.
+            meaningful = (result.get("composition_plan") or {}).get("intent") not in {
+                None,
+                "other",
+                "repair",
+            }
             result["composition_plan"] = {}
-            result["response"] = response("Pode me contar o que você quer saber sobre o carro?")
+            if not meaningful or not result.get("response"):
+                result["response"] = response("Pode me contar o que você quer saber sobre o carro?")
         return result
 
 

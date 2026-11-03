@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     web_chat_password: SecretStr = Field(default=SecretStr(""), repr=False)
     evolution_enabled: bool = False
     evolution_send_enabled: bool = False
+    evolution_typing_delay_ms: int = Field(default=0, ge=0, le=2000)
     evolution_url: str = "http://127.0.0.1:8081"
     evolution_instance: str = "leap-pilot"
     evolution_api_key: SecretStr = Field(default=SecretStr(""), repr=False)

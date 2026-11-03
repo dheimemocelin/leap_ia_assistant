@@ -31,6 +31,7 @@ async def lifespan(app):
             settings.evolution_url,
             settings.evolution_api_key.get_secret_value(),
             settings.evolution_instance,
+            typing_delay_ms=settings.evolution_typing_delay_ms,
         )
         worker = EvolutionWorker(
             storage,

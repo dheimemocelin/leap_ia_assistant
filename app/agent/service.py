@@ -440,6 +440,28 @@ class SalesAgent:
             hint = RouteHint(act="overview")
         if self.sales_focus and self.showroom and showroom_question(s["text"]):
             hint = RouteHint(act="purchase")
+        if (
+            self.sales_focus
+            and hint is None
+            and re.search(
+                r"quero (?:saber|conhecer|ver|entender).*(?:veiculos|carros|modelos)|\b(?:trabalhar|economizar|economia)\b",
+                norm(s["text"]),
+            )
+        ):
+            hint = RouteHint(
+                act="overview" if re.search(r"veiculos|carros|modelos", norm(s["text"])) else "need"
+            )
+        if (
+            self.sales_focus
+            and hint is None
+            and profile.get("vehicle_id")
+            and re.search(
+                r"(?:faz|roda|consumo|consome).*litro|(?:por|com) (?:um )?litro|km\s*/\s*l",
+                norm(s["text"]),
+            )
+            and not re.search(r"porta.malas|bagageiro", norm(s["text"]))
+        ):
+            hint = RouteHint(act="fact_question", topic="range")
         origin, failure = "deterministic", None
         if hint is None:
             origin = "llm"
@@ -602,6 +624,31 @@ class SalesAgent:
             }
         if self.sales_focus and profile.contact_reason == "service_request":
             profile.contact_reason = "vehicle_interest"
+        if (
+            self.sales_focus
+            and profile.vehicle_id
+            and re.search(
+                r"(?:faz|roda|consumo|consome).*litro|(?:por|com) (?:um )?litro|km\s*/\s*l",
+                norm(s["text"]),
+            )
+            and not re.search(r"porta.malas|bagageiro", norm(s["text"]))
+        ):
+            vehicle = self.catalog.vehicle(profile.vehicle_id)
+            facts = self.grounding.for_vehicle(profile.vehicle_id, "autonomia")
+            if vehicle and vehicle.approval_status == "approved" and facts:
+                intro = (
+                    f"O {vehicle.model} elétrico não usa combustível. A referência é autonomia por carga, não por litro. "
+                    if vehicle.powertrain.value == "BEV"
+                    else "Para comparar por litro, falta um consumo específico confirmado. Temos estas referências de autonomia, sem convertê-las em consumo: "
+                )
+                return {
+                    "lead_profile": profile.model_dump(),
+                    "composition_plan": {},
+                    "response": reply(
+                        intro + " ".join(f["statement"] for f in facts),
+                        sources=list(dict.fromkeys(f["source_id"] for f in facts)),
+                    ),
+                }
         # A new explicit selection interrupts contact collection; consent is scoped.
         text = norm(s["text"])
         if (
@@ -820,8 +867,13 @@ class SalesAgent:
         )
         if not plan and not override and not financial and not technical_question and not models:
             repeated = dict(before)
-            if re.search(
-                r"uber|aplicativo|familia|filhos|espaco|economia|uso.*cidade|viage(?:m|ns)", text
+            if (
+                re.search(
+                    r"uber|aplicativo|familia|filhos|espaco|economia|uso.*cidade|viage(?:m|ns)",
+                    text,
+                )
+                or self.sales_focus
+                and re.search(r"trabalh|economiz", text)
             ):
                 repeated["usage"] = None
                 repeated["needs"] = []
@@ -1155,6 +1207,13 @@ class SalesAgent:
             }
         model = next(iter(models), s.get("model"))
         powertrain = "BEV" if bev else "REEV" if reev else s.get("powertrain")
+        if self.sales_focus and not model and (s.get("routing") or {}).get("act") == "overview":
+            return {
+                **s,
+                "phase": "selected",
+                "selection_origin": "deterministic",
+                "call": {"name": "list_vehicles", "arguments": {}},
+            }
         if not model and text.strip("!.? ") in {
             "pode ser",
             "pode mostrar",

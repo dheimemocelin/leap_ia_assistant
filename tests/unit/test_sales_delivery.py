@@ -183,3 +183,69 @@ async def test_explicit_store_interest_is_saved_without_booking_promise(showroom
     assert profile(showroom_agent)["visit_interest"] is True
     assert profile(showroom_agent)["visit_preference"]
     assert "confirmada" not in result.text.lower() and not result.handoff_required
+
+
+async def test_work_and_economy_is_usage_even_when_classifier_fails(agent):
+    class BrokenClassifier(SalesModel):
+        async def complete(self, messages, tools):
+            if "route_conversation" in messages[-1].get("content", ""):
+                raise TimeoutError("synthetic")
+            return await super().complete(messages, tools)
+
+    agent.llm = BrokenClassifier()
+    for message in ["B10 BEV", "Pessoa Sintetica"]:
+        await agent.turn("sale", message)
+    reply = await agent.turn("sale", "Então quero trabalhar e economizar")
+    assert profile(agent)["usage"] == "trabalho"
+    assert "economia" in profile(agent)["needs"]
+    assert "Pode me contar o que você quer saber" not in reply.text
+    assert "trabalho" in reply.text.lower() or "rotina" in reply.text.lower()
+
+
+async def test_electric_liters_question_is_explained_with_approved_range(agent):
+    await agent.turn("sale", "B10 BEV")
+    reply = await agent.turn("sale", "Ele faz quanto com litro?")
+    assert "por carga" in reply.text.lower()
+    assert "elétrico" in reply.text.lower()
+    assert "288" in reply.text and reply.source_ids
+    assert agent.sessions[("local", "sale")]["usage"]["calls"] == 0
+    assert not agent.sessions[("local", "sale")]["tool_events"]
+    assert not reply.handoff_required
+
+
+async def test_general_vehicle_discovery_lists_approved_models_without_engine_quiz(agent):
+    reply = await agent.turn("sale", "Quero saber mais sobre os veículos")
+    assert "B10" in reply.text and "C10" in reply.text
+    assert "motorização você deseja" not in reply.text
+    assert agent.sessions[("local", "sale")]["tool_events"][0]["name"] == "list_vehicles"
+
+
+async def test_classifier_failure_preserves_deterministically_observed_family_need(agent):
+    class BrokenClassifier(SalesModel):
+        async def complete(self, messages, tools):
+            if "route_conversation" in messages[-1].get("content", ""):
+                raise TimeoutError("synthetic")
+            return await super().complete(messages, tools)
+
+    agent.llm = BrokenClassifier()
+    await agent.turn("sale", "B10 BEV")
+    await agent.turn("sale", "Pessoa Sintetica")
+    reply = await agent.turn("sale", "Levar os meus filhos")
+    assert "espaco" in profile(agent)["needs"]
+    assert "Pode me contar o que você quer saber" not in reply.text
+    assert agent.sessions[("local", "sale")]["usage"]["calls"] == 1
+
+
+async def test_trunk_liters_are_not_confused_with_fuel_economy(agent):
+    await agent.turn("sale", "B10 BEV")
+    reply = await agent.turn("sale", "Quantos litros tem o porta-malas?")
+    assert "405" in reply.text and "por carga" not in reply.text
+
+
+async def test_repeated_work_context_does_not_fall_into_missing_technical_facts(agent):
+    for text in ["B10 BEV", "Pessoa Sintetica", "Então quero trabalhar e economizar"]:
+        await agent.turn("sale", text)
+    reply = await agent.turn("sale", "Quero trabalhar e economizar")
+    assert not agent.sessions[("local", "sale")]["tool_events"]
+    assert "loja" in reply.text
+    assert profile(agent)["pending_question"] == "visit"

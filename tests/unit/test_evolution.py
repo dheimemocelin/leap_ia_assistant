@@ -106,7 +106,9 @@ def test_public_pilot_accepts_unknown_sender_but_preserves_auth_and_loop_guards(
     assert client.post(path, json=body).status_code == 401
     assert client.post(path, json=body, headers=headers()).json() == {"status": "queued"}
     for key in ({"fromMe": True}, {"remoteJid": "123@g.us"}):
-        assert client.post(path, json=event(**key), headers=headers()).json() == {"status": "ignored"}
+        assert client.post(path, json=event(**key), headers=headers()).json() == {
+            "status": "ignored"
+        }
     assert store.counts() == {"queued": 1}
 
 
@@ -355,3 +357,35 @@ async def test_erasure_bypasses_turn_limit_and_cancels_pending_work(inbox):
     assert store.counts() == {"cancelled": 40, "dry_run": 1}
     assert not await worker.once()
     assert not worker.agent.llm.calls
+
+
+async def test_native_typing_delay_is_bounded_and_uses_existing_authenticated_send():
+    calls = []
+
+    def transport(request):
+        calls.append(request)
+        return httpx.Response(201, json={"key": {"id": "synthetic-accepted"}})
+
+    adapter = EvolutionAdapter(
+        "https://evolution.invalid",
+        "synthetic-key",
+        "test-instance",
+        typing_delay_ms=1200,
+        transport=httpx.MockTransport(transport),
+    )
+    await adapter.send_text(
+        NUMBER, AssistantResponse(text="Olá!", confidence="insufficient_evidence")
+    )
+    assert len(calls) == 1
+    assert calls[0].url.path == "/message/sendText/test-instance"
+    assert calls[0].headers["apikey"] == "synthetic-key"
+    assert json.loads(calls[0].content)["delay"] == 1200
+    assert json.loads(calls[0].content)["number"] == NUMBER
+
+
+@pytest.mark.parametrize("delay", [-1, 2001, True, "1200"])
+def test_invalid_typing_configuration_is_rejected(delay):
+    with pytest.raises(ValueError):
+        EvolutionAdapter(
+            "https://evolution.invalid", "synthetic-key", "test-instance", typing_delay_ms=delay
+        )
