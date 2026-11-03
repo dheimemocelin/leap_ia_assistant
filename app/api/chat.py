@@ -70,11 +70,11 @@ def build_agent(*, reviewed_catalog=False, test_media=False, orchestration_enabl
         )
         grounding = GroundingPolicy(facts, catalog, brand=brand)
     knowledge = None
-    if settings.lia_knowledge_enabled:
+    if settings.lia_knowledge_enabled and reviewed_catalog:
         from app.knowledge.embeddings import LocalE5
         from app.knowledge.runtime import CatalogKnowledge
 
-        if not reviewed_catalog or grounding is None:
+        if grounding is None:
             raise ValueError("Knowledge runtime requires the reviewed catalog")
         knowledge = CatalogKnowledge(
             grounding, LocalE5(settings.lia_knowledge_model_dir), settings.lia_knowledge_cache_path

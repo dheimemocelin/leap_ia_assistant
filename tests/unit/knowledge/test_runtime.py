@@ -74,3 +74,11 @@ async def test_knowledge_tool_requires_configured_backend(agent):
     response = await agent.turn("runtime", "Qual a autonomia do C10 BEV?")
     assert agent.sessions[("local", "runtime")]["tool_events"][0]["name"] == "get_vehicle_details"
     assert "338" in response.text
+
+
+def test_unreviewed_api_catalog_does_not_load_pilot_knowledge(monkeypatch):
+    from app.api.chat import settings
+
+    monkeypatch.setattr(settings, "lia_knowledge_enabled", True)
+    a = build_agent(reviewed_catalog=False)
+    assert a.knowledge is None
