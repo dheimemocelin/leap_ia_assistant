@@ -1,0 +1,594 @@
+{
+  "checkpoint": "A",
+  "status": "review_required",
+  "input_files": 6,
+  "unique_documents": 6,
+  "duplicate_files": 0,
+  "expected_unique_documents": 6,
+  "errors": [],
+  "total_pages": 1515,
+  "page_issue_counts": {
+    "encoding_suspect": 1322,
+    "extractors_disagree": 535,
+    "fragmented_words": 23,
+    "sparse_text_or_image_only": 48,
+    "unexpected_glyphs_or_language": 902,
+    "equipment_applicability_requires_review": 64,
+    "repeated_text": 123
+  },
+  "approved_documents": 0,
+  "active_chunks": 0,
+  "identity_validation": "pending_visual_and_semantic_review",
+  "documents": [
+    {
+      "document_id": "doc-a33c1aaa35d0fecd6410d9d90a115d02d93460f20aa31c1cf574ca0834f45b93",
+      "sha256": "a33c1aaa35d0fecd6410d9d90a115d02d93460f20aa31c1cf574ca0834f45b93",
+      "size_bytes": 4662624,
+      "page_count": 259,
+      "files": [
+        "592e9541-040a-4472-b019-170afe6f9bab-44c04234-fa39-4172-96fc-5b65bfe3fe59-pdf.pdf"
+      ],
+      "pdf_metadata": {
+        "/Title": "MANUAIS-DE-BORDO_LEAP-C10BEV_2026-2026_.pdf",
+        "/Subject": null,
+        "/CreationDate": "D:20260304160310-03'00'",
+        "/ModDate": "D:20260624115852-03'00'",
+        "/Producer": "Acrobat Distiller 25.0 (Windows)"
+      },
+      "candidates": {
+        "model": [
+          "C10"
+        ],
+        "powertrain": [
+          "BEV"
+        ],
+        "model_year": [
+          "2026"
+        ],
+        "manufacturer": [
+          "Leapmotor"
+        ]
+      },
+      "evidence": [
+        {
+          "field": "model",
+          "value": "C10",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "powertrain",
+          "value": "BEV",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "model_year",
+          "value": "2026",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "manufacturer",
+          "value": "Leapmotor",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "document_type",
+          "value": "owner_manual",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "document_version",
+          "value": "Edição 02 - JAN/2026",
+          "page": 259,
+          "quote": "PN 60351938 - Edição 02 - JAN/2026",
+          "basis": "internal_text"
+        }
+      ],
+      "metadata_reviewed_by": "Codex: metadata inspection only, not content approval",
+      "manufacturer": "Leapmotor",
+      "model": "C10",
+      "powertrain": "BEV",
+      "market": null,
+      "model_year": 2026,
+      "document_type": "owner_manual",
+      "language": null,
+      "document_version": "Edição 02 - JAN/2026",
+      "publication_date": null,
+      "approval_status": "pending",
+      "extraction_status": "review_required",
+      "issues": [
+        "encoding_suspect",
+        "equipment_applicability_requires_review",
+        "extractors_disagree",
+        "fragmented_words",
+        "repeated_text",
+        "sparse_text_or_image_only",
+        "unexpected_glyphs_or_language"
+      ],
+      "pipeline_version": "audit-v1",
+      "extractor_versions": {
+        "pypdf": "6.21.4",
+        "pymupdf": "1.28.2"
+      },
+      "page_issue_counts": {
+        "encoding_suspect": 236,
+        "extractors_disagree": 49,
+        "fragmented_words": 1,
+        "sparse_text_or_image_only": 14,
+        "unexpected_glyphs_or_language": 125,
+        "equipment_applicability_requires_review": 27,
+        "repeated_text": 16
+      },
+      "pages_without_detected_issues": 8,
+      "visual_samples_reviewed": [
+        1
+      ],
+      "semantic_identity_complete": false
+    },
+    {
+      "document_id": "doc-2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "size_bytes": 6317528,
+      "page_count": 228,
+      "files": [
+        "592e9541-040a-4472-b019-170afe6f9bab-4fd80b68-c8d2-4e7e-a66f-b5fa199667c3-pdf.pdf"
+      ],
+      "pdf_metadata": {
+        "/Title": "Untitled",
+        "/Subject": null,
+        "/CreationDate": "D:20260605160927+08'00'",
+        "/ModDate": "D:20260814150143-03'00'",
+        "/Producer": "GPL Ghostscript 10.05.0"
+      },
+      "candidates": {
+        "model_year": [
+          "2026"
+        ],
+        "manufacturer": [
+          "Leapmotor"
+        ]
+      },
+      "evidence": [
+        {
+          "field": "model",
+          "value": "B10",
+          "page": 1,
+          "quote": "B10 MANUAL DO USUÁRIO",
+          "basis": "visual_review"
+        },
+        {
+          "field": "manufacturer",
+          "value": "Leapmotor",
+          "page": 1,
+          "quote": "LEAPMOTOR",
+          "basis": "visual_review"
+        },
+        {
+          "field": "document_type",
+          "value": "owner_manual",
+          "page": 1,
+          "quote": "MANUAL DO USUÁRIO",
+          "basis": "visual_review"
+        }
+      ],
+      "metadata_reviewed_by": "Codex: metadata inspection only, not content approval",
+      "manufacturer": "Leapmotor",
+      "model": "B10",
+      "powertrain": null,
+      "market": null,
+      "model_year": null,
+      "document_type": "owner_manual",
+      "language": null,
+      "document_version": null,
+      "publication_date": null,
+      "approval_status": "pending",
+      "extraction_status": "review_required",
+      "issues": [
+        "encoding_suspect",
+        "extractors_disagree",
+        "fragmented_words",
+        "repeated_text",
+        "sparse_text_or_image_only",
+        "unexpected_glyphs_or_language"
+      ],
+      "pipeline_version": "audit-v1",
+      "extractor_versions": {
+        "pypdf": "6.21.4",
+        "pymupdf": "1.28.2"
+      },
+      "page_issue_counts": {
+        "sparse_text_or_image_only": 1,
+        "unexpected_glyphs_or_language": 165,
+        "encoding_suspect": 108,
+        "extractors_disagree": 113,
+        "repeated_text": 26,
+        "fragmented_words": 5
+      },
+      "pages_without_detected_issues": 11,
+      "visual_samples_reviewed": [
+        1,
+        26
+      ],
+      "semantic_identity_complete": false
+    },
+    {
+      "document_id": "doc-8d59ee55518e3aa94d76151df8bfa1e426f1c7a12570b8a649125637eb468699",
+      "sha256": "8d59ee55518e3aa94d76151df8bfa1e426f1c7a12570b8a649125637eb468699",
+      "size_bytes": 20216007,
+      "page_count": 258,
+      "files": [
+        "592e9541-040a-4472-b019-170afe6f9bab-82c911c0-d3d7-412b-90a0-d2c0f3acdc49-pdf.pdf"
+      ],
+      "pdf_metadata": {
+        "/Title": "Untitled",
+        "/Subject": null,
+        "/CreationDate": "D:20260814150314-03'00'",
+        "/ModDate": "D:20260814150314-03'00'",
+        "/Producer": "Acrobat Distiller 26.0 (Windows)"
+      },
+      "candidates": {},
+      "evidence": [
+        {
+          "field": "model",
+          "value": "C10",
+          "page": 1,
+          "quote": "C10 MANUAL DO USUÁRIO",
+          "basis": "visual_review"
+        },
+        {
+          "field": "manufacturer",
+          "value": "Leapmotor",
+          "page": 1,
+          "quote": "LEAPMOTOR",
+          "basis": "visual_review"
+        },
+        {
+          "field": "document_type",
+          "value": "owner_manual",
+          "page": 1,
+          "quote": "MANUAL DO USUÁRIO",
+          "basis": "visual_review"
+        }
+      ],
+      "metadata_reviewed_by": "Codex: metadata inspection only, not content approval",
+      "manufacturer": "Leapmotor",
+      "model": "C10",
+      "powertrain": null,
+      "market": null,
+      "model_year": null,
+      "document_type": "owner_manual",
+      "language": null,
+      "document_version": null,
+      "publication_date": null,
+      "approval_status": "pending",
+      "extraction_status": "review_required",
+      "issues": [
+        "encoding_suspect",
+        "extractors_disagree",
+        "fragmented_words",
+        "repeated_text",
+        "sparse_text_or_image_only",
+        "unexpected_glyphs_or_language"
+      ],
+      "pipeline_version": "audit-v1",
+      "extractor_versions": {
+        "pypdf": "6.21.4",
+        "pymupdf": "1.28.2"
+      },
+      "page_issue_counts": {
+        "sparse_text_or_image_only": 2,
+        "encoding_suspect": 257,
+        "unexpected_glyphs_or_language": 256,
+        "repeated_text": 21,
+        "extractors_disagree": 127,
+        "fragmented_words": 6
+      },
+      "pages_without_detected_issues": 0,
+      "visual_samples_reviewed": [
+        1,
+        26
+      ],
+      "semantic_identity_complete": false
+    },
+    {
+      "document_id": "doc-0450e43eda035b74ef7c16bcda855703011b75e65e4b92b2325971dcb81ac617",
+      "sha256": "0450e43eda035b74ef7c16bcda855703011b75e65e4b92b2325971dcb81ac617",
+      "size_bytes": 17704263,
+      "page_count": 232,
+      "files": [
+        "592e9541-040a-4472-b019-170afe6f9bab-8c768743-c38e-4f88-866b-50f94ec5a37b-pdf.pdf"
+      ],
+      "pdf_metadata": {
+        "/Title": "60352121-Manual-C10 BEV-BR-MY2027.pdf",
+        "/Subject": null,
+        "/CreationDate": "D:20260814150746-03'00'",
+        "/ModDate": "D:20260814150746-03'00'",
+        "/Producer": "Acrobat Distiller 26.0 (Windows)"
+      },
+      "candidates": {},
+      "evidence": [],
+      "metadata_reviewed_by": null,
+      "manufacturer": null,
+      "model": null,
+      "powertrain": null,
+      "market": null,
+      "model_year": null,
+      "document_type": null,
+      "language": null,
+      "document_version": null,
+      "publication_date": null,
+      "approval_status": "pending",
+      "extraction_status": "review_required",
+      "issues": [
+        "encoding_suspect",
+        "extractors_disagree",
+        "fragmented_words",
+        "repeated_text",
+        "sparse_text_or_image_only",
+        "unexpected_glyphs_or_language"
+      ],
+      "pipeline_version": "audit-v1",
+      "extractor_versions": {
+        "pypdf": "6.21.4",
+        "pymupdf": "1.28.2"
+      },
+      "page_issue_counts": {
+        "sparse_text_or_image_only": 4,
+        "encoding_suspect": 228,
+        "extractors_disagree": 120,
+        "unexpected_glyphs_or_language": 227,
+        "repeated_text": 16,
+        "fragmented_words": 6
+      },
+      "pages_without_detected_issues": 0,
+      "visual_samples_reviewed": [
+        1,
+        26
+      ],
+      "semantic_identity_complete": false
+    },
+    {
+      "document_id": "doc-0ecd0a8b2721d8666cd5d69362a21a46058877a334782a3d26dd92e6f62b1e0d",
+      "sha256": "0ecd0a8b2721d8666cd5d69362a21a46058877a334782a3d26dd92e6f62b1e0d",
+      "size_bytes": 5238354,
+      "page_count": 273,
+      "files": [
+        "592e9541-040a-4472-b019-170afe6f9bab-9c0c479c-d916-4ef7-a0c2-09fbfe35207e-pdf.pdf"
+      ],
+      "pdf_metadata": {
+        "/Title": "MANUAIS-DE-BORDO_LEAP-C10REEV_2026-2026.pdf",
+        "/Subject": null,
+        "/CreationDate": "D:20260304160236-03'00'",
+        "/ModDate": "D:20260624141843-03'00'",
+        "/Producer": "Acrobat Distiller 25.0 (Windows)"
+      },
+      "candidates": {
+        "model": [
+          "C10"
+        ],
+        "powertrain": [
+          "REEV"
+        ],
+        "model_year": [
+          "2026"
+        ],
+        "manufacturer": [
+          "Leapmotor"
+        ]
+      },
+      "evidence": [
+        {
+          "field": "model",
+          "value": "C10",
+          "page": 1,
+          "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "powertrain",
+          "value": "REEV",
+          "page": 1,
+          "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "model_year",
+          "value": "2026",
+          "page": 1,
+          "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "manufacturer",
+          "value": "Leapmotor",
+          "page": 1,
+          "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "document_type",
+          "value": "owner_manual",
+          "page": 1,
+          "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "document_version",
+          "value": "Edição 02 - JAN/2026",
+          "page": 273,
+          "quote": "PN 60351938 - Edição 02 - JAN/2026",
+          "basis": "internal_text"
+        }
+      ],
+      "metadata_reviewed_by": "Codex: metadata inspection only, not content approval",
+      "manufacturer": "Leapmotor",
+      "model": "C10",
+      "powertrain": "REEV",
+      "market": null,
+      "model_year": 2026,
+      "document_type": "owner_manual",
+      "language": null,
+      "document_version": "Edição 02 - JAN/2026",
+      "publication_date": null,
+      "approval_status": "pending",
+      "extraction_status": "review_required",
+      "issues": [
+        "encoding_suspect",
+        "equipment_applicability_requires_review",
+        "extractors_disagree",
+        "fragmented_words",
+        "repeated_text",
+        "sparse_text_or_image_only",
+        "unexpected_glyphs_or_language"
+      ],
+      "pipeline_version": "audit-v1",
+      "extractor_versions": {
+        "pypdf": "6.21.4",
+        "pymupdf": "1.28.2"
+      },
+      "page_issue_counts": {
+        "encoding_suspect": 252,
+        "extractors_disagree": 45,
+        "fragmented_words": 1,
+        "sparse_text_or_image_only": 13,
+        "unexpected_glyphs_or_language": 128,
+        "equipment_applicability_requires_review": 23,
+        "repeated_text": 18
+      },
+      "pages_without_detected_issues": 8,
+      "visual_samples_reviewed": [
+        1
+      ],
+      "semantic_identity_complete": false
+    },
+    {
+      "document_id": "doc-eddb5672aaade1caec11a8df03e09ab0a30ff9baa9234920f50bdaba28de66fe",
+      "sha256": "eddb5672aaade1caec11a8df03e09ab0a30ff9baa9234920f50bdaba28de66fe",
+      "size_bytes": 3715600,
+      "page_count": 265,
+      "files": [
+        "592e9541-040a-4472-b019-170afe6f9bab-b2007cd0-71e9-4a4f-8138-9aa4d2898a40-pdf.pdf"
+      ],
+      "pdf_metadata": {
+        "/Title": "MANUAIS-DE-BORDO_LEAP-B10BEV_2026-2026_.pdf",
+        "/Subject": null,
+        "/CreationDate": "D:20260304160254-03'00'",
+        "/ModDate": "D:20260624135946-03'00'",
+        "/Producer": "Acrobat Distiller 25.0 (Windows)"
+      },
+      "candidates": {
+        "model": [
+          "B10"
+        ],
+        "powertrain": [
+          "BEV"
+        ],
+        "model_year": [
+          "2026"
+        ],
+        "manufacturer": [
+          "Leapmotor",
+          "LEAPMOTOR"
+        ]
+      },
+      "evidence": [
+        {
+          "field": "model",
+          "value": "B10",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "powertrain",
+          "value": "BEV",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "model_year",
+          "value": "2026",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "manufacturer",
+          "value": "Leapmotor",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "document_type",
+          "value": "owner_manual",
+          "page": 1,
+          "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+          "basis": "internal_text"
+        },
+        {
+          "field": "document_version",
+          "value": "Edição 02 - JAN/2026",
+          "page": 265,
+          "quote": "PN 60351938 - Edição 02 - JAN/2026",
+          "basis": "internal_text"
+        }
+      ],
+      "metadata_reviewed_by": "Codex: metadata inspection only, not content approval",
+      "manufacturer": "Leapmotor",
+      "model": "B10",
+      "powertrain": "BEV",
+      "market": null,
+      "model_year": 2026,
+      "document_type": "owner_manual",
+      "language": null,
+      "document_version": "Edição 02 - JAN/2026",
+      "publication_date": null,
+      "approval_status": "pending",
+      "extraction_status": "review_required",
+      "issues": [
+        "encoding_suspect",
+        "equipment_applicability_requires_review",
+        "extractors_disagree",
+        "fragmented_words",
+        "repeated_text",
+        "sparse_text_or_image_only",
+        "unexpected_glyphs_or_language"
+      ],
+      "pipeline_version": "audit-v1",
+      "extractor_versions": {
+        "pypdf": "6.21.4",
+        "pymupdf": "1.28.2"
+      },
+      "page_issue_counts": {
+        "encoding_suspect": 241,
+        "extractors_disagree": 81,
+        "fragmented_words": 4,
+        "sparse_text_or_image_only": 14,
+        "repeated_text": 26,
+        "equipment_applicability_requires_review": 14,
+        "unexpected_glyphs_or_language": 1
+      },
+      "pages_without_detected_issues": 8,
+      "visual_samples_reviewed": [
+        1
+      ],
+      "semantic_identity_complete": false
+    }
+  ],
+  "runtime_activation": false,
+  "real_duplicate_present": false,
+  "ocr_executed": false,
+  "llm_calls": 0,
+  "embedding_calls": 0
+}

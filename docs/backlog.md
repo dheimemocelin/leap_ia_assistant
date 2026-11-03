@@ -30,3 +30,16 @@
 - P0 antes de ativar: comparar conversas reais sintéticas com Groq dentro de orçamento autorizado e revisar naturalidade/continuidade com o responsável; não aceitar apenas sucesso de testes simulados.
 - P1: ampliar paráfrases e casos ambíguos observados, cobertura factual, redução de fallbacks e perguntas dispensáveis conforme evidência real.
 - Não incluído: pós-venda completo, novo CRM, novas integrações, outros modelos, deploy ou ativação automática.
+
+## Lia Knowledge v1 — após Checkpoint A
+
+- P0: confirmar ano-modelo/motorização/mercado nos arquivos recebidos como MY2027;
+  obter fonte oficial explícita quando o PDF não comprovar a aplicabilidade.
+- P0: OCR seletivo + revisão de páginas corrompidas; preservar alertas/tabelas;
+  não aprovar automaticamente texto com extração aparentemente limpa.
+- P1: B10 BEV MY2027, seções revisadas, 30+ perguntas com gabarito e avaliação
+  comparativa lexical/vetorial/híbrida em armazenamento próprio.
+- P1: ferramenta read-only search_knowledge no grafo existente e conversas completas
+  com grounding, revogação, isolamento de configuração e política comercial.
+- P2: expandir os outros cinco documentos após os mesmos gates.
+- Evidências/limites: docs/knowledge/checkpoint-a.md; nada ativado no piloto.

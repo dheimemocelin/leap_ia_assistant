@@ -1,0 +1,20 @@
+{
+  "checkpoint": "A.1 plus local B preview",
+  "recorded_at": "2026-11-03T13:45:22.422727+00:00",
+  "pytest_passed": 470,
+  "knowledge_tests_passed": 57,
+  "pytest_skipped": 0,
+  "ruff": "passed",
+  "compileall": "passed",
+  "diff_check": "passed",
+  "original_pdf_hashes_rechecked": 6,
+  "original_inputs_preserved": true,
+  "real_ocr_pages": 6,
+  "approved_fidelity_sections": 5,
+  "customer_runtime_sections": 0,
+  "real_embedding_provider": "local E5 ONNX CPU",
+  "real_retrieval_queries": 30,
+  "generative_llm_calls": 0,
+  "paid_service_calls": 0,
+  "production_changed": false
+}

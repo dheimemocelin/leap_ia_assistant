@@ -1,0 +1,50 @@
+{
+  "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+  "dpi": 100,
+  "checks": [
+    {
+      "page": 19,
+      "original_render_sha256": "cc468ddbf143605f8fb0ab62c69d4dae4ffc56bd28bbb630c2325e092195ec60",
+      "derived_render_sha256": "cc468ddbf143605f8fb0ab62c69d4dae4ffc56bd28bbb630c2325e092195ec60",
+      "appearance_unchanged": true
+    },
+    {
+      "page": 22,
+      "original_render_sha256": "54367432b5961d3702e2b57165da9c451285e03ed5e8f0fac9220cbb7dd7c190",
+      "derived_render_sha256": "54367432b5961d3702e2b57165da9c451285e03ed5e8f0fac9220cbb7dd7c190",
+      "appearance_unchanged": true
+    },
+    {
+      "page": 45,
+      "original_render_sha256": "eef7d8859a3a14de50a71a607baa8a6b4061ee90b582079eb388c421a8e1e6ed",
+      "derived_render_sha256": "eef7d8859a3a14de50a71a607baa8a6b4061ee90b582079eb388c421a8e1e6ed",
+      "appearance_unchanged": true
+    },
+    {
+      "page": 86,
+      "original_render_sha256": "4e3845a1bbf95865809ef82ebe963c9fb0813a4e7fa1910be071a22a3193b408",
+      "derived_render_sha256": "4e3845a1bbf95865809ef82ebe963c9fb0813a4e7fa1910be071a22a3193b408",
+      "appearance_unchanged": true
+    },
+    {
+      "page": 164,
+      "original_render_sha256": "26e2c5adb4554f6210e590db39faf9687a5e48aeab6c106a9f7c63c236896e9b",
+      "derived_render_sha256": "26e2c5adb4554f6210e590db39faf9687a5e48aeab6c106a9f7c63c236896e9b",
+      "appearance_unchanged": true
+    },
+    {
+      "page": 214,
+      "original_render_sha256": "c3edf4f4e59c1be9db7c8cbe489838726b61cf648873c8a3183c2dba77b25ee1",
+      "derived_render_sha256": "c3edf4f4e59c1be9db7c8cbe489838726b61cf648873c8a3183c2dba77b25ee1",
+      "appearance_unchanged": true
+    },
+    {
+      "page": 215,
+      "original_render_sha256": "6e589ebd7f259b6b656e0c174fc83556cfd8dfc2517cd37fedecc8a8a9a5567c",
+      "derived_render_sha256": "6e589ebd7f259b6b656e0c174fc83556cfd8dfc2517cd37fedecc8a8a9a5567c",
+      "appearance_unchanged": true
+    }
+  ],
+  "reviewer": "Codex",
+  "not_independent_human_review": true
+}

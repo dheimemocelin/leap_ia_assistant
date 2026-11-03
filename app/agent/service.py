@@ -180,6 +180,7 @@ class SalesAgent:
         input_token_rate=None,
         output_token_rate=None,
         orchestration_enabled=False,
+        knowledge=None,
     ):
         self.catalog, self.media, self.llm = catalog, media, llm
         self.sales = SalesTools(catalog)
@@ -187,6 +188,21 @@ class SalesAgent:
         self.grounding = grounding or GroundingPolicy([], catalog)
         self.prefer_tool_calling = prefer_tool_calling
         self.orchestration_enabled = orchestration_enabled
+        self.knowledge = knowledge
+        self.available_tools = TOOLS + (
+            [
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "search_knowledge",
+                        "description": "Buscar evidências aprovadas para a pergunta atual e o veículo canônico.",
+                        "parameters": ToolArguments.model_json_schema(),
+                    },
+                }
+            ]
+            if knowledge
+            else []
+        )
         self.memory_store = memory_store
         self.input_token_rate, self.output_token_rate = input_token_rate, output_token_rate
         self.sessions: dict[tuple[str, str], dict] = {}
@@ -486,8 +502,15 @@ class SalesAgent:
             return self.grounding.for_brand()
         if not profile.vehicle_id:
             return []
+        retrieved = (s.get("evidence") or {}).get("facts", [])
+        knowledge_facts = [
+            f
+            for f in retrieved
+            if self.knowledge and self.knowledge.validate(f, profile.vehicle_id)
+        ]
         return (
-            self.grounding.for_vehicle(profile.vehicle_id, "conhecer")
+            knowledge_facts
+            + self.grounding.for_vehicle(profile.vehicle_id, "conhecer")
             + self.grounding.for_vehicle(profile.vehicle_id, s["text"])
             + (self.specialist_evidence(s, profile.vehicle_id) or [])
         )
@@ -1113,6 +1136,8 @@ class SalesAgent:
                 if profile.next_action == SDRAction.SHOWCASE
                 else "get_vehicle_details"
             )
+            if self.knowledge and technical and not want_media:
+                name = "search_knowledge"
             args = {"vehicle_id": candidates[0]["id"]}
             if name == "search_vehicle_media" and s.get("intent_angle"):
                 args["angle"] = s["intent_angle"]
@@ -1160,7 +1185,7 @@ class SalesAgent:
                     *s["history"],
                     {"role": "user", "content": s["text"]},
                 ],
-                TOOLS,
+                self.available_tools,
             )
             if len(result.tool_calls) != 1:
                 raise ValueError("Expected one read tool")
@@ -1193,7 +1218,7 @@ class SalesAgent:
                         VehicleFilter(model=args.model, powertrain=args.powertrain)
                     )[:6]
                 ]
-            elif call.name in {"get_vehicle_details", "search_vehicle_media"}:
+            elif call.name in {"get_vehicle_details", "search_vehicle_media", "search_knowledge"}:
                 if s.get("input_type") == "audio" and call.name == "search_vehicle_media":
                     raise ValueError("Audio input replies are text-only")
                 if not args.vehicle_id:
@@ -1213,7 +1238,17 @@ class SalesAgent:
                     ).hexdigest()[:20]
                     for x in vehicle.sources
                 ][:10]
-                if call.name == "get_vehicle_details":
+                if call.name == "search_knowledge":
+                    if not self.knowledge:
+                        raise ValueError("Knowledge disabled")
+                    facts = await asyncio.to_thread(
+                        self.knowledge.retrieve,
+                        args.vehicle_id,
+                        s.get("intent_question") or s["text"],
+                    )
+                    data = [{"id": f["id"], "source_id": f["source_id"]} for f in facts]
+                    sources = list(dict.fromkeys(f["source_id"] for f in facts))
+                elif call.name == "get_vehicle_details":
                     data = details
                     facts = self.grounding.for_vehicle(
                         args.vehicle_id, s.get("intent_question") or s["text"]
@@ -1255,7 +1290,9 @@ class SalesAgent:
                 "phase": "retrieved",
                 "evidence": {
                     "data": data,
-                    "facts": facts if call.name == "get_vehicle_details" else [],
+                    "facts": facts
+                    if call.name in {"get_vehicle_details", "search_knowledge"}
+                    else [],
                     "kind": call.name,
                     "source_ids": sources,
                     "media_ids": [m["id"] for m in data]
@@ -1463,7 +1500,11 @@ class SalesAgent:
             }:
                 # A failed wording attempt must not hide an independently
                 # verified answer. Never salvage model text, IDs or questions.
-                live = self.grounding.for_vehicle(profile.vehicle_id, s["text"])
+                live = (
+                    self.current_evidence(s, profile, plan)
+                    if self.knowledge
+                    else self.grounding.for_vehicle(profile.vehicle_id, s["text"])
+                )
                 recovered = [f for f in facts if f in live]
                 if recovered:
                     response = reply(
@@ -1512,6 +1553,24 @@ class SalesAgent:
         if s.get("composition_plan"):
             return await self.compose_conversation(s)
         evidence = s["evidence"]
+        if evidence.get("kind") == "search_knowledge":
+            facts = [
+                f
+                for f in evidence.get("facts", [])
+                if self.knowledge.validate(f, s["lead_profile"].get("vehicle_id"))
+            ]
+            s["composition_plan"] = {
+                "intent": "technical" if facts else "missing_evidence",
+                "facts": facts,
+                "require_facts": bool(facts),
+                "question_keys": [],
+            }
+            s["response"] = reply(
+                " ".join(f["statement"] for f in facts)
+                or "Esse recurso pode variar conforme a versão. Ainda não tenho uma confirmação para o carro que você está considerando.",
+                sources=[f["source_id"] for f in facts],
+            )
+            return await self.compose_conversation(s)
         if (
             self.orchestration_enabled
             and s.get("active_specialist") == Specialist.SALES

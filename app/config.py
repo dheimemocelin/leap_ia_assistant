@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     groq_api_key: SecretStr = Field(default=SecretStr(""), repr=False)
     llm_provider: str = "disabled"
     lia_orchestration_enabled: bool = False
+    lia_knowledge_enabled: bool = False
+    lia_knowledge_model_dir: str = ".local/knowledge-models/e5-small"
+    lia_knowledge_cache_path: str = ".local/knowledge-runtime.sqlite3"
     llm_api_key: str = ""
     llm_model: str = ""
     llm_base_url: str = "http://127.0.0.1:11434"

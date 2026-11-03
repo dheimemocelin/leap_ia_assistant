@@ -1,0 +1,208 @@
+{
+  "checkpoint": "A.1",
+  "documents": [
+    {
+      "document_sha256": "0450e43eda035b74ef7c16bcda855703011b75e65e4b92b2325971dcb81ac617",
+      "pages_processed": 232,
+      "native_text_changed_pages": 227,
+      "native_encoding_improved_pages": 224,
+      "pages_needing_ocr_or_review": 22,
+      "pages_with_processing_failures": 0,
+      "pages_quarantined": 232,
+      "table_candidates": 75,
+      "table_candidates_approved": 0,
+      "before_invalid_ratio": 0.00541964047173772,
+      "after_invalid_ratio": 1.9000209002299026e-05,
+      "remaining_issue_counts": {
+        "sparse_text_or_image_only": 4,
+        "unexpected_glyphs_or_language": 14,
+        "repeated_text": 11,
+        "fragmented_words": 3,
+        "encoding_suspect": 1,
+        "unmapped_identity_font": 1
+      },
+      "elapsed_seconds": 60.656,
+      "approval_status": "pending",
+      "quality_version": "original-baseline-v2"
+    },
+    {
+      "document_sha256": "0ecd0a8b2721d8666cd5d69362a21a46058877a334782a3d26dd92e6f62b1e0d",
+      "pages_processed": 273,
+      "native_text_changed_pages": 0,
+      "native_encoding_improved_pages": 0,
+      "pages_needing_ocr_or_review": 235,
+      "pages_with_processing_failures": 0,
+      "pages_quarantined": 273,
+      "table_candidates": 66,
+      "table_candidates_approved": 0,
+      "before_invalid_ratio": 6.561013713756589e-05,
+      "after_invalid_ratio": 6.561013713756589e-05,
+      "remaining_issue_counts": {
+        "sparse_text_or_image_only": 12,
+        "unmapped_identity_font": 229,
+        "unexpected_glyphs_or_language": 128,
+        "equipment_applicability_requires_review": 23,
+        "encoding_suspect": 23,
+        "repeated_text": 1
+      },
+      "elapsed_seconds": 43.613,
+      "approval_status": "pending",
+      "quality_version": "original-baseline-v2"
+    },
+    {
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "pages_processed": 228,
+      "native_text_changed_pages": 207,
+      "native_encoding_improved_pages": 0,
+      "pages_needing_ocr_or_review": 6,
+      "pages_with_processing_failures": 0,
+      "pages_quarantined": 228,
+      "table_candidates": 60,
+      "table_candidates_approved": 0,
+      "before_invalid_ratio": 0.0,
+      "after_invalid_ratio": 0.0,
+      "remaining_issue_counts": {
+        "sparse_text_or_image_only": 1,
+        "editorial_translation_artifact": 2,
+        "repeated_text": 16,
+        "fragmented_words": 5,
+        "unexpected_glyphs_or_language": 1
+      },
+      "elapsed_seconds": 39.48,
+      "approval_status": "pending"
+    },
+    {
+      "document_sha256": "8d59ee55518e3aa94d76151df8bfa1e426f1c7a12570b8a649125637eb468699",
+      "pages_processed": 258,
+      "native_text_changed_pages": 256,
+      "native_encoding_improved_pages": 255,
+      "pages_needing_ocr_or_review": 5,
+      "pages_with_processing_failures": 0,
+      "pages_quarantined": 258,
+      "table_candidates": 87,
+      "table_candidates_approved": 0,
+      "before_invalid_ratio": 0.005425807463324159,
+      "after_invalid_ratio": 1.7272126673777025e-05,
+      "remaining_issue_counts": {
+        "sparse_text_or_image_only": 2,
+        "repeated_text": 14,
+        "fragmented_words": 3,
+        "encoding_suspect": 1,
+        "unmapped_identity_font": 1
+      },
+      "elapsed_seconds": 69.575,
+      "approval_status": "pending"
+    },
+    {
+      "document_sha256": "a33c1aaa35d0fecd6410d9d90a115d02d93460f20aa31c1cf574ca0834f45b93",
+      "pages_processed": 259,
+      "native_text_changed_pages": 0,
+      "native_encoding_improved_pages": 0,
+      "pages_needing_ocr_or_review": 221,
+      "pages_with_processing_failures": 0,
+      "pages_quarantined": 259,
+      "table_candidates": 60,
+      "table_candidates_approved": 0,
+      "before_invalid_ratio": 6.448138005325404e-05,
+      "after_invalid_ratio": 6.448138005325404e-05,
+      "remaining_issue_counts": {
+        "sparse_text_or_image_only": 13,
+        "unmapped_identity_font": 213,
+        "unexpected_glyphs_or_language": 125,
+        "equipment_applicability_requires_review": 27,
+        "encoding_suspect": 21,
+        "repeated_text": 2
+      },
+      "elapsed_seconds": 40.408,
+      "approval_status": "pending"
+    },
+    {
+      "document_sha256": "eddb5672aaade1caec11a8df03e09ab0a30ff9baa9234920f50bdaba28de66fe",
+      "pages_processed": 265,
+      "native_text_changed_pages": 0,
+      "native_encoding_improved_pages": 0,
+      "pages_needing_ocr_or_review": 215,
+      "pages_with_processing_failures": 0,
+      "pages_quarantined": 265,
+      "table_candidates": 49,
+      "table_candidates_approved": 0,
+      "before_invalid_ratio": 1.0068034744787904e-05,
+      "after_invalid_ratio": 1.0068034744787904e-05,
+      "remaining_issue_counts": {
+        "sparse_text_or_image_only": 14,
+        "repeated_text": 5,
+        "equipment_applicability_requires_review": 14,
+        "unmapped_identity_font": 207,
+        "encoding_suspect": 4,
+        "fragmented_words": 3,
+        "unexpected_glyphs_or_language": 1
+      },
+      "elapsed_seconds": 40.589,
+      "approval_status": "pending",
+      "quality_version": "original-baseline-v2"
+    }
+  ],
+  "total_pages_processed": 1515,
+  "native_text_changed_pages": 690,
+  "native_invalid_character_rate_improved_pages": 479,
+  "all_pages_requiring_general_review": 1515,
+  "bounded_sections_text_fidelity_approved": 5,
+  "runtime_approved_sections": 0,
+  "ocr_pages_processed": 6,
+  "ocr_pages_failed": 0,
+  "ocr_pages_approved": 0,
+  "ocr_pages": [
+    {
+      "document_sha256": "a33c1aaa35d0fecd6410d9d90a115d02d93460f20aa31c1cf574ca0834f45b93",
+      "page": 26,
+      "dpi": 200,
+      "text_sha256": "43d01adae976ed83ec56a54736253ce706083d175affb101a226c408021917ea",
+      "mean_word_confidence": 95.17667395931477,
+      "status": "review_required"
+    },
+    {
+      "document_sha256": "eddb5672aaade1caec11a8df03e09ab0a30ff9baa9234920f50bdaba28de66fe",
+      "page": 26,
+      "dpi": 200,
+      "text_sha256": "766308a2bb315d8948bf8367af81ee3455f9f6ce66693d26dd9e3edae5f375cb",
+      "mean_word_confidence": 95.436151722334,
+      "status": "review_required"
+    },
+    {
+      "document_sha256": "0ecd0a8b2721d8666cd5d69362a21a46058877a334782a3d26dd92e6f62b1e0d",
+      "page": 26,
+      "dpi": 200,
+      "text_sha256": "e04fae9e348c4cab8387c6838856f42efd9e588db04008b22e4b7a501377dc4f",
+      "mean_word_confidence": 95.9935370411449,
+      "status": "review_required"
+    },
+    {
+      "document_sha256": "a33c1aaa35d0fecd6410d9d90a115d02d93460f20aa31c1cf574ca0834f45b93",
+      "page": 32,
+      "dpi": 200,
+      "text_sha256": "7cc083878fec47afbacf415e840189420e89df5eb11ab90948e8f58a45f693f9",
+      "mean_word_confidence": 95.42083449148936,
+      "status": "review_required"
+    },
+    {
+      "document_sha256": "eddb5672aaade1caec11a8df03e09ab0a30ff9baa9234920f50bdaba28de66fe",
+      "page": 20,
+      "dpi": 200,
+      "text_sha256": "4c9a783b06294ad8d94176bec35b1e29343202cb797953d3a7789c5260d85545",
+      "mean_word_confidence": 93.91534257582417,
+      "status": "review_required"
+    },
+    {
+      "document_sha256": "0ecd0a8b2721d8666cd5d69362a21a46058877a334782a3d26dd92e6f62b1e0d",
+      "page": 34,
+      "dpi": 200,
+      "text_sha256": "169c0a7aff6817c1b0aec31a71952eeea5b370efc7a5aa4f9b399a3b400cca11",
+      "mean_word_confidence": 95.50458957802199,
+      "status": "review_required"
+    }
+  ],
+  "original_files_modified": false,
+  "production_modified": false,
+  "llm_calls": 0,
+  "paid_api_calls": 0
+}

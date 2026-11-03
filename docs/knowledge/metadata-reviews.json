@@ -1,0 +1,200 @@
+[
+  {
+    "sha256": "a33c1aaa35d0fecd6410d9d90a115d02d93460f20aa31c1cf574ca0834f45b93",
+    "reviewed_by": "Codex: metadata inspection only, not content approval",
+    "evidence": [
+      {
+        "field": "model",
+        "value": "C10",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "powertrain",
+        "value": "BEV",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "model_year",
+        "value": "2026",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "manufacturer",
+        "value": "Leapmotor",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "document_type",
+        "value": "owner_manual",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVC10\n\n\n\n\n\n    ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "document_version",
+        "value": "Edição 02 - JAN/2026",
+        "page": 259,
+        "quote": "PN 60351938 - Edição 02 - JAN/2026",
+        "basis": "internal_text"
+      }
+    ]
+  },
+  {
+    "sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+    "reviewed_by": "Codex: metadata inspection only, not content approval",
+    "evidence": [
+      {
+        "field": "model",
+        "value": "B10",
+        "page": 1,
+        "quote": "B10 MANUAL DO USUÁRIO",
+        "basis": "visual_review"
+      },
+      {
+        "field": "manufacturer",
+        "value": "Leapmotor",
+        "page": 1,
+        "quote": "LEAPMOTOR",
+        "basis": "visual_review"
+      },
+      {
+        "field": "document_type",
+        "value": "owner_manual",
+        "page": 1,
+        "quote": "MANUAL DO USUÁRIO",
+        "basis": "visual_review"
+      }
+    ]
+  },
+  {
+    "sha256": "8d59ee55518e3aa94d76151df8bfa1e426f1c7a12570b8a649125637eb468699",
+    "reviewed_by": "Codex: metadata inspection only, not content approval",
+    "evidence": [
+      {
+        "field": "model",
+        "value": "C10",
+        "page": 1,
+        "quote": "C10 MANUAL DO USUÁRIO",
+        "basis": "visual_review"
+      },
+      {
+        "field": "manufacturer",
+        "value": "Leapmotor",
+        "page": 1,
+        "quote": "LEAPMOTOR",
+        "basis": "visual_review"
+      },
+      {
+        "field": "document_type",
+        "value": "owner_manual",
+        "page": 1,
+        "quote": "MANUAL DO USUÁRIO",
+        "basis": "visual_review"
+      }
+    ]
+  },
+  {
+    "sha256": "0ecd0a8b2721d8666cd5d69362a21a46058877a334782a3d26dd92e6f62b1e0d",
+    "reviewed_by": "Codex: metadata inspection only, not content approval",
+    "evidence": [
+      {
+        "field": "model",
+        "value": "C10",
+        "page": 1,
+        "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "powertrain",
+        "value": "REEV",
+        "page": 1,
+        "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "model_year",
+        "value": "2026",
+        "page": 1,
+        "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "manufacturer",
+        "value": "Leapmotor",
+        "page": 1,
+        "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "document_type",
+        "value": "owner_manual",
+        "page": 1,
+        "quote": "  MANUAIS DE BORDO\n\n\n       REEVC10\n\n\n\n\n\n     ANO DE FABRICAÇÃO – 2026\n        ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "document_version",
+        "value": "Edição 02 - JAN/2026",
+        "page": 273,
+        "quote": "PN 60351938 - Edição 02 - JAN/2026",
+        "basis": "internal_text"
+      }
+    ]
+  },
+  {
+    "sha256": "eddb5672aaade1caec11a8df03e09ab0a30ff9baa9234920f50bdaba28de66fe",
+    "reviewed_by": "Codex: metadata inspection only, not content approval",
+    "evidence": [
+      {
+        "field": "model",
+        "value": "B10",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "powertrain",
+        "value": "BEV",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "model_year",
+        "value": "2026",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "manufacturer",
+        "value": "Leapmotor",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "document_type",
+        "value": "owner_manual",
+        "page": 1,
+        "quote": " MANUAIS DE BORDO\n\n\n       BEVB10\n\n\n\n\n\n   ANO DE FABRICAÇÃO – 2026\n      ANO MODELO – 2026",
+        "basis": "internal_text"
+      },
+      {
+        "field": "document_version",
+        "value": "Edição 02 - JAN/2026",
+        "page": 265,
+        "quote": "PN 60351938 - Edição 02 - JAN/2026",
+        "basis": "internal_text"
+      }
+    ]
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "checkpoint": "A",
+  "recorded_at": "2026-11-03T13:03:40.682710+00:00",
+  "base_commit": "05cbfa4",
+  "branch": "feat/lia-knowledge-v1",
+  "pytest_total_passed": 432,
+  "pytest_knowledge_passed": 19,
+  "ruff": "passed",
+  "compileall": "passed",
+  "git_diff_check": "passed",
+  "real_documents": 6,
+  "real_pages": 1515,
+  "real_duplicates": 0,
+  "approved_documents": 0,
+  "llm_calls": 0,
+  "embedding_calls": 0,
+  "ocr_executed": false,
+  "production_changed": false,
+  "retrieval_evaluation": "not_run",
+  "conversation_evaluation": "not_run",
+  "checkpoints_b_c_d": "not_implemented"
+}

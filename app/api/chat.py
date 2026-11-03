@@ -69,12 +69,23 @@ def build_agent(*, reviewed_catalog=False, test_media=False, orchestration_enabl
             else None
         )
         grounding = GroundingPolicy(facts, catalog, brand=brand)
+    knowledge = None
+    if settings.lia_knowledge_enabled:
+        from app.knowledge.embeddings import LocalE5
+        from app.knowledge.runtime import CatalogKnowledge
+
+        if not reviewed_catalog or grounding is None:
+            raise ValueError("Knowledge runtime requires the reviewed catalog")
+        knowledge = CatalogKnowledge(
+            grounding, LocalE5(settings.lia_knowledge_model_dir), settings.lia_knowledge_cache_path
+        )
     return SalesAgent(
         catalog,
         media,
         llm,
         timeout=settings.llm_timeout_seconds,
         grounding=grounding,
+        knowledge=knowledge,
         input_token_rate=settings.llm_input_usd_per_million,
         output_token_rate=settings.llm_output_usd_per_million,
         orchestration_enabled=settings.lia_orchestration_enabled

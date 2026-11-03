@@ -1,0 +1,398 @@
+{
+  "segments": [
+    {
+      "segment_id": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page_start": 19,
+      "page_end": 19,
+      "section_title": "Carregamento programado — descrição e condição CA",
+      "text": "CARREGAMENTO\nPROGRAMADO*\n\nPara facilitar o uso do veículo, você pode ativar a\nfunção de agendamento de carregamento lento\n\nna interface \"Configurações - Carregamento\" na\ntela de infoentretenimento. Após a ativação da\nfunção, o tempo de carregamento e a função de\nprioridade do limite de carregamento poderão ser\nconfigurados.\n\nDICA\n\n• Para o uso diário, recomendamos que você\npriorize o modo de carregamento\nprogramado, que será benéfico para\nprolongar a vida útil da bateria de potência e\nretardar a degradação da bateria de\npotência.\n• O carregamento com hora marcada só está\ndisponível em cenários nos quais o veículo\nestá sendo carregado usando um carregador\nCA.",
+      "text_sha256": "bba836a1eba7b29e0334b9f1643a46156c2881a28a9f27b9c4e5c1c0722f9217",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "content_type": "text",
+      "equipment_condition": "conditional",
+      "review_status": "pending"
+    },
+    {
+      "segment_id": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page_start": 164,
+      "page_end": 164,
+      "section_title": "Bateria de potência — descrição e cuidado com o chassi",
+      "text": "BATERIA DE POTÊNCIA\n\nCARACTERÍSTICAS DA BATERIA DE\nPOTÊNCIA\n\nA bateria de potência é a fonte de energia do\nveículo e pode ser carregada e descarregada\nrepetidamente. A bateria de potência é carregada\npor meio de uma fonte de alimentação externa, e\no veículo também pode recarregar a bateria de\npotência por meio da recuperação de energia ao\nfrear ou desacelerar.\n\nDICA\n\n• A bateria de potência está localizada sob o\nchassi da carroceria. Quando o veículo passar\npor superfícies irregulares ou dirigir em\nestradas desniveladas, tenha cuidado para\nevitar colisões.",
+      "text_sha256": "b263444a7041cd17391b6899fc5f59bc8ebbbf3522c2d09fe1cd0ac068ce9d11",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "content_type": "text",
+      "equipment_condition": "unknown",
+      "review_status": "pending"
+    },
+    {
+      "segment_id": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page_start": 45,
+      "page_end": 45,
+      "section_title": "Tela de infoentretenimento — interface e advertência",
+      "text": "TELA DE INFOENTRETENIMENTO\n\nINFORMAÇÕES DE EXIBIÇÃO DA INTERFACE PRINCIPAL\n\n1. Barra superior\n2. Acesso rápido\n3. Barra inferior\n\nBarra superior: exibe hora, Bluetooth, carregamento sem fio do celular, alerta de falhas e rede* etc.\n\nAtalhos: exibe cartões de atalho para navegação*, multimídia, status do veículo etc.\n\nBarra inferior: Os ícones da barra inferior ilustrados, da esquerda para a direita, são, respectivamente: tela inicial,\ncentral de aplicativos, configurações, navegação*, música, visão 360°, ajuste de temperatura do ar-condicionado,\nligar/desligar o ar-condicionado, descongelar o para-brisa dianteiro, descongelar o para-brisa traseiro, circulação\ninterna/externa e ajuste de volume.\n\nPor meio da interface “Configurações do veículo - Exibição - Barra inferior personalizada”, é possível personalizar\nos aplicativos, as funções de controle e o status exibidos na barra inferior, bem como sua ordem.\n\nADVERTÊNCIA\n\n• Para sua segurança ao dirigir, não opere a tela de controle central enquanto estiver dirigindo.",
+      "text_sha256": "dc4a3e10201b70b570474c78ae8fe6cc6716d53edb4216f2338ae6a44c84e1a6",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "content_type": "text",
+      "equipment_condition": "conditional",
+      "review_status": "pending"
+    },
+    {
+      "segment_id": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page_start": 86,
+      "page_end": 86,
+      "section_title": "Ajuste da ventilação central frontal",
+      "text": "AJUSTE DA VENTILAÇÃO CENTRAL\nFRONTAL\n\nMova a alavanca de ventilação para cima e para\nbaixo para ajustar a direção do fluxo de ar da\nventilação.\n\nEmpurre a alavanca da ventilação para a esquerda\ne para a direita para ajustar o fluxo de ar da\nventilação, e empurre as alavancas de ambos os\nlados para dentro até o final para fechar a\nventilação.",
+      "text_sha256": "711b57f29c656ec6186ac717dacfda6ac874b3eadb7acc50f2d256761858f9a6",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "content_type": "text",
+      "equipment_condition": "unknown",
+      "review_status": "pending"
+    },
+    {
+      "segment_id": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page_start": 22,
+      "page_end": 22,
+      "section_title": "Cinto de segurança — advertências de utilização",
+      "text": "ADVERTÊNCIA\n\n• Antes de cada viagem, todos os passageiros\nno veículo devem afivelar o cinto de\nsegurança, e um assento de segurança\ninfantil apropriado deve ser usado para\nqualquer criança que estiver viajando com\neles.\n• Mesmo que a velocidade do veículo seja\nbaixa, a força que atua sobre a carroceria\nhumana em caso de colisão é muito grande,\ne o motorista e os ocupantes não podem\ncontrolar seus corpos com as mãos.\nMotoristas e ocupantes sem cinto podem ser\narremessados para fora, e bater em qualquer\nobjeto dentro do veículo pode causar lesões\npessoais graves.\n• Os ocupantes do assento traseiro também\ndevem usar corretamente o cinto de\nsegurança. Caso contrário, os ocupantes\npodem ser arremessados violentamente\nquando ocorrer um incidente. Os ocupantes\ndo assento traseiro que não usam cintos de\nsegurança podem não apenas se machucar,\n\nmas também colocar em risco os outros\nocupantes do veículo.\n• Não instale enfeites ou dispositivos no cinto\nde segurança que impeçam o travamento do\ncinto, para evitar que o cinto de segurança\nnão ofereça proteção em caso de incidente.\n• Não incline muito o encosto do banco para\ntrás, pois isso afetará seriamente a proteção\ndo cinto de segurança.\n• Não deixe que as crianças brinquem com o\ncinto de segurança para evitar lesões\nacidentais.\n• Recomendamos o uso de cintos de\nsegurança para ocupantes que estejam\ndoentes, com deficiência ou com outras\nlimitações. Você também pode obter\nconselhos eficazes consultando seu médico.\n• Não coloque uma almofada entre a\ncarroceria do ocupante e o encosto do\nbanco, pois a almofada afetará a posição do\nassento e reduzirá o efeito protetor do cinto\nde segurança.\n• Em nenhuma circunstância é permitido\ndesmontar ou modificar o cinto de segurança\npor conta própria.\n• Os cintos de segurança devem ser\nsubstituídos quando o veículo acidentado for\ninspecionado e reparado,\nindependentemente de estarem danificados.",
+      "text_sha256": "4c04b5ae4e5568456de15cc6f6012c8ca98bfad8e229c8df7a74780f8a0294f2",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "content_type": "text",
+      "equipment_condition": "not_stated",
+      "review_status": "pending"
+    }
+  ],
+  "events": [
+    {
+      "segment_id": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "text_sha256": "bba836a1eba7b29e0334b9f1643a46156c2881a28a9f27b9c4e5c1c0722f9217",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "previous_event_sha256": null,
+      "status": "approved",
+      "reviewer": "Codex: original-page visual comparison, not manufacturer approval",
+      "reviewed_at": "2026-11-03T13:32:05.623975Z",
+      "reason": "Bounded text compared with original PDF image. Scope: extraction fidelity only; model-year/equipment applicability remains unresolved.",
+      "visual_comparison": true,
+      "scope": "text_fidelity_only"
+    },
+    {
+      "segment_id": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "text_sha256": "b263444a7041cd17391b6899fc5f59bc8ebbbf3522c2d09fe1cd0ac068ce9d11",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "previous_event_sha256": null,
+      "status": "approved",
+      "reviewer": "Codex: original-page visual comparison, not manufacturer approval",
+      "reviewed_at": "2026-11-03T13:32:05.628701Z",
+      "reason": "Bounded text compared with original PDF image. Scope: extraction fidelity only; model-year/equipment applicability remains unresolved.",
+      "visual_comparison": true,
+      "scope": "text_fidelity_only"
+    },
+    {
+      "segment_id": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "text_sha256": "dc4a3e10201b70b570474c78ae8fe6cc6716d53edb4216f2338ae6a44c84e1a6",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "previous_event_sha256": null,
+      "status": "approved",
+      "reviewer": "Codex: original-page visual comparison, not manufacturer approval",
+      "reviewed_at": "2026-11-03T13:32:05.632069Z",
+      "reason": "Bounded text compared with original PDF image. Scope: extraction fidelity only; model-year/equipment applicability remains unresolved.",
+      "visual_comparison": true,
+      "scope": "text_fidelity_only"
+    },
+    {
+      "segment_id": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "text_sha256": "711b57f29c656ec6186ac717dacfda6ac874b3eadb7acc50f2d256761858f9a6",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "previous_event_sha256": null,
+      "status": "approved",
+      "reviewer": "Codex: original-page visual comparison, not manufacturer approval",
+      "reviewed_at": "2026-11-03T13:32:05.638363Z",
+      "reason": "Bounded text compared with original PDF image. Scope: extraction fidelity only; model-year/equipment applicability remains unresolved.",
+      "visual_comparison": true,
+      "scope": "text_fidelity_only"
+    },
+    {
+      "segment_id": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "text_sha256": "4c04b5ae4e5568456de15cc6f6012c8ca98bfad8e229c8df7a74780f8a0294f2",
+      "source_recovery_key": "b668cf302be502272e07cf3520a02a35dbe16ac4d52276981a876c2a05021100",
+      "previous_event_sha256": null,
+      "status": "approved",
+      "reviewer": "Codex: original-page visual comparison, not manufacturer approval",
+      "reviewed_at": "2026-11-03T13:32:05.639792Z",
+      "reason": "Bounded text compared with original PDF image. Scope: extraction fidelity only; model-year/equipment applicability remains unresolved.",
+      "visual_comparison": true,
+      "scope": "text_fidelity_only"
+    }
+  ],
+  "sources": [
+    {
+      "segment_id": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "topic": "charging",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page": 19,
+      "block_indices": [
+        15,
+        17,
+        1,
+        2,
+        5
+      ],
+      "bboxes": [
+        [
+          33.90280532836914,
+          502.1231689453125,
+          116.27534484863281,
+          528.0811157226562
+        ],
+        [
+          33.90279769897461,
+          537.9498901367188,
+          180.15216064453125,
+          556.095458984375
+        ],
+        [
+          224.3258056640625,
+          40.99346923828125,
+          374.7329406738281,
+          86.85755157470703
+        ],
+        [
+          237.7650146484375,
+          103.15338134765625,
+          254.19541931152344,
+          112.05738067626953
+        ],
+        [
+          221.1779022216797,
+          117.99427795410156,
+          376.08673095703125,
+          210.61395263671875
+        ]
+      ],
+      "original_render_sha256": "29b4b1685a3f8c669e53eb708f5419f81f6fbd2dec4f02d54295df940fe217cd",
+      "scope": "text_fidelity_only",
+      "runtime_eligible": false,
+      "pending": [
+        "verified_model_year",
+        "powertrain_applicability",
+        "equipment_configuration"
+      ]
+    },
+    {
+      "segment_id": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "topic": "battery",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page": 164,
+      "block_indices": [
+        6,
+        8,
+        10,
+        11,
+        12
+      ],
+      "bboxes": [
+        [
+          231.468017578125,
+          198.36669921875,
+          341.1483459472656,
+          211.7227020263672
+        ],
+        [
+          231.47003173828125,
+          220.76388549804688,
+          380.5823669433594,
+          243.92588806152344
+        ],
+        [
+          231.46701049804688,
+          253.51150512695312,
+          380.8453369140625,
+          317.8567199707031
+        ],
+        [
+          244.90899658203125,
+          334.1539001464844,
+          261.3393859863281,
+          343.0578918457031
+        ],
+        [
+          228.32199096679688,
+          348.99481201171875,
+          384.6649475097656,
+          395.415283203125
+        ]
+      ],
+      "original_render_sha256": "728786e23d60cfab564942598f24b328cf12aa3c4ad4396ce152a8a93f906594",
+      "scope": "text_fidelity_only",
+      "runtime_eligible": false,
+      "pending": [
+        "verified_model_year",
+        "powertrain_applicability",
+        "equipment_configuration"
+      ]
+    },
+    {
+      "segment_id": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "topic": "multimedia",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page": 45,
+      "block_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "bboxes": [
+        [
+          33.90279769897461,
+          40.447509765625,
+          190.94021606445312,
+          53.80350875854492
+        ],
+        [
+          33.9047966003418,
+          62.842681884765625,
+          271.4371337890625,
+          75.08567810058594
+        ],
+        [
+          34.744197845458984,
+          290.3919982910156,
+          304.2965087890625,
+          298.1829833984375
+        ],
+        [
+          33.90017318725586,
+          299.9167785644531,
+          328.8523864746094,
+          308.82080078125
+        ],
+        [
+          33.900508880615234,
+          315.87579345703125,
+          283.65557861328125,
+          324.77978515625
+        ],
+        [
+          33.900508880615234,
+          331.8367919921875,
+          373.98797607421875,
+          368.4598083496094
+        ],
+        [
+          33.900508880615234,
+          375.5168151855469,
+          372.9237976074219,
+          393.6597900390625
+        ],
+        [
+          47.89030075073242,
+          409.95599365234375,
+          95.49346160888672,
+          418.8599853515625
+        ],
+        [
+          30.755298614501953,
+          424.7958984375,
+          337.44708251953125,
+          434.25640869140625
+        ]
+      ],
+      "original_render_sha256": "6a1b10fe0c35e201202cd13e9aabdb4b19248bbd32d7f16eea85820f360408b9",
+      "scope": "text_fidelity_only",
+      "runtime_eligible": false,
+      "pending": [
+        "verified_model_year",
+        "powertrain_applicability",
+        "equipment_configuration"
+      ]
+    },
+    {
+      "segment_id": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "topic": "comfort",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page": 86,
+      "block_indices": [
+        7,
+        9,
+        10
+      ],
+      "bboxes": [
+        [
+          41.051204681396484,
+          255.72103881835938,
+          187.86651611328125,
+          278.88409423828125
+        ],
+        [
+          41.04890060424805,
+          390.62896728515625,
+          184.4683837890625,
+          418.010986328125
+        ],
+        [
+          41.04990005493164,
+          425.0679931640625,
+          192.4104461669922,
+          470.93194580078125
+        ]
+      ],
+      "original_render_sha256": "ecbbd5129996cb979f4fe324ca76c3963e7e05d3b27b976ffcd690d3a4d42d62",
+      "scope": "text_fidelity_only",
+      "runtime_eligible": false,
+      "pending": [
+        "verified_model_year",
+        "powertrain_applicability",
+        "equipment_configuration"
+      ]
+    },
+    {
+      "segment_id": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "topic": "safety",
+      "document_sha256": "2aa86fae9db7f002ecc2c2930ca4708b8a6fcd3183ad93b51a888254a35c5c30",
+      "page": 22,
+      "block_indices": [
+        7,
+        10,
+        5
+      ],
+      "bboxes": [
+        [
+          55.03169631958008,
+          329.1128845214844,
+          102.63484954833984,
+          338.0168762207031
+        ],
+        [
+          37.896602630615234,
+          343.955810546875,
+          192.06732177734375,
+          547.4512329101562
+        ],
+        [
+          228.31961059570312,
+          40.71272277832031,
+          384.2522888183594,
+          308.8874816894531
+        ]
+      ],
+      "original_render_sha256": "1214eb3287d9ca24d51af96f8117e5dd8a0e831dee78c87bf4a3215cf51d31e8",
+      "scope": "text_fidelity_only",
+      "runtime_eligible": false,
+      "pending": [
+        "verified_model_year",
+        "powertrain_applicability",
+        "equipment_configuration"
+      ]
+    }
+  ]
+}

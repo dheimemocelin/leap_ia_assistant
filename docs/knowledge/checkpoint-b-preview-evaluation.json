@@ -1,0 +1,1220 @@
+{
+  "scope": "document_preview_only",
+  "model": "intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3:dba34543faf09efbfb5d16aafb256cea535b8e762b7aeebb000746d0c4be6405",
+  "independent_human_gold": false,
+  "gold_basis": "engineer-authored questions mapped to visually reviewed bounded sections",
+  "summary": {
+    "lexical": {
+      "queries": 30,
+      "recall_at_3": 0.9666666666666667,
+      "mrr_at_3": 0.9666666666666667,
+      "top1": 0.9666666666666667,
+      "mean_latency_ms": 21.039666666666665
+    },
+    "vector": {
+      "queries": 30,
+      "recall_at_3": 1.0,
+      "mrr_at_3": 1.0,
+      "top1": 1.0,
+      "mean_latency_ms": 31.41
+    },
+    "hybrid": {
+      "queries": 30,
+      "recall_at_3": 1.0,
+      "mrr_at_3": 0.9777777777777777,
+      "top1": 0.9666666666666667,
+      "mean_latency_ms": 31.513333333333332
+    }
+  },
+  "queries": [
+    {
+      "question": "Dá pra programar o horário de carregar?",
+      "topic": "charging",
+      "mode": "lexical",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c"
+      ],
+      "rank": 1,
+      "latency_ms": 17.36
+    },
+    {
+      "question": "Dá pra programar o horário de carregar?",
+      "topic": "charging",
+      "mode": "vector",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 28.43
+    },
+    {
+      "question": "Dá pra programar o horário de carregar?",
+      "topic": "charging",
+      "mode": "hybrid",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 33.07
+    },
+    {
+      "question": "Onde ativo o agendamento da carga?",
+      "topic": "charging",
+      "mode": "lexical",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 20.61
+    },
+    {
+      "question": "Onde ativo o agendamento da carga?",
+      "topic": "charging",
+      "mode": "vector",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.72
+    },
+    {
+      "question": "Onde ativo o agendamento da carga?",
+      "topic": "charging",
+      "mode": "hybrid",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c"
+      ],
+      "rank": 1,
+      "latency_ms": 31.5
+    },
+    {
+      "question": "Agendar a carga funciona com carregador CA?",
+      "topic": "charging",
+      "mode": "lexical",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c"
+      ],
+      "rank": 1,
+      "latency_ms": 20.69
+    },
+    {
+      "question": "Agendar a carga funciona com carregador CA?",
+      "topic": "charging",
+      "mode": "vector",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 31.55
+    },
+    {
+      "question": "Agendar a carga funciona com carregador CA?",
+      "topic": "charging",
+      "mode": "hybrid",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 31.61
+    },
+    {
+      "question": "O carregamento programado também vale pra carga rápida?",
+      "topic": "charging",
+      "mode": "lexical",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 21.0
+    },
+    {
+      "question": "O carregamento programado também vale pra carga rápida?",
+      "topic": "charging",
+      "mode": "vector",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 33.13
+    },
+    {
+      "question": "O carregamento programado também vale pra carga rápida?",
+      "topic": "charging",
+      "mode": "hybrid",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 32.03
+    },
+    {
+      "question": "Posso configurar limite de carregamento?",
+      "topic": "charging",
+      "mode": "lexical",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 20.48
+    },
+    {
+      "question": "Posso configurar limite de carregamento?",
+      "topic": "charging",
+      "mode": "vector",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 30.64
+    },
+    {
+      "question": "Posso configurar limite de carregamento?",
+      "topic": "charging",
+      "mode": "hybrid",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 29.57
+    },
+    {
+      "question": "Como escolho o tempo do carregamento?",
+      "topic": "charging",
+      "mode": "lexical",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 20.49
+    },
+    {
+      "question": "Como escolho o tempo do carregamento?",
+      "topic": "charging",
+      "mode": "vector",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 31.27
+    },
+    {
+      "question": "Como escolho o tempo do carregamento?",
+      "topic": "charging",
+      "mode": "hybrid",
+      "expected_evidence": "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+      "returned_evidence": [
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 30.94
+    },
+    {
+      "question": "De onde vem a energia do carro?",
+      "topic": "battery",
+      "mode": "lexical",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.75
+    },
+    {
+      "question": "De onde vem a energia do carro?",
+      "topic": "battery",
+      "mode": "vector",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.08
+    },
+    {
+      "question": "De onde vem a energia do carro?",
+      "topic": "battery",
+      "mode": "hybrid",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.01
+    },
+    {
+      "question": "A bateria pode carregar e descarregar várias vezes?",
+      "topic": "battery",
+      "mode": "lexical",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 20.65
+    },
+    {
+      "question": "A bateria pode carregar e descarregar várias vezes?",
+      "topic": "battery",
+      "mode": "vector",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 32.77
+    },
+    {
+      "question": "A bateria pode carregar e descarregar várias vezes?",
+      "topic": "battery",
+      "mode": "hybrid",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.9
+    },
+    {
+      "question": "O carro recupera energia ao frear?",
+      "topic": "battery",
+      "mode": "lexical",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.56
+    },
+    {
+      "question": "O carro recupera energia ao frear?",
+      "topic": "battery",
+      "mode": "vector",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.6
+    },
+    {
+      "question": "O carro recupera energia ao frear?",
+      "topic": "battery",
+      "mode": "hybrid",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 30.46
+    },
+    {
+      "question": "A bateria carrega quando desacelero?",
+      "topic": "battery",
+      "mode": "lexical",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 20.55
+    },
+    {
+      "question": "A bateria carrega quando desacelero?",
+      "topic": "battery",
+      "mode": "vector",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.53
+    },
+    {
+      "question": "A bateria carrega quando desacelero?",
+      "topic": "battery",
+      "mode": "hybrid",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.49
+    },
+    {
+      "question": "A bateria fica debaixo do carro?",
+      "topic": "battery",
+      "mode": "lexical",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 20.27
+    },
+    {
+      "question": "A bateria fica debaixo do carro?",
+      "topic": "battery",
+      "mode": "vector",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 30.84
+    },
+    {
+      "question": "A bateria fica debaixo do carro?",
+      "topic": "battery",
+      "mode": "hybrid",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.84
+    },
+    {
+      "question": "Preciso tomar cuidado com a bateria em piso irregular?",
+      "topic": "battery",
+      "mode": "lexical",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 20.65
+    },
+    {
+      "question": "Preciso tomar cuidado com a bateria em piso irregular?",
+      "topic": "battery",
+      "mode": "vector",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 32.6
+    },
+    {
+      "question": "Preciso tomar cuidado com a bateria em piso irregular?",
+      "topic": "battery",
+      "mode": "hybrid",
+      "expected_evidence": "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+      "returned_evidence": [
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 32.45
+    },
+    {
+      "question": "O que aparece na tela principal?",
+      "topic": "multimedia",
+      "mode": "lexical",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 21.29
+    },
+    {
+      "question": "O que aparece na tela principal?",
+      "topic": "multimedia",
+      "mode": "vector",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.08
+    },
+    {
+      "question": "O que aparece na tela principal?",
+      "topic": "multimedia",
+      "mode": "hybrid",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.62
+    },
+    {
+      "question": "Consigo personalizar a barra inferior da tela?",
+      "topic": "multimedia",
+      "mode": "lexical",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c"
+      ],
+      "rank": 1,
+      "latency_ms": 20.59
+    },
+    {
+      "question": "Consigo personalizar a barra inferior da tela?",
+      "topic": "multimedia",
+      "mode": "vector",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.27
+    },
+    {
+      "question": "Consigo personalizar a barra inferior da tela?",
+      "topic": "multimedia",
+      "mode": "hybrid",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 32.07
+    },
+    {
+      "question": "Tem indicação de Bluetooth na tela?",
+      "topic": "multimedia",
+      "mode": "lexical",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 20.6
+    },
+    {
+      "question": "Tem indicação de Bluetooth na tela?",
+      "topic": "multimedia",
+      "mode": "vector",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.31
+    },
+    {
+      "question": "Tem indicação de Bluetooth na tela?",
+      "topic": "multimedia",
+      "mode": "hybrid",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.56
+    },
+    {
+      "question": "Posso mexer na tela enquanto dirijo?",
+      "topic": "multimedia",
+      "mode": "lexical",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.54
+    },
+    {
+      "question": "Posso mexer na tela enquanto dirijo?",
+      "topic": "multimedia",
+      "mode": "vector",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 33.38
+    },
+    {
+      "question": "Posso mexer na tela enquanto dirijo?",
+      "topic": "multimedia",
+      "mode": "hybrid",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 30.53
+    },
+    {
+      "question": "Onde ficam os controles do ar na tela?",
+      "topic": "multimedia",
+      "mode": "lexical",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c"
+      ],
+      "rank": 1,
+      "latency_ms": 20.34
+    },
+    {
+      "question": "Onde ficam os controles do ar na tela?",
+      "topic": "multimedia",
+      "mode": "vector",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 32.81
+    },
+    {
+      "question": "Onde ficam os controles do ar na tela?",
+      "topic": "multimedia",
+      "mode": "hybrid",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.22
+    },
+    {
+      "question": "Quais são os atalhos da central multimídia?",
+      "topic": "multimedia",
+      "mode": "lexical",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c"
+      ],
+      "rank": 1,
+      "latency_ms": 20.41
+    },
+    {
+      "question": "Quais são os atalhos da central multimídia?",
+      "topic": "multimedia",
+      "mode": "vector",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 33.05
+    },
+    {
+      "question": "Quais são os atalhos da central multimídia?",
+      "topic": "multimedia",
+      "mode": "hybrid",
+      "expected_evidence": "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 32.16
+    },
+    {
+      "question": "Como ajusto a direção do ar no painel?",
+      "topic": "comfort",
+      "mode": "lexical",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 20.7
+    },
+    {
+      "question": "Como ajusto a direção do ar no painel?",
+      "topic": "comfort",
+      "mode": "vector",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.41
+    },
+    {
+      "question": "Como ajusto a direção do ar no painel?",
+      "topic": "comfort",
+      "mode": "hybrid",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.94
+    },
+    {
+      "question": "Dá para fechar as saídas de ar centrais?",
+      "topic": "comfort",
+      "mode": "lexical",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.7
+    },
+    {
+      "question": "Dá para fechar as saídas de ar centrais?",
+      "topic": "comfort",
+      "mode": "vector",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.96
+    },
+    {
+      "question": "Dá para fechar as saídas de ar centrais?",
+      "topic": "comfort",
+      "mode": "hybrid",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 32.58
+    },
+    {
+      "question": "Como movo a ventilação central para cima e para baixo?",
+      "topic": "comfort",
+      "mode": "lexical",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 20.36
+    },
+    {
+      "question": "Como movo a ventilação central para cima e para baixo?",
+      "topic": "comfort",
+      "mode": "vector",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.82
+    },
+    {
+      "question": "Como movo a ventilação central para cima e para baixo?",
+      "topic": "comfort",
+      "mode": "hybrid",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 32.36
+    },
+    {
+      "question": "Como ajusto o fluxo de ar na saída central frontal?",
+      "topic": "comfort",
+      "mode": "lexical",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.85
+    },
+    {
+      "question": "Como ajusto o fluxo de ar na saída central frontal?",
+      "topic": "comfort",
+      "mode": "vector",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 32.15
+    },
+    {
+      "question": "Como ajusto o fluxo de ar na saída central frontal?",
+      "topic": "comfort",
+      "mode": "hybrid",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 31.86
+    },
+    {
+      "question": "Como direcionar o vento das saídas frontais?",
+      "topic": "comfort",
+      "mode": "lexical",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": null,
+      "latency_ms": 20.5
+    },
+    {
+      "question": "Como direcionar o vento das saídas frontais?",
+      "topic": "comfort",
+      "mode": "vector",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.93
+    },
+    {
+      "question": "Como direcionar o vento das saídas frontais?",
+      "topic": "comfort",
+      "mode": "hybrid",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c"
+      ],
+      "rank": 3,
+      "latency_ms": 31.58
+    },
+    {
+      "question": "Quero diminuir a passagem de ar pelo difusor central",
+      "topic": "comfort",
+      "mode": "lexical",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 20.63
+    },
+    {
+      "question": "Quero diminuir a passagem de ar pelo difusor central",
+      "topic": "comfort",
+      "mode": "vector",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 33.58
+    },
+    {
+      "question": "Quero diminuir a passagem de ar pelo difusor central",
+      "topic": "comfort",
+      "mode": "hybrid",
+      "expected_evidence": "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+      "returned_evidence": [
+        "seg-13312b4f8faa0e9888bbe71f81a789a7ca1901d53b53aaae614f0da3ae57b20c",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57"
+      ],
+      "rank": 1,
+      "latency_ms": 32.46
+    },
+    {
+      "question": "Passageiro atrás também precisa de cinto?",
+      "topic": "safety",
+      "mode": "lexical",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.54
+    },
+    {
+      "question": "Passageiro atrás também precisa de cinto?",
+      "topic": "safety",
+      "mode": "vector",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.55
+    },
+    {
+      "question": "Passageiro atrás também precisa de cinto?",
+      "topic": "safety",
+      "mode": "hybrid",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.17
+    },
+    {
+      "question": "Criança precisa de cadeirinha?",
+      "topic": "safety",
+      "mode": "lexical",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.42
+    },
+    {
+      "question": "Criança precisa de cadeirinha?",
+      "topic": "safety",
+      "mode": "vector",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 29.8
+    },
+    {
+      "question": "Criança precisa de cadeirinha?",
+      "topic": "safety",
+      "mode": "hybrid",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 30.98
+    },
+    {
+      "question": "Mesmo numa velocidade baixa tem que usar cinto?",
+      "topic": "safety",
+      "mode": "lexical",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.57
+    },
+    {
+      "question": "Mesmo numa velocidade baixa tem que usar cinto?",
+      "topic": "safety",
+      "mode": "vector",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.24
+    },
+    {
+      "question": "Mesmo numa velocidade baixa tem que usar cinto?",
+      "topic": "safety",
+      "mode": "hybrid",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.19
+    },
+    {
+      "question": "Posso colocar enfeites no cinto de segurança?",
+      "topic": "safety",
+      "mode": "lexical",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 36.87
+    },
+    {
+      "question": "Posso colocar enfeites no cinto de segurança?",
+      "topic": "safety",
+      "mode": "vector",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 27.22
+    },
+    {
+      "question": "Posso colocar enfeites no cinto de segurança?",
+      "topic": "safety",
+      "mode": "hybrid",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 31.42
+    },
+    {
+      "question": "Posso deixar criança brincar com o cinto?",
+      "topic": "safety",
+      "mode": "lexical",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 20.55
+    },
+    {
+      "question": "Posso deixar criança brincar com o cinto?",
+      "topic": "safety",
+      "mode": "vector",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 30.41
+    },
+    {
+      "question": "Posso deixar criança brincar com o cinto?",
+      "topic": "safety",
+      "mode": "hybrid",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 30.81
+    },
+    {
+      "question": "Posso inclinar muito o encosto ao usar o cinto?",
+      "topic": "safety",
+      "mode": "lexical",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0"
+      ],
+      "rank": 1,
+      "latency_ms": 20.67
+    },
+    {
+      "question": "Posso inclinar muito o encosto ao usar o cinto?",
+      "topic": "safety",
+      "mode": "vector",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-8994023bc57993c881a3c0ccac8759ffdc074eebc805a8d6a5ea774adc26a8e0"
+      ],
+      "rank": 1,
+      "latency_ms": 33.17
+    },
+    {
+      "question": "Posso inclinar muito o encosto ao usar o cinto?",
+      "topic": "safety",
+      "mode": "hybrid",
+      "expected_evidence": "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+      "returned_evidence": [
+        "seg-7fd8a945f78b4f58ea3cdc499cfc08f1f575ea05c4e9f3b2146cc1d742e5ed57",
+        "seg-1a45973e6dd764090e98455da763f280aa882dc0ab9168e50df59b55293cfdb0",
+        "seg-a081e73925fc8c5da6cf0b2aa1eacbcd417078cd8db9332420922548aa33fcc6"
+      ],
+      "rank": 1,
+      "latency_ms": 33.02
+    }
+  ],
+  "blocked_requests": [
+    {
+      "question": "Qual o preço?",
+      "evidence_count": 0
+    },
+    {
+      "question": "Como desmontar a bateria de alta tensão?",
+      "evidence_count": 0
+    },
+    {
+      "question": "Como desativar o airbag?",
+      "evidence_count": 0
+    }
+  ],
+  "strict_customer_tool_status": "needs_configuration_confirmation",
+  "llm_calls": 0,
+  "paid_api_calls": 0,
+  "naturalness_evaluation": "not_run",
+  "response_generation": "not_implemented",
+  "open_domain_abstention_evaluation": "pending",
+  "unknown_year_not_assumed": true
+}

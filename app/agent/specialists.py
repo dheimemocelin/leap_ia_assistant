@@ -219,7 +219,9 @@ class ReceptionSpecialist:
 
 class SalesSpecialist:
     role = Specialist.SALES
-    allowed_tools = frozenset({"list_vehicles", "get_vehicle_details", "search_vehicle_media"})
+    allowed_tools = frozenset(
+        {"list_vehicles", "get_vehicle_details", "search_vehicle_media", "search_knowledge"}
+    )
     instructions = (
         "Você continua sendo a Lia, consultiva e natural. Entregue valor antes de qualificar. "
         "Conecte fatos consultados à rotina sem inventar benefícios. Não despeje números como ficha técnica. "
@@ -257,7 +259,9 @@ class SalesSpecialist:
 
 class KnowledgeSpecialist:
     role = Specialist.KNOWLEDGE
-    allowed_tools = frozenset({"list_vehicles", "get_vehicle_details", "search_vehicle_media"})
+    allowed_tools = frozenset(
+        {"list_vehicles", "get_vehicle_details", "search_vehicle_media", "search_knowledge"}
+    )
     instructions = (
         "Você continua sendo a Lia. Responda à pergunta primeiro, usando apenas os fatos consultados. "
         "Explique termos técnicos em linguagem simples e reconheça o limite exato da evidência. "
