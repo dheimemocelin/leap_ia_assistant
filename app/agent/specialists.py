@@ -101,6 +101,8 @@ def fast_hint(text, profile):
         t,
     ):
         return RouteHint(act="media_request")
+    if re.search(r"quais modelos|quais carros|qual voce tem|que modelos", t):
+        return RouteHint(act="overview")
     if re.search(r"me fal[ae]|me cont[ae]|me apresent|quero conhecer|quero saber mais", t):
         return RouteHint(act="overview")
     if re.search(
@@ -177,23 +179,18 @@ class ReceptionSpecialist:
         result = await host.consult(state)
         profile = result.get("lead_profile") or {}
         act = state["routing"]["act"]
-        if act == "greeting" and not result.get("response"):
-            ask_name = not profile.get("display_name") and not profile.get("name_prompted")
-            question = (
-                {"key": "preferred_name", "text": "Como você prefere ser chamado?"}
-                if ask_name
-                else {
-                    "key": "clarification",
-                    "text": "O que você gostaria de conhecer sobre o carro?",
-                }
-            )
+        if act == "greeting":
+            question = {"key": "clarification", "text": "O que te trouxe por aqui hoje?"}
             result["composition_plan"] = {
                 "intent": "welcome",
                 "facts": [],
-                "question_keys": [question["key"]],
+                "question_keys": ["clarification"],
                 "suggested_question": question,
             }
-            result["response"] = response("Oi! " + question["text"])
+            greeting = state["text"].strip().rstrip("!?.")
+            if greeting.casefold() not in {"bom dia", "boa tarde", "boa noite", "opa"}:
+                greeting = "Oi"
+            result["response"] = response(greeting.capitalize() + "! " + question["text"])
         if (
             profile.get("display_name")
             and not before.get("display_name")

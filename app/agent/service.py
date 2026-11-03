@@ -142,6 +142,9 @@ def customer_text(text):
 
 
 def ordinal_choice(text):
+    numeric = re.fullmatch(r"([123])[.!? ]*", norm(text))
+    if numeric:
+        return int(numeric[1]) - 1
     match = re.fullmatch(
         r"(?:(?:a|o|quero a|quero o|prefiro a|prefiro o|pode ser a|pode ser o) )?"
         r"(primeir[oa]|segund[oa]|terceir[oa])(?: opcao| modelo| carro)?[.!? ]*",
@@ -444,7 +447,7 @@ class SalesAgent:
         if (
             hint.act == "profile_reply"
             and profile.get("pending_question")
-            and profile.get("pending_question") != "display_name"
+            and profile.get("pending_question") not in {"display_name", "clarification"}
         ):
             role = Specialist.SALES
         return {
@@ -1716,9 +1719,15 @@ class SalesAgent:
             match = re.match(r"^(?:Olá|Oi|Opa)[!,] ", response.text)
             greeting = match.group(0) if match else ""
             body = response.text[len(greeting) :]
-            text = greeting + "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. " + body
+            identity = (
+                "Sou a Lia, assistente virtual da Leapmotor. "
+                if self.orchestration_enabled
+                else "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. "
+            )
+            text = greeting + identity + body
             if (
-                not profile.display_name
+                not self.orchestration_enabled
+                and not profile.display_name
                 and not profile.name_prompted
                 and not response.handoff_required
             ):

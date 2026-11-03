@@ -93,9 +93,11 @@ def assert_single_lia(response):
 
 async def test_one_identity_discovers_intent_without_department_menu(agent):
     greeting = await agent.turn("internal", "Oi")
-    assert "Lia" in greeting.text and "IA" in greeting.text
-    assert "prefere ser chamado" in greeting.text
-    named = await agent.turn("internal", "Pessoa Sintetica")
+    assert "Lia" in greeting.text and "assistente virtual" in greeting.text
+    assert "pré-vendas" not in greeting.text and " de IA" not in greeting.text
+    assert "te trouxe" in greeting.text
+    assert "prefere ser chamado" not in greeting.text
+    named = await agent.turn("internal", "Me chamo Pessoa Sintetica")
     assert "O que te trouxe" in named.text
     assert "Qual modelo" not in named.text
     assert "Lia" not in named.text
@@ -105,7 +107,7 @@ async def test_one_identity_discovers_intent_without_department_menu(agent):
 
 
 async def test_sales_knowledge_sales_transition_keeps_vehicle_name_and_no_repeat_gallery(agent):
-    for message in ["Oi", "Pessoa Sintetica", "Quero conhecer o B10", "BEV"]:
+    for message in ["Oi", "Me chamo Pessoa Sintetica", "Quero conhecer o B10", "BEV"]:
         response = await agent.turn("internal", message)
         assert_single_lia(response)
     assert response.media_ids
@@ -145,7 +147,7 @@ async def test_first_specific_question_bypasses_reception_questions(agent):
     result = await agent.turn("internal", "Qual a autonomia do C10 BEV?")
     assert state(agent)["active_specialist"] == "knowledge"
     assert "338" in result.text and result.source_ids
-    assert result.text.index("338") < result.text.index("prefere ser chamado")
+    assert "prefere ser chamado" not in result.text
 
 
 async def test_name_question_never_becomes_a_vehicle_query(agent):
@@ -269,7 +271,7 @@ async def test_local_memory_and_specialist_switch_survive_restart(agent, tmp_pat
     store = PilotStore(str(tmp_path / "pilot.sqlite3"))
     thread = store.open_thread("synthetic-contact", "whatsapp:synthetic")
     agent.memory_store = store
-    for text in ["Oi", "Pessoa Sintetica", "B10 BEV", "Qual a autonomia?"]:
+    for text in ["Oi", "Me chamo Pessoa Sintetica", "B10 BEV", "Qual a autonomia?"]:
         await agent.turn(thread["conversation_id"], text, owner=thread["owner"])
     restarted = build_agent(reviewed_catalog=True, test_media=True, orchestration_enabled=True)
     restarted.llm = SpecialistModel()
@@ -378,3 +380,24 @@ async def test_provider_context_is_specialized_without_exposing_customer_name(ag
             if context.get("task") == "compose_conversation":
                 contexts.append(context)
     assert contexts and contexts[-1]["specialist"] == "knowledge"
+
+
+@pytest.mark.parametrize("greeting", ["Oi", "Opa", "Bom dia", "Boa tarde", "Boa noite"])
+async def test_opening_prioritizes_contact_intent_not_name(agent, greeting):
+    answer = await agent.turn("opening", greeting)
+    assert "assistente virtual da Leapmotor" in answer.text
+    assert "pré-vendas" not in answer.text and " de IA" not in answer.text
+    assert "te trouxe" in answer.text
+    assert "nome" not in answer.text and "chamado" not in answer.text
+    assert not agent.sessions[("local", "opening")]["lead_profile"]["name_prompted"]
+    assert_single_lia(answer)
+
+
+async def test_numeric_choice_resolves_only_remembered_offers(agent):
+    await agent.turn("internal", "Quais modelos vocês têm?")
+    offered = state(agent).get("offered_vehicle_ids", [])
+    assert offered
+    answer = await agent.turn("internal", "1")
+    assert state(agent)["lead_profile"]["vehicle_id"] == offered[0]
+    assert answer.media_ids
+    assert_single_lia(answer)

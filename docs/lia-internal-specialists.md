@@ -90,3 +90,20 @@ Revisão humana ainda necessária: relevância, continuidade, naturalidade, repe
 - Não houve inferência paga, envio real, deploy, merge ou push nesta execução.
 
 Gates executados nesta entrega: 407 testes Pytest passaram (20 diálogos completos na suíte nova), Ruff passou, compilação Python passou e `git diff --check` passou. O aviso de depreciação upstream do LangChain permanece. Varredura dos valores reais de credenciais não encontrou segredos no diff/arquivos novos. Os caminhos CommercialPolicyEngine, barreira HTTP, dados de catálogo e mídias não foram modificados. Não houve revisão independente ou avaliação paga nesta execução.
+
+### Abertura orientada ao motivo do contato
+
+Na versão com especialistas habilitados, a identificação pública passa a ser
+“Lia, assistente virtual da Leapmotor”, sem o título interno “de IA de pré-vendas”.
+A saudação pergunta o motivo do contato antes do nome; perguntas específicas
+continuam sendo atendidas diretamente. Nome voluntário permanece no perfil
+persistente. A saída não acrescenta uma pergunta obrigatória sobre nome.
+
+Regressões adicionais: cinco saudações, consulta de modelos e seleção numérica
+sobre opções canônicas previamente apresentadas. A seleção numérica não cria
+um menu obrigatório. O caminho legado com a flag desativada permanece intacto.
+
+Estas mudanças não foram ativadas no WhatsApp. O endereço e horário da unidade
+não foram cadastrados nem verificados nesta execução; não há evidência para
+prometer que essas informações estão disponíveis. Avaliação com Groq e revisão
+humana da naturalidade continuam pendentes de autorização para chamadas reais.
