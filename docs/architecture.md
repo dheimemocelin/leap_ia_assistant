@@ -80,3 +80,7 @@ O assistente só faz pré-vendas informativas. Não informa preço, parcelas, ta
 - Contratos Evolution (versão, webhook, assinatura, rate limits) e Syonet (endpoint, autenticação, campos obrigatórios, idempotência, sandbox).
 - Critérios de lead qualificado, horários/fila de handoff e métricas de negócio.
 - Identidade do painel, RBAC, SSO e auditoria.
+
+## Evolução opt-in: especialistas internos
+
+A branch de especialistas acrescenta roteamento contextual, acolhimento, vendas e conhecimento ao mesmo SalesAgent/LangGraph. Não cria outro banco, identidade, modelo obrigatório ou grafo autônomo por especialista. O cliente continua falando com a Lia. Permissões, orçamento compartilhado de chamadas e validação final permanecem no backend. A ativação é controlada por `LIA_ORCHESTRATION_ENABLED`, inicialmente false, e depende de avaliação real. Consulte [o desenho e as evidências](lia-internal-specialists.md).

@@ -23,7 +23,7 @@ class ChatInput(BaseModel):
     text: str = Field(min_length=1, max_length=4000)
 
 
-def build_agent(*, reviewed_catalog=False, test_media=False):
+def build_agent(*, reviewed_catalog=False, test_media=False, orchestration_enabled=None):
     root = Path(__file__).resolve().parents[2]
     catalog_root = root / ("data/validation/grounding" if reviewed_catalog else "data/catalog")
     catalog = load_catalog(catalog_root)
@@ -77,6 +77,9 @@ def build_agent(*, reviewed_catalog=False, test_media=False):
         grounding=grounding,
         input_token_rate=settings.llm_input_usd_per_million,
         output_token_rate=settings.llm_output_usd_per_million,
+        orchestration_enabled=settings.lia_orchestration_enabled
+        if orchestration_enabled is None
+        else orchestration_enabled,
     )
 
 

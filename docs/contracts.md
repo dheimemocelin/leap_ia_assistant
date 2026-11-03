@@ -65,3 +65,7 @@ O plano `purchase` trata decisão de compra/visita sem conceder ações externas
 ### Conhecimento técnico e referências de opção
 
 `ReviewedTextFact` e a introdução institucional possuem revisão explícita, fonte e digest. Somente a projeção pública de fatos aprovados chega à composição; o modelo não aprova documentos. `offered_vehicle_ids` guarda IDs ordenados no estado da mesma conversa; referências ordinais não podem selecionar itens fora dessa oferta. A linguagem de apresentação pode usar elétrico/ultra-híbrido, preservando as chaves BEV/REEV internamente. [Fontes, evidências e limites](knowledge-expansion.md).
+
+### Especialistas internos da Lia (opt-in)
+
+`RouteHint` contém ato, tópico e evidência opcional de rotina, sem ferramentas, consentimento ou destinatário. O backend deriva `reception`, `sales` ou `knowledge` e verifica o conjunto de ferramentas antes da execução. Todos compartilham o estado e a validação de saída; o formato público AssistantResponse permanece inalterado. `active_specialist` e resumo de roteamento são privados. `LIA_ORCHESTRATION_ENABLED=false` preserva o modo atual até avaliação. [Responsabilidades, grafo e limitações](lia-internal-specialists.md).

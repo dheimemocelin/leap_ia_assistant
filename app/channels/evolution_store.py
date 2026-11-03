@@ -154,6 +154,10 @@ class EvolutionStore(PilotStore):
             "action",
             "composition_origin",
             "fallback_reason",
+            "specialist",
+            "conversation_act",
+            "routing_origin",
+            "routing_failure",
         }
         with self.connect() as db:
             db.execute(

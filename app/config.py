@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     redis_url: str = "redis://localhost:6379/0"
     groq_api_key: SecretStr = Field(default=SecretStr(""), repr=False)
     llm_provider: str = "disabled"
+    lia_orchestration_enabled: bool = False
     llm_api_key: str = ""
     llm_model: str = ""
     llm_base_url: str = "http://127.0.0.1:11434"

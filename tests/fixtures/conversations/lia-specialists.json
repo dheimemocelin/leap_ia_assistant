@@ -1,0 +1,168 @@
+[
+  {
+    "id": "welcome",
+    "messages": [
+      "Oi",
+      "Pessoa Sintetica",
+      "Quero conhecer B10",
+      "BEV"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "first-fact",
+    "messages": [
+      "Qual a autonomia do C10 BEV?"
+    ],
+    "last_specialist": "knowledge"
+  },
+  {
+    "id": "buying",
+    "messages": [
+      "B10 BEV",
+      "Qual a autonomia?",
+      "Quero comprar"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "photos",
+    "messages": [
+      "Quero fotos do interior do C10"
+    ],
+    "last_specialist": "knowledge"
+  },
+  {
+    "id": "ordinal",
+    "messages": [
+      "Quero conhecer o B10",
+      "A primeira opção"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "repair",
+    "messages": [
+      "B10 BEV",
+      "Ah?"
+    ],
+    "last_specialist": "reception"
+  },
+  {
+    "id": "greeting-typo",
+    "messages": [
+      "B10 BEV",
+      "Ou"
+    ],
+    "last_specialist": "reception"
+  },
+  {
+    "id": "professional",
+    "messages": [
+      "B10 BEV",
+      "Pensei em usar para Uber"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "family",
+    "messages": [
+      "B10 BEV",
+      "Quero usar para minha família"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "first-electric",
+    "messages": [
+      "B10 BEV",
+      "Nunca tive um carro elétrico"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "charging-concern",
+    "messages": [
+      "B10 BEV",
+      "Tenho receio da recarga"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "visit",
+    "messages": [
+      "B10 BEV",
+      "Quero comprar",
+      "Sim",
+      "Sábado de manhã"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "decline",
+    "messages": [
+      "B10 BEV",
+      "Não quero falar com vendedor",
+      "Qual a bateria?"
+    ],
+    "last_specialist": "knowledge"
+  },
+  {
+    "id": "human",
+    "messages": [
+      "B10 BEV",
+      "Quero falar com um vendedor"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "model-change",
+    "messages": [
+      "B10 BEV",
+      "Agora quero C10 BEV",
+      "Qual a autonomia?"
+    ],
+    "last_specialist": "knowledge"
+  },
+  {
+    "id": "missing-knowledge",
+    "messages": [
+      "Qual a bateria do C10 BEV?"
+    ],
+    "last_specialist": "knowledge"
+  },
+  {
+    "id": "memory",
+    "messages": [
+      "Me chamo Pessoa Sintetica",
+      "C10 BEV",
+      "Qual meu nome?"
+    ],
+    "last_specialist": "reception"
+  },
+  {
+    "id": "overview",
+    "messages": [
+      "B10 BEV",
+      "Me fala sobre o carro"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "price",
+    "messages": [
+      "C10 BEV",
+      "Qual o preço?"
+    ],
+    "last_specialist": "sales"
+  },
+  {
+    "id": "home-context",
+    "messages": [
+      "B10 BEV",
+      "Tenho receio da recarga",
+      "Em casa"
+    ],
+    "last_specialist": "sales"
+  }
+]

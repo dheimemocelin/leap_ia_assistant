@@ -109,6 +109,7 @@ git diff --check
 | Memória, oportunidades e exclusão local | [Piloto e persistência](docs/pilot-runbook.md) |
 | Refatoração de composição, memória e áudio em avaliação | [Lia v3](docs/lia-v3.md) |
 | Conhecimento oficial, linguagem simples e escolhas por contexto | [Expansão e evidências](docs/knowledge-expansion.md) |
+| Acolhimento, vendas e dúvidas com uma única Lia (em avaliação) | [Especialistas internos](docs/lia-internal-specialists.md) |
 | Próximas melhorias de atendimento | [Plano da próxima iteração](docs/next-iteration-plan.md) |
 | Estrutura e decisões técnicas | [Arquitetura](docs/architecture.md) e [modelo de dados](docs/data-model.md) |
 | APIs, ferramentas e validações | [Contratos](docs/contracts.md) e [testes](docs/testing.md) |

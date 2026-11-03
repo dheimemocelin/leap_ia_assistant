@@ -23,3 +23,10 @@
 12. Observabilidade sem PII, métricas de conversão/qualidade, evals e testes de regressão adversarial.
 13. Política LGPD de retenção/exclusão, segurança de sessão/tenant, load tests, backup/restore e runbooks.
 14. Piloto por loja com fontes locais de preço/estoque, critérios go/no-go, rollback e monitoramento.
+
+## Iteração de especialistas internos — 2026-11-03
+
+- Implementado para avaliação: acolhimento, vendas e conhecimento com roteamento contextual, memória compartilhada e permissões por executor, no grafo existente.
+- P0 antes de ativar: comparar conversas reais sintéticas com Groq dentro de orçamento autorizado e revisar naturalidade/continuidade com o responsável; não aceitar apenas sucesso de testes simulados.
+- P1: ampliar paráfrases e casos ambíguos observados, cobertura factual, redução de fallbacks e perguntas dispensáveis conforme evidência real.
+- Não incluído: pós-venda completo, novo CRM, novas integrações, outros modelos, deploy ou ativação automática.

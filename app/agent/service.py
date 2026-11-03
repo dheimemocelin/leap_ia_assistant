@@ -32,6 +32,14 @@ from app.agent.social import (
     fallback_social,
     social_intent,
 )
+from app.agent.specialists import (
+    ROUTER_SYSTEM,
+    SPECIALISTS,
+    RouteHint,
+    Specialist,
+    fast_hint,
+    specialist_for,
+)
 from app.catalog.media_library import MediaSearchQuery, VehicleMediaLibrary, norm
 from app.domain.response import AssistantResponse
 from app.policy.commercial import CommercialPolicyEngine, PolicyDecision
@@ -108,6 +116,8 @@ class TurnState(TypedDict, total=False):
     presented_fact_ids: list[str]
     offered_vehicle_ids: list[str]
     reference_vehicle_id: str | None
+    routing: dict
+    active_specialist: str
 
 
 def reply(text: str, *, sources=None, media=None, handoff=False):
@@ -166,21 +176,40 @@ class SalesAgent:
         memory_store=None,
         input_token_rate=None,
         output_token_rate=None,
+        orchestration_enabled=False,
     ):
         self.catalog, self.media, self.llm = catalog, media, llm
         self.sales = SalesTools(catalog)
         self.timeout = timeout
         self.grounding = grounding or GroundingPolicy([], catalog)
         self.prefer_tool_calling = prefer_tool_calling
+        self.orchestration_enabled = orchestration_enabled
         self.memory_store = memory_store
         self.input_token_rate, self.output_token_rate = input_token_rate, output_token_rate
         self.sessions: dict[tuple[str, str], dict] = {}
         self.locks: dict[tuple[str, str], asyncio.Lock] = {}
         builder = StateGraph(TurnState)
         for name in ["consult", "guard", "select", "tools", "compose", "output"]:
-            builder.add_node(name, getattr(self, name))
-        builder.add_edge(START, "consult")
-        builder.add_edge("consult", "guard")
+            if name != "consult" or not orchestration_enabled:
+                builder.add_node(name, getattr(self, name))
+        if orchestration_enabled:
+            for name in ["route", "reception", "sales_specialist", "knowledge_specialist"]:
+                builder.add_node(name, getattr(self, name))
+            builder.add_edge(START, "route")
+            builder.add_conditional_edges(
+                "route",
+                lambda s: {
+                    "reception": "reception",
+                    "sales": "sales_specialist",
+                    "knowledge": "knowledge_specialist",
+                }[s["active_specialist"]],
+                ["reception", "sales_specialist", "knowledge_specialist"],
+            )
+            for name in ["reception", "sales_specialist", "knowledge_specialist"]:
+                builder.add_edge(name, "guard")
+        else:
+            builder.add_edge(START, "consult")
+            builder.add_edge("consult", "guard")
         builder.add_conditional_edges(
             "guard",
             lambda s: (
@@ -254,6 +283,7 @@ class SalesAgent:
                     "calls": 0,
                     "tool_events": [],
                     "reference_vehicle_id": None,
+                    "routing": {},
                     "input_tokens": 0,
                     "output_tokens": 0,
                 }
@@ -271,6 +301,7 @@ class SalesAgent:
                     "presented_fact_ids",
                     "composition",
                     "offered_vehicle_ids",
+                    "active_specialist",
                 ]
             }
             self.sessions[key]["history"] = (
@@ -314,6 +345,19 @@ class SalesAgent:
                 "estimated_llm_usd": None,
                 "interpretation_failure": state.get("interpretation") == "interpretation_failed",
             }
+            if self.orchestration_enabled:
+                self.sessions[key]["routing"] = {
+                    k: state.get("routing", {}).get(k)
+                    for k in ("act", "topic", "origin", "failure")
+                }
+                self.sessions[key]["metrics"].update(
+                    {
+                        "specialist": state["active_specialist"],
+                        "conversation_act": state["routing"]["act"],
+                        "routing_origin": state["routing"]["origin"],
+                        "routing_failure": state["routing"].get("failure"),
+                    }
+                )
             if (
                 self.input_token_rate is not None
                 and self.output_token_rate is not None
@@ -345,6 +389,105 @@ class SalesAgent:
                 },
             )
             return AssistantResponse.model_validate(state["response"])
+
+    async def route(self, s):
+        profile = s.get("lead_profile") or {}
+        hint = fast_hint(s["text"], profile)
+        if hint is None and ordinal_choice(s["text"]) is not None:
+            hint = RouteHint(act="overview")
+        origin, failure = "deterministic", None
+        if hint is None:
+            origin = "llm"
+            text = redact_history(s["text"])
+            if profile.get("display_name"):
+                text = text.replace(profile["display_name"], "[nome omitido]")
+            context = {
+                "task": "route_conversation",
+                "message": text,
+                "history": s.get("history", [])[-4:],
+                "last_question": profile.get("pending_question"),
+                "vehicle": {k: profile.get(k) for k in ("interest_model", "powertrain")},
+                "usage": profile.get("usage"),
+                "needs": profile.get("needs", []),
+                "last_specialist": s.get("active_specialist"),
+            }
+            try:
+                result = await self.model_call(
+                    s,
+                    [
+                        {"role": "system", "content": ROUTER_SYSTEM},
+                        {"role": "user", "content": json.dumps(context, ensure_ascii=False)},
+                    ],
+                    [],
+                )
+                if result.tool_calls:
+                    raise ValueError("Router has no tools")
+                hint = RouteHint.model_validate_json(result.text)
+            except TimeoutError:
+                failure = "provider_timeout"
+            except LLMProviderError as exc:
+                failure = "provider_timeout" if str(exc) == "groq_timeout" else "provider_failure"
+            except httpx.HTTPError:
+                failure = "provider_failure"
+            except (ValidationError, ValueError):
+                failure = "invalid_interpretation"
+            except Exception:  # noqa: BLE001 - no provider body or PII in routing telemetry
+                failure = "interpretation_unavailable"
+            if failure:
+                origin = "fallback"
+                hint = RouteHint(act="other")
+        if hint.usage and (
+            not hint.evidence_quote or hint.evidence_quote.casefold() not in s["text"].casefold()
+        ):
+            hint = hint.model_copy(update={"usage": None, "evidence_quote": ""})
+        role = specialist_for(hint.act)
+        if (
+            hint.act == "profile_reply"
+            and profile.get("pending_question")
+            and profile.get("pending_question") != "display_name"
+        ):
+            role = Specialist.SALES
+        return {
+            "active_specialist": role.value,
+            "routing": {**hint.model_dump(), "origin": origin, "failure": failure},
+            **{
+                k: s[k]
+                for k in (
+                    "calls",
+                    "input_tokens",
+                    "output_tokens",
+                    "llm_latency_ms",
+                    "token_usage_known",
+                )
+            },
+        }
+
+    async def reception(self, s):
+        return await SPECIALISTS[Specialist.RECEPTION].handle(self, s)
+
+    async def sales_specialist(self, s):
+        return await SPECIALISTS[Specialist.SALES].handle(self, s)
+
+    async def knowledge_specialist(self, s):
+        return await SPECIALISTS[Specialist.KNOWLEDGE].handle(self, s)
+
+    def specialist_evidence(self, s, vehicle_id):
+        if not self.orchestration_enabled:
+            return None
+        specialist = SPECIALISTS.get(s.get("active_specialist"))
+        evidence = getattr(specialist, "evidence", None)
+        return evidence(self, s, vehicle_id) if evidence else None
+
+    def current_evidence(self, s, profile, plan):
+        if plan["intent"] == "brand":
+            return self.grounding.for_brand()
+        if not profile.vehicle_id:
+            return []
+        return (
+            self.grounding.for_vehicle(profile.vehicle_id, "conhecer")
+            + self.grounding.for_vehicle(profile.vehicle_id, s["text"])
+            + (self.specialist_evidence(s, profile.vehicle_id) or [])
+        )
 
     async def consult(self, s):
         profile = LeadProfile.model_validate(s.get("lead_profile") or {})
@@ -467,6 +610,11 @@ class SalesAgent:
             if profile.consent == "offered":
                 profile.consent = "not_requested"
         before = profile.model_dump()
+        routing = s.get("routing") or {}
+        if routing.get("usage") and routing.get("evidence_quote"):
+            profile.usage = routing["usage"]
+            if profile.usage not in profile.use_contexts:
+                profile.use_contexts.append(profile.usage)
         if s.get("reference_vehicle_id") and profile.pending_question == "display_name":
             profile.pending_question = None
         override, redact = observe(profile, s["text"], channel_phone=s.get("trusted_contact_phone"))
@@ -477,6 +625,7 @@ class SalesAgent:
                 text,
             )
         )
+        technical_question = technical_question or routing.get("act") == "fact_question"
         financial = CommercialPolicyEngine().classify_request(
             s["text"]
         ) != PolicyDecision.ALLOW or bool(
@@ -639,6 +788,7 @@ class SalesAgent:
             )
         if (
             not override
+            and not s.get("routing")
             and not s.get("reference_vehicle_id")
             and not models
             and not pts
@@ -939,6 +1089,7 @@ class SalesAgent:
                     norm(s.get("intent_question") or s["text"]) if powertrain_answer else text,
                 )
             )
+            technical = technical or (s.get("routing") or {}).get("act") == "fact_question"
             s["proactive"] = introduction and not technical and not self.prefer_tool_calling
             if s.get("input_type") == "audio":
                 s["proactive"] = False
@@ -983,7 +1134,7 @@ class SalesAgent:
                 if angle in text and name == "search_vehicle_media":
                     args["angle"] = angle
                     break
-            if not self.prefer_tool_calling:
+            if not self.prefer_tool_calling or self.orchestration_enabled and s["calls"]:
                 return {
                     **s,
                     "selection_origin": "deterministic",
@@ -1026,6 +1177,10 @@ class SalesAgent:
     async def tools(self, s):
         try:
             call = ToolCall.model_validate(s["call"])
+            if self.orchestration_enabled:
+                specialist = SPECIALISTS.get(s.get("active_specialist"))
+                if specialist is None or call.name not in specialist.allowed_tools:
+                    raise ValueError("Specialist tool permission denied")
             args = ToolArguments.model_validate(call.arguments)
             sources = []
             if call.name == "list_vehicles":
@@ -1060,6 +1215,9 @@ class SalesAgent:
                     facts = self.grounding.for_vehicle(
                         args.vehicle_id, s.get("intent_question") or s["text"]
                     )
+                    specialized = self.specialist_evidence(s, args.vehicle_id)
+                    if specialized is not None:
+                        facts = specialized
                     sources = list(dict.fromkeys(f["source_id"] for f in facts))
                 else:
                     results = self.media.search(
@@ -1117,20 +1275,10 @@ class SalesAgent:
         profile = LeadProfile.model_validate(s["lead_profile"])
         facts = plan.get("facts", [])
         # Only server-reviewed facts can reach the composition evidence contract.
-        facts = (
-            [
-                f
-                for f in facts
-                if f in self.grounding.for_vehicle(profile.vehicle_id, "conhecer")
-                or f in self.grounding.for_vehicle(profile.vehicle_id, s["text"])
-            ]
-            if profile.vehicle_id
-            else []
-        )
-        if plan["intent"] == "brand":
-            facts = [f for f in plan.get("facts", []) if f in self.grounding.for_brand()]
+        facts = [f for f in facts if f in self.current_evidence(s, profile, plan)]
         context = {
             "task": "compose_conversation",
+            "conversation_act": (s.get("routing") or {}).get("act"),
             "intent": plan["intent"],
             "vehicle": {"model": profile.interest_model, "powertrain": profile.powertrain},
             "profile": {
@@ -1171,6 +1319,11 @@ class SalesAgent:
                 else None
             ),
         }
+        specialist = (
+            SPECIALISTS.get(s.get("active_specialist")) if self.orchestration_enabled else None
+        )
+        if specialist:
+            context["specialist"] = specialist.role.value
         if plan["intent"] in {"positive", "negative", "doubt", "more", "short"}:
             context["reaction"] = plan["intent"]
         reason = None
@@ -1183,6 +1336,7 @@ class SalesAgent:
                     {
                         "role": "system",
                         "content": SYSTEM
+                        + (" " + specialist.instructions if specialist else "")
                         + " Escreva a formulação conversacional, não escolha templates. Retorne SOMENTE JSON "
                         '{"text":"texto livre", "fact_ids":[], "question":null}. '
                         'Question é opcional: {"key":"chave permitida","text":"pergunta?"}. '
@@ -1210,6 +1364,15 @@ class SalesAgent:
             if result.tool_calls:
                 raise CompositionRejected("unexpected_tool_call")
             draft = ConversationDraft.model_validate_json(result.text)
+            if (
+                self.orchestration_enabled
+                and re.search(
+                    r"ainda esta pensando|(?:voce|cliente).*indecis|ainda esta avaliando|voce esta ansios",
+                    norm(draft.text),
+                )
+                and not re.search(r"estou (?:pensando|indecis|avaliando|ansios)", norm(s["text"]))
+            ):
+                raise CompositionRejected("unsupported_customer_state")
             # Approval/source changes while the provider is running revoke evidence.
             current = (
                 self.grounding.for_vehicle(profile.vehicle_id, "conhecer")
@@ -1217,6 +1380,8 @@ class SalesAgent:
                 if profile.vehicle_id
                 else []
             )
+            if self.orchestration_enabled:
+                current = self.current_evidence(s, profile, plan)
             if plan["intent"] == "brand":
                 current = self.grounding.for_brand()
             facts = [f for f in facts if f in current]
@@ -1279,7 +1444,11 @@ class SalesAgent:
                     "Entendi. Seguimos por aqui, a partir do que você já me contou.",
                     "Certo. Podemos continuar pelo que você quiser explorar.",
                 ]
-                response = reply(next(text for text in alternatives if text not in previous))
+                response = reply(
+                    "Posso reformular a explicação. O que você quer entender melhor sobre o carro?"
+                    if self.orchestration_enabled
+                    else next(text for text in alternatives if text not in previous)
+                )
             recovered = []
             if plan.get("require_facts") and reason in {
                 "question_shape",
@@ -1340,6 +1509,31 @@ class SalesAgent:
         if s.get("composition_plan"):
             return await self.compose_conversation(s)
         evidence = s["evidence"]
+        if (
+            self.orchestration_enabled
+            and s.get("active_specialist") == Specialist.SALES
+            and s["routing"]["act"] == "overview"
+            and evidence.get("kind") == "get_vehicle_details"
+        ):
+            profile = LeadProfile.model_validate(s["lead_profile"])
+            question = (
+                "Como você imagina usar o carro no dia a dia?"
+                if not profile.usage and "usage" not in profile.asked
+                else None
+            )
+            s["composition_plan"] = {
+                "intent": "overview",
+                "facts": evidence.get("facts", []),
+                "require_facts": bool(evidence.get("facts")),
+                "question_keys": ["usage"] if question else [],
+                "suggested_question": {"key": "usage", "text": question} if question else None,
+            }
+            s["response"] = reply(
+                " ".join(f["statement"] for f in evidence.get("facts", []))
+                or "O que você tem curiosidade de conhecer melhor no carro?",
+                sources=evidence.get("source_ids", []),
+            )
+            return await self.compose_conversation(s)
         if not evidence["data"] and evidence.get("kind") == "search_vehicle_media":
             selected_id = s["call"]["arguments"].get("vehicle_id")
             seen = [
@@ -1397,6 +1591,9 @@ class SalesAgent:
             if s.get("proactive"):
                 caption = f"Separei estas imagens do {label} para você começar a conhecê-lo."
                 facts = self.grounding.for_vehicle(vehicle.id, "conhecer")
+                specialized = self.specialist_evidence(s, vehicle.id)
+                if specialized is not None:
+                    facts = specialized
                 if facts:
                     facts = [
                         f for f in facts if f["id"] not in (s.get("presented_fact_ids") or [])

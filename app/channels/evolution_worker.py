@@ -175,6 +175,16 @@ class EvolutionWorker:
                         "action": state["lead_profile"]["next_action"],
                         "composition_origin": state.get("composition", {}).get("origin"),
                         "fallback_reason": state.get("composition", {}).get("fallback_reason"),
+                        **{
+                            k: state.get("metrics", {}).get(k)
+                            for k in (
+                                "specialist",
+                                "conversation_act",
+                                "routing_origin",
+                                "routing_failure",
+                            )
+                            if k in state.get("metrics", {})
+                        },
                     }
                 )
                 await asyncio.to_thread(self.store.record_metrics, identifier, metrics)

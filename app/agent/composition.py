@@ -42,6 +42,7 @@ class ConversationQuestion(BaseModel):
         "visit",
         "visit_preference",
         "trade_in",
+        "clarification",
     ]
     text: str = Field(min_length=1, max_length=180)
 
@@ -76,6 +77,8 @@ class ConversationPlan(BaseModel):
         "brand",
         "other",
         "purchase",
+        "repair",
+        "overview",
     ]
     action: str | None = None
     question_keys: list[str] = Field(default_factory=list, max_length=3)
@@ -116,7 +119,7 @@ def validate_prose(text: str, profile: dict, *, question=False):
     if re.search(r"consultor|vendedor|humano|\blia\b|assistente virtual|me chamo|sou uma?", t):
         raise CompositionRejected("identity_or_handoff")
     if re.search(
-        r"base (?:aprovada|revisada)|nossa base|catalogo interno|resumo institucional.*revisad|contexto.*preservad",
+        r"base (?:aprovada|revisada)|nossa base|catalogo interno|resumo institucional.*revisad|contexto.*preservad|\bfaq\b|agente de vendas|especialista interno|departamento de",
         t,
     ):
         raise CompositionRejected("internal_jargon")

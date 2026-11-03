@@ -1,0 +1,703 @@
+{
+  "evaluation": "same synthetic protocol model and inputs; no real inference, no delivery",
+  "baseline": "06f915f",
+  "candidate": "working tree, orchestration enabled",
+  "real_provider_calls": 0,
+  "human_quality_review": "pending",
+  "before": {
+    "opening": [
+      {
+        "user": "Oi",
+        "assistant": {
+          "text": "Opa! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Seja bem-vindo. Como você prefere ser chamado?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "welcome",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": []
+      },
+      {
+        "user": "Pessoa Sintetica",
+        "assistant": {
+          "text": "Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "Quero conhecer B10",
+        "assistant": {
+          "text": "No B10, posso te mostrar a opção elétrica ou a ultra-híbrida. Qual você prefere conhecer primeiro?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico tem motor elétrico de 218 cv. O porta-malas traseiro do B10 elétrico tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": [
+          "search_vehicle_media"
+        ]
+      }
+    ],
+    "observed_sequence": [
+      {
+        "user": "B10 BEV",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico tem motor elétrico de 218 cv. O porta-malas traseiro do B10 elétrico tem capacidade de 405 litros. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": [
+          "search_vehicle_media"
+        ]
+      },
+      {
+        "user": "Ou",
+        "assistant": {
+          "text": "Prazer, Ou. Podemos continuar explorando o carro por aqui.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "Ah?",
+        "assistant": {
+          "text": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "other",
+          "evidence_selection_recovered": false
+        },
+        "calls": 2,
+        "tools": []
+      },
+      {
+        "user": "Me fala sobre o carro",
+        "assistant": {
+          "text": "Estou acompanhando. Pode me contar o que você quer abordar agora.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "fallback",
+          "fallback_reason": "repeated_response",
+          "intent": "other"
+        },
+        "calls": 2,
+        "tools": []
+      }
+    ],
+    "context_switch": [
+      {
+        "user": "Me chamo Pessoa Sintetica",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Prazer, Pessoa Sintetica. Qual modelo você quer conhecer?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "B10 BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico tem motor elétrico de 218 cv. O porta-malas traseiro do B10 elétrico tem capacidade de 405 litros. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": [
+          "search_vehicle_media"
+        ]
+      },
+      {
+        "user": "Qual a autonomia?",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. A autonomia homologada do B10 elétrico é de 288 km pelo Inmetro.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "technical",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": [
+          "get_vehicle_details"
+        ]
+      },
+      {
+        "user": "Pensei em usar para Uber",
+        "assistant": {
+          "text": "Entendi que você pensa no carro para trabalhar com aplicativo. Vamos olhar sua rotina antes de tirar conclusões. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "usage",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": []
+      },
+      {
+        "user": "Quero comprar",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. Você gostaria de conhecer o carro de perto na loja?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "purchase",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": []
+      },
+      {
+        "user": "Não quero falar com vendedor",
+        "assistant": {
+          "text": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": null,
+        "routing": null,
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      }
+    ]
+  },
+  "after": {
+    "opening": [
+      {
+        "user": "Oi",
+        "assistant": {
+          "text": "Opa! Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Seja bem-vindo. Como você prefere ser chamado?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "reception",
+        "routing": {
+          "act": "greeting",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "welcome",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": []
+      },
+      {
+        "user": "Pessoa Sintetica",
+        "assistant": {
+          "text": "Prazer, Pessoa Sintetica. O que te trouxe até a Leapmotor?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "reception",
+        "routing": {
+          "act": "profile_reply",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "Quero conhecer B10",
+        "assistant": {
+          "text": "No B10, posso te mostrar a opção elétrica ou a ultra-híbrida. Qual você prefere conhecer primeiro?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "overview",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico usa propulsão totalmente elétrica, alimentada por bateria. O B10 elétrico tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "overview",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": [
+          "search_vehicle_media"
+        ]
+      }
+    ],
+    "observed_sequence": [
+      {
+        "user": "B10 BEV",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico usa propulsão totalmente elétrica, alimentada por bateria. O B10 elétrico tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto. Toque em uma imagem para ampliar. Como você prefere ser chamado?",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "overview",
+          "topic": null,
+          "origin": "llm",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 1,
+        "tools": [
+          "search_vehicle_media"
+        ]
+      },
+      {
+        "user": "Ou",
+        "assistant": {
+          "text": "Prazer, Ou. Podemos continuar explorando o carro por aqui.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "reception",
+        "routing": {
+          "act": "profile_reply",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "Ah?",
+        "assistant": {
+          "text": "Não fui clara na resposta anterior. Posso reformular o que estava explicando.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "reception",
+        "routing": {
+          "act": "repair",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "repair",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": []
+      },
+      {
+        "user": "Me fala sobre o carro",
+        "assistant": {
+          "text": "Vamos conhecer melhor o carro a partir do que faz sentido para você. A autonomia homologada do B10 elétrico é de 288 km pelo Inmetro. O B10 elétrico tem sete airbags: frontais, laterais, de cortina e central. Como você imagina usar o carro no dia a dia?",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "overview",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "overview",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": [
+          "get_vehicle_details"
+        ]
+      }
+    ],
+    "context_switch": [
+      {
+        "user": "Me chamo Pessoa Sintetica",
+        "assistant": {
+          "text": "Sou a Lia, assistente virtual de IA de pré-vendas Leapmotor. Prazer, Pessoa Sintetica. O que te trouxe até a Leapmotor?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "reception",
+        "routing": {
+          "act": "profile_reply",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      },
+      {
+        "user": "B10 BEV",
+        "assistant": {
+          "text": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico usa propulsão totalmente elétrica, alimentada por bateria. O B10 elétrico tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto. Toque em uma imagem para ampliar.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-media-a7003f6ac5256d84fcd2",
+            "src-media-9700050189508cfaadbf",
+            "src-media-cd78dc3783a5a75757a9",
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [
+            "b10-bev-cockpit-02",
+            "b10-bev-front_3_4-03",
+            "b10-bev-front_seats_roof-04"
+          ],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "overview",
+          "topic": null,
+          "origin": "llm",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 1,
+        "tools": [
+          "search_vehicle_media"
+        ]
+      },
+      {
+        "user": "Qual a autonomia?",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. A autonomia homologada do B10 elétrico é de 288 km pelo Inmetro.",
+          "confidence": "grounded",
+          "source_ids": [
+            "src-df3598f09d51f9445970"
+          ],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "knowledge",
+        "routing": {
+          "act": "fact_question",
+          "topic": "range",
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "technical",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": [
+          "get_vehicle_details"
+        ]
+      },
+      {
+        "user": "Pensei em usar para Uber",
+        "assistant": {
+          "text": "Entendi que você pensa no carro para trabalhar com aplicativo. Vamos olhar sua rotina antes de tirar conclusões. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "need",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "usage",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": []
+      },
+      {
+        "user": "Quero comprar",
+        "assistant": {
+          "text": "Vamos continuar a partir do seu interesse e das suas prioridades. Você gostaria de conhecer o carro de perto na loja?",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "purchase",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "purchase",
+          "evidence_selection_recovered": false
+        },
+        "calls": 1,
+        "tools": []
+      },
+      {
+        "user": "Não quero falar com vendedor",
+        "assistant": {
+          "text": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+          "confidence": "insufficient_evidence",
+          "source_ids": [],
+          "media_ids": [],
+          "handoff_required": false
+        },
+        "specialist": "sales",
+        "routing": {
+          "act": "purchase",
+          "topic": null,
+          "origin": "deterministic",
+          "failure": null
+        },
+        "composition": {
+          "origin": "deterministic",
+          "fallback_reason": null
+        },
+        "calls": 0,
+        "tools": []
+      }
+    ]
+  },
+  "source_fingerprints": {
+    "app/agent/service.py": "68838dd37b03cea68b227190cd0e7484493ad15dd423f8823b00fde501400ba0",
+    "app/agent/specialists.py": "1fbd43eef50f3e16b96c1d6163057d8bf927115d11b5be6a5782b42a2aaa34ec",
+    "tests/fixtures/conversations/lia-specialists.json": "22788178677336601f65f762fcea18ec0964c2ec57d77622775b240f3f2fb404"
+  }
+}
