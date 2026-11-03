@@ -28,6 +28,13 @@ from app.agent.consultative import (
 from app.agent.grounding import GroundingPolicy
 from app.agent.intent import INTENT_SYSTEM, InterpretedIntent
 from app.agent.llm import LLMAdapter, LLMProviderError, ToolCall
+from app.agent.sales_focus import (
+    add_visit_question,
+    showroom_question,
+    showroom_text,
+    support_context,
+    support_reply,
+)
 from app.agent.social import (
     fallback_social,
     social_intent,
@@ -181,6 +188,8 @@ class SalesAgent:
         output_token_rate=None,
         orchestration_enabled=False,
         knowledge=None,
+        sales_focus=False,
+        showroom=None,
     ):
         self.catalog, self.media, self.llm = catalog, media, llm
         self.sales = SalesTools(catalog)
@@ -189,6 +198,8 @@ class SalesAgent:
         self.prefer_tool_calling = prefer_tool_calling
         self.orchestration_enabled = orchestration_enabled
         self.knowledge = knowledge
+        self.sales_focus = sales_focus
+        self.showroom = showroom or {}
         self.available_tools = TOOLS + (
             [
                 {
@@ -411,9 +422,24 @@ class SalesAgent:
 
     async def route(self, s):
         profile = s.get("lead_profile") or {}
-        hint = fast_hint(s["text"], profile)
+        hint = (
+            RouteHint(act="other")
+            if self.sales_focus and support_context(s["text"], profile)
+            else fast_hint(s["text"], profile)
+        )
         if hint is None and ordinal_choice(s["text"]) is not None:
             hint = RouteHint(act="overview")
+        if (
+            self.sales_focus
+            and hint is None
+            and re.fullmatch(
+                r"(?:quero (?:o |um )?|o |a |e o )?(?:b10|c10)(?: (?:be+v|reev|eletrico|hibrido|ultra-hibrido))?",
+                norm(s["text"]).strip("!.? "),
+            )
+        ):
+            hint = RouteHint(act="overview")
+        if self.sales_focus and self.showroom and showroom_question(s["text"]):
+            hint = RouteHint(act="purchase")
         origin, failure = "deterministic", None
         if hint is None:
             origin = "llm"
@@ -517,6 +543,65 @@ class SalesAgent:
 
     async def consult(self, s):
         profile = LeadProfile.model_validate(s.get("lead_profile") or {})
+        if self.sales_focus and self.showroom and showroom_question(s["text"]):
+            hours = bool(re.search(r"horario|que horas|abre|fecha", norm(s["text"])))
+            text = showroom_text(self.showroom, hours=hours)
+            if not CommercialPolicyEngine().validate_output(text):
+                return {
+                    "lead_profile": profile.model_dump(),
+                    "response": reply(
+                        "Ainda não tenho essa informação da loja confirmada para te passar."
+                    ),
+                    "composition_plan": {},
+                }
+            if not hours:
+                profile.showroom_presented = True
+            if "assistencia" in norm(s["text"]) or "oficina" in norm(s["text"]):
+                text = (
+                    "Essa é a loja de vendas. Não tenho confirmação de assistência técnica nesse local. "
+                    + text
+                )
+            source = (
+                "src-showroom-"
+                + hashlib.sha256(json.dumps(self.showroom, sort_keys=True).encode()).hexdigest()[
+                    :20
+                ]
+            )
+            return {
+                "lead_profile": profile.model_dump(),
+                "response": reply(text, sources=[source]),
+                "composition_plan": {},
+            }
+        if self.sales_focus and support_context(s["text"], profile.model_dump()):
+            profile.contact_reason = "service_request"
+            return {
+                "lead_profile": profile.model_dump(),
+                "response": reply(support_reply(s["text"], s.get("history", []))),
+                "composition_plan": {},
+            }
+        if (
+            self.sales_focus
+            and profile.pending_question == "display_name"
+            and re.search(r"nao.*(?:nome|informar|dizer)|prefiro nao|^nao$", norm(s["text"]))
+        ):
+            profile.name_prompted = True
+            profile.pending_question = "usage" if profile.vehicle_id and not profile.usage else None
+            if profile.pending_question and "usage" not in profile.asked:
+                profile.asked.append("usage")
+            return {
+                "lead_profile": profile.model_dump(),
+                "composition_plan": {},
+                "response": reply(
+                    "Sem problema, seguimos por aqui."
+                    + (
+                        " Como você pretende usar o carro no dia a dia?"
+                        if profile.pending_question
+                        else ""
+                    )
+                ),
+            }
+        if self.sales_focus and profile.contact_reason == "service_request":
+            profile.contact_reason = "vehicle_interest"
         # A new explicit selection interrupts contact collection; consent is scoped.
         text = norm(s["text"])
         if (
@@ -636,6 +721,11 @@ class SalesAgent:
             if profile.consent == "offered":
                 profile.consent = "not_requested"
         before = profile.model_dump()
+        if self.sales_focus and re.search(r"quero (?:ir|passar|conhecer).*(?:loja|shopping)", text):
+            profile.visit_interest = True
+            profile.pending_question = "visit_preference"
+            if "visit_requested" not in profile.signals:
+                profile.signals.append("visit_requested")
         routing = s.get("routing") or {}
         if routing.get("usage") and routing.get("evidence_quote"):
             profile.usage = routing["usage"]
@@ -889,6 +979,48 @@ class SalesAgent:
                 override = reply(
                     "Estou acompanhando. Pode me contar o que você quer abordar agora."
                 )
+        if self.sales_focus:
+            if (
+                profile.display_name
+                and not before.get("display_name")
+                and profile.vehicle_id
+                and not profile.usage
+            ):
+                override = reply(
+                    f"Prazer, {profile.display_name}! Como você pretende usar o carro no dia a dia?"
+                )
+                s["composition_plan"] = {}
+                profile.pending_question = "usage"
+                if "usage" not in profile.asked:
+                    profile.asked.append("usage")
+            if s.get("composition_plan"):
+                s["composition_plan"] = add_visit_question(s["composition_plan"], profile)
+            if profile.visit_preference and profile.visit_preference != before.get(
+                "visit_preference"
+            ):
+                text = "Anotei sua preferência para a visita."
+                if profile.trade_in_interest is None and "trade_in" not in profile.asked:
+                    text += " Você pensa em incluir seu carro atual na troca?"
+                    profile.pending_question = "trade_in"
+                    profile.asked.append("trade_in")
+                override = reply(text)
+                s["composition_plan"] = {}
+
+            if (
+                profile.trade_in_interest is True
+                and before.get("trade_in_interest") is not True
+                and not financial
+            ):
+                text = "Podemos considerar seu carro na troca. Para avaliar as possibilidades, é importante trazê-lo à loja para uma avaliação presencial."
+                question = (s.get("composition_plan") or {}).get("suggested_question")
+                if question and question["key"] in {"visit", "visit_preference"}:
+                    text += " " + question["text"]
+                    profile.pending_question = question["key"]
+                    if question["key"] not in profile.asked:
+                        profile.asked.append(question["key"])
+                override = reply(text)
+                s["composition_plan"] = {}
+
         classify(profile)
         return {
             "lead_profile": profile.model_dump(),
@@ -914,6 +1046,22 @@ class SalesAgent:
             r"pix|pagamento|reserv|negoci|fech|desconto|promoc|preco|quanto vale|avaliacao.*usado",
             norm(s["text"]),
         ):
+            if self.sales_focus:
+                profile = LeadProfile.model_validate(s["lead_profile"])
+                text = "Esses detalhes são tratados na loja. Posso te ajudar a escolher a versão e o que você quer conhecer de perto."
+                if (
+                    profile.vehicle_id
+                    and profile.visit_interest is None
+                    and "visit" not in profile.asked
+                ):
+                    text += " Você gostaria de visitar a loja?"
+                    profile.pending_question = "visit"
+                    profile.asked.append("visit")
+                return {
+                    "phase": "blocked",
+                    "response": reply(text),
+                    "lead_profile": profile.model_dump(),
+                }
             return {
                 "phase": "blocked",
                 "response": s.get("response")
@@ -1300,7 +1448,10 @@ class SalesAgent:
                     else [],
                 },
             }
-        except Exception:  # noqa: BLE001 - no raw tool errors to model/client
+        except Exception as exc:  # noqa: BLE001 - no raw tool errors to model/client
+            logging.getLogger(__name__).warning(
+                "sales_tool_failed error_type=%s", type(exc).__name__
+            )
             return {
                 "phase": "error",
                 "response": reply(
@@ -1656,6 +1807,8 @@ class SalesAgent:
                 specialized = self.specialist_evidence(s, vehicle.id)
                 if specialized is not None:
                     facts = specialized
+                if self.sales_focus:
+                    facts = []
                 if facts:
                     facts = [
                         f for f in facts if f["id"] not in (s.get("presented_fact_ids") or [])
@@ -1672,7 +1825,17 @@ class SalesAgent:
                             [*evidence["source_ids"], *(f["source_id"] for f in facts[:2])]
                         )
                     )
-                caption += " Toque em uma imagem para ampliar."
+                if self.sales_focus:
+                    if not profile.display_name and not profile.name_prompted:
+                        caption += " Como posso te chamar?"
+                        profile.name_prompted = True
+                        profile.pending_question = "display_name"
+                    elif not profile.usage and "usage" not in profile.asked:
+                        caption += " Como você pretende usar o carro no dia a dia?"
+                        profile.pending_question = "usage"
+                        profile.asked.append("usage")
+                else:
+                    caption += " Toque em uma imagem para ampliar."
                 profile.next_action = "present"
             return {
                 "lead_profile": profile.model_dump(),
@@ -1797,6 +1960,29 @@ class SalesAgent:
                     profile.pending_question = "display_name"
             response = AssistantResponse.model_validate({**response.model_dump(), "text": text})
             profile.greeted = True
+        if (
+            self.sales_focus
+            and self.showroom
+            and profile.pending_question == "visit"
+            and not profile.showroom_presented
+            and "loja" in norm(response.text)
+            and CommercialPolicyEngine().validate_output(showroom_text(self.showroom))
+        ):
+            source = (
+                "src-showroom-"
+                + hashlib.sha256(json.dumps(self.showroom, sort_keys=True).encode()).hexdigest()[
+                    :20
+                ]
+            )
+            response = AssistantResponse.model_validate(
+                {
+                    **response.model_dump(),
+                    "text": showroom_text(self.showroom) + " " + response.text,
+                    "confidence": "grounded",
+                    "source_ids": list(dict.fromkeys([*response.source_ids, source])),
+                }
+            )
+            profile.showroom_presented = True
         response = AssistantResponse.model_validate(
             {**response.model_dump(), "text": customer_text(response.text)}
         )

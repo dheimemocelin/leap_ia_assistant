@@ -86,6 +86,15 @@ def build_agent(*, reviewed_catalog=False, test_media=False, orchestration_enabl
         timeout=settings.llm_timeout_seconds,
         grounding=grounding,
         knowledge=knowledge,
+        sales_focus=settings.lia_sales_focus_enabled,
+        showroom={
+            "name": settings.lia_showroom_name,
+            "location": settings.lia_showroom_location,
+            "landmarks": settings.lia_showroom_landmarks,
+            "hours": settings.lia_showroom_hours,
+        }
+        if settings.lia_showroom_name and settings.lia_showroom_location
+        else None,
         input_token_rate=settings.llm_input_usd_per_million,
         output_token_rate=settings.llm_output_usd_per_million,
         orchestration_enabled=settings.lia_orchestration_enabled

@@ -28,6 +28,11 @@ class Settings(BaseSettings):
     groq_api_key: SecretStr = Field(default=SecretStr(""), repr=False)
     llm_provider: str = "disabled"
     lia_orchestration_enabled: bool = False
+    lia_sales_focus_enabled: bool = False
+    lia_showroom_name: str = ""
+    lia_showroom_location: str = ""
+    lia_showroom_landmarks: str = ""
+    lia_showroom_hours: str = ""
     lia_knowledge_enabled: bool = False
     lia_knowledge_model_dir: str = ".local/knowledge-models/e5-small"
     lia_knowledge_cache_path: str = ".local/knowledge-runtime.sqlite3"

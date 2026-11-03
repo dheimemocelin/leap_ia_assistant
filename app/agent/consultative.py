@@ -52,6 +52,7 @@ class LeadProfile(BaseModel):
     consent_scope: str | None = None
     display_name: str | None = None
     name_prompted: bool = False
+    showroom_presented: bool = False
     contact_name: str | None = None
     contact_phone: str | None = None
     pending_question: str | None = None

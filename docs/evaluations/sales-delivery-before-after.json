@@ -1,0 +1,436 @@
+{
+  "type": "synthetic graph executions; no real Groq quality claim",
+  "base": "2acd07d-compatible with sales-focus disabled",
+  "conversations": [
+    {
+      "scenario": "sales",
+      "sales_focus": false,
+      "transcript": [
+        {
+          "user": "oi",
+          "assistant": "Oi! Sou a Lia, assistente virtual da Leapmotor. O que te trouxe por aqui hoje?",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Quero conhecer o B10",
+          "assistant": "No B10, posso te mostrar a opção elétrica ou a ultra-híbrida. Qual você prefere conhecer primeiro?",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "BEV",
+          "assistant": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. O B10 elétrico usa propulsão totalmente elétrica, alimentada por bateria. O B10 elétrico tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto. Toque em uma imagem para ampliar.",
+          "media_count": 3,
+          "llm_calls": 0,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "Pessoa Sintetica",
+          "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+          "media_count": 0,
+          "llm_calls": 2,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "Vou usar na cidade",
+          "assistant": "Entendi o papel do carro na sua rotina. Vamos considerar o que você precisa nesse uso. O que mais importa para você nesse uso?",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Gostei muito",
+          "assistant": "Pelo que você contou, o visual chamou sua atenção. Podemos olhar a escolha a partir da sua rotina.",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "sim",
+          "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+          "media_count": 0,
+          "llm_calls": 2,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "amanhã à tarde",
+          "assistant": "Pode me contar o que você quer saber sobre o carro?",
+          "media_count": 0,
+          "llm_calls": 2,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Tenho um carro na troca",
+          "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. Você gostaria de conhecer o carro de perto na loja?",
+          "media_count": 0,
+          "llm_calls": 2,
+          "question_count": 1,
+          "handoff": false
+        }
+      ],
+      "qualification": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "use_contexts": [
+          "urbano"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "visit_preference": null,
+        "trade_in_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "positive_reaction",
+          "purchase_inquiry"
+        ],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": false,
+        "showroom_presented": false,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": "visit",
+        "asked": [
+          "clarification",
+          "use_priority",
+          "visit"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "morno",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "intenção de troca informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "scenario": "sales",
+      "sales_focus": true,
+      "transcript": [
+        {
+          "user": "oi",
+          "assistant": "Oi! Sou a Lia, assistente virtual da Leapmotor. Como posso te ajudar a escolher seu próximo carro?",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Quero conhecer o B10",
+          "assistant": "No B10, posso te mostrar a opção elétrica ou a ultra-híbrida. Qual você prefere conhecer primeiro?",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "BEV",
+          "assistant": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+          "media_count": 3,
+          "llm_calls": 0,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Pessoa Sintetica",
+          "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Vou usar na cidade",
+          "assistant": "Entendi o papel do carro na sua rotina. Vamos considerar o que você precisa nesse uso. O que mais importa para você nesse uso?",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Gostei muito",
+          "assistant": "A loja Leapmotor Autovema Mobility fica no 1º piso do Porto Velho Shopping. Acesso F, perto da CVC. Pelo que você contou, o visual chamou sua atenção. Podemos olhar a escolha a partir da sua rotina. Você gostaria de passar na loja para conhecer o carro de perto?",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "sim",
+          "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. Que dia e período seriam melhores para você conhecer o carro na loja?",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "amanhã à tarde",
+          "assistant": "Anotei sua preferência para a visita. Você pensa em incluir seu carro atual na troca?",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "Tenho um carro na troca",
+          "assistant": "Podemos considerar seu carro na troca. Para avaliar as possibilidades, é importante trazê-lo à loja para uma avaliação presencial.",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 0,
+          "handoff": false
+        }
+      ],
+      "qualification": {
+        "interest_model": "B10",
+        "powertrain": "BEV",
+        "vehicle_id": "b10-bev",
+        "usage": "urbano",
+        "use_contexts": [
+          "urbano"
+        ],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "interest",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": true,
+        "visit_preference": "amanha / tarde",
+        "trade_in_interest": true,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [
+          "positive_reaction",
+          "purchase_inquiry"
+        ],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": "Pessoa Sintetica",
+        "name_prompted": true,
+        "showroom_presented": true,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "usage",
+          "use_priority",
+          "visit",
+          "visit_preference",
+          "trade_in"
+        ],
+        "greeted": true,
+        "next_action": "QUALIFY",
+        "temperature": "quente",
+        "qualification_reasons": [
+          "modelo identificado",
+          "uso informado",
+          "interesse explícito em visita",
+          "preferência de visita informada",
+          "intenção de troca informada"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "scenario": "scope",
+      "sales_focus": false,
+      "transcript": [
+        {
+          "user": "oi",
+          "assistant": "Oi! Sou a Lia, assistente virtual da Leapmotor. O que te trouxe por aqui hoje?",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "estou com problema no ar do b10",
+          "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+          "media_count": 0,
+          "llm_calls": 2,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "pode me ajudar?",
+          "assistant": "Pode me contar o que você quer saber sobre o carro?",
+          "media_count": 0,
+          "llm_calls": 2,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "então ele não está gelando",
+          "assistant": "Posso reformular a explicação. O que você quer entender melhor sobre o carro?",
+          "media_count": 0,
+          "llm_calls": 2,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "ok",
+          "assistant": "Certo, seguimos a partir do que você já me contou.",
+          "media_count": 0,
+          "llm_calls": 1,
+          "question_count": 0,
+          "handoff": false
+        }
+      ],
+      "qualification": {
+        "interest_model": "B10",
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "vehicle_interest",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "visit_preference": null,
+        "trade_in_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": false,
+        "showroom_presented": false,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [
+          "clarification"
+        ],
+        "greeted": true,
+        "next_action": "DISCOVER",
+        "temperature": "frio",
+        "qualification_reasons": [
+          "modelo identificado"
+        ],
+        "handoff_summary": null
+      }
+    },
+    {
+      "scenario": "scope",
+      "sales_focus": true,
+      "transcript": [
+        {
+          "user": "oi",
+          "assistant": "Oi! Sou a Lia, assistente virtual da Leapmotor. Como posso te ajudar a escolher seu próximo carro?",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 1,
+          "handoff": false
+        },
+        {
+          "user": "estou com problema no ar do b10",
+          "assistant": "Eu te ajudo a conhecer os modelos e escolher seu próximo Leapmotor. Para verificar um defeito no ar-condicionado, é necessário atendimento de assistência técnica.",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "pode me ajudar?",
+          "assistant": "Para esse sintoma, o próximo passo é uma avaliação da assistência técnica. Por aqui, meu atendimento é voltado à escolha e compra de um carro.",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "então ele não está gelando",
+          "assistant": "Para esse sintoma, o próximo passo é uma avaliação da assistência técnica. Por aqui, meu atendimento é voltado à escolha e compra de um carro.",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 0,
+          "handoff": false
+        },
+        {
+          "user": "ok",
+          "assistant": "Certo. Se depois quiser conhecer os modelos ou pensar numa troca, posso ajudar por aqui.",
+          "media_count": 0,
+          "llm_calls": 0,
+          "question_count": 0,
+          "handoff": false
+        }
+      ],
+      "qualification": {
+        "interest_model": null,
+        "powertrain": null,
+        "vehicle_id": null,
+        "usage": null,
+        "use_contexts": [],
+        "first_electric": false,
+        "daily_distance_km": null,
+        "trip_distance_km": null,
+        "charging_access": null,
+        "contact_reason": "service_request",
+        "commercial_stage": "discovery",
+        "needs": [],
+        "objections": [],
+        "knows_brand": false,
+        "visit_interest": null,
+        "visit_preference": null,
+        "trade_in_interest": null,
+        "purchase_timeline": null,
+        "buying_intent": false,
+        "signals": [],
+        "consent": "not_requested",
+        "consent_at": null,
+        "consent_scope": null,
+        "display_name": null,
+        "name_prompted": false,
+        "showroom_presented": false,
+        "contact_name": null,
+        "contact_phone": null,
+        "pending_question": null,
+        "asked": [],
+        "greeted": true,
+        "next_action": "DISCOVER",
+        "temperature": "frio",
+        "qualification_reasons": [],
+        "handoff_summary": null
+      }
+    }
+  ]
+}

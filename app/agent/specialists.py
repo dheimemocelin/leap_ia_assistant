@@ -179,7 +179,15 @@ class ReceptionSpecialist:
         result = await host.consult(state)
         profile = result.get("lead_profile") or {}
         act = state["routing"]["act"]
-        if act == "greeting":
+        if act == "greeting" and host.sales_focus:
+            greeting = state["text"].strip().rstrip("!?.").capitalize()
+            if greeting.casefold() not in {"oi", "opa", "olá", "bom dia", "boa tarde", "boa noite"}:
+                greeting = "Oi"
+            result["response"] = response(
+                greeting + "! Como posso te ajudar a escolher seu próximo carro?"
+            )
+            result["composition_plan"] = {}
+        elif act == "greeting":
             question = {"key": "clarification", "text": "O que te trouxe por aqui hoje?"}
             result["composition_plan"] = {
                 "intent": "welcome",
