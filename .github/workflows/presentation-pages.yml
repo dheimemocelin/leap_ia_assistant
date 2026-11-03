@@ -1,0 +1,42 @@
+name: Publicar apresentação da Lia
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lia-presentation-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Conferir conteúdo público
+        run: |
+          test -f site/index.html
+          test -f site/styles.css
+          test -f site/assets/grupo-rovema.png
+          test -f site/assets/dheime-mocelin.jpg
+          mkdir -p _site
+          cp site/index.html site/styles.css site/.nojekyll _site/
+          cp -R site/assets _site/assets
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar site
+        id: deployment
+        uses: actions/deploy-pages@v4
