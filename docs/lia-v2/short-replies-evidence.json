@@ -1,0 +1,27 @@
+{
+  "evidence": "synthetic_graph_execution",
+  "paid_calls": 0,
+  "cases": [
+    {
+      "case": "road_usage",
+      "input": "Na estrada mesmo",
+      "answer": "Entendi o papel do carro na sua rotina. Vamos considerar o que você precisa nesse uso. Você costuma fazer qual distância nessas viagens?",
+      "tools": [],
+      "usage": "viagens"
+    },
+    {
+      "case": "repair_with_rejected_invention",
+      "input": "Como?",
+      "answer": "Não expliquei bem. Você estava conhecendo o B10 ultra-híbrido. Vamos retomar o uso que você comentou para viagens.",
+      "reason": "invented_service_context"
+    },
+    {
+      "case": "local_handoff",
+      "input": "sim",
+      "answer": "Registrei seu pedido de contato. Ele ainda não foi enviado a um consultor; podemos continuar por aqui.",
+      "delivery_status": {
+        "queued": 1
+      }
+    }
+  ]
+}

@@ -588,6 +588,53 @@ class SalesAgent:
             return s
         if archived:
             profile.pending_question = None
+        current_text = norm(s["text"]).strip("!.? ")
+        road_reply = bool(re.fullmatch(r"(?:na|em|pela) estrada(?: mesmo)?", current_text))
+        previous_reply = next(
+            (m["content"] for m in reversed(s.get("history", [])) if m["role"] == "assistant"), ""
+        )
+        range_clarification = (
+            road_reply
+            and profile.pending_question not in {"usage", "travel_pattern"}
+            and (
+                "?" in previous_reply
+                and bool(re.search(r"autonomia|alcance|consumo", norm(previous_reply)))
+                or bool(
+                    re.search(r"autonomia|alcance|consumo", norm(s.get("intent_question") or ""))
+                )
+            )
+        )
+        if range_clarification and profile.vehicle_id:
+            facts = self.grounding.for_vehicle(profile.vehicle_id, "autonomia")[:2]
+            body = " ".join(f["statement"] for f in facts)
+            body += (
+                " " if body else ""
+            ) + "Não tenho uma medição específica de autonomia na estrada para essa versão."
+            if "travel_pattern" not in profile.asked:
+                body += " Que distância você costuma percorrer nas suas viagens?"
+                profile.asked.append("travel_pattern")
+                profile.pending_question = "travel_pattern"
+            s.update(
+                lead_profile=profile.model_dump(),
+                response=reply(body, sources=list(dict.fromkeys(f["source_id"] for f in facts))),
+            )
+            return s
+        if (
+            current_text in {"como", "como assim", "nao entendi"}
+            and profile.contact_reason != "service_request"
+        ):
+            label = self.profile_vehicle_label(profile)
+            body = "Não expliquei bem."
+            if label:
+                body += f" Você estava conhecendo o {label}."
+            if profile.usage == "viagens":
+                body += " Vamos retomar o uso que você comentou para viagens."
+            s.update(
+                response=reply(body),
+                composition_plan={"intent": "repair", "facts": [], "question_keys": []},
+            )
+            s["routing"]["act"] = "repair"
+            return s
         # Older persisted threads contain only the accumulated shown IDs. Recover
         # known media for the CURRENT canonical vehicle, never infer another variant.
         if not s.get("last_shown_media_ids") and profile.vehicle_id and s.get("shown_media_ids"):
@@ -717,8 +764,8 @@ class SalesAgent:
                 ended_at=timestamp(self.clock()), end_reason="handoff_delivered"
             )
         bodies = {
-            "prepared": "Seu resumo autorizado está preparado aqui. Ainda não foi enviado ao atendimento humano.",
-            "queued": "Seu resumo está na fila local. O recebimento pelo atendimento humano ainda não foi confirmado.",
+            "prepared": "Registrei seu interesse em conversar com um consultor. O pedido ainda não foi enviado.",
+            "queued": "Registrei seu pedido de contato. Ele ainda não foi enviado a um consultor; podemos continuar por aqui.",
             "delivered": "O recebimento do seu resumo foi confirmado pelo canal de atendimento humano. Vou pausar minhas respostas para essa continuidade.",
             "acknowledged": "O atendimento humano confirmou sua continuidade. Vou manter minhas respostas pausadas.",
             "failed": "Não consegui confirmar a entrega do seu resumo. Você pode continuar conversando comigo por aqui.",
@@ -749,6 +796,12 @@ class SalesAgent:
             and profile.get("vehicle_id")
         ):
             hint = RouteHint(act="overview")
+        if (
+            self.conversation_v2_enabled
+            and profile.get("vehicle_id")
+            and re.fullmatch(r"(?:na|em|pela) estrada(?: mesmo)?[.!? ]*", norm(s["text"]))
+        ):
+            hint = RouteHint(act="need", usage="viagens", evidence_quote=s["text"])
         if hint is None and ordinal_choice(s["text"]) is not None:
             hint = RouteHint(act="overview")
         if (
@@ -1970,6 +2023,15 @@ class SalesAgent:
                 )
             ):
                 raise CompositionRejected("misplaced_technical_abstention")
+            if plan["intent"] == "repair":
+                customer_context = " ".join(
+                    m["content"] for m in s.get("history", []) if m["role"] == "user"
+                )
+                service_terms = r"manutenc|reparo|defeito|oficina"
+                if re.search(service_terms, norm(draft.text)) and not re.search(
+                    service_terms, norm(customer_context)
+                ):
+                    raise CompositionRejected("invented_service_context")
             if plan["intent"] == "closing" and (
                 draft.question
                 or re.search(
