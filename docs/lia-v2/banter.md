@@ -16,7 +16,7 @@ A resposta pode não ter pergunta; risada não exige nova escolha de motorizaç�
 
 ## Evidências
 
-- **568 testes passaram** na suíte completa, incluindo dez casos de humor/escopo: conversa Fusca → risada → Fusca, fantasia, redação livre, referência externa literal, veículo na troca e tentativas de atributos inventados, preço, ataque e encaminhamento não autorizado.
+- **570 testes passaram** na suíte completa, incluindo doze casos de humor/escopo: conversa Fusca → risada → Fusca, fantasia, redação livre, referência externa literal, veículo na troca e tentativas de atributos inventados, preço, ataque e encaminhamento não autorizado.
 - Ruff, compilação e diff aprovados.
 - [Execuções sintéticas](banter-evidence.json): mesmo grafo e LLM simulado; sem inferência paga ou envio externo no teste.
 - Nenhuma alteração no CommercialPolicyEngine, consentimento, aprovação de mídia ou interface de envio.
@@ -24,3 +24,7 @@ A resposta pode não ter pergunta; risada não exige nova escolha de motorizaç�
 ## Limites
 
 Não há garantia de lidar bem com qualquer situação. Ironia, referências desconhecidas, ambiguidade e novas paráfrases ainda precisam de avaliação real e humana. Os filtros de afirmações são conservadores e não são prova semântica geral. Uma expressão válida pode cair em fallback; os registros não ocultam isso como resposta bem-sucedida do LLM. Não foi realizada nova avaliação paga do Groq nesta entrega.
+
+A regressão adicional de consentimento falhou antes da correção: uma mudança para brincadeira não cancelava a pergunta pendente. Agora, ela invalida a autorização ainda não concedida; um “sim” posterior não compartilha dados. Consentimento já concedido ou recusado não é reclassificado automaticamente.
+
+A detecção de risada pura evita repetição ambígua de quantificadores; o teste com uma sequência longa de “k” seguida de texto passa sem classificar a mensagem inteira como risada.

@@ -40,7 +40,8 @@ def fallback_social(kind: Reaction) -> str:
 def playful_signal(text):
     """Unambiguous fast paths; open-ended tone interpretation stays in the router."""
     t = norm(text).strip("!.? ")
-    if re.fullmatch(r"(?:k{2,}|(?:ha){2,}|(?:rs){2,}|😂|🤣|😄|\s)+", t):
+    compact = re.sub(r"\s+", "", t)
+    if re.fullmatch(r"k{2,}|(?:ha){2,}|(?:rs){2,}|[😂🤣😄]+", compact):
         return "banter", ""
     if re.search(r"\b(?:lua|marte|voar)\b", t) and re.search(r"carro|veiculo|b10|c10", t):
         return "banter", ""

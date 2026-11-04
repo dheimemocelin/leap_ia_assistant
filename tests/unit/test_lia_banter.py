@@ -125,3 +125,21 @@ async def test_joke_does_not_authorize_sending_a_lead_or_financial_answer():
     p = a.sessions[("local", "s")]["lead_profile"]
     assert p["consent"] == "not_requested" and p["handoff_summary"] is None
     assert not answer.handoff_required and not answer.media_ids
+
+
+async def test_joke_interrupts_pending_consent_before_a_later_yes():
+    a = make_agent()
+    a.llm = BanterModel()
+    for message in ["B10 BEV", "Pessoa Sintetica", "Quero falar com um consultor"]:
+        await a.turn("s", message, trusted_contact_phone="5511999990000")
+    assert a.sessions[("local", "s")]["lead_profile"]["consent"] == "offered"
+    await a.turn("s", "Fusca")
+    await a.turn("s", "sim", trusted_contact_phone="5511999990000")
+    p = a.sessions[("local", "s")]["lead_profile"]
+    assert p["consent"] == "not_requested" and p["handoff_summary"] is None
+
+
+def test_long_laughter_followed_by_text_is_not_mistaken_for_pure_laughter():
+    from app.agent.social import playful_signal
+
+    assert playful_signal("k" * 2000 + " texto") is None

@@ -944,6 +944,10 @@ class SalesAgent:
             and CommercialPolicyEngine().classify_request(s["text"]) == PolicyDecision.ALLOW
             and not re.search(r"troca|usado|avaliacao", norm(s["text"]))
         ):
+            if profile.consent == "offered":
+                # A topic change invalidates a pending yes/no authorization question.
+                profile.consent = "not_requested"
+                profile.pending_question = None
             profile.next_action = SDRAction.ENGAGE
             models = sorted({v["model"] for v in self.sales.list_vehicles(VehicleFilter())})
             bridge = (
