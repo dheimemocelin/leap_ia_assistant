@@ -268,7 +268,16 @@ class SalesSpecialist:
                     break
             if len(selected) == 2:
                 break
-        return selected
+        if not selected and host.conversation_v2_enabled:
+            # A direct request for details permits revisiting approved facts.
+            # An exhausted novelty list must not erase the available evidence.
+            for query in queries:
+                for fact in host.grounding.for_vehicle(vehicle_id, query):
+                    if fact not in selected:
+                        selected.append(fact)
+                if len(selected) >= 2:
+                    break
+        return selected[:2]
 
 
 class KnowledgeSpecialist:

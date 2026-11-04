@@ -588,6 +588,52 @@ class SalesAgent:
             return s
         if archived:
             profile.pending_question = None
+        # Older persisted threads contain only the accumulated shown IDs. Recover
+        # known media for the CURRENT canonical vehicle, never infer another variant.
+        if not s.get("last_shown_media_ids") and profile.vehicle_id and s.get("shown_media_ids"):
+            approved = {
+                m.id
+                for m in self.media.search(
+                    MediaSearchQuery(vehicle_id=profile.vehicle_id, limit=100)
+                )
+            }
+            recovered = [i for i in s["shown_media_ids"] if i in approved][:3]
+            if recovered:
+                s.update(last_shown_media_ids=recovered, last_media_vehicle_id=profile.vehicle_id)
+        concern = bool(re.search(r"\b(?:receio|medo|preocupad[oa])\b", norm(s["text"])))
+        asks_fact = bool(
+            re.search(
+                r"\b(?:qual|quanto|quantos|quantas|como funciona|tem|possui)\b", norm(s["text"])
+            )
+        )
+        if (
+            concern
+            and profile.vehicle_id
+            and not asks_fact
+            and CommercialPolicyEngine().classify_request(s["text"]) == PolicyDecision.ALLOW
+        ):
+            if "contextual_concern" not in profile.objections:
+                profile.objections.append("contextual_concern")
+            question = (
+                None
+                if "electric_concern" in profile.asked
+                else {
+                    "key": "electric_concern",
+                    "text": "O que mais te preocupa nesse tipo de carro?",
+                }
+            )
+            fallback = "Podemos conversar sobre esse receio com calma, antes de qualquer decisão."
+            s.update(
+                lead_profile=profile.model_dump(),
+                response=reply(fallback + (" " + question["text"] if question else "")),
+                composition_plan={
+                    "intent": "objection",
+                    "facts": [],
+                    "question_keys": ["electric_concern"] if question else [],
+                    "suggested_question": question,
+                },
+            )
+            return s
         mode = media_mode(s["text"], bool(s.get("last_shown_media_ids")))
         if mode:
             s.update(media_request_mode=mode, want_media=True, interpretation="media")
@@ -1915,6 +1961,15 @@ class SalesAgent:
             if result.tool_calls:
                 raise CompositionRejected("unexpected_tool_call")
             draft = ConversationDraft.model_validate_json(result.text)
+            if (
+                plan["intent"] == "objection"
+                and not facts
+                and re.search(
+                    r"nao tenho.*(?:dado|detalhe|informacao)|nao.*confirmad|base.*aprovad",
+                    norm(draft.text),
+                )
+            ):
+                raise CompositionRejected("misplaced_technical_abstention")
             if plan["intent"] == "closing" and (
                 draft.question
                 or re.search(

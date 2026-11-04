@@ -95,7 +95,7 @@ def media_mode(text, has_gallery):
     if re.search(r"foto|imagem", t) and re.search(r"outra|outras|diferente|mais", t):
         return "another"
     if re.search(
-        r"(?:manda|mande|mostra|mostre|envia|envie|reenvia|reenvie).*(?:novamente|de novo)|cade.*(?:foto|imagem)|reenvia|reenvie",
+        r"(?:manda|mande|mostra|mostre|envia|envie|reenvia|reenvie).*(?:novamente|de novo)|cade.*(?:foto|imagem)|reenvia|reenvie|rever.*(?:foto|imagem)",
         t,
     ):
         return "repeat"
