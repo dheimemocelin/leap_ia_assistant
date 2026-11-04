@@ -62,6 +62,8 @@ class LeadProfile(BaseModel):
     temperature: Literal["frio", "morno", "quente"] = "frio"
     qualification_reasons: list[str] = Field(default_factory=list)
     handoff_summary: dict | None = None
+    handoff_offer_pending: bool = False
+    handoff_offer_made: bool = False
 
 
 def response(text, *, sources=None, media=None, handoff=False):

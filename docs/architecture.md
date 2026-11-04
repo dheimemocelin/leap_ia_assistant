@@ -84,3 +84,7 @@ O assistente só faz pré-vendas informativas. Não informa preço, parcelas, ta
 ## Evolução opt-in: especialistas internos
 
 A branch de especialistas acrescenta roteamento contextual, acolhimento, vendas e conhecimento ao mesmo SalesAgent/LangGraph. Não cria outro banco, identidade, modelo obrigatório ou grafo autônomo por especialista. O cliente continua falando com a Lia. Permissões, orçamento compartilhado de chamadas e validação final permanecem no backend. A ativação é controlada por `LIA_ORCHESTRATION_ENABLED`, inicialmente false, e depende de avaliação real. Consulte [o desenho e as evidências](lia-internal-specialists.md).
+
+## Lia V2 — ciclo de atendimento (opt-in, desenvolvimento)
+
+A branch de desenvolvimento adiciona o nó `lifecycle` ao mesmo LangGraph, antes do roteamento existente. Separa memória persistente, sessão, estado comercial e entrega de handoff. A flag `LIA_CONVERSATION_V2_ENABLED` permanece falsa por padrão. Não houve ativação no piloto. Consulte [máquina de estados, memória e limites](lia-v2/README.md), [diagnóstico](lia-v2/diagnosis.md) e [evidências](lia-v2/validation.md).

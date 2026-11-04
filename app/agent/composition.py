@@ -79,6 +79,8 @@ class ConversationPlan(BaseModel):
         "purchase",
         "repair",
         "overview",
+        "closing",
+        "resuming",
     ]
     action: str | None = None
     question_keys: list[str] = Field(default_factory=list, max_length=3)

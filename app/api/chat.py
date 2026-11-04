@@ -87,6 +87,9 @@ def build_agent(*, reviewed_catalog=False, test_media=False, orchestration_enabl
         grounding=grounding,
         knowledge=knowledge,
         sales_focus=settings.lia_sales_focus_enabled,
+        conversation_v2_enabled=settings.lia_conversation_v2_enabled,
+        session_inactivity_seconds=settings.lia_session_inactivity_seconds,
+        handoff_mode=settings.lia_handoff_mode,
         showroom={
             "name": settings.lia_showroom_name,
             "location": settings.lia_showroom_location,

@@ -1,0 +1,1427 @@
+{
+  "evidence_type": "synthetic_graph_execution",
+  "paid_calls": 0,
+  "human_quality_review": "pending",
+  "external_delivery": "not_executed",
+  "scenarios": [
+    {
+      "name": "name_close_return",
+      "before": {
+        "turns": [
+          {
+            "user": "Oi",
+            "assistant": "Oi! Sou a Lia, assistente virtual da Leapmotor. Como posso te ajudar a escolher seu próximo carro?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "B10 BEV",
+            "assistant": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Vou pensar",
+            "assistant": "Não consegui buscar essa informação agora. Pode me dizer de outro jeito?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Oi",
+            "assistant": "Oi! Como posso te ajudar a escolher seu próximo carro?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Me fala daquele carro",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. O B10 elétrico usa propulsão totalmente elétrica, alimentada por bateria. O B10 elétrico tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto. Como você imagina usar o carro no dia a dia?",
+            "source_ids": [
+              "src-df3598f09d51f9445970"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 1
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 2,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      },
+      "after": {
+        "turns": [
+          {
+            "user": "Oi",
+            "assistant": "Olá! Sou a Lia, assistente virtual da Leapmotor. Como posso te chamar?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "DISCOVERY",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica. O que te trouxe até a Leapmotor?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "DISCOVERY",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "B10 BEV",
+            "assistant": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como você pretende usar o carro no dia a dia?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Vou pensar",
+            "assistant": "Claro, pense com calma. Guardamos o contexto do B10 elétrico para quando você quiser retomar.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "PAUSED",
+            "commercial_state": "PAUSED",
+            "composition_origin": "fallback",
+            "fallback_reason": "closing_pressure",
+            "questions": 0
+          },
+          {
+            "user": "Oi",
+            "assistant": "Oi, Pessoa Sintetica! Quer continuar conhecendo o B10 elétrico?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Me fala daquele carro",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. O B10 elétrico usa propulsão totalmente elétrica, alimentada por bateria. O B10 elétrico tem central multimídia de 14,6 polegadas com espelhamento sem fio via Apple CarPlay e Android Auto.",
+            "source_ids": [
+              "src-df3598f09d51f9445970"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 1,
+          "fallback_turns": 1,
+          "responses_with_multiple_questions": 0
+        }
+      }
+    },
+    {
+      "name": "repeat_and_other_photo",
+      "before": {
+        "turns": [
+          {
+            "user": "C10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do C10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Manda novamente",
+            "assistant": "Prazer, Manda novamente! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Cadê?",
+            "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Tem outra foto?",
+            "assistant": "Claro! Separei uma foto do C10 elétrico. Toque nela para ampliar.",
+            "source_ids": [
+              "src-media-e78c9e74d659679eef6d"
+            ],
+            "media_ids": [
+              "c10-bev-rear_3_4-05"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 4,
+          "llm_authored_turns": 1,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      },
+      "after": {
+        "turns": [
+          {
+            "user": "C10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do C10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Manda novamente",
+            "assistant": "Separei estas fotos do C10 elétrico para mostrar aqui.",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Cadê?",
+            "assistant": "Separei estas fotos do C10 elétrico para mostrar aqui.",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Tem outra foto?",
+            "assistant": "Separei uma foto do C10 elétrico para mostrar aqui.",
+            "source_ids": [
+              "src-media-e78c9e74d659679eef6d"
+            ],
+            "media_ids": [
+              "c10-bev-rear_3_4-05"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 4,
+          "llm_authored_turns": 0,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      }
+    },
+    {
+      "name": "technical_day_return",
+      "before": {
+        "turns": [
+          {
+            "user": "C10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do C10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Qual a autonomia?",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. O C10 elétrico tem autonomia de até 338 km no ciclo PBEV.",
+            "source_ids": [
+              "src-4fd5626a95fbbb06171a"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Até mais",
+            "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Qual a autonomia dele?",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. O C10 elétrico tem autonomia de até 338 km no ciclo PBEV.",
+            "source_ids": [
+              "src-4fd5626a95fbbb06171a"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 5,
+          "llm_authored_turns": 3,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      },
+      "after": {
+        "turns": [
+          {
+            "user": "C10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do C10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Qual a autonomia?",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. O C10 elétrico tem autonomia de até 338 km no ciclo PBEV.",
+            "source_ids": [
+              "src-4fd5626a95fbbb06171a"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Até mais",
+            "assistant": "Obrigada pela conversa. Até mais!",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "CLOSED",
+            "commercial_state": "CLOSED",
+            "composition_origin": "fallback",
+            "fallback_reason": "closing_pressure",
+            "questions": 0
+          },
+          {
+            "user": "Qual a autonomia dele?",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. O C10 elétrico tem autonomia de até 338 km no ciclo PBEV.",
+            "source_ids": [
+              "src-4fd5626a95fbbb06171a"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 5,
+          "llm_authored_turns": 2,
+          "fallback_turns": 1,
+          "responses_with_multiple_questions": 0
+        }
+      }
+    },
+    {
+      "name": "usage_and_visit_decline",
+      "before": {
+        "turns": [
+          {
+            "user": "B10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Vou usar para Uber",
+            "assistant": "Entendi que você pensa no carro para trabalhar com aplicativo. Vamos olhar sua rotina antes de tirar conclusões. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Quero visitar a loja",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. Que dia e período seriam melhores para você conhecer o carro na loja?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Não quero falar com vendedor",
+            "assistant": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Quero continuar",
+            "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 1,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 3,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      },
+      "after": {
+        "turns": [
+          {
+            "user": "B10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Vou usar para Uber",
+            "assistant": "Entendi que você pensa no carro para trabalhar com aplicativo. Vamos olhar sua rotina antes de tirar conclusões. Em um dia de trabalho, aproximadamente quantos quilômetros você pretende rodar?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Quero visitar a loja",
+            "assistant": "Podemos organizar o que você quer conhecer na loja. Você gostaria de falar com um consultor?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "AWAITING_CONSENT",
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Não quero falar com vendedor",
+            "assistant": "Tudo bem, seguimos por aqui sem compartilhar seus dados. Você pode continuar vendo o carro no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "INTERESTED",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Quero continuar",
+            "assistant": "Você estava conhecendo o B10 elétrico. Podemos retomar por ele.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "INTERESTED",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 1,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 2,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      }
+    },
+    {
+      "name": "authorized_local_queue",
+      "before": {
+        "turns": [
+          {
+            "user": "Oi",
+            "assistant": "Oi! Sou a Lia, assistente virtual da Leapmotor. Como posso te ajudar a escolher seu próximo carro?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "B10 BEV",
+            "assistant": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Quero falar com um consultor",
+            "assistant": "Posso preparar a continuidade com um consultor. Você autoriza compartilhar seu nome, telefone e interesse neste veículo para esse contato?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "sim",
+            "assistant": "Como você gostaria que eu registrasse seu nome?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Qual a autonomia?",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. A autonomia homologada do B10 elétrico é de 288 km pelo Inmetro.",
+            "source_ids": [
+              "src-df3598f09d51f9445970"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 2,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      },
+      "after": {
+        "turns": [
+          {
+            "user": "Oi",
+            "assistant": "Olá! Sou a Lia, assistente virtual da Leapmotor. Como posso te chamar?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "DISCOVERY",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica. O que te trouxe até a Leapmotor?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "DISCOVERY",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "B10 BEV",
+            "assistant": "Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como você pretende usar o carro no dia a dia?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Quero falar com um consultor",
+            "assistant": "Posso preparar a continuidade com um consultor. Você autoriza compartilhar seu nome, telefone e interesse neste veículo para esse contato?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "AWAITING_CONSENT",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "sim",
+            "assistant": "Seu resumo está na fila local. O recebimento pelo atendimento humano ainda não foi confirmado.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "HANDOFF_PENDING",
+            "commercial_state": "HANDOFF_PENDING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Qual a autonomia?",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades. A autonomia homologada do B10 elétrico é de 288 km pelo Inmetro.",
+            "source_ids": [
+              "src-df3598f09d51f9445970"
+            ],
+            "media_ids": [],
+            "tools": [
+              "get_vehicle_details"
+            ],
+            "session_status": "HANDOFF_PENDING",
+            "commercial_state": "HANDOFF_PENDING",
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          }
+        ],
+        "handoffs": {
+          "queued": 1
+        },
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 1
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 1,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      }
+    },
+    {
+      "name": "financial_and_pause",
+      "before": {
+        "turns": [
+          {
+            "user": "B10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Qual o preço?",
+            "assistant": "Esses detalhes são tratados na loja. Posso te ajudar a escolher a versão e o que você quer conhecer de perto. Você gostaria de visitar a loja?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Não",
+            "assistant": "Vamos continuar a partir do seu interesse e das suas prioridades.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Depois eu vejo",
+            "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Oi",
+            "assistant": "Oi! Como posso te ajudar a escolher seu próximo carro?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 2,
+          "fallback_turns": 0,
+          "responses_with_multiple_questions": 0
+        }
+      },
+      "after": {
+        "turns": [
+          {
+            "user": "B10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Qual o preço?",
+            "assistant": "Podemos organizar o que você quer conhecer na loja. Você gostaria de falar com um consultor?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "AWAITING_CONSENT",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Não",
+            "assistant": "Tudo bem, seguimos por aqui sem encaminhar seus dados.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Depois eu vejo",
+            "assistant": "Combinado, continuamos com o B10 elétrico quando você quiser. Até mais!",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "PAUSED",
+            "commercial_state": "PAUSED",
+            "composition_origin": "fallback",
+            "fallback_reason": "closing_pressure",
+            "questions": 0
+          },
+          {
+            "user": "Oi",
+            "assistant": "Oi, Pessoa Sintetica! Quer continuar conhecendo o B10 elétrico?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 0,
+          "fallback_turns": 1,
+          "responses_with_multiple_questions": 0
+        }
+      }
+    },
+    {
+      "name": "model_change_and_rear",
+      "before": {
+        "turns": [
+          {
+            "user": "B10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "C10 BEV",
+            "assistant": "Separei estas imagens do C10 elétrico para você começar a conhecê-lo.",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Quero ver a traseira",
+            "assistant": "Estou acompanhando o que você está contando. Pode seguir no seu ritmo.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "llm",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Mostra de novo",
+            "assistant": "Pode me contar o que você quer saber sobre o carro?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "fallback",
+            "fallback_reason": "repeated_response",
+            "questions": 1
+          },
+          {
+            "user": "Não tenho interesse",
+            "assistant": "Posso reformular a explicação. O que você quer entender melhor sobre o carro?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": null,
+            "commercial_state": null,
+            "composition_origin": "fallback",
+            "fallback_reason": "repeated_response",
+            "questions": 1
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 1,
+          "fallback_turns": 2,
+          "responses_with_multiple_questions": 0
+        }
+      },
+      "after": {
+        "turns": [
+          {
+            "user": "B10 BEV",
+            "assistant": "Sou a Lia, assistente virtual da Leapmotor. Separei estas imagens do B10 elétrico para você começar a conhecê-lo. Como posso te chamar?",
+            "source_ids": [
+              "src-media-a7003f6ac5256d84fcd2",
+              "src-media-9700050189508cfaadbf",
+              "src-media-cd78dc3783a5a75757a9"
+            ],
+            "media_ids": [
+              "b10-bev-cockpit-02",
+              "b10-bev-front_3_4-03",
+              "b10-bev-front_seats_roof-04"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "Pessoa Sintetica",
+            "assistant": "Prazer, Pessoa Sintetica! Como você pretende usar o carro no dia a dia?",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 1
+          },
+          {
+            "user": "C10 BEV",
+            "assistant": "Separei estas imagens do C10 elétrico para você começar a conhecê-lo.",
+            "source_ids": [
+              "src-media-d82d93c7faaa38f8004b",
+              "src-media-fa2a4d50a9e503e76e9e",
+              "src-media-a686823ddd21ea2635af"
+            ],
+            "media_ids": [
+              "c10-bev-front_3_4-07",
+              "c10-bev-front_seats-06",
+              "c10-bev-panoramic_roof-08"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Quero ver a traseira",
+            "assistant": "Separei uma foto do C10 elétrico para mostrar aqui.",
+            "source_ids": [
+              "src-media-e78c9e74d659679eef6d"
+            ],
+            "media_ids": [
+              "c10-bev-rear_3_4-05"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Mostra de novo",
+            "assistant": "Separei uma foto do C10 elétrico para mostrar aqui.",
+            "source_ids": [
+              "src-media-e78c9e74d659679eef6d"
+            ],
+            "media_ids": [
+              "c10-bev-rear_3_4-05"
+            ],
+            "tools": [
+              "search_vehicle_media"
+            ],
+            "session_status": "ACTIVE",
+            "commercial_state": "EXPLORING",
+            "composition_origin": "deterministic",
+            "fallback_reason": null,
+            "questions": 0
+          },
+          {
+            "user": "Não tenho interesse",
+            "assistant": "Tudo bem, respeitamos sua decisão. Obrigada pela conversa.",
+            "source_ids": [],
+            "media_ids": [],
+            "tools": [],
+            "session_status": "CLOSED",
+            "commercial_state": "CLOSED",
+            "composition_origin": "fallback",
+            "fallback_reason": "closing_pressure",
+            "questions": 0
+          }
+        ],
+        "handoffs": {},
+        "conversion": {
+          "opportunities": 1,
+          "visit_interest": 0,
+          "authorized_handoffs": 0
+        },
+        "metrics": {
+          "turns": 6,
+          "llm_authored_turns": 0,
+          "fallback_turns": 1,
+          "responses_with_multiple_questions": 0
+        }
+      }
+    }
+  ]
+}

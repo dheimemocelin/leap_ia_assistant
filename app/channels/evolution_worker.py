@@ -168,6 +168,11 @@ class EvolutionWorker:
                     input_type=metrics["input_type"],
                 )
                 state = self.agent.sessions[(thread["owner"], thread["conversation_id"])]
+                if getattr(self.agent, "conversation_v2_enabled", False) and state.get(
+                    "suppress_delivery"
+                ):
+                    await asyncio.to_thread(self.store.finish, identifier, "human_hold")
+                    return True
                 metrics.update(
                     {
                         "llm_calls": state["usage"]["calls"],
@@ -182,6 +187,10 @@ class EvolutionWorker:
                                 "conversation_act",
                                 "routing_origin",
                                 "routing_failure",
+                                "session_status",
+                                "commercial_state",
+                                "session_reopened",
+                                "handoff_status",
                             )
                             if k in state.get("metrics", {})
                         },
@@ -205,8 +214,24 @@ class EvolutionWorker:
                     image = await asyncio.to_thread(approved_image, self.agent, part["content"])
                     provider_id = await self.adapter.send_image(event["recipient"], image)
                 await asyncio.to_thread(self.store.part_done, identifier, part["part"], provider_id)
+                if part["kind"] == "image" and getattr(
+                    self.agent, "conversation_v2_enabled", False
+                ):
+                    await asyncio.to_thread(
+                        self.store.mark_media_delivery,
+                        event["person"],
+                        "whatsapp:" + event["instance"],
+                        part["content"],
+                    )
             await asyncio.to_thread(self.store.finish, identifier, "sent")
         except Exception:  # noqa: BLE001 - no raw provider messages, recipients or keys in logs
+            if getattr(self.agent, "conversation_v2_enabled", False):
+                await asyncio.to_thread(
+                    self.store.mark_media_delivery,
+                    event["person"],
+                    "whatsapp:" + event["instance"],
+                    failed=True,
+                )
             await asyncio.to_thread(self.store.finish, identifier, "review")
         return True
 

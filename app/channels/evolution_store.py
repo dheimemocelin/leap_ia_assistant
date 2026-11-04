@@ -158,6 +158,10 @@ class EvolutionStore(PilotStore):
             "conversation_act",
             "routing_origin",
             "routing_failure",
+            "session_status",
+            "commercial_state",
+            "session_reopened",
+            "handoff_status",
         }
         with self.connect() as db:
             db.execute(

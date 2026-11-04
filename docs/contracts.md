@@ -69,3 +69,7 @@ O plano `purchase` trata decisão de compra/visita sem conceder ações externas
 ### Especialistas internos da Lia (opt-in)
 
 `RouteHint` contém ato, tópico e evidência opcional de rotina, sem ferramentas, consentimento ou destinatário. O backend deriva `reception`, `sales` ou `knowledge` e verifica o conjunto de ferramentas antes da execução. Todos compartilham o estado e a validação de saída; o formato público AssistantResponse permanece inalterado. `active_specialist` e resumo de roteamento são privados. `LIA_ORCHESTRATION_ENABLED=false` preserva o modo atual até avaliação. [Responsabilidades, grafo e limitações](lia-internal-specialists.md).
+
+## Lia V2 — transferência local autorizada
+
+`app/handoff/service.py` define `HandoffContract`, `HandoffDispatcher` e `DeliveryReceipt`. Consentimento persistido e dados mínimos são obrigatórios; destinos não são argumentos de ferramenta do LLM. Os estados `prepared`, `queued`, `delivered`, `failed` e `acknowledged` são independentes do estado conversacional. O adapter local só retorna `queued`. Recibo de entrega exige identificador externo; testes de entrega usam adapter sintético. Não existe novo endpoint público para despacho/confirmação. Veja o [contrato e ciclo completos](lia-v2/README.md).
