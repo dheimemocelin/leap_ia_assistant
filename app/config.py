@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     lia_orchestration_enabled: bool = False
     lia_sales_focus_enabled: bool = False
     lia_conversation_v2_enabled: bool = False
-    lia_session_inactivity_seconds: int = Field(default=86400, ge=60, le=2592000)
+    lia_session_inactivity_seconds: int = Field(default=3600, ge=60, le=2592000)
     lia_handoff_mode: Literal["disabled", "local"] = "disabled"
     lia_showroom_name: str = ""
     lia_showroom_location: str = ""

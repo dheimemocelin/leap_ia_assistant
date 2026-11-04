@@ -25,7 +25,7 @@ O campo legado `commercial_stage` permanece para compatibilidade. A dimensão ex
 | “Vou pensar” / “Depois eu vejo” | ACTIVE → PAUSED | Registra motivo e data, despedida sem insistência nem nova pergunta. |
 | Despedida / desinteresse | ACTIVE → CLOSED | Preserva memória permitida, sem follow-up automático. |
 | Inatividade configurada | ACTIVE → PAUSED → ACTIVE na próxima entrada | Arquiva a sessão anterior; não envia mensagem por timer. |
-| Retorno após pausa/encerramento | PAUSED/CLOSED → nova ACTIVE | Novo ID de sessão, mesmo cliente, veículo e preferências. Saudação conhecida usa nome confirmado; pedido direto segue para sua resposta. |
+| Retorno após pausa/encerramento | PAUSED/CLOSED → nova ACTIVE | Novo ID de sessão, mesmo cliente, veículo e preferências. Saudação conhecida usa nome confirmado e pergunta o motivo atual, sem sugerir automaticamente o carro anterior; pedido direto segue para sua resposta. |
 | Resumo autorizado preparado ou em fila | → HANDOFF_PENDING | Não afirma recebimento humano. Cliente pode continuar conversando. |
 | Recibo de entrega válido | → TRANSFERRED | HANDOFF_CONFIRMED no estado comercial; worker deixa de responder automaticamente. |
 | “Voltar para Lia” | TRANSFERRED → ACTIVE | Retoma somente mediante pedido explícito; não reenvia automaticamente a transferência anterior. |
@@ -80,11 +80,11 @@ Revogar consentimento remove os dados pessoais do contrato local e bloqueia novo
 
 ```dotenv
 LIA_CONVERSATION_V2_ENABLED=true
-LIA_SESSION_INACTIVITY_SECONDS=86400
+LIA_SESSION_INACTIVITY_SECONDS=3600
 LIA_HANDOFF_MODE=local
 ```
 
-Padrões: V2 desativada, inatividade 24h e handoff `disabled`. `disabled` prepara somente; `local` registra fila. Não há opção de envio externo nesta entrega. A flag independe da ativação do RAG e não substitui o fluxo comercial existente.
+Padrões: V2 desativada, inatividade 1h e handoff `disabled`. `disabled` prepara somente; `local` registra fila. Não há opção de envio externo nesta entrega. A flag independe da ativação do RAG e não substitui o fluxo comercial existente.
 
 Validação realizada com fixtures sintéticas em bancos temporários. Não alterar `.env` do piloto nem reiniciar o serviço para experimentar sem aprovação. Instalar a versão não basta para ativar V2: a flag também precisa ser configurada.
 
@@ -93,3 +93,9 @@ Validação realizada com fixtures sintéticas em bancos temporários. Não alte
 Por turno: estado de sessão/comercial, reabertura, origem de composição, fallback, perguntas consecutivas, ferramentas, tokens e latência já existentes. Sem nome/telefone/texto em logs operacionais. Métodos internos `handoff_metrics()` e `conversion_metrics()` retornam contagens agregadas de status, oportunidades e interesse em visita, sem alegar conversão em vendas.
 
 As transcrições usam o grafo completo com LLM simulado, antes/depois da flag, e incluem métricas mecânicas. Não medem naturalidade humana, eficácia comercial, conversão real ou qualidade do Groq. Atendimento vivo, recibos reais e observação de mídia no aparelho permanecem pendentes. Sem deploy, merge, push, WhatsApp/Syonet real, inferência paga ou mudança na política comercial.
+
+## Ajuste de abertura após inatividade
+
+Após 1h sem mensagens, a próxima entrada pode abrir nova sessão também quando o encaminhamento estiver apenas preparado/em fila, sem recebimento humano confirmado. Nome e interesse ficam preservados, mas um “Oi” recebe uma abertura sobre a necessidade de hoje, sem convite automático para continuar o carro anterior. Retomadas explícitas continuam recuperando o interesse. Transferência confirmada não expira para liberar o bot. Nenhuma despedida é enviada por timer.
+
+Validação do ajuste: dois testes de intervalo de 2h falharam antes da correção (ACTIVE e HANDOFF_PENDING); após o ajuste, a suíte completa passou em **558 testes**, com Ruff, compilação e diff aprovados. A expectativa antiga de mencionar o B10 na saudação de retorno foi substituída por verificação de abertura neutra, mantendo a verificação do interesse persistido. Saudações também não forçam assunto anterior dentro de sessão ativa. Não houve inferência paga.

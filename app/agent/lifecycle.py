@@ -50,7 +50,10 @@ def begin_session(previous, now, inactivity_seconds):
         return ConversationSession(opened_at=at, last_interaction_at=at), None
     old = ConversationSession.model_validate(previous)
     elapsed = now - datetime.fromisoformat(old.last_interaction_at).timestamp()
-    expired = old.status == SessionStatus.ACTIVE and elapsed >= inactivity_seconds
+    expired = (
+        old.status in {SessionStatus.ACTIVE, SessionStatus.HANDOFF_PENDING}
+        and elapsed >= inactivity_seconds
+    )
     if old.status in {SessionStatus.CLOSED, SessionStatus.PAUSED} or expired:
         if expired:
             old.status = SessionStatus.PAUSED

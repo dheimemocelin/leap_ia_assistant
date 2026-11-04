@@ -211,7 +211,7 @@ class SalesAgent:
         sales_focus=False,
         showroom=None,
         conversation_v2_enabled=False,
-        session_inactivity_seconds=86400,
+        session_inactivity_seconds=3600,
         handoff_mode="disabled",
         handoff_dispatcher=None,
         clock=time.time,
@@ -686,7 +686,6 @@ class SalesAgent:
             s.update(media_request_mode=mode, want_media=True, interpretation="media")
         t = norm(s["text"]).strip("!.? ")
         if greeting(s["text"]):
-            label = self.profile_vehicle_label(profile)
             if not profile.greeted:
                 body = (
                     "Olá! Como posso te chamar?"
@@ -697,17 +696,11 @@ class SalesAgent:
                 if not profile.display_name:
                     profile.pending_question = "display_name"
             elif archived:
-                body = (f"Oi, {profile.display_name}!" if profile.display_name else "Oi!") + (
-                    f" Quer continuar conhecendo o {label}?"
-                    if label
-                    else " Como posso te ajudar hoje?"
-                )
-            else:
                 body = (
-                    f"Seguimos com o {label}. O que você quer conhecer melhor?"
-                    if label
-                    else "Oi! Como posso te ajudar?"
-                )
+                    f"Oi, {profile.display_name}!" if profile.display_name else "Oi!"
+                ) + " Como posso te ajudar hoje?"
+            else:
+                body = "Oi! Como posso te ajudar?"
             s.update(lead_profile=profile.model_dump(), response=reply(body))
             return s
         if t in {

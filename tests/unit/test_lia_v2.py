@@ -84,7 +84,8 @@ async def test_closed_session_reopens_after_restart_with_same_confirmed_customer
     assert state["conversation_session"]["id"] != old["conversation_session"]["id"]
     assert state["conversation_session"]["resumed_from"] == old["conversation_session"]["id"]
     assert state["lead_profile"]["display_name"] == "Pessoa Sintetica"
-    assert "Pessoa Sintetica" in answer.text and "B10" in answer.text
+    assert "Pessoa Sintetica" in answer.text and "B10" not in answer.text
+    assert state["lead_profile"]["vehicle_id"] == "b10-bev"
     assert "Sou a Lia" not in answer.text
     with store.connect() as db:
         assert db.execute("select count(*) from pilot_sessions").fetchone()[0] == 2
