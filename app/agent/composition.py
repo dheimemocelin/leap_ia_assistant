@@ -62,6 +62,8 @@ class ConversationPlan(BaseModel):
     model_config = ConfigDict(extra="forbid")
     intent: Literal[
         "positive",
+        "banter",
+        "outside_catalog",
         "negative",
         "doubt",
         "more",
@@ -102,14 +104,22 @@ def validate_prose(text: str, profile: dict, *, question=False):
     allowed = {norm(profile.get("interest_model") or ""), norm(profile.get("powertrain") or "")}
     if not profile.get("interest_model"):
         allowed.update({"b10", "c10"})
+    allowed.update(norm(x) for x in profile.get("_social_catalog_models", []))
     if entities - allowed:
         raise CompositionRejected("cross_vehicle_entity")
     acronyms = set(re.findall(r"\b[A-Z][A-Z0-9-]+\b", text))
-    if acronyms - {value.upper() for value in allowed} - {"OK"}:
+    quoted_vehicle = norm(profile.get("_social_vehicle_quote") or "")
+    if acronyms - {value.upper() for value in allowed} - {quoted_vehicle.upper(), "OK"}:
         raise CompositionRejected("unapproved_entity")
-    if re.search(r"\b(?:tesla|byd|dolphin|corolla|volvo|t03)\b", t):
+    external_entities = re.findall(r"\b(?:tesla|byd|dolphin|corolla|volvo|t03)\b", t)
+    if any(entity != quoted_vehicle for entity in external_entities):
         raise CompositionRejected("unapproved_entity")
-    if re.search(r"\b(?:leapmotor|fundad[oa]|fabricante|chinesa|china|stellantis)\b", t):
+    institutional = (
+        r"\b(?:fundad[oa]|fabricante|chinesa|china|stellantis)\b"
+        if profile.get("_social_brand_reference")
+        else r"\b(?:leapmotor|fundad[oa]|fabricante|chinesa|china|stellantis)\b"
+    )
+    if re.search(institutional, t):
         raise CompositionRejected("institutional_evidence_required")
     without_entities = re.sub(r"\b(?:b10|c10)\b", "", t)
     if re.search(

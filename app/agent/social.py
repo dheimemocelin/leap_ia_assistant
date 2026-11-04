@@ -35,3 +35,16 @@ def fallback_social(kind: Reaction) -> str:
         "doubt": "Podemos esclarecer suas dúvidas por aqui, um ponto de cada vez.",
         "more": "Podemos continuar conhecendo o carro pelo que mais importa para você.",
     }[kind]
+
+
+def playful_signal(text):
+    """Unambiguous fast paths; open-ended tone interpretation stays in the router."""
+    t = norm(text).strip("!.? ")
+    if re.fullmatch(r"(?:k{2,}|(?:ha){2,}|(?:rs){2,}|😂|🤣|😄|\s)+", t):
+        return "banter", ""
+    if re.search(r"\b(?:lua|marte|voar)\b", t) and re.search(r"carro|veiculo|b10|c10", t):
+        return "banter", ""
+    match = re.search(r"\b(fusca|opala|kombi|uno)\b", t)
+    if match and not re.search(r"\bb10\b|\bc10\b|troca|usado|avaliacao", t):
+        return "outside_catalog", match[0]
+    return None

@@ -1,0 +1,61 @@
+{
+  "evidence": "synthetic_graph_execution",
+  "paid_calls": 0,
+  "scenarios": [
+    [
+      {
+        "user": "Tô pensando em comprar um fusca",
+        "assistant": "Fusca, um ícone! Posso te apresentar o B10 e o C10 da Leapmotor.",
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "outside_catalog",
+          "evidence_selection_recovered": false
+        },
+        "tools": [],
+        "buying_intent": false,
+        "vehicle_id": null
+      },
+      {
+        "user": "kkkk",
+        "assistant": "😄 Entrei na brincadeira.",
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "banter",
+          "evidence_selection_recovered": false
+        },
+        "tools": [],
+        "buying_intent": false,
+        "vehicle_id": null
+      },
+      {
+        "user": "Fusca",
+        "assistant": "Fusca, um clássico! Posso te apresentar o B10 e o C10 da Leapmotor.",
+        "composition": {
+          "origin": "fallback",
+          "fallback_reason": "repeated_response",
+          "intent": "outside_catalog"
+        },
+        "tools": [],
+        "buying_intent": false,
+        "vehicle_id": null
+      }
+    ],
+    [
+      {
+        "user": "Quero um carro que vai pra lua",
+        "assistant": "A Lua fica para outra aventura! Por aqui, podemos conhecer o B10 e o C10.",
+        "composition": {
+          "origin": "llm",
+          "fallback_reason": null,
+          "intent": "banter",
+          "evidence_selection_recovered": false
+        },
+        "tools": [],
+        "buying_intent": false,
+        "vehicle_id": null
+      }
+    ]
+  ]
+}
