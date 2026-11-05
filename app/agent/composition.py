@@ -79,6 +79,7 @@ class ConversationPlan(BaseModel):
         "brand",
         "other",
         "purchase",
+        "visit_wrapup",
         "repair",
         "overview",
         "closing",

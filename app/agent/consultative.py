@@ -43,6 +43,9 @@ class LeadProfile(BaseModel):
     knows_brand: bool = False
     visit_interest: bool | None = None
     visit_preference: str | None = None
+    visit_booking_status: Literal[
+        "not_requested", "preference_recorded", "confirmation_required"
+    ] = "not_requested"
     trade_in_interest: bool | None = None
     purchase_timeline: str | None = None
     buying_intent: bool = False
@@ -152,6 +155,7 @@ def collect_contact(profile: LeadProfile):
         "objections": profile.objections,
         "visit_interest": profile.visit_interest,
         "visit_preference": profile.visit_preference,
+        "visit_booking_status": profile.visit_booking_status,
         "trade_in_interest": profile.trade_in_interest,
         "purchase_timeline": profile.purchase_timeline,
         "temperature": profile.temperature,
@@ -397,11 +401,17 @@ def observe(profile: LeadProfile, text: str, *, channel_phone: str | None = None
     }:
         day = re.search(r"\b(hoje|amanha|segunda|terca|quarta|quinta|sexta|sabado|domingo)\b", t)
         period = re.search(r"\b(manha|tarde|noite)\b", t)
-        if day or period:
+        clock = re.search(r"\b([01]?\d|2[0-3])(?:h([0-5]\d)?|:([0-5]\d))\b", t)
+        if (day or period or clock) and not re.search(r"recarga|carregamento|autonomia|bateria", t):
             profile.visit_interest = True
-            profile.visit_preference = " / ".join(
-                value.group(1) for value in (day, period) if value
-            )
+            parts = [value.group(1) for value in (day, period) if value]
+            if clock:
+                minute = clock.group(2) or clock.group(3)
+                parts.append(
+                    f"{int(clock.group(1))}h" + (minute if minute and minute != "00" else "")
+                )
+            profile.visit_preference = " / ".join(parts)
+            profile.visit_booking_status = "preference_recorded"
             profile.pending_question = None
     if explicit_contact:
         if "human_contact_requested" not in profile.signals:

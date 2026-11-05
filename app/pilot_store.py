@@ -125,6 +125,7 @@ class PilotStore:
             "trip_distance_km",
             "visit_interest",
             "visit_preference",
+            "visit_booking_status",
             "trade_in_interest",
             "purchase_timeline",
             "buying_intent",

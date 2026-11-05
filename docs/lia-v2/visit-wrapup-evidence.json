@@ -1,0 +1,37 @@
+{
+  "evidence": "synthetic_graph_execution",
+  "paid_calls": 0,
+  "external_bookings": 0,
+  "turns": [
+    {
+      "user": "Pode agendar, não tenho carro",
+      "assistant": "Obrigada por me contar como você quer conhecer o carro. Anotei sua preferência para quinta, às 10h. Sem veículo na troca. A visita ainda não está agendada; é preciso confirmar com a equipe da loja.",
+      "session_status": "ACTIVE",
+      "visit_preference": "quinta / 10h",
+      "visit_booking_status": "confirmation_required",
+      "trade_in_interest": false,
+      "pending_question": null,
+      "consent": "not_requested",
+      "composition": {
+        "origin": "fallback",
+        "fallback_reason": "unexecuted_visit_commitment",
+        "intent": "visit_wrapup"
+      }
+    },
+    {
+      "user": "Obrigado",
+      "assistant": "Obrigada pela conversa. Até mais!",
+      "session_status": "CLOSED",
+      "visit_preference": "quinta / 10h",
+      "visit_booking_status": "confirmation_required",
+      "trade_in_interest": false,
+      "pending_question": null,
+      "consent": "not_requested",
+      "composition": {
+        "origin": "fallback",
+        "fallback_reason": "closing_pressure",
+        "intent": "closing"
+      }
+    }
+  ]
+}

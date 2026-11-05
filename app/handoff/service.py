@@ -28,6 +28,10 @@ class HandoffContract(BaseModel):
     vehicle_id: str | None
     needs: list[str] = Field(default_factory=list)
     usage: str | None = None
+    visit_preference: str | None = None
+    visit_booking_status: Literal[
+        "not_requested", "preference_recorded", "confirmation_required"
+    ] = "not_requested"
     reason: Literal["customer_requested", "offer_accepted"]
     summary: str
     consent: Literal["granted", "revoked"]
@@ -110,6 +114,8 @@ class HandoffService:
             vehicle_id=profile.get("vehicle_id"),
             needs=profile.get("needs", []),
             usage=profile.get("usage"),
+            visit_preference=profile.get("visit_preference"),
+            visit_booking_status=profile.get("visit_booking_status", "not_requested"),
             reason="customer_requested"
             if "human_contact_requested" in profile["signals"]
             else "offer_accepted",
